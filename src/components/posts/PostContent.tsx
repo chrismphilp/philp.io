@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Card } from 'react-bootstrap';
 
 interface PostContentProps {
   showContent: boolean;
@@ -7,9 +8,11 @@ interface PostContentProps {
 export default class PostContent extends Component<PostContentProps, {}> {
   render() {
     return (
-      <div style={this.props.showContent ? styles.contentContainer : styles.contentHidden}>
-        <h1>Test</h1>
-      </div>
+      <Card
+        style={this.props.showContent ? {...styles.contentContainer, ...styles.contentBorder} :
+          {...styles.contentHidden, ...styles.contentBorder}}>
+        <Card.Header as="h5" style={{backgroundColor: 'white'}}>The importance of state</Card.Header>
+      </Card>
     );
   }
 }
@@ -17,25 +20,20 @@ export default class PostContent extends Component<PostContentProps, {}> {
 const styles = {
   contentHidden: {
     height: 0,
-    overflow: 'hidden',
-    borderLeft: 5,
-    borderRight: 5,
-    borderBottom: 5,
-    borderTop: 'none',
-    borderWidth: 1,
-    borderColor: 'e6e6e6',
-    borderStyle: 'solid',
+    overflow: 'hidden'
   },
   contentContainer: {
     backgroundColor: '#ffffff',
     height: 350,
+    overflow: 'show'
+  },
+  contentBorder: {
     borderLeft: 5,
     borderRight: 5,
     borderBottom: 5,
     borderTop: 0,
     borderWidth: 1,
     borderColor: '#e6e6e6',
-    borderStyle: 'solid',
-    overflow: 'show'
+    borderStyle: 'solid'
   }
 };
