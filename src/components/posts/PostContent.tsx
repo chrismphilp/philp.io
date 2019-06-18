@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 
-export default class PostContent extends Component {
+interface PostContentProps {
+  showContent: boolean;
+}
+
+export default class PostContent extends Component<PostContentProps, {}> {
   render() {
     return (
-      <div style={styles.contentContainer}>
+      <div style={this.props.showContent ? styles.contentContainer : styles.contentHidden}>
         <h1>Test</h1>
       </div>
     );
@@ -11,8 +15,13 @@ export default class PostContent extends Component {
 }
 
 const styles = {
+  contentHidden: {
+    height: 0,
+    overflow: 'hidden'
+  },
   contentContainer: {
     backgroundColor: 'black',
-    height: 250
+    height: 350,
+    overflow: 'show'
   }
 };

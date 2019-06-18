@@ -1,0 +1,18 @@
+.example-enter {
+  height: 0;
+}
+
+.example-enter.example-enter-active {
+  height: 350px;
+  transition: height 500ms;
+}
+
+.example-exit {
+  height: 350px;
+  background-color: black;
+}
+
+.example-exit.example-exit-active {
+  height: 0;
+  transition: height 300ms;
+}
