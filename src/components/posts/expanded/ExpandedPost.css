@@ -9,10 +9,13 @@
 
 .example-exit {
   height: 350px;
-  background-color: black;
+  background-color: #ffffff;
+  border: black;
+  border-width: 0 5px 5px 5px;
 }
 
 .example-exit.example-exit-active {
   height: 0;
   transition: height 300ms;
+  border-width: 0;
 }
