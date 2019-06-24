@@ -15,7 +15,7 @@ export default class TattooRemovalPost extends Component {
           Tattooing involves inserting ink into the dermal tissue layer of the skin (found under the epidermis - the
           outermost layer of the skin). Once the ink has entered, normally using a tattoo needle, the pigment begins to
           disperse itself through the epidermis and the upper dermis. Once it has entered these layers of the skin, the
-          body sends out it's personal protection system for foreign agents - <b>Phagocytes</b>.
+          body sends out one of it's billions of personal protection operatives for foreign agents - <b>Phagocytes</b>.
         </h5>
         <GifWrapper>
           <iframe src='https://www.gfycat.com/ifr/essentialminiaturecuckoo'
@@ -30,6 +30,11 @@ export default class TattooRemovalPost extends Component {
           their target, they bind, and then engulf them. Here in lies the problem; the ink particles are too big to be
           ingested by the Phagocytes, so instead are held in place in the layers of skin by its Collagen network (the
           skins main structural protein).
+        </h5>
+        <h5>
+          So now you may be beginning to get an <i>inkling</i> as to how tattoos can be removed. The aforementioned
+          Q-switched lasers emit a centralised burst of light, which breaks up these larger pigments into much
+          smaller subsets, allowing the Phagocytes to then fully engulf and dispose of these particles.
         </h5>
         <h5>
           Given the fact that over 1 in 4 individuals are reported as regretting ever getting a tattoo <a
