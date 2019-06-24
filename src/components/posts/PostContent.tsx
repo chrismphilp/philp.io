@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, CSSProperties } from 'react';
 import { Card } from 'react-bootstrap';
+import TattooRemovalPost from '../../assets/tattoo-removal/TattooRemoval';
 
 interface PostContentProps {
   showContent: boolean;
@@ -11,7 +12,10 @@ export default class PostContent extends Component<PostContentProps, {}> {
       <Card
         style={this.props.showContent ? {...styles.contentContainer, ...styles.contentBorder} :
           {...styles.contentHidden, ...styles.contentBorder}}>
-        <Card.Header as="h5" style={{backgroundColor: 'white'}}>The importance of state</Card.Header>
+        <Card.Header as="h5" style={{backgroundColor: 'white'}}>How can 'permanent' ink be unwritten?</Card.Header>
+        <Card.Body style={styles.postContent}>
+          <TattooRemovalPost/>
+        </Card.Body>
       </Card>
     );
   }
@@ -24,9 +28,10 @@ const styles = {
   },
   contentContainer: {
     backgroundColor: '#ffffff',
-    height: 350,
+    height: 550,
+    overflowY: 'scroll',
     overflow: 'show'
-  },
+  } as CSSProperties,
   contentBorder: {
     borderLeft: 5,
     borderRight: 5,
@@ -35,5 +40,9 @@ const styles = {
     borderWidth: 1,
     borderColor: '#e6e6e6',
     borderStyle: 'solid'
-  }
+  },
+  postContent: {
+    fontFamily: 'Source Sans Pro',
+    textAlign: 'justify'
+  } as CSSProperties
 };

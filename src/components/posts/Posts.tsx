@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, CSSProperties } from 'react';
 import ExpandedPost from './expanded/ExpandedPost';
 
 interface PostsState {
@@ -30,7 +30,9 @@ export class Posts extends Component<{}, PostsState> {
           </div>
           <div style={styles.cardBody}>
             <div style={styles.cardBodyFiller}/>
-            <div style={styles.cardBodyHeader}>React State Vs. Props</div>
+            <div style={styles.cardBodyHeader}>
+              React State Vs. Props
+            </div>
             <div style={styles.cardBodyFiller}/>
           </div>
         </div>
@@ -45,11 +47,12 @@ const styles = {
   cardRoot: {
     flexDirection: 'row',
     display: 'flex',
-    cursor: 'pointer'
-  } as React.CSSProperties,
+    cursor: 'pointer',
+    paddingTop: 15
+  } as CSSProperties,
   cardHeader: {
     flex: 1,
-    backgroundColor: '#e6e6e6'
+    backgroundColor: '#e6e6e6',
   },
   image: {
     maxWidth: '100%'
@@ -59,11 +62,12 @@ const styles = {
     flex: 3,
     flexDirection: 'column',
     backgroundColor: '#f0f0f0'
-  } as React.CSSProperties,
+  } as CSSProperties,
   cardBodyHeader: {
     flex: 2,
     fontSize: 50,
-    paddingLeft: 15
+    paddingLeft: 15,
+    fontFamily: 'Open Sans'
   },
   cardBodyFiller: {
     flex: 1

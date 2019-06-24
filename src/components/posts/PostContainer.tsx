@@ -8,6 +8,7 @@ export class PostContainer extends Component {
       <Container style={styles.container}>
         <Row>
           <Posts/>
+          <Posts/>
         </Row>
       </Container>
     );
@@ -16,7 +17,7 @@ export class PostContainer extends Component {
 
 const styles = {
   container: {
-    paddingTop: '25px',
-    paddingBottom: '25px',
+    paddingTop: 25,
+    paddingBottom: 25
   } as CSSProperties
 };

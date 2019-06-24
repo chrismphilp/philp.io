@@ -38,12 +38,3 @@ export default class ExpandedPost extends Component<ExpandedPostProps, ExpandedP
     );
   }
 }
-
-// const styles = {
-//   unexpandedPost: {
-//     height: 50
-//   },
-//   expandedPost: {
-//     height: 500
-//   }
-// };
