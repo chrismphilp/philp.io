@@ -1,11 +1,16 @@
 import React, { Component, CSSProperties } from 'react';
 import ExpandedPost from './expanded/ExpandedPost';
+import { IPostCollection } from '../../assets/PostCollection';
+
+interface PostsProps {
+  entry: IPostCollection;
+}
 
 interface PostsState {
   showFullPost: boolean;
 }
 
-export class Posts extends Component<{}, PostsState> {
+export class Posts extends Component<PostsProps, PostsState> {
   constructor(props: any) {
     super(props);
     this.state = {
@@ -24,20 +29,22 @@ export class Posts extends Component<{}, PostsState> {
         <div style={styles.cardRoot}>
           <div style={styles.cardHeader}>
             <img
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1280px-React-icon.svg.png"
-              alt=""
+              src={this.props.entry.widgetImage}
+              alt={this.props.entry.widgetImageAlt}
               style={styles.image}/>
           </div>
           <div style={styles.cardBody}>
             <div style={styles.cardBodyFiller}/>
             <div style={styles.cardBodyHeader}>
-              React State Vs. Props
+              {this.props.entry.title}
             </div>
             <div style={styles.cardBodyFiller}/>
           </div>
         </div>
         <ExpandedPost showFullPost={this.state.showFullPost}
-                      postSwitch={() => this.handlePostSwitch()}/>
+                      postSwitch={() => this.handlePostSwitch()}
+                      subTitle={this.props.entry.subTitle}
+                      content={this.props.entry.content}/>
       </div>
     );
   }

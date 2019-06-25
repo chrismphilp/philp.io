@@ -1,14 +1,18 @@
 import React, { Component, CSSProperties } from 'react';
 import { Posts } from './Posts';
 import { Container, Row } from 'react-bootstrap';
+import { PostCollection } from '../../assets/PostCollection';
 
 export class PostContainer extends Component {
   render() {
     return (
       <Container style={styles.container}>
         <Row>
-          <Posts/>
-          <Posts/>
+          {PostCollection.map((entry, key) => {
+            return (
+              <Posts entry={entry} key={key}/>
+            );
+          })}
         </Row>
       </Container>
     );

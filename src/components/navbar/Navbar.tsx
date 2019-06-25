@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import { AppBar, Typography, Toolbar } from '@material-ui/core';
+import React, { Component, CSSProperties } from 'react';
 import moment from 'moment';
 
 interface NavbarState {
@@ -24,16 +23,12 @@ export class Navbar extends Component<{}, NavbarState> {
   render() {
     return (
       <div style={styles.root}>
-        <AppBar position="static" color="default">
-          <Toolbar>
-            <Typography variant="h6" color="inherit" style={styles.time}>
-              The Philpy Thought Shower
-            </Typography>
-            <Typography variant="h6" color="inherit">
-              {this.state.date}
-            </Typography>
-          </Toolbar>
-        </AppBar>
+        <div style={styles.logo}>
+          The Philpy Thought Shower
+        </div>
+        <div style={styles.time}>
+          {this.state.date}
+        </div>
       </div>
     );
   }
@@ -41,9 +36,18 @@ export class Navbar extends Component<{}, NavbarState> {
 
 const styles = {
   root: {
-    flexGrow: 1
+    backgroundColor: 'black',
+    height: 55,
+    color: 'white'
   },
+  logo: {
+    float: 'left',
+    paddingTop: 13.5,
+    paddingLeft: 15
+  } as CSSProperties,
   time: {
-    flex: 1
-  }
+    float: 'right',
+    paddingTop: 13.5,
+    paddingRight: 15
+  } as CSSProperties
 };

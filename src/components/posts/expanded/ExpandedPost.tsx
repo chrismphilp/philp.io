@@ -4,8 +4,10 @@ import { CSSTransition } from 'react-transition-group';
 import './ExpandedPost.css';
 
 interface ExpandedPostProps {
-  showFullPost: boolean;
   postSwitch: () => void;
+  showFullPost: boolean;
+  subTitle: string;
+  content: string;
 }
 
 interface ExpandedPostState {
@@ -33,7 +35,9 @@ export default class ExpandedPost extends Component<ExpandedPostProps, ExpandedP
                      unmountOnExit
                      onEntering={() => this.handleAnimationFinished()}
                      onExiting={() => this.handleAnimationFinished()}>
-        <PostContent showContent={this.state.showContent}/>
+        <PostContent showContent={this.state.showContent}
+                     subTitle={this.props.subTitle}
+                     content={this.props.content}/>
       </CSSTransition>
     );
   }

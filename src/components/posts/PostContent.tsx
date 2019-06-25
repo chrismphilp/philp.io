@@ -4,6 +4,8 @@ import TattooRemovalPost from '../../assets/tattoo-removal/TattooRemoval';
 
 interface PostContentProps {
   showContent: boolean;
+  subTitle: string;
+  content: string;
 }
 
 export default class PostContent extends Component<PostContentProps, {}> {
@@ -12,7 +14,7 @@ export default class PostContent extends Component<PostContentProps, {}> {
       <Card
         style={this.props.showContent ? {...styles.contentContainer, ...styles.contentBorder} :
           {...styles.contentHidden, ...styles.contentBorder}}>
-        <Card.Header as="h5" style={{backgroundColor: 'white'}}>How can 'permanent' ink be unwritten?</Card.Header>
+        <Card.Header as="h5" style={{backgroundColor: 'white'}}>{this.props.subTitle}</Card.Header>
         <Card.Body style={styles.postContent}>
           <TattooRemovalPost/>
         </Card.Body>
