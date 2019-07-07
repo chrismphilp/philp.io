@@ -1,11 +1,11 @@
 import React, { Component, CSSProperties } from 'react';
 import { Card } from 'react-bootstrap';
-import TattooRemovalPost from '../../assets/tattoo-removal/TattooRemoval';
+import { PostReferences } from '../../assets/PostCollection';
 
 interface PostContentProps {
   showContent: boolean;
   subTitle: string;
-  content: string;
+  contentKey: string;
 }
 
 export default class PostContent extends Component<PostContentProps, {}> {
@@ -16,7 +16,7 @@ export default class PostContent extends Component<PostContentProps, {}> {
           {...styles.contentHidden, ...styles.contentBorder}}>
         <Card.Header as="h5" style={{backgroundColor: 'white'}}>{this.props.subTitle}</Card.Header>
         <Card.Body style={styles.postContent}>
-          <TattooRemovalPost/>
+          {PostReferences.get(this.props.contentKey)}
         </Card.Body>
       </Card>
     );

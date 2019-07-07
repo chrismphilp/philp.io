@@ -44,7 +44,7 @@ export class Posts extends Component<PostsProps, PostsState> {
         <ExpandedPost showFullPost={this.state.showFullPost}
                       postSwitch={() => this.handlePostSwitch()}
                       subTitle={this.props.entry.subTitle}
-                      content={this.props.entry.content}/>
+                      contentKey={this.props.entry.contentKey}/>
       </div>
     );
   }

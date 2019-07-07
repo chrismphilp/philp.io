@@ -7,7 +7,7 @@ interface ExpandedPostProps {
   postSwitch: () => void;
   showFullPost: boolean;
   subTitle: string;
-  content: string;
+  contentKey: string;
 }
 
 interface ExpandedPostState {
@@ -37,7 +37,7 @@ export default class ExpandedPost extends Component<ExpandedPostProps, ExpandedP
                      onExiting={() => this.handleAnimationFinished()}>
         <PostContent showContent={this.state.showContent}
                      subTitle={this.props.subTitle}
-                     content={this.props.content}/>
+                     contentKey={this.props.contentKey}/>
       </CSSTransition>
     );
   }
