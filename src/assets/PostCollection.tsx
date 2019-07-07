@@ -1,6 +1,8 @@
 import React from 'react';
 import TattooRemovalPost from './tattoo-removal/tattooRemoval.json';
+import CloudFormationPost from './cloud-formation/cloudFormation.json';
 import TattooRemoval from './tattoo-removal/TattooRemoval';
+import CloudFormation from './cloud-formation/CloudFormation';
 
 export interface IPostCollection {
   title: string;
@@ -13,10 +15,12 @@ export interface IPostCollection {
   contentKey: string;
 }
 
-export const PostCollection: [IPostCollection] = [
+export const PostCollection: IPostCollection[] = [
+  CloudFormationPost,
   TattooRemovalPost
 ];
 
 const postReferences: Map<string, any> = new Map<string, any>();
+postReferences.set('cloudFormation', <CloudFormation/>);
 postReferences.set('tattooRemoval', <TattooRemoval/>);
 export const PostReferences = postReferences;

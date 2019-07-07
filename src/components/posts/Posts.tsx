@@ -62,7 +62,8 @@ const styles = {
     backgroundColor: '#e6e6e6',
   },
   image: {
-    maxWidth: '100%'
+    maxWidth: '100%',
+    minHeight: 175
   },
   cardBody: {
     display: 'flex',
