@@ -2,8 +2,13 @@ import React, { Component } from 'react';
 import { GifWrapper } from '../../components/posts/gifs/GifWrapper';
 import PostContent from '../../components/posts/PostContent';
 import content from './tattooRemoval.json';
+import { Route } from 'react-router';
 
-export default class TattooRemoval extends Component {
+interface TattooRemovalProps {
+  match: any;
+}
+
+export default class TattooRemoval extends Component<TattooRemovalProps, {}> {
   render() {
     return (
       <PostContent subTitle={content.subTitle}>

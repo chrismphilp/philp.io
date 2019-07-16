@@ -7,7 +7,7 @@ import Router from './components/router/Router';
 const App: React.FC = () => {
   return (
     <div>
-      <BrowserRouter basename={'/'}>
+      <BrowserRouter basename={'/blog'}>
         <Navbar/>
         <Router/>
       </BrowserRouter>

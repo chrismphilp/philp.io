@@ -4,12 +4,16 @@ import { Container, Row } from 'react-bootstrap';
 import { PostCollection } from '../../assets/PostCollection';
 import { Redirect } from 'react-router';
 
+interface PostContainerProps {
+  match: any;
+}
+
 interface PostContainerState {
   redirect: boolean;
   url: string;
 }
 
-export class PostContainer extends Component<{}, PostContainerState> {
+export class PostContainer extends Component<PostContainerProps, PostContainerState> {
   constructor(props: any) {
     super(props);
     this.state = {
@@ -25,7 +29,7 @@ export class PostContainer extends Component<{}, PostContainerState> {
 
   render() {
     if (this.state.redirect) {
-      return <Redirect push to={this.state.url}/>;
+      return <Redirect push to={`${this.props.match.url.slice(0, -1)}${this.state.url}`}/>;
     }
 
     return (
