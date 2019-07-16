@@ -1,7 +1,5 @@
 import React, { Component, CSSProperties } from 'react';
 import { Card } from 'react-bootstrap';
-import { PostReferences } from '../../assets/PostCollection';
-import CloudFormation from '../../assets/cloud-formation/CloudFormation';
 
 interface PostContentProps {
   showContent: boolean;
@@ -16,10 +14,6 @@ export default class PostContent extends Component<PostContentProps, {}> {
         style={this.props.showContent ? {...styles.contentContainer, ...styles.contentBorder} :
           {...styles.contentHidden, ...styles.contentBorder}}>
         <Card.Header as="h5" style={{backgroundColor: 'white'}}>{this.props.subTitle}</Card.Header>
-        <Card.Body style={styles.postContent}>
-          <CloudFormation/>
-          {/*{PostReferences.get(this.props.contentKey)}*/}
-        </Card.Body>
       </Card>
     );
   }

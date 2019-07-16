@@ -1,5 +1,6 @@
 import React, { Component, CSSProperties } from 'react';
 import moment from 'moment';
+import { Link } from 'react-router-dom';
 
 interface NavbarState {
   date: string;
@@ -23,9 +24,7 @@ export class Navbar extends Component<{}, NavbarState> {
   render() {
     return (
       <div style={styles.root}>
-        <div style={styles.logo}>
-          The Philpy Thought Shower
-        </div>
+        <Link to={'/'} style={styles.logo}>Philpy Thought Shower</Link>
         <div style={styles.time}>
           {this.state.date}
         </div>
@@ -43,7 +42,9 @@ const styles = {
   logo: {
     float: 'left',
     paddingTop: 13.5,
-    paddingLeft: 15
+    paddingLeft: 15,
+    textDecoration: 'none',
+    color: 'white'
   } as CSSProperties,
   time: {
     float: 'right',

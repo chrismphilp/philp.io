@@ -1,5 +1,4 @@
 import React, { Component, CSSProperties } from 'react';
-import ExpandedPost from './expanded/ExpandedPost';
 import { IPostCollection } from '../../assets/PostCollection';
 
 interface PostsProps {
@@ -41,10 +40,6 @@ export class Posts extends Component<PostsProps, PostsState> {
             <div style={styles.cardBodyFiller}/>
           </div>
         </div>
-        <ExpandedPost showFullPost={this.state.showFullPost}
-                      postSwitch={() => this.handlePostSwitch()}
-                      subTitle={this.props.entry.subTitle}
-                      contentKey={this.props.entry.contentKey}/>
       </div>
     );
   }

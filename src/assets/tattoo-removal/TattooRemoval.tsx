@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { GifWrapper } from '../../components/posts/expanded/gifs/GifWrapper';
+import { GifWrapper } from '../../components/posts/gifs/GifWrapper';
 
-export default class TattooRemovalPost extends Component {
+export default class TattooRemoval extends Component {
   render() {
     return (
       <div>
