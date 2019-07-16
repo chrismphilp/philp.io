@@ -5,7 +5,7 @@ export interface IPostCollection {
   title: string;
   subTitle: string;
   author: string;
-  type: string;
+  category: string;
   link: string;
   date: string;
   widgetImage: string;

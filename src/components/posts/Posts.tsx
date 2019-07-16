@@ -24,20 +24,23 @@ export class Posts extends Component<PostsProps, PostsState> {
 
   render() {
     return (
-      <div onClick={() => this.handlePostSwitch()}>
-        <div style={styles.cardRoot}>
-          <div style={styles.cardHeader}>
+      <div onClick={() => this.handlePostSwitch()}
+           style={styles.cardRoot}>
+        <div style={styles.cardTile}>
+          <div style={styles.cardText}>
+            <div style={styles.cardTitle}>
+              {this.props.entry.title}
+            </div>
+            <div style={styles.cardDate}>
+              <h6>Published date: {this.props.entry.date}</h6>
+              <h6>Category: {this.props.entry.category}</h6>
+            </div>
+          </div>
+          <div style={styles.cardImage}>
             <img
               src={this.props.entry.widgetImage}
               alt={this.props.entry.widgetImageAlt}
               style={styles.image}/>
-          </div>
-          <div style={styles.cardBody}>
-            <div style={styles.cardBodyFiller}/>
-            <div style={styles.cardBodyHeader}>
-              {this.props.entry.title}
-            </div>
-            <div style={styles.cardBodyFiller}/>
           </div>
         </div>
       </div>
@@ -47,32 +50,38 @@ export class Posts extends Component<PostsProps, PostsState> {
 
 const styles = {
   cardRoot: {
+    paddingTop: 25
+  },
+  cardTile: {
     flexDirection: 'row',
     display: 'flex',
     cursor: 'pointer',
-    paddingTop: 15
+    borderStyle: 'outset',
+    borderColor: 'black',
+    borderWidth: 2.5,
+    fontFamily: 'DM Serif Display'
   } as CSSProperties,
-  cardHeader: {
+  cardText: {
+    flexDirection: 'column',
+    flex: 2
+  } as CSSProperties,
+  cardImage: {
     flex: 1,
-    backgroundColor: '#e6e6e6',
-  },
+    padding: 5,
+    borderLeftStyle: 'solid',
+    borderLeftColor: '#e6e6e6',
+    borderLeftWidth: 1.5
+  } as CSSProperties,
   image: {
     maxWidth: '100%',
-    minHeight: 175
+    maxHeight: 250
   },
-  cardBody: {
+  cardTitle: {
     display: 'flex',
     flex: 3,
     flexDirection: 'column',
-    backgroundColor: '#f0f0f0'
+    backgroundColor: '#ffffff',
+    fontSize: 50
   } as CSSProperties,
-  cardBodyHeader: {
-    flex: 2,
-    fontSize: 50,
-    paddingLeft: 15,
-    fontFamily: 'Open Sans'
-  },
-  cardBodyFiller: {
-    flex: 1
-  }
+  cardDate: {}
 };

@@ -33,8 +33,8 @@ export class PostContainer extends Component<{}, PostContainerState> {
         <Row>
           {PostCollection.map((entry, key) => {
             return (
-              <div onClick={() => this.redirectToLink(entry.link)}>
-                <Posts entry={entry} key={key}/>
+              <div onClick={() => this.redirectToLink(entry.link)} key={key}>
+                <Posts entry={entry}/>
               </div>
             );
           })}

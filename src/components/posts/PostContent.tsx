@@ -1,34 +1,25 @@
-import React, { Component, CSSProperties } from 'react';
+import React, { Component, CSSProperties, ReactElement } from 'react';
 import { Card } from 'react-bootstrap';
 
 interface PostContentProps {
-  showContent: boolean;
   subTitle: string;
-  contentKey: string;
+  children: ReactElement;
 }
 
 export default class PostContent extends Component<PostContentProps, {}> {
   render() {
     return (
-      <Card
-        style={this.props.showContent ? {...styles.contentContainer, ...styles.contentBorder} :
-          {...styles.contentHidden, ...styles.contentBorder}}>
-        <Card.Header as="h5" style={{backgroundColor: 'white'}}>{this.props.subTitle}</Card.Header>
+      <Card style={styles.contentContainer}>
+        <Card.Header as="h5">{this.props.subTitle}</Card.Header>
+        <Card.Body style={styles.postContent}>{this.props.children}</Card.Body>
       </Card>
     );
   }
 }
 
 const styles = {
-  contentHidden: {
-    height: 0,
-    overflow: 'hidden'
-  },
   contentContainer: {
-    backgroundColor: '#ffffff',
-    height: 550,
-    overflowY: 'scroll',
-    overflow: 'show'
+    backgroundColor: '#ffffff'
   } as CSSProperties,
   contentBorder: {
     borderLeft: 5,
