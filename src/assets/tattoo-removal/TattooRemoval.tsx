@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { GifWrapper } from '../../components/posts/gifs/GifWrapper';
 import PostContent from '../../components/posts/PostContent';
 import content from './tattooRemoval.json';
-import { Route } from 'react-router';
 
 interface TattooRemovalProps {
   match: any;
