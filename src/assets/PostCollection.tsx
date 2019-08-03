@@ -15,5 +15,6 @@ export interface IPostCollection {
 
 export const PostCollection: IPostCollection[] = [
   CloudFormationPost,
+  CloudFormationPost,
   TattooRemovalPost
 ];

@@ -1,6 +1,6 @@
 import React, { Component, CSSProperties } from 'react';
 import { Posts } from './Posts';
-import { Container, Row } from 'react-bootstrap';
+import { CardColumns, Container } from 'react-bootstrap';
 import { PostCollection } from '../../assets/PostCollection';
 import { Redirect } from 'react-router';
 
@@ -22,11 +22,6 @@ export class PostContainer extends Component<PostContainerProps, PostContainerSt
     };
   }
 
-
-  redirectToLink(url: string) {
-    this.setState({redirect: true, url: url});
-  }
-
   render() {
     if (this.state.redirect) {
       return <Redirect push to={`${this.props.match.url.slice(0, -1)}${this.state.url}`}/>;
@@ -34,15 +29,13 @@ export class PostContainer extends Component<PostContainerProps, PostContainerSt
 
     return (
       <Container style={styles.container}>
-        <Row>
+        <CardColumns>
           {PostCollection.map((entry, key) => {
             return (
-              <div onClick={() => this.redirectToLink(entry.link)} key={key}>
-                <Posts entry={entry}/>
-              </div>
+              <Posts entry={entry} match={this.props.match} key={key}/>
             );
           })}
-        </Row>
+        </CardColumns>
       </Container>
     );
   }

@@ -1,49 +1,50 @@
 import React, { Component, CSSProperties } from 'react';
 import { IPostCollection } from '../../assets/PostCollection';
+import { Button, Card, CardColumns, CardGroup, Image } from "react-bootstrap";
+import { Redirect } from "react-router";
 
 interface PostsProps {
   entry: IPostCollection;
+  match: any;
 }
 
 interface PostsState {
   showFullPost: boolean;
+  redirect: boolean;
 }
 
 export class Posts extends Component<PostsProps, PostsState> {
   constructor(props: any) {
     super(props);
     this.state = {
-      showFullPost: false
+      showFullPost: false,
+      redirect: false
     }
   }
 
-  handlePostSwitch(): void {
+  private handlePostSwitch(): void {
     const currentPostState = this.state.showFullPost;
     this.setState({showFullPost: !currentPostState});
   }
 
   render() {
+    if (this.state.redirect) {
+      return <Redirect push to={`${this.props.match.url.slice(0, -1)}${this.props.entry.link}`}/>;
+    }
+
     return (
-      <div onClick={() => this.handlePostSwitch()}
-           style={styles.cardRoot}>
-        <div style={styles.cardTile}>
-          <div style={styles.cardText}>
-            <div style={styles.cardTitle}>
-              {this.props.entry.title}
-            </div>
-            <div style={styles.cardDate}>
-              <h6>Published date: {this.props.entry.date}</h6>
-              <h6>Category: {this.props.entry.category}</h6>
-            </div>
-          </div>
-          <div style={styles.cardImage}>
-            <img
-              src={this.props.entry.widgetImage}
-              alt={this.props.entry.widgetImageAlt}
-              style={styles.image}/>
-          </div>
-        </div>
-      </div>
+      <Card>
+        <Card.Img variant="top" src={this.props.entry.widgetImage}/>
+        <Card.Body>
+          <Card.Title>Card Title</Card.Title>
+          <Card.Text>
+            Some quick example text to build on the card title and make up the bulk of
+            the card's content.
+          </Card.Text>
+          <Button onClick={() => this.handlePostSwitch()}
+                  variant="primary">Go somewhere</Button>
+        </Card.Body>
+      </Card>
     );
   }
 }
