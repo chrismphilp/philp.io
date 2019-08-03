@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { GifWrapper } from '../../components/posts/gifs/GifWrapper';
-import PostContent from '../../components/posts/PostContent';
+import { GifWrapper } from '../../components/dashboard/posts/gifs/GifWrapper';
+import PostContent from '../../components/dashboard/posts/PostContent';
 import content from './tattooRemoval.json';
 
 interface TattooRemovalProps {
