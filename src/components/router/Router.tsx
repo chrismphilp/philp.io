@@ -4,6 +4,7 @@ import About from '../about/About';
 import CloudFormation from '../../assets/cloud-formation/CloudFormation';
 import TattooRemoval from '../../assets/tattoo-removal/TattooRemoval';
 import Dashboard from '../dashboard/Dashboard';
+import InfiniteMadness from '../../assets/infinite-madness/InfiniteMadness';
 
 const Router = () => {
   return (
@@ -13,6 +14,7 @@ const Router = () => {
         <Route path='/about' component={About}/>
         <Route path='/tattoo-removal' component={TattooRemoval}/>
         <Route path='/cloud-theory' component={CloudFormation}/>
+        <Route path='/infinite-madness' component={InfiniteMadness}/>
       </Switch>
     </main>
   );

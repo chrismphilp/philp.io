@@ -1,5 +1,6 @@
-import TattooRemovalPost from './tattoo-removal/tattooRemoval.json';
-import CloudFormationPost from './cloud-formation/cloudFormation.json';
+import TattooRemovalData from './tattoo-removal/TattooRemoval.data';
+import CloudFormationData from './cloud-formation/CloudFormation.data';
+import InfiniteMadnessData from './infinite-madness/InfiniteMadness.data';
 
 export interface IPostCollection {
   title: string;
@@ -14,13 +15,7 @@ export interface IPostCollection {
 }
 
 export const PostCollection: IPostCollection[] = [
-  CloudFormationPost,
-  CloudFormationPost,
-  TattooRemovalPost,
-  CloudFormationPost,
-  TattooRemovalPost,
-  CloudFormationPost,
-  TattooRemovalPost,
-  CloudFormationPost,
-  TattooRemovalPost
+  CloudFormationData,
+  InfiniteMadnessData,
+  TattooRemovalData
 ];
