@@ -11,24 +11,29 @@ const PostContent: FunctionComponent<PostContentProps> = (props) => {
   const classes = useStyles(props.content);
 
   return (
-    <Paper className={classes.mainFeaturedPost}>
-      <img style={{display: 'none'}}
-           src={props.content.widgetImage}
-           alt="background"/>
-      <div className={classes.overlay}/>
-      <Grid container>
-        <Grid item md={6}>
-          <div className={classes.mainFeaturedPostContent}>
-            <Typography component="h1" variant="h3" color="inherit" gutterBottom>
-              {props.content.title}
-            </Typography>
-            <Typography variant="h5" color="inherit" paragraph>
-              {props.content.subTitle}
-            </Typography>
-          </div>
+    <div>
+      <Paper className={classes.mainFeaturedPost}>
+        <img style={{display: 'none'}}
+             src={props.content.widgetImage}
+             alt="background"/>
+        <div className={classes.overlay}/>
+        <Grid container>
+          <Grid item md={6}>
+            <div className={classes.mainFeaturedPostContent}>
+              <Typography component="h1" variant="h3" color="inherit" gutterBottom>
+                {props.content.title}
+              </Typography>
+              <Typography variant="h5" color="inherit" paragraph>
+                {props.content.subTitle}
+              </Typography>
+            </div>
+          </Grid>
         </Grid>
-      </Grid>
-    </Paper>
+      </Paper>
+      <div>
+        {props.children}
+      </div>
+    </div>
   );
 };
 
@@ -41,7 +46,8 @@ const useStyles = makeStyles<Theme, IPostCollection>((theme: Theme) => ({
     backgroundImage: `url(${content.widgetImage})`,
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center'
+    backgroundPosition: 'center',
+    borderRadius: 0
   }),
   overlay: {
     position: 'absolute',

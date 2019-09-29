@@ -1,10 +1,14 @@
 import React, { FunctionComponent } from 'react';
-import { PostCollection } from '../../../assets/PostCollection';
 import { GridList, GridListTile, GridListTileBar, IconButton, makeStyles, Theme } from '@material-ui/core';
 import { RouteComponentProps, withRouter } from 'react-router';
 import InfoIcon from '@material-ui/icons/Info';
+import { IPostCollection } from '../../../assets/PostCollection';
 
-const PostContainer: FunctionComponent<RouteComponentProps> = (props) => {
+type PostContainerProps = {
+  posts: IPostCollection[];
+};
+
+const PostContainer: FunctionComponent<PostContainerProps & RouteComponentProps> = (props) => {
 
   const handlePostSwitch = (link: string): void => props.history.push(link);
   const classes = useStyles();
@@ -12,7 +16,7 @@ const PostContainer: FunctionComponent<RouteComponentProps> = (props) => {
   return (
     <div className={classes.root}>
       <GridList cellHeight={250}>
-        {PostCollection.map((content, key) =>
+        {props.posts.map((content, key) =>
           <GridListTile key={key}>
             <img src={content.widgetImage}
                  alt={content.widgetImageAlt}
