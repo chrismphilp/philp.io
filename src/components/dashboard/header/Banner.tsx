@@ -1,7 +1,7 @@
-import React, { FunctionComponent } from "react";
-import { Col, Container, Jumbotron, Row } from "react-bootstrap";
-import FilterContainer from "../filter/FilterContainer";
-import { IPostCollection } from "../../../assets/PostCollection";
+import React, { FunctionComponent } from 'react';
+import { Col, Container, Jumbotron, Row } from 'react-bootstrap';
+import FilterContainer from '../filter/FilterContainer';
+import { IPostCollection } from '../../../assets/PostCollection';
 
 type BannerProps = {
   updateData: (data: IPostCollection[]) => void;

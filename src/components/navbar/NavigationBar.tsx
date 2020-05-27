@@ -1,12 +1,12 @@
-import React, { FunctionComponent, useEffect, useState } from "react";
-import { Nav, Navbar } from "react-bootstrap";
-import moment from "moment";
+import React, { FunctionComponent, useEffect, useState } from 'react';
+import { Nav, Navbar } from 'react-bootstrap';
+import moment from 'moment';
 
 const NavigationBar: FunctionComponent = () => {
-  const [date, setDate] = useState<string>(moment().format("MMMM Do YYYY, h:mm:ss a"));
+  const [date, setDate] = useState<string>(moment().format('MMMM Do YYYY, h:mm:ss a'));
 
   useEffect(() => {
-    setInterval(() => setDate(moment().format("MMMM Do YYYY, h:mm:ss a")), 1000);
+    setInterval(() => setDate(moment().format('MMMM Do YYYY, h:mm:ss a')), 1000);
   });
 
   return (
@@ -18,7 +18,7 @@ const NavigationBar: FunctionComponent = () => {
           <Nav.Link href="about">About Me</Nav.Link>
         </Nav>
         <Nav>
-          <Nav.Item style={{ color: "white" }}>{date}</Nav.Item>
+          <Nav.Item style={{ color: 'white' }}>{date}</Nav.Item>
         </Nav>
       </Navbar.Collapse>
     </Navbar>

@@ -1,8 +1,8 @@
-import React, { FunctionComponent, useState } from "react";
-import { Container } from "react-bootstrap";
-import PostContainer from "./posts/PostContainer";
-import Banner from "./header/Banner";
-import { IPostCollection, PostCollection } from "../../assets/PostCollection";
+import React, { FunctionComponent, useState } from 'react';
+import { Container } from 'react-bootstrap';
+import PostContainer from './posts/PostContainer';
+import Banner from './header/Banner';
+import { IPostCollection, PostCollection } from '../../assets/PostCollection';
 
 const Dashboard: FunctionComponent = () => {
   const [posts] = useState<IPostCollection[]>(PostCollection);

@@ -1,6 +1,6 @@
-import TattooRemovalData from "./tattoo-removal/TattooRemoval.data";
-import CloudFormationData from "./cloud-formation/CloudFormation.data";
-import InfiniteMadnessData from "./infinite-madness/InfiniteMadness.data";
+import TattooRemovalData from './tattoo-removal/TattooRemoval.data';
+import CloudFormationData from './cloud-formation/CloudFormation.data';
+import InfiniteMadnessData from './infinite-madness/InfiniteMadness.data';
 
 export interface IPostCollection {
   title: string;
