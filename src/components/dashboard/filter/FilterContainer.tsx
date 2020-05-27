@@ -1,32 +1,34 @@
-import React, { FunctionComponent } from 'react';
-import { makeStyles } from '@material-ui/core';
-import FilterExpansionPanel from './FilterExpansionPanel';
-import { IPostCollection } from '../../../assets/PostCollection';
+import React, { FunctionComponent } from "react";
+import { makeStyles } from "@material-ui/core";
+import { IPostCollection } from "../../../assets/PostCollection";
+import { Filter, IFilterDefinition } from "react-filter-menu";
 
 type FilterContainerProps = {
+  updateData: (data: IPostCollection[]) => void;
   posts: IPostCollection[];
 };
 
-const FilterContainer: FunctionComponent<FilterContainerProps> = (props) => {
+const filterDefinitions: IFilterDefinition[] = [
+  {
+    displayName: "Title",
+    objectKey: "title",
+  },
+];
+
+const FilterContainer: FunctionComponent<FilterContainerProps> = ({ updateData, posts }) => {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      <FilterExpansionPanel posts={props.posts}
-                            panelTitle={'Category'}
-                            objectKey={'category'}/>
-
-      <FilterExpansionPanel posts={props.posts}
-                            panelTitle={'Sort By'}
-                            objectKey={'category'}/>
+      <Filter filterHeader={"Filter"} updateData={updateData} filterDefinitions={filterDefinitions} filterData={posts} theme={"light"} />
     </div>
   );
 };
 
 const useStyles = makeStyles(() => ({
   root: {
-    width: '100%'
-  }
+    width: "100%",
+  },
 }));
 
 export default FilterContainer;

@@ -1,34 +1,28 @@
-import React, { Component } from 'react';
-import { Container } from 'react-bootstrap';
-import PostContainer from './posts/PostContainer';
-import Banner from './header/banner/Banner';
-import { IPostCollection, PostCollection } from '../../assets/PostCollection';
+import React, { FunctionComponent, useState } from "react";
+import { Container } from "react-bootstrap";
+import PostContainer from "./posts/PostContainer";
+import Banner from "./header/Banner";
+import { IPostCollection, PostCollection } from "../../assets/PostCollection";
 
-type DashboardState = {
-  posts: IPostCollection[];
-};
+const Dashboard: FunctionComponent = () => {
+  const [posts] = useState<IPostCollection[]>(PostCollection);
+  const [filteredPosts, setFilteredPosts] = useState<IPostCollection[]>(PostCollection);
 
-export default class Dashboard extends Component<{}, DashboardState> {
-  constructor(props: any) {
-    super(props);
-    this.state = {
-      posts: PostCollection
-    };
-  }
+  const updateData = (data: IPostCollection[]): void => setFilteredPosts(data);
 
-  render() {
-    return (
-      <Container style={styles.container}>
-        <Banner posts={this.state.posts}/>
-        <PostContainer posts={this.state.posts}/>
-      </Container>
-    );
-  }
+  return (
+    <Container style={styles.container}>
+      <Banner updateData={updateData} posts={posts} />
+      <PostContainer posts={filteredPosts} />
+    </Container>
+  );
 };
 
 const styles = {
   container: {
     paddingTop: 25,
-    paddingBottom: 25
-  }
+    paddingBottom: 25,
+  },
 };
+
+export default Dashboard;

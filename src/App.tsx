@@ -1,17 +1,17 @@
-import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
-import { NavigationBar } from './components/navbar/NavigationBar';
-import { Footer } from './components/footer/Footer';
-import Router from './components/router/Router';
+import React, { FunctionComponent } from "react";
+import { BrowserRouter } from "react-router-dom";
+import NavigationBar from "./components/navbar/NavigationBar";
+import Footer from "./components/footer/Footer";
+import Router from "./components/router/Router";
 
-const App: React.FC = () => {
+const App: FunctionComponent = () => {
   return (
     <div>
-      <BrowserRouter basename={'/blog'}>
-        <NavigationBar/>
-        <Router/>
+      <BrowserRouter basename={"/blog"}>
+        <NavigationBar />
+        <Router />
       </BrowserRouter>
-      <Footer/>
+      <Footer />
     </div>
   );
 };
