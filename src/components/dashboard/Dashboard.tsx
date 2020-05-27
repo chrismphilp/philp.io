@@ -12,16 +12,27 @@ const Dashboard: FunctionComponent = () => {
 
   return (
     <Container style={styles.container}>
-      <Banner updateData={updateData} posts={posts} />
-      <PostContainer posts={filteredPosts} />
+      <div style={styles.filter}>
+        <Banner updateData={updateData} posts={posts} />
+      </div>
+      <div style={styles.posts}>
+        <PostContainer posts={filteredPosts} />
+      </div>
     </Container>
   );
 };
 
 const styles = {
   container: {
+    display: 'flex',
     paddingTop: 25,
     paddingBottom: 25,
+  },
+  filter: {
+    flex: 2,
+  },
+  posts: {
+    flex: 4,
   },
 };
 

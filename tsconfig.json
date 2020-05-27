@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "module": "es6",
     "target": "es5",
     "lib": [
       "dom",
@@ -8,14 +9,14 @@
     ],
     "allowJs": true,
     "skipLibCheck": true,
+    "sourceMap": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "module": "esnext",
+    "noImplicitAny": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "noEmit": true,
     "jsx": "react",
     "isolatedModules": true
   },
@@ -23,7 +24,6 @@
     "src"
   ],
   "exclude": [
-    "node_modules",
     "test"
   ]
 }

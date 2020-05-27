@@ -13,6 +13,10 @@ const filterDefinitions: IFilterDefinition[] = [
     displayName: 'Title',
     objectKey: 'title',
   },
+  {
+    displayName: 'Category',
+    objectKey: 'category',
+  },
 ];
 
 const FilterContainer: FunctionComponent<FilterContainerProps> = ({ updateData, posts }) => {
@@ -25,7 +29,7 @@ const FilterContainer: FunctionComponent<FilterContainerProps> = ({ updateData, 
         updateData={updateData}
         filterDefinitions={filterDefinitions}
         filterData={posts}
-        theme={'light'}
+        theme={'dark'}
       />
     </div>
   );
