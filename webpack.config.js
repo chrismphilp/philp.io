@@ -47,8 +47,11 @@ module.exports = {
     'react': 'React',
     'react-dom': 'ReactDOM',
   },
-  'output': {
+  output: {
     path: path.join(__dirname, 'build'),
-    'filename': 'main.js',
+    filename: 'main.js',
+  },
+  devServer: {
+    contentBase: path.join(__dirname, 'build'),
   },
 };

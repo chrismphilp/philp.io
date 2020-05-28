@@ -5,18 +5,11 @@ import About from '../about/About';
 import CloudFormation from '../../assets/cloud-formation/CloudFormation';
 import TattooRemoval from '../../assets/tattoo-removal/TattooRemoval';
 import InfiniteMadness from '../../assets/infinite-madness/InfiniteMadness';
+import { Link } from 'react-router-dom';
 
 const Router = () => {
   return (
-    <main>
-      <Switch>
-        <Route exact path="/" component={Dashboard} />
-        <Route path="/about" component={About} />
-        <Route path="/tattoo-removal" component={TattooRemoval} />
-        <Route path="/cloud-theory" component={CloudFormation} />
-        <Route path="/infinite-madness" component={InfiniteMadness} />
-      </Switch>
-    </main>
+    <div/>
   );
 };
 
