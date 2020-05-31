@@ -12,11 +12,15 @@ const NavigationBar: FunctionComponent = () => {
 
   return (
     <Navbar collapseOnSelect expand="sm" bg="dark" variant="dark">
-      <Link to="/"><Navbar.Brand>Philpy Thought Shower</Navbar.Brand></Link>
+      <Link to="/">
+        <Navbar.Brand>Philpy Thought Shower</Navbar.Brand>
+      </Link>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse>
         <Nav className="mr-auto">
-          <Link to="/about"><Nav.Item>About Me</Nav.Item></Link>
+          <Link to="/about">
+            <Nav.Item>About Me</Nav.Item>
+          </Link>
         </Nav>
         <Nav>
           <Nav.Item style={{ color: 'white' }}>{date}</Nav.Item>

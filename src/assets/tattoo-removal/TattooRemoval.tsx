@@ -8,15 +8,16 @@ const TattooRemoval: FunctionComponent = () => {
       <div>
         <h5>
           <b>Lasers</b>. However, these are not the type that you saw in those classic James Bond movies, slowly
-          advancing to the hero's groin. These are known as Q-switched lasers and are the most common way to remove
-          tattoos. Before getting to the removal stage however, it is important to understand how tattoo's themselves
-          remain in the body.
+          advancing to the hero&apos;s groin. These are known as Q-switched lasers and are the most common way to remove
+          tattoos. Before getting to the removal stage however, it is important to understand how tattoo&apos;s
+          themselves remain in the body.
         </h5>
         <h5>
           Tattooing involves inserting ink into the dermal tissue layer of the skin (found under the epidermis - the
           outermost layer of the skin). Once the ink has entered, normally using a tattoo needle, the pigment begins to
           disperse itself through the epidermis and the upper dermis. Once it has entered these layers of the skin, the
-          body sends out one of it's billions of personal protection operatives for foreign agents - <b>Phagocytes</b>.
+          body sends out one of it&apos;s billions of personal protection operatives for foreign agents -{' '}
+          <b>Phagocytes</b>.
         </h5>
         <h5>
           The main function of Phagocytes within the human body is to protect from harmful particles, and are essential
@@ -43,9 +44,9 @@ const TattooRemoval: FunctionComponent = () => {
         </h5>
         <h5>
           So, given the fact that over 1 in 4 individuals are reported as regretting ever getting a tattoo{' '}
-          <a href="https://www.advdermatology.com/blog/statistics-surrounding-tattoo-regret">[1]</a>, there's hope on
-          the horizon with this amazing technology. So your mate Dave with his 'sick' <b>NO RAGRETS</b> graffiti across
-          his chest can still have some optimism.
+          <a href="https://www.advdermatology.com/blog/statistics-surrounding-tattoo-regret">[1]</a>, there&apos;s hope
+          on the horizon with this amazing technology. So your mate Dave with his &apos;sick&apos; <b>NO RAGRETS</b>{' '}
+          graffiti across his chest can still have some optimism.
         </h5>
       </div>
     </PostContent>

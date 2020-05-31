@@ -16,8 +16,8 @@ const CloudFormation: FunctionComponent = () => {
           vapour condense onto. When billions of these particles collect together they form a visible cloud.
         </h5>
         <h5>
-          Hopefully by this point you're on <i>cloud nine</i>, and most importantly, have vastly improved your knowledge
-          of the billions of droplets that hang over you every day.
+          Hopefully by this point you&apos;re on <i>cloud nine</i>, and most importantly, have vastly improved your
+          knowledge of the billions of droplets that hang over you every day.
         </h5>
       </div>
     </PostContent>

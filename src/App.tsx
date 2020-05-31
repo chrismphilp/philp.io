@@ -13,14 +13,14 @@ const App: FunctionComponent = () => {
   return (
     <div>
       <HashRouter basename={process.env.PUBLIC_URL}>
-        <NavigationBar/>
-        <Route exact path="/" component={Dashboard}/>
-        <Route path="/about" component={About}/>
+        <NavigationBar />
+        <Route exact path="/" component={Dashboard} />
+        <Route path="/about" component={About} />
         <Route path="/tattoo-removal" component={TattooRemoval} />
         <Route path="/cloud-theory" component={CloudFormation} />
         <Route path="/infinite-madness" component={InfiniteMadness} />
       </HashRouter>
-      <Footer/>
+      <Footer />
     </div>
   );
 };

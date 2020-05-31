@@ -1,44 +1,50 @@
 import React, { FunctionComponent } from 'react';
 import { makeStyles } from '@material-ui/core';
 import { IPostCollection } from '../../../assets/PostCollection';
-import { Filter, IFilterDefinition } from 'react-filter-menu';
+import Filter from 'react-filter-menu/src/Filter';
+import { IFilterDefinition } from 'react-filter-menu/src/model/FilterDefinitions.model';
 
 type FilterContainerProps = {
   updateData: (data: IPostCollection[]) => void;
   posts: IPostCollection[];
 };
 
-const filterDefinitions: IFilterDefinition[] = [
-  {
-    displayName: 'Title',
-    objectKey: 'title',
-  },
-  {
-    displayName: 'Category',
-    objectKey: 'category',
-  },
-];
+const filterDefinitions: IFilterDefinition<IPostCollection>[] = [
+    {
+      displayName: 'Title',
+      objectKey: 'title',
+      type: 'string',
+    },
+    {
+      displayName: 'Category',
+      objectKey: 'category',
+      type: 'string',
+    },
+    {
+      displayName: 'Date',
+      objectKey: 'date',
+      type: 'string',
+    },
+  ],
+  FilterContainer: FunctionComponent<FilterContainerProps> = ({ updateData, posts }) => {
+    const classes = useStyles();
 
-const FilterContainer: FunctionComponent<FilterContainerProps> = ({ updateData, posts }) => {
-  const classes = useStyles();
-
-  return (
-    <div className={classes.root}>
-      <Filter
-        filterHeader={'Filter'}
-        updateData={updateData}
-        filterDefinitions={filterDefinitions}
-        filterData={posts}
-        theme={'dark'}
-      />
-    </div>
-  );
-};
-
-const useStyles = makeStyles(() => ({
-  root: {
-    width: '100%',
+    return (
+      <div className={classes.root}>
+        <Filter
+          updateData={updateData}
+          filterDefinitions={filterDefinitions}
+          filterData={posts}
+          itemsPerRow={3}
+          theme={'dark'}
+        />
+      </div>
+    );
   },
-}));
+  useStyles = makeStyles(() => ({
+    root: {
+      width: '100%',
+    },
+  }));
 
 export default FilterContainer;

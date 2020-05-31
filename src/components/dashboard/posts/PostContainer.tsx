@@ -1,55 +1,40 @@
 import React, { FunctionComponent } from 'react';
-import { GridList, GridListTile, GridListTileBar, IconButton, makeStyles, Theme } from '@material-ui/core';
-import { RouteComponentProps, withRouter } from 'react-router';
-import InfoIcon from '@material-ui/icons/Info';
 import { IPostCollection } from '../../../assets/PostCollection';
+import styled from 'styled-components';
+import StandardPost from './StandardPost';
+
+const RowContainer = styled.div`
+    display: flex;
+  `,
+  Content = styled.div`
+    flex: 7;
+    padding: 25px 0 25px 0;
+  `,
+  Padding = styled.div`
+    flex: 1;
+  `;
 
 type PostContainerProps = {
   posts: IPostCollection[];
 };
 
-const PostContainer: FunctionComponent<PostContainerProps & RouteComponentProps> = ({ posts, history }) => {
-  const handlePostSwitch = (link: string): void => history.push(link);
-  const classes = useStyles();
+const PostContainer: FunctionComponent<PostContainerProps> = ({ posts }) => (
+  <>
+    {posts.map((post, key) => (
+      <RowContainer key={key}>
+        <Padding />
+        <Content>
+          {key % 2 === 0 ? (
+            <StandardPost post={post} orientation={'left'} />
+          ) : (
+            <StandardPost post={post} orientation={'right'} />
+          )}
+        </Content>
+        <Padding />
+      </RowContainer>
+    ))}
+    ;
+  </>
+);
 
-  return (
-    <div className={classes.root}>
-      <GridList cellHeight={250}>
-        {posts.map((content, key) => (
-          <GridListTile key={key}>
-            <img
-              src={content.widgetImage}
-              alt={content.widgetImageAlt}
-              onClick={() => handlePostSwitch(content.link)}
-            />
-            <GridListTileBar
-              title={content.title}
-              subtitle={<span>by: {content.author}</span>}
-              actionIcon={
-                <IconButton className={classes.icon} href={''}>
-                  <InfoIcon />
-                </IconButton>
-              }
-            />
-          </GridListTile>
-        ))}
-      </GridList>
-    </div>
-  );
-};
-
-const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
-    overflow: 'hidden',
-    backgroundColor: theme.palette.background.paper,
-    cursor: 'pointer',
-  },
-  icon: {
-    color: 'rgba(255, 255, 255, 0.54)',
-  },
-}));
-
-export default withRouter(PostContainer);
+export default PostContainer;

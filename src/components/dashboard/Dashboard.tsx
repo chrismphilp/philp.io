@@ -1,39 +1,36 @@
 import React, { FunctionComponent, useState } from 'react';
-import { Container } from 'react-bootstrap';
 import PostContainer from './posts/PostContainer';
 import Banner from './header/Banner';
 import { IPostCollection, PostCollection } from '../../assets/PostCollection';
+import styled from 'styled-components';
+import device from '../../util/device-sizes';
 
-const Dashboard: FunctionComponent = () => {
-  const [posts] = useState<IPostCollection[]>(PostCollection);
-  const [filteredPosts, setFilteredPosts] = useState<IPostCollection[]>(PostCollection);
+const BannerContainer = styled.div`
+    @media ${device.mobile} {
+      display: flex;
+    }
+    @media ${device.tablet} {
+      display: flex;
+      padding: 25px 75px 25px 75px;
+    }
+    @media ${device.laptop} {
+      display: flex;
+      padding: 25px 75px 25px 75px;
+    }
+  `,
+  Dashboard: FunctionComponent = () => {
+    const [posts] = useState<IPostCollection[]>(PostCollection),
+      [filteredPosts, setFilteredPosts] = useState<IPostCollection[]>(PostCollection),
+      updateData = (data: IPostCollection[]): void => setFilteredPosts(data);
 
-  const updateData = (data: IPostCollection[]): void => setFilteredPosts(data);
-
-  return (
-    <Container style={styles.container}>
-      <div style={styles.filter}>
-        <Banner updateData={updateData} posts={posts} />
-      </div>
-      <div style={styles.posts}>
+    return (
+      <>
+        <BannerContainer>
+          <Banner updateData={updateData} posts={posts} />
+        </BannerContainer>
         <PostContainer posts={filteredPosts} />
-      </div>
-    </Container>
-  );
-};
-
-const styles = {
-  container: {
-    display: 'flex',
-    paddingTop: 25,
-    paddingBottom: 25,
-  },
-  filter: {
-    flex: 2,
-  },
-  posts: {
-    flex: 4,
-  },
-};
+      </>
+    );
+  };
 
 export default Dashboard;
