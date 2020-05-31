@@ -12,7 +12,12 @@ module.exports = {
       version: 'detect', // Tells eslint-plugin-react to automatically detect the version of React to use
     },
   },
+  'plugins': [
+    'prettier',
+    '@typescript-eslint',
+  ],
   extends: [
+    'prettier',
     'fbjs/strict',
     'plugin:react/recommended', // Uses the recommended rules from @eslint-plugin-react
     'plugin:@typescript-eslint/recommended', // Uses the recommended rules from the @typescript-eslint/eslint-plugin
@@ -21,6 +26,6 @@ module.exports = {
   ],
   rules: {
     'react/prop-types': [0],
-    'one-var': [0],
+    'one-var': ['error', 'consecutive'],
   },
 };

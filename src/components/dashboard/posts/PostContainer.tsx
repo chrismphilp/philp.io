@@ -7,7 +7,7 @@ const RowContainer = styled.div`
     display: flex;
   `,
   Content = styled.div`
-    flex: 7;
+    flex: 5;
     padding: 25px 0 25px 0;
   `,
   Padding = styled.div`

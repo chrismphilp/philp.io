@@ -6,17 +6,13 @@ import styled from 'styled-components';
 import device from '../../util/device-sizes';
 
 const BannerContainer = styled.div`
-    @media ${device.mobile} {
-      display: flex;
-    }
-    @media ${device.tablet} {
-      display: flex;
-      padding: 25px 75px 25px 75px;
+    @media screen and (max-width: ${device.laptop})
+      padding: 0;
     }
     @media ${device.laptop} {
-      display: flex;
-      padding: 25px 75px 25px 75px;
+      padding: 25px 225px 25px 225px;
     }
+    display: flex;
   `,
   Dashboard: FunctionComponent = () => {
     const [posts] = useState<IPostCollection[]>(PostCollection),

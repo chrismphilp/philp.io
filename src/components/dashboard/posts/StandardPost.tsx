@@ -5,19 +5,16 @@ import { Image } from 'react-bootstrap';
 import styled from 'styled-components';
 import PostInformation from './PostInformation';
 
-const ImageContainer = styled.img`
-    padding: 25px;
-    width: 275px;
-    height: 275px;
-  `,
-  RootContainer = styled.div`
+const RootContainer = styled.div`
     background-color: #dcdcdc;
     color: #ffc300;
     display: flex;
     width: 100%;
     font-family: 'Roboto Condensed', sans-serif;
-    cursor: pointer;
     flex: 1;
+  `,
+  ImageContainer = styled.div`
+    cursor: pointer;
   `;
 
 type PostContainerProps = {
@@ -26,19 +23,23 @@ type PostContainerProps = {
 };
 
 const StandardPost: FunctionComponent<PostContainerProps & RouteComponentProps> = ({ post, orientation, history }) => {
-  const handlePostSwitch = (link: string): void => history.push(link);
+  const RoundedImage = (
+    <ImageContainer onClick={() => history.push(post.link)}>
+      <Image
+        roundedCircle
+        src={post.widgetImage}
+        alt={post.widgetImageAlt}
+        width={285}
+        height={275}
+        style={{ padding: 15 }}
+      />
+    </ImageContainer>
+  );
 
   if (orientation === 'left') {
     return (
       <RootContainer>
-        <Image
-          roundedCircle
-          src={post.widgetImage}
-          alt={post.widgetImageAlt}
-          onClick={() => handlePostSwitch(post.link)}
-          width={275}
-          height={275}
-        />
+        {RoundedImage}
         <PostInformation post={post} orientation={orientation} />
       </RootContainer>
     );
@@ -46,7 +47,7 @@ const StandardPost: FunctionComponent<PostContainerProps & RouteComponentProps> 
     return (
       <RootContainer>
         <PostInformation post={post} orientation={orientation} />
-        <ImageContainer src={post.widgetImage} alt={post.widgetImageAlt} onClick={() => handlePostSwitch(post.link)} />
+        {RoundedImage}
       </RootContainer>
     );
   }
