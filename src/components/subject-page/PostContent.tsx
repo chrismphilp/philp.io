@@ -1,6 +1,13 @@
 import React, { FunctionComponent, ReactElement } from 'react';
-import { Grid, makeStyles, Paper, Theme, Typography } from '@material-ui/core';
-import { IPostCollection } from '../../../assets/PostCollection';
+import { Grid, makeStyles, Theme, Typography } from '@material-ui/core';
+import { IPostCollection } from '../../assets/posts/PostCollection';
+import styled from 'styled-components';
+
+const PostText = styled.div`
+  font-family: sans-serif;
+  max-width: 1050px;
+  margin: 0 auto;
+`;
 
 type PostContentProps = {
   content: IPostCollection;
@@ -12,9 +19,9 @@ const PostContent: FunctionComponent<PostContentProps> = ({ content, children })
 
     return (
       <div>
-        <Paper className={classes.mainFeaturedPost}>
-          <img style={{ display: 'none' }} src={content.widgetImage} alt="background" />
-          <div className={classes.overlay} />
+        <div className={classes.mainFeaturedPost}>
+          <img style={{ display: 'none' }} src={content.widgetImage} alt="background"/>
+          <div className={classes.overlay}/>
           <Grid container>
             <Grid item md={6}>
               <div className={classes.mainFeaturedPostContent}>
@@ -27,8 +34,8 @@ const PostContent: FunctionComponent<PostContentProps> = ({ content, children })
               </div>
             </Grid>
           </Grid>
-        </Paper>
-        <div>{children}</div>
+        </div>
+        <PostText>{children}</PostText>
       </div>
     );
   },
