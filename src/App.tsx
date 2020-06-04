@@ -8,18 +8,25 @@ import About from './components/about/About';
 import TattooRemoval from './assets/posts/tattoo-removal/TattooRemoval';
 import CloudFormation from './assets/posts/cloud-formation/CloudFormation';
 import InfiniteMadness from './assets/posts/infinite-madness/InfiniteMadness';
+import styled from 'styled-components';
 
-const App: FunctionComponent = () =>
-  <>
-    <HashRouter basename={process.env.PUBLIC_URL}>
-      <NavigationBar/>
-      <Route exact path="/" component={Dashboard}/>
-      <Route path="/about" component={About}/>
-      <Route path="/tattoo-removal" component={TattooRemoval}/>
-      <Route path="/cloud-theory" component={CloudFormation}/>
-      <Route path="/infinite-madness" component={InfiniteMadness}/>
-    </HashRouter>
-    <Footer/>
-  </>;
+const AppRoot = styled.div`
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+  `,
+  App: FunctionComponent = () => (
+    <AppRoot>
+      <HashRouter basename={process.env.PUBLIC_URL}>
+        <NavigationBar />
+        <Route exact path="/" component={Dashboard} />
+        <Route path="/about" component={About} />
+        <Route path="/tattoo-removal" component={TattooRemoval} />
+        <Route path="/cloud-theory" component={CloudFormation} />
+        <Route path="/infinite-madness" component={InfiniteMadness} />
+      </HashRouter>
+      <Footer />
+    </AppRoot>
+  );
 
 export default App;

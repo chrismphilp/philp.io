@@ -1,37 +1,44 @@
 import React, { FunctionComponent } from 'react';
-import { IPostCollection } from '../../../assets/posts/PostCollection';
-import bannerImage from '../../../assets/images/banner.jpg';
 import styled from 'styled-components';
 
+type BannerSectionStyleProps = {
+  image: any;
+};
+
 const BannerSection = styled.section`
-  margin: 0;
-  padding: 8em 0 6em 0;
-  background-color: #1E2832;
-  color: rgba(255, 255, 255, 0.75);
-  background-attachment: fixed;
-  background-image: url(${bannerImage});
-  background-size: cover;
-  text-align: center;
-`;
+    margin: 0;
+    padding: 8em 0 6em 0;
+    background-color: #1e2832;
+    color: rgba(255, 255, 255, 0.75);
+    background-attachment: fixed;
+    background-image: url(${(props: BannerSectionStyleProps) => props.image});
+    background-size: cover;
+    text-align: center;
+  `,
+  BannerHeader = styled.h2`
+    border: 0;
+    font: inherit;
+    vertical-align: baseline;
+    font-size: 2em;
+  `,
+  BannerSubHeader = styled.p`
+    color: #fff;
+    font-size: 1.05em;
+    margin-bottom: 1.75em;
+    text-transform: uppercase;
+  `;
 
-const BannerHeader = styled.h2`
-  border: 0;
-  font: inherit;
-  vertical-align: baseline;
-  font-size: 2em;
-`;
+type BannerProps = {
+  image: any;
+  header: string;
+  subHeader: string;
+};
 
-const BannerSubHeader = styled.p`
-  color: #fff;
-  font-size: 1.05em;
-  margin-bottom: 1.75em;
-  text-transform: uppercase;
-`;
-
-const Banner: FunctionComponent = () =>
-  <BannerSection>
-    <BannerHeader>Philpy Thought Shower</BannerHeader>
-    <BannerSubHeader>A blog where I share my thoughts on topics that interest me.</BannerSubHeader>
-  </BannerSection>;
+const Banner: FunctionComponent<BannerProps> = ({ image, header, subHeader }) => (
+  <BannerSection image={image}>
+    <BannerHeader>{header}</BannerHeader>
+    <BannerSubHeader>{subHeader}.</BannerSubHeader>
+  </BannerSection>
+);
 
 export default Banner;

@@ -1,10 +1,10 @@
 import React, { FunctionComponent } from 'react';
-import PostContent from '../../../components/subject-page/PostContent';
 import content from './TattooRemoval.data';
+import SubjectPage from '../../../components/subject-page/SubjectPage';
 
 const TattooRemoval: FunctionComponent = () => {
   return (
-    <PostContent content={content}>
+    <SubjectPage post={content}>
       <div>
         <h5>
           <b>Lasers</b>. However, these are not the type that you saw in those classic James Bond movies, slowly
@@ -49,7 +49,7 @@ const TattooRemoval: FunctionComponent = () => {
           graffiti across his chest can still have some optimism.
         </h5>
       </div>
-    </PostContent>
+    </SubjectPage>
   );
 };
 
