@@ -3,6 +3,8 @@ import { IPostCollection } from '../PostCollection';
 const infiniteMadnessData: IPostCollection = {
   title: 'Infinite Madness',
   subTitle: 'The formation of clouds',
+  sidebarHeader: '',
+  sidebarSubHeader: '',
   author: 'Christopher Philp',
   category: 'Mathematics',
   link: '/infinite-madness',
@@ -10,6 +12,7 @@ const infiniteMadnessData: IPostCollection = {
   widgetImage: 'https://wp-assets.futurism.com/2019/04/hubble-data-universe-expanding-faster-1200x630.png',
   widgetImageAlt: 'Infinity',
   contentKey: 'infiniteMadness',
+  dateCollection: []
 };
 
 export default infiniteMadnessData;

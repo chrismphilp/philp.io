@@ -27,5 +27,6 @@ module.exports = {
   rules: {
     'react/prop-types': [0],
     'one-var': ['error', 'consecutive'],
+    '@typescript-eslint/no-explicit-any': [0]
   },
 };

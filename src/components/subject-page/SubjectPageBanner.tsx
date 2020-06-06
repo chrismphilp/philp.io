@@ -83,7 +83,7 @@ type SubjectPageBannerProps = {
   children?: ReactElement;
 };
 
-const SubjectPageBanner: FunctionComponent<SubjectPageBannerProps> = ({ post, children }) => {
+const SubjectPageBanner: FunctionComponent<SubjectPageBannerProps> = ({ post }) => {
   return (
     <PageBanner>
       <PageBannerContainer>

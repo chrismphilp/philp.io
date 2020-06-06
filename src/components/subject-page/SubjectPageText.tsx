@@ -4,7 +4,7 @@ import { IPostCollection } from '../../assets/posts/PostCollection';
 
 const TextContainer = styled.div`
     height: 100%;
-    font-family: 'Roboto Condensed', sans-serif;
+    text-align: justify;
     overflow: inherit;
     float: left;
     margin: 0;

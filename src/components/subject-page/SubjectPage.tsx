@@ -7,6 +7,7 @@ import SubjectPageContent from './SubjectPageContent';
 
 const SubjectPageContainer = styled.div`
     overflow: auto;
+    font-family: 'Roboto Condensed', sans-serif !important;
     box-sizing: border-box;
     margin: 0;
     padding: 0;

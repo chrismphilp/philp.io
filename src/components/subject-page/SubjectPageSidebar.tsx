@@ -1,7 +1,8 @@
 import React, { FunctionComponent } from 'react';
-import { IPostCollection } from '../../assets/posts/PostCollection';
+import { DateField, IPostCollection } from '../../assets/posts/PostCollection';
 import dateContainer from '../../assets/images/date-container.jpg';
 import styled from 'styled-components';
+import { getMonthFromDateIndex } from '../../util/date.utils';
 
 const SubjectPageSidebarContainer = styled.div`
     overflow: inherit;
@@ -30,7 +31,6 @@ const SubjectPageSidebarContainer = styled.div`
     margin: 0;
     padding: 0;
     display: block;
-    margin-bottom: 2em;
   `,
   SidebarHeaderTitle = styled.h2`
     line-height: 1.75em;
@@ -57,18 +57,18 @@ const SubjectPageSidebarContainer = styled.div`
     list-style: none;
   `,
   SidebarListItem = styled.li`
+    border-bottom: 1px solid aqua;
     line-height: 1.75em;
     font-size: 11pt;
     list-style: none;
     margin: 0px;
-    padding: 30px 0px 20px 0px;
-    padding-top: 0px;
+    padding: 25px 0px 20px 0px;
     background: none;
   `,
   SidebarListItemDate = styled.p`
     list-style: none;
     float: left;
-    width: 78px;
+    width: 98px;
     height: 78px;
     margin: 0px 25px 0px 0px;
     padding: 6px 0px 0px 0px;
@@ -77,7 +77,6 @@ const SubjectPageSidebarContainer = styled.div`
     letter-spacing: 1px;
     text-align: center;
     text-transform: uppercase;
-    font-size: 0.8em;
     font-weight: 300;
     color: #ffffff;
   `,
@@ -87,10 +86,10 @@ const SubjectPageSidebarContainer = styled.div`
     letter-spacing: 1px;
     text-align: center;
     text-transform: uppercase;
-    font-size: 0.8em;
+    font-size: 0.85em;
     font-weight: 300;
     margin: 0;
-    padding: 0;
+    padding: 0 16.5px 0 0;
     display: block;
     text-decoration: none;
     color: #ffffff;
@@ -101,10 +100,9 @@ const SubjectPageSidebarContainer = styled.div`
     text-align: center;
     text-transform: uppercase;
     display: block;
-    margin: 13.5px 0px 0px 0px;
-    padding: 0;
-    letter-spacing: -1px;
-    font-size: 3em;
+    margin: 25.5px 0px 0px 0px;
+    padding: 0 0 0 0;
+    font-size: 1.45em;
     font-weight: 300;
     color: #ffffff;
   `,
@@ -130,32 +128,39 @@ const SubjectPageSidebarContainer = styled.div`
   `;
 
 type SubjectPageSidebarProps = {
-  post: IPostCollection;
+  sidebarHeader: string;
+  sidebarSubHeader: string;
+  dateCollection: DateField[];
 };
 
-const SubjectPageSidebar: FunctionComponent<SubjectPageSidebarProps> = ({ post }) => {
+const SubjectPageSidebar: FunctionComponent<SubjectPageSidebarProps> = ({sidebarHeader, sidebarSubHeader, dateCollection}) => {
+
   return (
     <SubjectPageSidebarContainer>
       <SidebarSection>
         <SidebarHeader>
-          <SidebarHeaderTitle>Some Interesting Dates</SidebarHeaderTitle>
-          <SidebarHeaderSubTitle>Maybe keep them in mind</SidebarHeaderSubTitle>
+          <SidebarHeaderTitle>{sidebarHeader}</SidebarHeaderTitle>
+          <SidebarHeaderSubTitle>{sidebarSubHeader}</SidebarHeaderSubTitle>
         </SidebarHeader>
         <SidebarList>
-          <SidebarListItem>
-            <SidebarListItemDate>
-              <SidebarListItemDateHeader>
-                September
-                <SidebarListItemDateContent>15</SidebarListItemDateContent>
-              </SidebarListItemDateHeader>
-            </SidebarListItemDate>
-            <SidebarListItemTextContainer>
-              <SidebarListItemTextContent>
-                Donec leo, vivamus fermentum nibh in augue praesent a lacus at urna congue rutrum. Maecenas luctus
-                lectus.
-              </SidebarListItemTextContent>
-            </SidebarListItemTextContainer>
-          </SidebarListItem>
+          {dateCollection.map((dateField: DateField) => {
+            const month: string = getMonthFromDateIndex(dateField.date.getMonth());
+            return (
+              <SidebarListItem>
+                <SidebarListItemDate>
+                  <SidebarListItemDateHeader>
+                    {month}
+                    <SidebarListItemDateContent>
+                      {dateField.date.getFullYear() + (dateField.timePeriod ?? '')}
+                    </SidebarListItemDateContent>
+                  </SidebarListItemDateHeader>
+                </SidebarListItemDate>
+                <SidebarListItemTextContainer>
+                  <SidebarListItemTextContent>{dateField.text}</SidebarListItemTextContent>
+                </SidebarListItemTextContainer>
+              </SidebarListItem>
+            );
+          })}
         </SidebarList>
       </SidebarSection>
     </SubjectPageSidebarContainer>

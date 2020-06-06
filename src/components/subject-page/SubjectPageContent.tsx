@@ -47,7 +47,10 @@ const SubjectPageContent: FunctionComponent<PostParagraphProps> = ({ post, child
       <SubjectPageMain>
         <SubjectPageContentRow>
           <SubjectPageText post={post}>{children}</SubjectPageText>
-          <SubjectPageSidebar post={post} />
+          <SubjectPageSidebar
+            sidebarHeader={post.sidebarHeader}
+            sidebarSubHeader={post.sidebarSubHeader}
+            dateCollection={post.dateCollection}/>
         </SubjectPageContentRow>
       </SubjectPageMain>
     </SubjectPageContentContainer>
