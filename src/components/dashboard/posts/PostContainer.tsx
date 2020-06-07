@@ -2,7 +2,7 @@ import React, { FunctionComponent, useState } from 'react';
 import PostWidget from './PostWidget';
 import PageSelector from '../page-selector/PageSelector';
 import styled from 'styled-components';
-import { IPostCollection } from '../../../assets/posts/model/PostCollection.model';
+import { IPostCollection } from '../../../model/PostCollection.model';
 
 const PostWrapper = styled.div`
     background-color: #eee;

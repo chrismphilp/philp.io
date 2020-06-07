@@ -1,5 +1,5 @@
-import { PostCategories } from '../model/PostCategories';
-import { IPostCollection } from '../model/PostCollection.model';
+import { PostCategories } from '../../../model/PostCategories';
+import { IPostCollection } from '../../../model/PostCollection.model';
 import moment from 'moment';
 
 const cloudFormationData: IPostCollection = {

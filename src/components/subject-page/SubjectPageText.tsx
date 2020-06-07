@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
-import { IPostCollection } from '../../assets/posts/model/PostCollection.model';
+import { IPostCollection } from '../../model/PostCollection.model';
 
 const TextContainer = styled.div`
     height: 100%;

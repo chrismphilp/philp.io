@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
-import { IPostCollection } from '../../../assets/posts/model/PostCollection.model';
+import { IPostCollection } from '../../../model/PostCollection.model';
 
 type PostArticleStyleProps = {
   orientation: 'left' | 'right';

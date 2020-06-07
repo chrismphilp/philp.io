@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
 import SubjectPageSidebar from './SubjectPageSidebar';
 import SubjectPageText from './SubjectPageText';
-import { IPostCollection } from '../../assets/posts/model/PostCollection.model';
+import { IPostCollection } from '../../model/PostCollection.model';
 
 const SubjectPageContentContainer = styled.div`
     width: 1200px;

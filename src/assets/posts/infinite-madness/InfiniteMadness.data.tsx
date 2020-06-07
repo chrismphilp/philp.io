@@ -1,5 +1,5 @@
-import { IPostCollection } from '../model/PostCollection.model';
-import { PostCategories } from '../model/PostCategories';
+import { IPostCollection } from '../../../model/PostCollection.model';
+import { PostCategories } from '../../../model/PostCategories';
 import moment from 'moment';
 
 const infiniteMadnessData: IPostCollection = {

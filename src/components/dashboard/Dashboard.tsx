@@ -3,7 +3,7 @@ import Banner from './header/Banner';
 import bannerImage from '../../assets/images/banner.jpg';
 import PostContainer from './posts/PostContainer';
 import { PostCollection } from '../../assets/posts/PostCollection';
-import { IPostCollection } from '../../assets/posts/model/PostCollection.model';
+import { IPostCollection } from '../../model/PostCollection.model';
 import { splitArrayIntoGroups } from '../../util/data.util';
 
 const Dashboard: FunctionComponent = () => {
