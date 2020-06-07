@@ -1,6 +1,6 @@
 import React, { FunctionComponent, ReactElement } from 'react';
-import { IPostCollection } from '../../assets/posts/PostCollection';
 import styled from 'styled-components';
+import { IPostCollection } from '../../assets/posts/model/PostCollection.model';
 
 const PageBanner = styled.div`
     height: 100%;

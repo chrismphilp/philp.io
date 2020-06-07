@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from 'react';
-import { IPostCollection } from '../../assets/posts/PostCollection';
 import SubjectPageBanner from './SubjectPageBanner';
 import styled from 'styled-components';
 import subjectBackground from '../../assets/images/subject-background.jpg';
 import SubjectPageContent from './SubjectPageContent';
+import { IPostCollection } from '../../assets/posts/model/PostCollection.model';
 
 const SubjectPageContainer = styled.div`
     overflow: auto;

@@ -1,11 +1,18 @@
 import React, { FunctionComponent, useState } from 'react';
-import PostContainer from './posts/PostWidget';
 import Banner from './header/Banner';
-import { IPostCollection, PostCollection } from '../../assets/posts/PostCollection';
 import bannerImage from '../../assets/images/banner.jpg';
+import PostContainer from './posts/PostContainer';
+import { PostCollection } from '../../assets/posts/PostCollection';
+import { IPostCollection } from '../../assets/posts/model/PostCollection.model';
+import { splitArrayIntoGroups } from '../../util/data.util';
 
 const Dashboard: FunctionComponent = () => {
-  const [posts] = useState<IPostCollection[]>(PostCollection);
+  const [posts] = useState<IPostCollection[][]>(
+    splitArrayIntoGroups(
+      PostCollection.sort((a: any, b: any) => b.date - a.date),
+      3,
+    ),
+  );
 
   return (
     <>

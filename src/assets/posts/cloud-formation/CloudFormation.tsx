@@ -6,14 +6,14 @@ const CloudFormation: FunctionComponent = () => {
   return (
     <SubjectPage post={content}>
       <p>
-        Ever wondered how these wondrous 500,000 tonne masses form and travel across the skyline each day? How come
-        they don’t seem to shrink when it rains? Why do they appear angelically white? All great questions, so let’s
-        break it down.
+        Ever wondered how these wondrous 500,000 tonne masses form and travel across the skyline each day? How come they
+        don’t seem to shrink when it rains? Why do they appear angelically white? All great questions, so let’s break it
+        down.
       </p>
 
       <p>
-        Clouds primarily consist of water droplets and ice crystals, small and light enough to float in the air; but
-        how did the water vapour get up there in the first place?
+        Clouds primarily consist of water droplets and ice crystals, small and light enough to float in the air; but how
+        did the water vapour get up there in the first place?
       </p>
 
       <p>
@@ -23,8 +23,8 @@ const CloudFormation: FunctionComponent = () => {
         specific amount of water vapour at any given time, dependant on its temperature and weight – known as
         atmospheric pressure, and given higher temperatures and atmospheric pressure, a greater quantity can be
         maintained. However, once it reaches its maximum threshold – known as the dew point - if a drop in temperature
-        or atmospheric pressure occurs, the only option is for this water vapour to convert from gas to liquid, via
-        the process of condensation.
+        or atmospheric pressure occurs, the only option is for this water vapour to convert from gas to liquid, via the
+        process of condensation.
       </p>
 
       <p>

@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import moment from 'moment';
 import styled from 'styled-components';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
 
 const Header = styled.header`
     left: 0;
@@ -70,7 +70,9 @@ const Header = styled.header`
               <NavigationLink onClick={() => history.push('/about')}>About</NavigationLink>
             </NavigationItem>
             <NavigationItem>
-              <NavigationLink onClick={() => history.push('#')}>{date}</NavigationLink>
+              <NavigationLink onClick={() => window.open('https://en.wikipedia.org/wiki/Greenwich_Mean_Time')}>
+                {date}
+              </NavigationLink>
             </NavigationItem>
           </NavigationList>
         </NavigationContainer>

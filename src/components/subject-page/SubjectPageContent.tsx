@@ -1,8 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
-import { IPostCollection } from '../../assets/posts/PostCollection';
 import SubjectPageSidebar from './SubjectPageSidebar';
 import SubjectPageText from './SubjectPageText';
+import { IPostCollection } from '../../assets/posts/model/PostCollection.model';
 
 const SubjectPageContentContainer = styled.div`
     width: 1200px;
@@ -50,7 +50,8 @@ const SubjectPageContent: FunctionComponent<PostParagraphProps> = ({ post, child
           <SubjectPageSidebar
             sidebarHeader={post.sidebarHeader}
             sidebarSubHeader={post.sidebarSubHeader}
-            dateCollection={post.dateCollection}/>
+            dateCollection={post.dateCollection}
+          />
         </SubjectPageContentRow>
       </SubjectPageMain>
     </SubjectPageContentContainer>

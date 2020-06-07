@@ -1,8 +1,8 @@
 import React, { FunctionComponent } from 'react';
-import { DateField, IPostCollection } from '../../assets/posts/PostCollection';
 import dateContainer from '../../assets/images/date-container.jpg';
 import styled from 'styled-components';
 import { getMonthFromDateIndex } from '../../util/date.utils';
+import { DateField } from '../../assets/posts/model/DateField.model';
 
 const SubjectPageSidebarContainer = styled.div`
     overflow: inherit;
@@ -133,8 +133,11 @@ type SubjectPageSidebarProps = {
   dateCollection: DateField[];
 };
 
-const SubjectPageSidebar: FunctionComponent<SubjectPageSidebarProps> = ({sidebarHeader, sidebarSubHeader, dateCollection}) => {
-
+const SubjectPageSidebar: FunctionComponent<SubjectPageSidebarProps> = ({
+  sidebarHeader,
+  sidebarSubHeader,
+  dateCollection,
+}) => {
   return (
     <SubjectPageSidebarContainer>
       <SidebarSection>
@@ -143,10 +146,10 @@ const SubjectPageSidebar: FunctionComponent<SubjectPageSidebarProps> = ({sidebar
           <SidebarHeaderSubTitle>{sidebarSubHeader}</SidebarHeaderSubTitle>
         </SidebarHeader>
         <SidebarList>
-          {dateCollection.map((dateField: DateField) => {
+          {dateCollection.map((dateField: DateField, key: number) => {
             const month: string = getMonthFromDateIndex(dateField.date.getMonth());
             return (
-              <SidebarListItem>
+              <SidebarListItem key={key}>
                 <SidebarListItemDate>
                   <SidebarListItemDateHeader>
                     {month}

@@ -1,13 +1,13 @@
 import React, { FunctionComponent } from 'react';
-import content from './InfiniteMadness.data';
+import content from './GoogleSearch.data';
 import SubjectPage from '../../../components/subject-page/SubjectPage';
 
-const InfiniteMadness: FunctionComponent = () => {
+const GoogleSearch: FunctionComponent = () => {
   return (
     <SubjectPage post={content}>
-      <div />
+      <p></p>
     </SubjectPage>
   );
 };
 
-export default InfiniteMadness;
+export default GoogleSearch;
