@@ -5,13 +5,18 @@ import Footer from './components/footer/Footer';
 import { Route } from 'react-router';
 import Dashboard from './components/dashboard/Dashboard';
 import About from './components/about/About';
-import TattooRemoval from './assets/tattoo-removal/TattooRemoval';
-import CloudFormation from './assets/cloud-formation/CloudFormation';
-import InfiniteMadness from './assets/infinite-madness/InfiniteMadness';
+import TattooRemoval from './assets/posts/tattoo-removal/TattooRemoval';
+import CloudFormation from './assets/posts/cloud-formation/CloudFormation';
+import InfiniteMadness from './assets/posts/infinite-madness/InfiniteMadness';
+import styled from 'styled-components';
 
-const App: FunctionComponent = () => {
-  return (
-    <div>
+const AppRoot = styled.div`
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+  `,
+  App: FunctionComponent = () => (
+    <AppRoot>
       <HashRouter basename={process.env.PUBLIC_URL}>
         <NavigationBar />
         <Route exact path="/" component={Dashboard} />
@@ -21,8 +26,7 @@ const App: FunctionComponent = () => {
         <Route path="/infinite-madness" component={InfiniteMadness} />
       </HashRouter>
       <Footer />
-    </div>
+    </AppRoot>
   );
-};
 
 export default App;

@@ -1,32 +1,29 @@
 import React, { FunctionComponent, useState } from 'react';
-import PostContainer from './posts/PostContainer';
 import Banner from './header/Banner';
-import { IPostCollection, PostCollection } from '../../assets/PostCollection';
-import styled from 'styled-components';
-import device from '../../util/device-sizes';
+import bannerImage from '../../assets/images/banner.jpg';
+import PostContainer from './posts/PostContainer';
+import { PostCollection } from '../../assets/posts/PostCollection';
+import { IPostCollection } from '../../assets/posts/model/PostCollection.model';
+import { splitArrayIntoGroups } from '../../util/data.util';
 
-const BannerContainer = styled.div`
-    @media screen and (max-width: ${device.laptop})
-      padding: 0;
-    }
-    @media ${device.laptop} {
-      padding: 25px 225px 25px 225px;
-    }
-    display: flex;
-  `,
-  Dashboard: FunctionComponent = () => {
-    const [posts] = useState<IPostCollection[]>(PostCollection),
-      [filteredPosts, setFilteredPosts] = useState<IPostCollection[]>(PostCollection),
-      updateData = (data: IPostCollection[]): void => setFilteredPosts(data);
+const Dashboard: FunctionComponent = () => {
+  const [posts] = useState<IPostCollection[][]>(
+    splitArrayIntoGroups(
+      PostCollection.sort((a: any, b: any) => b.date - a.date),
+      3,
+    ),
+  );
 
-    return (
-      <>
-        <BannerContainer>
-          <Banner updateData={updateData} posts={posts} />
-        </BannerContainer>
-        <PostContainer posts={filteredPosts} />
-      </>
-    );
-  };
+  return (
+    <>
+      <Banner
+        image={bannerImage}
+        header={'Philpy Thought Shower'}
+        subHeader={'A blog where I share my thoughts on topics that interest me.'}
+      />
+      <PostContainer posts={posts} />
+    </>
+  );
+};
 
 export default Dashboard;

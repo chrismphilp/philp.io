@@ -1,12 +1,12 @@
 import React, { FunctionComponent } from 'react';
-import PostContent from '../../components/dashboard/posts/PostContent';
 import content from './InfiniteMadness.data';
+import SubjectPage from '../../../components/subject-page/SubjectPage';
 
 const InfiniteMadness: FunctionComponent = () => {
   return (
-    <PostContent content={content}>
+    <SubjectPage post={content}>
       <div />
-    </PostContent>
+    </SubjectPage>
   );
 };
 

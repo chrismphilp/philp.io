@@ -1,40 +1,50 @@
-import React, { FunctionComponent } from 'react';
-import { IPostCollection } from '../../../assets/PostCollection';
+import React, { FunctionComponent, useState } from 'react';
+import PostWidget from './PostWidget';
+import PageSelector from '../page-selector/PageSelector';
 import styled from 'styled-components';
-import StandardPost from './StandardPost';
+import { IPostCollection } from '../../../assets/posts/model/PostCollection.model';
 
-const RowContainer = styled.div`
+const PostWrapper = styled.div`
+    background-color: #eee;
+  `,
+  PostSection = styled.section`
     display: flex;
+    padding: 6em 0 2em 0;
+    color: #777;
+    width: 100%;
+    margin: 0 auto;
   `,
-  Content = styled.div`
-    flex: 5;
-    padding: 25px 0 25px 0;
-  `,
-  Padding = styled.div`
-    flex: 1;
+  PostSectionInner = styled.div`
+    color: #777;
+    box-sizing: border-box;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+    margin: 0 auto;
+    width: 70em;
   `;
 
 type PostContainerProps = {
-  posts: IPostCollection[];
+  posts: IPostCollection[][];
 };
 
-const PostContainer: FunctionComponent<PostContainerProps> = ({ posts }) => (
-  <>
-    {posts.map((post, key) => (
-      <RowContainer key={key}>
-        <Padding />
-        <Content>
-          {key % 2 === 0 ? (
-            <StandardPost post={post} orientation={'left'} />
-          ) : (
-            <StandardPost post={post} orientation={'right'} />
-          )}
-        </Content>
-        <Padding />
-      </RowContainer>
-    ))}
-    ;
-  </>
-);
+const PostContainer: FunctionComponent<PostContainerProps> = ({ posts }) => {
+  const [currentPage, setCurrentPage] = useState<number>(1);
+
+  return (
+    <PostWrapper>
+      <PostSection>
+        <PostSectionInner>
+          {posts[currentPage - 1].map((post: IPostCollection, key: number) => (
+            <PostWidget key={key} post={post} orientation={key % 2 === 0 ? 'left' : 'right'} />
+          ))}
+        </PostSectionInner>
+      </PostSection>
+      <PageSelector setCurrentPage={setCurrentPage} numberOfPages={posts.length} currentPage={currentPage} />
+    </PostWrapper>
+  );
+};
 
 export default PostContainer;
