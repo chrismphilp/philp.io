@@ -4,7 +4,7 @@ import moment from 'moment';
 
 const googleSearchData: IPostCollection = {
   title: 'Hey Google, Search This For Me',
-  subTitle: 'Search optimisations are everywhere',
+  subTitle: "How the world's biggest search engine works",
   sidebarHeader: '',
   sidebarSubHeader: '',
   author: 'Christopher Philp',

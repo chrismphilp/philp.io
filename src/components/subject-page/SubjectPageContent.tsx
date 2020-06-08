@@ -39,19 +39,24 @@ const SubjectPageContentContainer = styled.div`
 
 type PostParagraphProps = {
   post: IPostCollection;
+  sidebarPresent: boolean;
 };
 
-const SubjectPageContent: FunctionComponent<PostParagraphProps> = ({ post, children }) => {
+const SubjectPageContent: FunctionComponent<PostParagraphProps> = ({ post, sidebarPresent, children }) => {
   return (
     <SubjectPageContentContainer>
       <SubjectPageMain>
         <SubjectPageContentRow>
-          <SubjectPageText post={post}>{children}</SubjectPageText>
-          <SubjectPageSidebar
-            sidebarHeader={post.sidebarHeader}
-            sidebarSubHeader={post.sidebarSubHeader}
-            dateCollection={post.dateCollection}
-          />
+          <SubjectPageText post={post} sidebarPresent={sidebarPresent}>
+            {children}
+          </SubjectPageText>
+          {sidebarPresent && (
+            <SubjectPageSidebar
+              sidebarHeader={post.sidebarHeader}
+              sidebarSubHeader={post.sidebarSubHeader}
+              dateCollection={post.dateCollection}
+            />
+          )}
         </SubjectPageContentRow>
       </SubjectPageMain>
     </SubjectPageContentContainer>

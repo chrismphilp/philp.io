@@ -2,6 +2,10 @@ import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
 import { IPostCollection } from '../../model/PostCollection.model';
 
+type TextContainerStyleProps = {
+  sidebarPresent: boolean;
+};
+
 const TextContainer = styled.div`
     height: 100%;
     text-align: justify;
@@ -13,7 +17,7 @@ const TextContainer = styled.div`
     font-size: 100%;
     font: inherit;
     vertical-align: baseline;
-    width: 66.6666666667%;
+    width: ${(props: TextContainerStyleProps) => (props.sidebarPresent ? '66.6666666667%' : '100%')};
     float: left;
     box-sizing: border-box;
     padding-left: 50px;
@@ -98,11 +102,12 @@ const TextContainer = styled.div`
 
 type PostParagraphProps = {
   post: IPostCollection;
+  sidebarPresent: boolean;
 };
 
-const SubjectPageText: FunctionComponent<PostParagraphProps> = ({ post, children }) => {
+const SubjectPageText: FunctionComponent<PostParagraphProps> = ({ post, sidebarPresent, children }) => {
   return (
-    <TextContainer>
+    <TextContainer sidebarPresent={sidebarPresent}>
       <TextRow>
         <TextContent>
           <TextSection>

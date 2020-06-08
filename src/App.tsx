@@ -8,6 +8,8 @@ import About from './components/about/About';
 import TattooRemoval from './assets/posts/tattoo-removal/TattooRemoval';
 import CloudFormation from './assets/posts/cloud-formation/CloudFormation';
 import InfiniteMadness from './assets/posts/infinite-madness/InfiniteMadness';
+import GoogleSearch from './assets/posts/google-search/GoogleSearch';
+import TypeScript37 from './assets/posts/typescript3.7/TypeScript3.7';
 import styled from 'styled-components';
 
 const AppRoot = styled.div`
@@ -24,6 +26,8 @@ const AppRoot = styled.div`
         <Route path="/tattoo-removal" component={TattooRemoval} />
         <Route path="/cloud-theory" component={CloudFormation} />
         <Route path="/infinite-madness" component={InfiniteMadness} />
+        <Route path="/google-search" component={GoogleSearch} />
+        <Route path="/typescript-3.7" component={TypeScript37} />
       </HashRouter>
       <Footer />
     </AppRoot>

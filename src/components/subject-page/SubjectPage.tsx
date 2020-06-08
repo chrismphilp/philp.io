@@ -35,17 +35,18 @@ const SubjectPageContainer = styled.div`
 
 type SubjectPageProps = {
   post: IPostCollection;
+  sidebarPresent?: boolean;
 };
 
-const SubjectPage: FunctionComponent<SubjectPageProps> = ({ post, children }) => {
-  return (
-    <SubjectPageContainer>
-      <Wrapper>
-        <SubjectPageBanner post={post} />
-        <SubjectPageContent post={post}>{children}</SubjectPageContent>
-      </Wrapper>
-    </SubjectPageContainer>
-  );
-};
+const SubjectPage: FunctionComponent<SubjectPageProps> = ({ post, sidebarPresent = true, children }) => (
+  <SubjectPageContainer>
+    <Wrapper>
+      <SubjectPageBanner post={post} />
+      <SubjectPageContent post={post} sidebarPresent={sidebarPresent}>
+        {children}
+      </SubjectPageContent>
+    </Wrapper>
+  </SubjectPageContainer>
+);
 
 export default SubjectPage;
