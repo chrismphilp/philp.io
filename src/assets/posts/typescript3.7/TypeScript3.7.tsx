@@ -30,15 +30,16 @@ const TypeScript37: FunctionComponent = () => {
 let x = y?.z.execute();
 
 // Identical to the above
-let x = (y === null || y === undefined) ? undefined : y.z.execute();
+x = (y === null || y === undefined) ? undefined : y.z.execute();
 
-let y = { 
+y = { 
   z: {
-    execute: () => 5;
+    execute: () => 5
   }
 }
 // x === 5
-x = y?.z.execute();`}
+x = y?.z.execute();
+`}
         </code>
       </pre>
 
@@ -58,7 +59,7 @@ x = y?.z.execute();`}
         <code className="language-js">
           {`// New operator usage
 return arr?.[0];
-// Previous
+// Previous approach
 return (arr === null || arr === undefined) ? // undefined : // arr[0];
 `}
         </code>
@@ -75,19 +76,19 @@ return (arr === null || arr === undefined) ? // undefined : // arr[0];
         <code className="language-js">
           {`let y = {
   z: {
-    execute: undefined;
+    execute: undefined
   }
 }
 
 // x === undefined
 let x = y.z?.execute?.();
 
-y.z = execute: () => 5;
+y.z.execute = () => 5;
 
 // x === 5
 x = y.z?.execute?.();
 
-y.z = 5;
+y.z.execute = 5;
 
 // This will still result in a type error
 x = y.z?.execute?.();
@@ -101,7 +102,71 @@ x = y.z?.execute?.();
       <p>
         Nullish coalescing requires the use of the <code className="language-js">??</code> operator and is used to fall
         back to a default value when similarly dealing with <code className="language-js">null</code> or{' '}
-        <code className="language-js">undefined</code>.
+        <code className="language-js">undefined</code>. The operator states that the value on the left of{' '}
+        <code className="language-js">??</code> will be used if not equal to <code className="language-js">null</code>{' '}
+        or <code className="language-js">undefined</code>, else use the expression to the right. See the example below:
+      </p>
+
+      <pre>
+        <code className="language-js">
+          {`let y = null,
+z = 5;
+  
+// x === z === 5
+let x = y ?? z; 
+
+y = 55;
+
+// x === y === 55
+x = y ?? z;
+`}
+        </code>
+      </pre>
+
+      <p>
+        The <code className="language-js">??</code> operator can replace uses of <code className="language-js">||</code>{' '}
+        when trying to use a default value, which gives better behaviour for falsy values.
+      </p>
+
+      <pre>
+        <code className="language-js">
+          {`// ?? is better than using || as it avoids falsy behaviours
+let x = 0;
+
+// total === x === 0.5 -> unlikely to be intended
+let total = x || 0.5;
+
+// total === x === 0 
+total = x ?? 0.5;
+`}
+        </code>
+      </pre>
+
+      <br />
+      <h2>Combining the two operators</h2>
+
+      <p>
+        Finally, the two operators can be combined to set a default value when <code className="language-js">null</code>{' '}
+        or <code className="language-js">undefined</code> are encountered.
+      </p>
+
+      <pre>
+        <code className="language-js">
+          {`let person = {
+  name: 'Chris',
+  details: undefined
+}, 
+x = 5;
+
+// personsAge === x === 5;
+let personsAge = person.details?.age ?? x;
+`}
+        </code>
+      </pre>
+
+      <p>
+        <i>Hopefully</i> you&apos;ve learnt something new, or if not confirmed your understanding of operators that you
+        use in your daily development.
       </p>
     </SubjectPage>
   );
