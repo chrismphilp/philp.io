@@ -6,7 +6,7 @@ type NavigationButtonStyleProps = {
 };
 
 const NavigationButton = styled.li`
-    color: #666;
+    color: ${'#666'};
     list-style: none;
     cursor: ${(props: NavigationButtonStyleProps) => (props.disabled ? 'default' : 'pointer')};
     box-sizing: border-box;
@@ -40,9 +40,13 @@ const NavigationButton = styled.li`
     text-align: center;
     background: ${(props: NavigationButtonStyleProps) => (props.disabled ? '#c6c6c6' : '#5FCEC0')};
     color: #fff;
-    box-shadow: 0 0 0 2px #5fcec0;
+    box-shadow: 0 0 0 2px ${(props: NavigationButtonStyleProps) => (props.disabled ? '#c6c6c6' : '#5fcec0')};
     width: 10em;
     padding: 0;
+
+    ${NavigationButton}: hover & {
+      background: ${(props: NavigationButtonStyleProps) => (props.disabled ? '#c6c6c6' : '#3bbfaf')};
+    }
   `;
 
 type PageNavigationButtonProps = {

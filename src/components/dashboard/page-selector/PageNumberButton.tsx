@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
 
 const NumberButton = styled.li`
-  color: #666;
+  color: ${'#666'};
   list-style: none;
   cursor: pointer;
   box-sizing: border-box;
@@ -16,8 +16,7 @@ const NumberButton = styled.li`
 `;
 
 type NumberButtonLinkStyleProps = {
-  buttonValue: number;
-  currentPage: number;
+  selected: boolean;
 };
 
 const NumberButtonLink = styled.a`
@@ -38,11 +37,15 @@ const NumberButtonLink = styled.a`
   width: 3em;
   text-align: center;
   border-radius: 4px;
-  background: #fff;
-  border: solid 2px #fff;
-  color: #ff6098;
-  border-color: ${(props: NumberButtonLinkStyleProps) =>
-    props.buttonValue === props.currentPage ? 'green' : '#ff6098'};
+  background: ${'#fff'};
+  border: solid 2px ${'#fff'};
+  color: ${(props: NumberButtonLinkStyleProps) => (props.selected ? '#ff6098' : '#000000')};
+  border-color: ${(props: NumberButtonLinkStyleProps) => (props.selected ? '#ff6098' : '')};
+
+  ${NumberButton}:hover & {
+    color: ${'#5fcec0'};
+    border-color: ${'#5fcec0'};
+  }
 `;
 
 type PageNumberButtonProps = {
@@ -51,12 +54,14 @@ type PageNumberButtonProps = {
   currentPage: number;
 };
 
-const PageNumberButton: FunctionComponent<PageNumberButtonProps> = ({ setCurrentPage, buttonValue, currentPage }) => (
-  <NumberButton onClick={() => setCurrentPage(buttonValue)}>
-    <NumberButtonLink buttonValue={buttonValue} currentPage={currentPage}>
-      {buttonValue}
-    </NumberButtonLink>
-  </NumberButton>
-);
+const PageNumberButton: FunctionComponent<PageNumberButtonProps> = ({ setCurrentPage, buttonValue, currentPage }) => {
+  const selected: boolean = buttonValue === currentPage;
+
+  return (
+    <NumberButton onClick={() => setCurrentPage(buttonValue)}>
+      <NumberButtonLink selected={selected}>{buttonValue}</NumberButtonLink>
+    </NumberButton>
+  );
+};
 
 export default PageNumberButton;

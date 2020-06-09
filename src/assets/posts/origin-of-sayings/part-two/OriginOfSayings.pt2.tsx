@@ -1,8 +1,8 @@
 import React, { FunctionComponent } from 'react';
-import SubjectPage from '../../../components/subject-page/SubjectPage';
-import content from './OriginOfSayings.data';
+import SubjectPage from '../../../../components/subject-page/SubjectPage';
+import content from './OriginOfSayings.pt2.data';
 
-const OriginOfSayings: FunctionComponent = () => {
+const OriginOfSayingsPt2: FunctionComponent = () => {
   return (
     <SubjectPage post={content} sidebarPresent={false}>
       <p>The English language is full of nuanced sayings that are used everyday, whilst being rooted in history.</p>
@@ -10,4 +10,4 @@ const OriginOfSayings: FunctionComponent = () => {
   );
 };
 
-export default OriginOfSayings;
+export default OriginOfSayingsPt2;

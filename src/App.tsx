@@ -10,7 +10,8 @@ import CloudFormation from './assets/posts/cloud-formation/CloudFormation';
 import InfiniteMadness from './assets/posts/infinite-madness/InfiniteMadness';
 import GoogleSearch from './assets/posts/google-search/GoogleSearch';
 import TypeScript37 from './assets/posts/typescript3.7/TypeScript3.7';
-import OriginOfSayings from './assets/posts/origin-of-sayings/OriginOfSayings';
+import OriginOfSayingsPt1 from './assets/posts/origin-of-sayings/part-one/OriginOfSayings.pt1';
+import OriginOfSayingsPt2 from './assets/posts/origin-of-sayings/part-two/OriginOfSayings.pt2';
 import styled from 'styled-components';
 
 const AppRoot = styled.div`
@@ -29,7 +30,8 @@ const AppRoot = styled.div`
         <Route path="/infinite-madness" component={InfiniteMadness} />
         <Route path="/google-search" component={GoogleSearch} />
         <Route path="/typescript-3.7" component={TypeScript37} />
-        <Route path="/origin-of-sayings" component={OriginOfSayings} />
+        <Route path="/origin-of-sayings-part-one" component={OriginOfSayingsPt1} />
+        <Route path="/origin-of-sayings-part-two" component={OriginOfSayingsPt2} />
       </HashRouter>
       <Footer />
     </AppRoot>
