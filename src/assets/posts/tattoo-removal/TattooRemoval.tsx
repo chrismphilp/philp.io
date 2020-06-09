@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
-import content from './TattooRemoval.data';
 import SubjectPage from '../../../components/subject-page/SubjectPage';
+import content from './TattooRemoval.data';
 
 const TattooRemoval: FunctionComponent = () => {
   return (

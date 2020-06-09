@@ -4,7 +4,7 @@
   "homepage": "http://chrismphilp.github.io/blog",
   "scripts": {
     "format": "prettier --write \"src/**/*.tsx\"",
-    "lint": "eslint --max-warnings 0 --ext .js \"src/**/*.{ts,tsx}\" --fix",
+    "lint": "eslint --max-warnings 0 --ext .js \"src/**/*.{ts,tsx,js,json}\" --fix",
     "start": "webpack-dev-server --open --mode development",
     "build": "webpack --mode production",
     "test": "jest --config jestconfig.json",
