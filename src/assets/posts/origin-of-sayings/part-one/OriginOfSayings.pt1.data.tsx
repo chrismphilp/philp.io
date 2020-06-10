@@ -12,7 +12,7 @@ const originOfSayingsPt1Data: IPostCollection = {
   link: '/origin-of-sayings-part-one',
   date: moment(new Date('2020-06-09T00:00:00+0000')).toDate(),
   widgetImage: 'https://upload.wikimedia.org/wikipedia/commons/7/7f/Frith_A_Private_View.jpg',
-  widgetImageAlt: 'Victorian Street',
+  widgetImageAlt: 'Victorian Art Museum',
   contentKey: 'originOfSayingsPt1',
   dateCollection: [],
 };

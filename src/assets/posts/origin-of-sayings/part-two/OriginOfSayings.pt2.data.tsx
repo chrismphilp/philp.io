@@ -4,7 +4,7 @@ import moment from 'moment';
 
 const originOfSayingsPt2Data: IPostCollection = {
   title: 'The Origin of Sayings - Part 2',
-  subTitle: 'Continue your learning',
+  subTitle: 'Continue onto pastures new',
   sidebarHeader: '',
   sidebarSubHeader: '',
   author: 'Christopher Philp',

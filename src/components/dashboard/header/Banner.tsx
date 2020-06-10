@@ -1,5 +1,6 @@
-import React, { FunctionComponent } from 'react';
+import React, { Dispatch, FunctionComponent, SetStateAction } from 'react';
 import styled from 'styled-components';
+import SearchBar from './SearchBar';
 
 type BannerSectionStyleProps = {
   image: any;
@@ -29,15 +30,19 @@ const BannerSection = styled.section`
   `;
 
 type BannerProps = {
+  onSearch: (event: React.MouseEvent) => void;
+  setSearchText: Dispatch<SetStateAction<string>>;
   image: any;
   header: string;
   subHeader: string;
+  searchText: string;
 };
 
-const Banner: FunctionComponent<BannerProps> = ({ image, header, subHeader }) => (
+const Banner: FunctionComponent<BannerProps> = ({ onSearch, setSearchText, image, header, subHeader, searchText }) => (
   <BannerSection image={image}>
     <BannerHeader>{header}</BannerHeader>
-    <BannerSubHeader>{subHeader}.</BannerSubHeader>
+    <BannerSubHeader>{subHeader}</BannerSubHeader>
+    <SearchBar onSearch={onSearch} setSearchText={setSearchText} searchText={searchText} />
   </BannerSection>
 );
 

@@ -37,7 +37,7 @@ const PostContainer: FunctionComponent<PostContainerProps> = ({ posts }) => {
     <PostWrapper>
       <PostSection>
         <PostSectionInner>
-          {posts[currentPage - 1].map((post: IPostCollection, key: number) => (
+          {posts[currentPage - 1]?.map((post: IPostCollection, key: number) => (
             <PostWidget key={key} post={post} orientation={key % 2 === 0 ? 'left' : 'right'} />
           ))}
         </PostSectionInner>

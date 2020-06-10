@@ -47,18 +47,18 @@ const OriginOfSayingsPt1: FunctionComponent = () => {
       <h3>Goodbye</h3>
 
       <p>
-        This is relatively simple one, but interesting nonetheless. In the 15th century a common farewell was ‘God be
-        with thee’. Over 300 years this eventually got compounded; ‘God be with yee’ in the 16th century; ‘God b'wee’ in
-        the 17th century; and eventually ‘Goodbye’ in the late 17th century.
+        This is relatively simple one, but interesting nonetheless. In the 15th century a common farewell was ‘
+        <b>God be with thee</b>’. Over 300 years this eventually got compounded; ‘<b>God be with yee</b>’ in the 16th
+        century; ‘<b>God b&apos;wee</b>’ in the 17th century; and eventually ‘<b>Goodbye</b>’ in the late 17th century.
       </p>
 
       <h3>Beyond the Pale</h3>
 
       <p>
         What we know today as pale (light in colour) is far different from its now obsolete early English meaning – a
-        stake or pointed piece of wood, also known as a fencepost. In turn the Pale began to be associated with the area
-        enclosed by these pale posts, such as a settlement. Therefore, anyone wanting to go outside of these safe areas
-        were said to be going ‘beyond the Pale’ – to go outside agreed standard of decency.
+        stake or pointed piece of wood, also known as a fencepost. In turn the <b>Pale</b> began to be associated with
+        the area enclosed by these pale posts, such as a settlement. Therefore, anyone wanting to go outside of these
+        safe areas were said to be going ‘<b>beyond the Pale</b>’ – to go outside agreed standard of decency.
       </p>
     </SubjectPage>
   );
