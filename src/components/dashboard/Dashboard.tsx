@@ -9,15 +9,12 @@ import { splitArrayIntoGroups } from '../../util/data.util';
 const Dashboard: FunctionComponent = () => {
   const [posts] = useState<IPostCollection[]>(PostCollection.sort((a: any, b: any) => b.date - a.date)),
     [filteredPosts, setFilteredPosts] = useState<IPostCollection[][]>(splitArrayIntoGroups(posts, 3)),
-    [searchText, setSearchText] = useState<string>(''),
-    onSearch = (event: React.MouseEvent) => {
-      event.preventDefault();
+    onSearch = (searchText: string) => {
       setFilteredPosts(
         splitArrayIntoGroups(
-          (searchText === ''
+          searchText === ''
             ? posts
-            : posts.filter((value) => value.title.toLowerCase().includes(searchText.toLowerCase()))
-          ).sort((a: any, b: any) => b.date - a.date),
+            : posts.filter((value) => value.title.toLowerCase().includes(searchText.toLowerCase())),
           3,
         ),
       );
@@ -29,8 +26,6 @@ const Dashboard: FunctionComponent = () => {
         image={bannerImage}
         header={'Philpy Thought Shower'}
         subHeader={'A blog where I share my thoughts on topics that interest me.'}
-        searchText={searchText}
-        setSearchText={setSearchText}
         onSearch={onSearch}
       />
       <PostContainer posts={filteredPosts} />

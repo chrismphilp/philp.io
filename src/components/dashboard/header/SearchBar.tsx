@@ -1,4 +1,4 @@
-import React, { Dispatch, FunctionComponent, SetStateAction } from 'react';
+import React, { FunctionComponent, useState } from 'react';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -60,17 +60,27 @@ const Wrapper = styled.div`
   );
 
 type SearchBarProps = {
-  onSearch: (event: React.MouseEvent) => void;
-  setSearchText: Dispatch<SetStateAction<string>>;
-  searchText: string;
+  onSearch: (searchText: string) => void;
 };
 
-const SearchBar: FunctionComponent<SearchBarProps> = ({ onSearch, setSearchText, searchText }) => {
+const SearchBar: FunctionComponent<SearchBarProps> = ({ onSearch }) => {
+  const [timer, setTimer] = useState<number>(),
+    handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      const value: string = event.target.value;
+      // Clears running timer and starts a new one each time the user types
+      clearTimeout(timer);
+      setTimer(
+        setTimeout(() => {
+          onSearch(value);
+        }, 1000),
+      );
+    };
+
   return (
     <Wrapper>
       <SearchBarForm>
-        <SearchBarFormTextBox value={searchText} onChange={(e) => setSearchText(e.target.value)} />
-        <SearchButtonContainer onClick={onSearch}>
+        <SearchBarFormTextBox onChange={handleChange} />
+        <SearchButtonContainer>
           <SearchButtonIcon />
         </SearchButtonContainer>
       </SearchBarForm>

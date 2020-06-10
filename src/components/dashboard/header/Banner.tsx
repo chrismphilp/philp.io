@@ -1,4 +1,4 @@
-import React, { Dispatch, FunctionComponent, SetStateAction } from 'react';
+import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
 import SearchBar from './SearchBar';
 
@@ -30,19 +30,17 @@ const BannerSection = styled.section`
   `;
 
 type BannerProps = {
-  onSearch: (event: React.MouseEvent) => void;
-  setSearchText: Dispatch<SetStateAction<string>>;
+  onSearch: (searchText: string) => void;
   image: any;
   header: string;
   subHeader: string;
-  searchText: string;
 };
 
-const Banner: FunctionComponent<BannerProps> = ({ onSearch, setSearchText, image, header, subHeader, searchText }) => (
+const Banner: FunctionComponent<BannerProps> = ({ onSearch, image, header, subHeader }) => (
   <BannerSection image={image}>
     <BannerHeader>{header}</BannerHeader>
     <BannerSubHeader>{subHeader}</BannerSubHeader>
-    <SearchBar onSearch={onSearch} setSearchText={setSearchText} searchText={searchText} />
+    <SearchBar onSearch={onSearch} />
   </BannerSection>
 );
 
