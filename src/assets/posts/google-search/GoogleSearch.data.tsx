@@ -1,4 +1,4 @@
-import { PostCategories } from '../../../model/PostCategories';
+import { PostCategories } from '../../../model/PostCategories.model';
 import { IPostCollection } from '../../../model/PostCollection.model';
 import moment from 'moment';
 
@@ -9,6 +9,7 @@ const googleSearchData: IPostCollection = {
   sidebarSubHeader: '',
   author: 'Christopher Philp',
   category: PostCategories.Technology,
+  keywords: ['google', 'search', 'engine', 'browser'],
   link: '/google-search',
   date: moment(new Date('2020-06-08T00:00:00+0000')).toDate(),
   widgetImage: 'https://blog.hubspot.com/hubfs/image8-2.jpg',

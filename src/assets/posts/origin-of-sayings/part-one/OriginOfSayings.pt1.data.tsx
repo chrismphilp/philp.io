@@ -1,5 +1,5 @@
 import { IPostCollection } from '../../../../model/PostCollection.model';
-import { PostCategories } from '../../../../model/PostCategories';
+import { PostCategories } from '../../../../model/PostCategories.model';
 import moment from 'moment';
 
 const originOfSayingsPt1Data: IPostCollection = {
@@ -9,6 +9,7 @@ const originOfSayingsPt1Data: IPostCollection = {
   sidebarSubHeader: '',
   author: 'Christopher Philp',
   category: PostCategories.Language,
+  keywords: ['sayings', 'origin', 'etymology', 'words'],
   link: '/origin-of-sayings-part-one',
   date: moment(new Date('2020-06-09T00:00:00+0000')).toDate(),
   widgetImage: 'https://upload.wikimedia.org/wikipedia/commons/7/7f/Frith_A_Private_View.jpg',

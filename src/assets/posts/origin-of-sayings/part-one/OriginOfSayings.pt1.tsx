@@ -1,8 +1,10 @@
 import React, { FunctionComponent } from 'react';
 import SubjectPage from '../../../../components/subject-page/SubjectPage';
 import content from './OriginOfSayings.pt1.data';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
+import SubjectPageTextLink from '../../../../components/subject-page/SubjectPageTextLink';
 
-const OriginOfSayingsPt1: FunctionComponent = () => {
+const OriginOfSayingsPt1: FunctionComponent<RouteComponentProps> = ({ history }) => {
   return (
     <SubjectPage post={content} sidebarPresent={false}>
       <p>
@@ -60,8 +62,14 @@ const OriginOfSayingsPt1: FunctionComponent = () => {
         the area enclosed by these pale posts, such as a settlement. Therefore, anyone wanting to go outside of these
         safe areas were said to be going ‘<b>beyond the Pale</b>’ – to go outside agreed standard of decency.
       </p>
+
+      <br />
+      <p>
+        If you liked this article, you can read the next part{' '}
+        <SubjectPageTextLink linkText={'here'} link={'/origin-of-sayings-part-two'} history={history} />.
+      </p>
     </SubjectPage>
   );
 };
 
-export default OriginOfSayingsPt1;
+export default withRouter(OriginOfSayingsPt1);

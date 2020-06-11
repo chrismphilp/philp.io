@@ -1,5 +1,5 @@
 import { IPostCollection } from '../../../model/PostCollection.model';
-import { PostCategories } from '../../../model/PostCategories';
+import { PostCategories } from '../../../model/PostCategories.model';
 import moment from 'moment';
 
 const infiniteMadnessData: IPostCollection = {
@@ -9,6 +9,7 @@ const infiniteMadnessData: IPostCollection = {
   sidebarSubHeader: 'They might seem unfathomable',
   author: 'Christopher Philp',
   category: PostCategories.Mathematics,
+  keywords: ['infinite', 'infinity', 'forever', 'madness'],
   link: '/infinite-madness',
   date: moment('2020-06-25T00:00:00+0000').toDate(),
   widgetImage: 'https://www.scitecheuropa.eu/wp-content/uploads/2019/07/ClaudioVentrella.jpg',

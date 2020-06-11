@@ -1,5 +1,5 @@
 import { IPostCollection } from '../../../model/PostCollection.model';
-import { PostCategories } from '../../../model/PostCategories';
+import { PostCategories } from '../../../model/PostCategories.model';
 import moment from 'moment';
 
 const tattooRemovalData: IPostCollection = {
@@ -9,6 +9,7 @@ const tattooRemovalData: IPostCollection = {
   sidebarSubHeader: 'And leave a mark...',
   author: 'Christopher Philp',
   category: PostCategories.Science,
+  keywords: ['tattoo', 'removal', 'surgery'],
   link: '/tattoo-removal',
   date: moment(new Date('2020-06-07T00:00:00+0000')).toDate(),
   widgetImage:

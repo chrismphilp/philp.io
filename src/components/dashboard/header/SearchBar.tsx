@@ -67,13 +67,8 @@ const SearchBar: FunctionComponent<SearchBarProps> = ({ onSearch }) => {
   const [timer, setTimer] = useState<number>(),
     handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       const value: string = event.target.value;
-      // Clears running timer and starts a new one each time the user types
       clearTimeout(timer);
-      setTimer(
-        setTimeout(() => {
-          onSearch(value);
-        }, 1000),
-      );
+      setTimer(setTimeout(() => onSearch(value), 1000));
     };
 
   return (

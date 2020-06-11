@@ -1,4 +1,4 @@
-import { PostCategories } from '../../../model/PostCategories';
+import { PostCategories } from '../../../model/PostCategories.model';
 import { IPostCollection } from '../../../model/PostCollection.model';
 import moment from 'moment';
 
@@ -9,6 +9,7 @@ const cloudFormationData: IPostCollection = {
   sidebarSubHeader: 'And other particle-lars...',
   author: 'Christopher Philp',
   category: PostCategories.Science,
+  keywords: ['cloud', 'nature', 'rain'],
   link: '/cloud-theory',
   date: moment(new Date('2020-06-05T00:00:00+0000')).toDate(),
   widgetImage: 'https://hitinfrastructure.com/images/site/article_headers/_normal/Cloud.jpg',

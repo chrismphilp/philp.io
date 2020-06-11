@@ -4,7 +4,14 @@ import SubjectPageSidebar from './SubjectPageSidebar';
 import SubjectPageText from './SubjectPageText';
 import { IPostCollection } from '../../model/PostCollection.model';
 
-const SubjectPageContentContainer = styled.div`
+const Wrapper = styled.div`
+    height: 100%;
+    min-width: 1200px;
+    overflow: inherit;
+    position: relative;
+    padding: 0em 3em;
+  `,
+  SubjectPageContentContainer = styled.div`
     width: 1200px;
     overflow: inherit;
     margin: 0;
@@ -44,22 +51,24 @@ type PostParagraphProps = {
 
 const SubjectPageContent: FunctionComponent<PostParagraphProps> = ({ post, sidebarPresent, children }) => {
   return (
-    <SubjectPageContentContainer>
-      <SubjectPageMain>
-        <SubjectPageContentRow>
-          <SubjectPageText post={post} sidebarPresent={sidebarPresent}>
-            {children}
-          </SubjectPageText>
-          {sidebarPresent && (
-            <SubjectPageSidebar
-              sidebarHeader={post.sidebarHeader}
-              sidebarSubHeader={post.sidebarSubHeader}
-              dateCollection={post.dateCollection}
-            />
-          )}
-        </SubjectPageContentRow>
-      </SubjectPageMain>
-    </SubjectPageContentContainer>
+    <Wrapper>
+      <SubjectPageContentContainer>
+        <SubjectPageMain>
+          <SubjectPageContentRow>
+            <SubjectPageText post={post} sidebarPresent={sidebarPresent}>
+              {children}
+            </SubjectPageText>
+            {sidebarPresent && (
+              <SubjectPageSidebar
+                sidebarHeader={post.sidebarHeader}
+                sidebarSubHeader={post.sidebarSubHeader}
+                dateCollection={post.dateCollection}
+              />
+            )}
+          </SubjectPageContentRow>
+        </SubjectPageMain>
+      </SubjectPageContentContainer>
+    </Wrapper>
   );
 };
 

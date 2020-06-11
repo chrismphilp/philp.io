@@ -8,6 +8,7 @@ export type IPostCollection = {
   dateCollection: DateField[];
   author: string;
   category: string;
+  keywords: string[];
   link: string;
   date: Date;
   widgetImage: string;
