@@ -1,29 +1,27 @@
-import React, { FunctionComponent, useEffect } from 'react';
+import React, { FunctionComponent } from 'react';
 import content from './TypeScript3.7.data';
 import SubjectPage from '../../../components/subject-page/SubjectPage';
-import Prism from 'prismjs';
+import 'prismjs/components/prism-javascript.min';
 
 const TypeScript37: FunctionComponent = () => {
-  useEffect(() => Prism.highlightAll(), []);
-
   return (
     <SubjectPage post={content} sidebarPresent={false}>
       <h2>Optional Chaining</h2>
       <h4>
-        <code className="language-js">?.</code> Operator
+        <code className="language-javascript">?.</code> Operator
       </h4>
 
       <p>
         Optional Chaining is a great new feature which allows expressions to only run until the point one of the
-        accessed fields is equal to <code className="language-js">null</code> or{' '}
-        <code className="language-js">undefined</code>. This is through the use of the{' '}
-        <code className="language-js">?.</code> operator - <b>optional property access</b> - allowing anything expressed
-        on the right of the question mark to continue executing, otherwise{' '}
-        <code className="language-js">undefined</code> is returned. See the example below:
+        accessed fields is equal to <code className="language-javascript">null</code> or{' '}
+        <code className="language-javascript">undefined</code>. This is through the use of the{' '}
+        <code className="language-javascript">?.</code> operator - <b>optional property access</b> - allowing anything
+        expressed on the right of the question mark to continue executing, otherwise{' '}
+        <code className="language-javascript">undefined</code> is returned. See the example below:
       </p>
 
       <pre>
-        <code className="language-js">
+        <code className="language-javascript">
           {`let y = null;
           
 // x === undefined
@@ -56,7 +54,7 @@ x = y?.z.execute();
       </p>
 
       <pre>
-        <code className="language-js">
+        <code className="language-javascript">
           {`// New operator usage
 return arr?.[0];
 // Previous approach
@@ -68,12 +66,12 @@ return (arr === null || arr === undefined) ? // undefined : // arr[0];
       <h4>Optional Calls</h4>
 
       <p>
-        These allow us to conditionally call expressions if they’re not <code className="language-js">null</code> or{' '}
-        <code className="language-js">undefined</code>.
+        These allow us to conditionally call expressions if they’re not{' '}
+        <code className="language-javascript">null</code> or <code className="language-javascript">undefined</code>.
       </p>
 
       <pre>
-        <code className="language-js">
+        <code className="language-javascript">
           {`let y = {
   z: {
     execute: undefined
@@ -100,15 +98,16 @@ x = y.z?.execute?.();
       <h2>Nullish Coalescing</h2>
 
       <p>
-        Nullish coalescing requires the use of the <code className="language-js">??</code> operator and is used to fall
-        back to a default value when similarly dealing with <code className="language-js">null</code> or{' '}
-        <code className="language-js">undefined</code>. The operator states that the value on the left of{' '}
-        <code className="language-js">??</code> will be used if not equal to <code className="language-js">null</code>{' '}
-        or <code className="language-js">undefined</code>, else use the expression to the right. See the example below:
+        Nullish coalescing requires the use of the <code className="language-javascript">??</code> operator and is used
+        to fall back to a default value when similarly dealing with <code className="language-javascript">null</code> or{' '}
+        <code className="language-javascript">undefined</code>. The operator states that the value on the left of{' '}
+        <code className="language-javascript">??</code> will be used if not equal to{' '}
+        <code className="language-javascript">null</code> or <code className="language-javascript">undefined</code>,
+        else use the expression to the right. See the example below:
       </p>
 
       <pre>
-        <code className="language-js">
+        <code className="language-javascript">
           {`let y = null,
 z = 5;
   
@@ -124,12 +123,13 @@ x = y ?? z;
       </pre>
 
       <p>
-        The <code className="language-js">??</code> operator can replace uses of <code className="language-js">||</code>{' '}
-        when trying to use a default value, which gives better behaviour for falsy values.
+        The <code className="language-javascript">??</code> operator can replace uses of{' '}
+        <code className="language-javascript">||</code> when trying to use a default value, which gives better behaviour
+        for falsy values.
       </p>
 
       <pre>
-        <code className="language-js">
+        <code className="language-javascript">
           {`// ?? is better than using || as it avoids falsy behaviours
 let x = 0;
 
@@ -146,12 +146,13 @@ total = x ?? 0.5;
       <h2>Combining the two operators</h2>
 
       <p>
-        Finally, the two operators can be combined to set a default value when <code className="language-js">null</code>{' '}
-        or <code className="language-js">undefined</code> are encountered.
+        Finally, the two operators can be combined to set a default value when{' '}
+        <code className="language-javascript">null</code> or <code className="language-javascript">undefined</code> are
+        encountered.
       </p>
 
       <pre>
-        <code className="language-js">
+        <code className="language-javascript">
           {`let person = {
   name: 'Chris',
   details: undefined

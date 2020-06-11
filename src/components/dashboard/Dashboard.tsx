@@ -11,7 +11,7 @@ const Dashboard: FunctionComponent = () => {
   useEffect(() => {
     ReactGA.initialize('UA-44048042-2', { testMode: process.env.NODE_ENV === 'test' });
     ReactGA.pageview(window.location.pathname + window.location.search);
-  });
+  }, []);
 
   const [posts] = useState<IPostCollection[]>(PostCollection.sort((a: any, b: any) => b.date - a.date)),
     [filteredPosts, setFilteredPosts] = useState<IPostCollection[][]>(splitArrayIntoGroups(posts, 3)),

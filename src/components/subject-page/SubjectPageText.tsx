@@ -56,7 +56,7 @@ const TextContainer = styled.div`
     margin: 0;
     padding: 0;
     border: 0;
-    font-size: 100%;
+    font-size: 1.25em !important;
     font: inherit;
     vertical-align: baseline;
     display: block;
