@@ -12,7 +12,7 @@ const CPPPointers: FunctionComponent = () => {
 
       <p>
         C and C++ unlike a lot of other languages provide the ability to directly interact with hardware memory -
-        normally described as a middle-level or &apos;systems&apos; language - this is through the use of{' '}
+        normally described as a middle-level or &apos;systems&apos; language - through the use of
         <b>pointers</b>. Every variable declared in any language has a memory location, and every memory location has an
         address used to locate it - C++ gives you the power to directly modify this memory.
       </p>
@@ -36,8 +36,10 @@ cout << &food; // Outputs the memory address of food (0x6dfed4)
       <h3>Pointers</h3>
 
       <p>
-        A pointer on the other hand, is a variable that stores the memory address of a variable as its value and is
-        created using the <code className={'language-cpp'}>*</code> operator. A pointer can exist for any data type, as
+        A pointer on the other hand, is a variable that <b>stores the memory address of a variable as its value</b>, and
+        is
+        created using the <code className={'language-cpp'}>*</code> operator. A pointer can exist for <b>any data
+        type</b>, as
         it merely points to a memory address of the variable.
       </p>
 
@@ -61,10 +63,10 @@ cout << *y; // Outputs the value of x (5)
       </h3>
 
       <p>
-        The arrow operator is a shorthand method for accessing the elements of a{' '}
-        <code className={'language-cpp'}>struct</code> or <code className={'language-cpp'}>class</code> pointer.
-        Normally the <code className={'language-cpp'}>.</code> operator would be used for non-pointer access. The
-        example below shows the equivalences.
+        The arrow operator is a <b>shorthand method for accessing the contents of a</b>{' '}
+        <code className={'language-cpp'}>struct</code> <b>or</b> <code className={'language-cpp'}>class</code>{' '}
+        <b>pointer</b> - normally the <code className={'language-cpp'}>.</code> operator would be used for non-pointer
+        access. The example below shows the equivalences.
       </p>
 
       <pre>
@@ -76,7 +78,7 @@ public:
   int area (void);
 } rect;
 
-Rectangle* p_rect = &rect;
+Rectangle* p_rect = &rect; // Creates a pointer to the rect declared above
 p_rect->area;
 // This is equivalent to
 (*p_rect).area;
@@ -88,8 +90,8 @@ p_rect->area;
 
       <p>
         By default, arguments to a function in C++ are passed by value, and the changes made to any arguments inside the
-        function will not affect the original value, and instead are made to a clone. However, there are 3 main ways to
-        pass arguments to a function.
+        function will not affect the original value, and instead are made to a copy. The 3 main ways - including pass by
+        value - to pass arguments to a function are shown below.
         <h4>
           Call by <b>value</b>:
         </h4>
@@ -189,7 +191,7 @@ void edit_two(int *x, int *y)
         </ol>
       </p>
 
-      <br />
+      <br/>
       <p>
         Hopefully this has cleared up any confusion surrounding pointers and you can begin to understand those
         insufferable <code className={'language-cpp'}>nullptr</code> exceptions.
