@@ -14,6 +14,7 @@ import OriginOfSayingsPt1 from './assets/posts/origin-of-sayings/part-one/Origin
 import OriginOfSayingsPt2 from './assets/posts/origin-of-sayings/part-two/OriginOfSayings.pt2';
 import CPPPointers from './assets/posts/cpp-pointers/CPPPointers';
 import styled from 'styled-components';
+import HelicopterFlight from './assets/posts/helicopter-flight/HelicopterFlight';
 
 const AppRoot = styled.div`
     width: 100%;
@@ -35,6 +36,7 @@ const AppRoot = styled.div`
           <Route path="/origin-of-sayings-part-one" component={OriginOfSayingsPt1} />
           <Route path="/origin-of-sayings-part-two" component={OriginOfSayingsPt2} />
           <Route path="/cpp-pointers" component={CPPPointers} />
+          <Route path="/helicopter-flight" component={HelicopterFlight} />
         </HashRouter>
         <Footer />
       </AppRoot>

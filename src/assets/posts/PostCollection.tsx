@@ -6,6 +6,7 @@ import TypeScript37Data from './typescript3.7/TypeScript3.7.data';
 import OriginOfSayingsDataPt1 from './origin-of-sayings/part-one/OriginOfSayings.pt1.data';
 import OriginOfSayingsDataPt2 from './origin-of-sayings/part-two/OriginOfSayings.pt2.data';
 import CPPPointersData from './cpp-pointers/CPPPointers.data';
+import HelicopterFlight from './helicopter-flight/HelicopterFlight.data';
 import { IPostCollection } from '../../model/PostCollection.model';
 
 export const PostCollection: IPostCollection[] = [
@@ -17,4 +18,5 @@ export const PostCollection: IPostCollection[] = [
   OriginOfSayingsDataPt1,
   OriginOfSayingsDataPt2,
   CPPPointersData,
+  HelicopterFlight
 ];
