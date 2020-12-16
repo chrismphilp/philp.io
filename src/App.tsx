@@ -15,6 +15,7 @@ import OriginOfSayingsPt2 from './assets/posts/origin-of-sayings/part-two/Origin
 import CPPPointers from './assets/posts/cpp-pointers/CPPPointers';
 import styled from 'styled-components';
 import HelicopterFlight from './assets/posts/helicopter-flight/HelicopterFlight';
+import GitFunctionality from './assets/posts/git-functionality/GitFunctionality';
 
 const AppRoot = styled.div`
     width: 100%;
@@ -37,6 +38,7 @@ const AppRoot = styled.div`
           <Route path="/origin-of-sayings-part-two" component={OriginOfSayingsPt2} />
           <Route path="/cpp-pointers" component={CPPPointers} />
           <Route path="/helicopter-flight" component={HelicopterFlight} />
+          <Route path="/git" component={GitFunctionality} />
         </HashRouter>
         <Footer />
       </AppRoot>

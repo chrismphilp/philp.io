@@ -12,7 +12,7 @@ const typeScript37Data: IPostCollection = {
   keywords: ['typescript', 'coding', 'react'],
   link: '/typescript-3.7',
   date: moment(new Date('2020-06-08T00:00:00+0000')).toDate(),
-  widgetImage: 'https://www.sitepen.com/wp-content/uploads/2016/08/improving-typescript-modules-featured-image.jpg',
+  widgetImage: 'https://i2.wp.com/storage.googleapis.com/blog-images-backup/1*KTh3puTlJIF6vAuUUu_LAQ.jpeg?ssl=1',
   widgetImageAlt: 'TypeScript Logo',
   contentKey: 'typeScript3.7',
   dateCollection: [],
