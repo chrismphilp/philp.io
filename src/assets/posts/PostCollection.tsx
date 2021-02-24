@@ -7,6 +7,7 @@ import OriginOfSayingsDataPt1 from './origin-of-sayings/part-one/OriginOfSayings
 import OriginOfSayingsDataPt2 from './origin-of-sayings/part-two/OriginOfSayings.pt2.data';
 import CPPPointersData from './cpp-pointers/CPPPointers.data';
 import HelicopterFlight from './helicopter-flight/HelicopterFlight.data';
+import Caffeine from './caffeine/Caffeine.data';
 import { IPostCollection } from '../../model/PostCollection.model';
 
 export const PostCollection: IPostCollection[] = [
@@ -18,5 +19,6 @@ export const PostCollection: IPostCollection[] = [
   OriginOfSayingsDataPt1,
   OriginOfSayingsDataPt2,
   CPPPointersData,
-  HelicopterFlight
+  HelicopterFlight,
+  Caffeine,
 ];
