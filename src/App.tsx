@@ -16,6 +16,7 @@ import CPPPointers from './assets/posts/cpp-pointers/CPPPointers';
 import styled from 'styled-components';
 import HelicopterFlight from './assets/posts/helicopter-flight/HelicopterFlight';
 import Caffeine from './assets/posts/caffeine/Caffeine';
+import GitFunctionality from './assets/posts/git-functionality/GitFunctionality';
 
 const AppRoot = styled.div`
     width: 100%;
@@ -39,6 +40,7 @@ const AppRoot = styled.div`
           <Route path="/cpp-pointers" component={CPPPointers} />
           <Route path="/helicopter-flight" component={HelicopterFlight} />
           <Route path="/caffeine" component={Caffeine} />
+          <Route path="/git" component={GitFunctionality} />
         </HashRouter>
         <Footer />
       </AppRoot>
