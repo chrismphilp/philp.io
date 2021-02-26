@@ -1,5 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
+import { IAppState } from "../../../redux";
+import { connect, ConnectedProps } from "react-redux";
+import { bindActionCreators, Dispatch } from "redux";
+import { updatePageNumber } from "../../../redux/page/page.action";
 
 const NumberButton = styled.li`
   color: ${'#666'};
@@ -49,19 +53,33 @@ const NumberButtonLink = styled.a`
 `;
 
 type PageNumberButtonProps = {
-  setCurrentPage: (value: number) => void;
   buttonValue: number;
-  currentPage: number;
 };
 
-const PageNumberButton: FunctionComponent<PageNumberButtonProps> = ({ setCurrentPage, buttonValue, currentPage }) => {
-  const selected: boolean = buttonValue === currentPage;
+const PageNumberButton: FunctionComponent<PageNumberButtonProps & ConnectedProps<typeof connector>> =
+  ({ updatePage, buttonValue, page }) => {
+  const selected: boolean = buttonValue === page;
 
   return (
-    <NumberButton onClick={() => setCurrentPage(buttonValue)}>
+    <NumberButton onClick={() => updatePage(buttonValue)}>
       <NumberButtonLink selected={selected}>{buttonValue}</NumberButtonLink>
     </NumberButton>
   );
 };
 
-export default PageNumberButton;
+const mapStateToProps = (state: IAppState): {
+  page: number
+} => ({
+  page: state.pageReducer.pageNumber
+});
+
+const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators({
+  updatePage: updatePageNumber
+}, dispatch);
+
+const connector = connect(
+  mapStateToProps,
+  mapDispatchToProps
+);
+
+export default connector(PageNumberButton);

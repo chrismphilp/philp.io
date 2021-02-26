@@ -42,7 +42,7 @@ const PostContainer: FunctionComponent<PostContainerProps> = ({ posts }) => {
           ))}
         </PostSectionInner>
       </PostSection>
-      <PageSelector setCurrentPage={setCurrentPage} numberOfPages={posts.length} currentPage={currentPage} />
+      <PageSelector numberOfPages={posts.length} />
     </PostWrapper>
   );
 };

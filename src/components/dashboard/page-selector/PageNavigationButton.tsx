@@ -1,5 +1,9 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent } from "react";
 import styled from 'styled-components';
+import { IAppState } from "../../../redux";
+import { connect, ConnectedProps } from "react-redux";
+import { updatePageNumber } from "../../../redux/page/page.action";
+import { bindActionCreators, Dispatch } from "redux";
 
 type NavigationButtonStyleProps = {
   disabled: boolean;
@@ -50,23 +54,21 @@ const NavigationButton = styled.li`
   `;
 
 type PageNavigationButtonProps = {
-  setCurrentPage: (value: number) => void;
   buttonText: string;
   disabled: boolean;
   navigationDirection: 'down' | 'up';
-  currentPage: number;
 };
 
-const PageNavigationButton: FunctionComponent<PageNavigationButtonProps> = ({
-  setCurrentPage,
+const PageNavigationButton: FunctionComponent<PageNavigationButtonProps & ConnectedProps<typeof connector>> = ({
+  updatePage,
   buttonText,
   disabled,
   navigationDirection,
-  currentPage,
+  page
 }) => {
   const onClick = () => {
     if (disabled) return;
-    setCurrentPage(navigationDirection === 'up' ? currentPage + 1 : currentPage - 1);
+    updatePage(navigationDirection === 'up' ? page + 1 : page - 1);
   };
 
   return (
@@ -76,4 +78,19 @@ const PageNavigationButton: FunctionComponent<PageNavigationButtonProps> = ({
   );
 };
 
-export default PageNavigationButton;
+const mapStateToProps = (state: IAppState): {
+  page: number
+} => ({
+  page: state.pageReducer.pageNumber
+});
+
+const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators({
+  updatePage: updatePageNumber
+}, dispatch);
+
+const connector = connect(
+  mapStateToProps,
+  mapDispatchToProps
+);
+
+export default connector(PageNavigationButton);

@@ -64,11 +64,11 @@ type SearchBarProps = {
 };
 
 const SearchBar: FunctionComponent<SearchBarProps> = ({ onSearch }) => {
-  const [timer, setTimer] = useState<number>(),
-    handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const [timer, setTimer] = useState<number>();
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       const value: string = event.target.value;
       clearTimeout(timer);
-      setTimer(setTimeout(() => onSearch(value), 1000));
+      setTimer(window.setTimeout(() => onSearch(value), 1000));
     };
 
   return (
