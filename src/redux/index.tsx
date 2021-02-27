@@ -1,10 +1,10 @@
-import pageReducer from "./page/page.reducer";
+import dashboardReducer from "./dashboard/dashboard.reducer";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { applyMiddleware, combineReducers, createStore } from "redux";
 import thunk from "redux-thunk";
 
 const rootReducer = combineReducers({
-  pageReducer: pageReducer
+  dashboardReducer: dashboardReducer
 });
 
 export type IAppState = ReturnType<typeof rootReducer>;

@@ -1,6 +1,6 @@
-import React, { FunctionComponent } from 'react';
-import styled from 'styled-components';
-import SearchBar from './SearchBar';
+import React, { FunctionComponent } from "react";
+import styled from "styled-components";
+import SearchBar from "./SearchBar";
 
 type BannerSectionStyleProps = {
   image: any;
@@ -30,17 +30,16 @@ const BannerSection = styled.section`
   `;
 
 type BannerProps = {
-  onSearch: (searchText: string) => void;
   image: any;
   header: string;
   subHeader: string;
 };
 
-const Banner: FunctionComponent<BannerProps> = ({ onSearch, image, header, subHeader }) => (
+const Banner: FunctionComponent<BannerProps> = ({ image, header, subHeader }) => (
   <BannerSection image={image}>
     <BannerHeader>{header}</BannerHeader>
     <BannerSubHeader>{subHeader}</BannerSubHeader>
-    <SearchBar onSearch={onSearch} />
+    <SearchBar />
   </BannerSection>
 );
 

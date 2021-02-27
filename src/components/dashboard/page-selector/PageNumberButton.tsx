@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { IAppState } from "../../../redux";
 import { connect, ConnectedProps } from "react-redux";
 import { bindActionCreators, Dispatch } from "redux";
-import { updatePageNumber } from "../../../redux/page/page.action";
+import { updatePageNumber } from "../../../redux/dashboard/dashboard.action";
 
 const NumberButton = styled.li`
   color: ${'#666'};
@@ -70,7 +70,7 @@ const PageNumberButton: FunctionComponent<PageNumberButtonProps & ConnectedProps
 const mapStateToProps = (state: IAppState): {
   page: number
 } => ({
-  page: state.pageReducer.pageNumber
+  page: state.dashboardReducer.pageNumber
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators({

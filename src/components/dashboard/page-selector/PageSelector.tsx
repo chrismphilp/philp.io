@@ -4,7 +4,7 @@ import PageNumberButton from './PageNumberButton';
 import styled from 'styled-components';
 import { IAppState } from "../../../redux";
 import { bindActionCreators, Dispatch } from "redux";
-import { updatePageNumber } from "../../../redux/page/page.action";
+import { updatePageNumber } from "../../../redux/dashboard/dashboard.action";
 import { connect, ConnectedProps } from "react-redux";
 
 const PageSelectorContainer = styled.ul`
@@ -49,7 +49,7 @@ const PageSelector: FunctionComponent<PageSelectorProps & ConnectedProps<typeof 
 const mapStateToProps = (state: IAppState): {
   page: number
 } => ({
-  page: state.pageReducer.pageNumber
+  page: state.dashboardReducer.pageNumber
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators({
