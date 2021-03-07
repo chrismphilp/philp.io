@@ -1,5 +1,6 @@
 import { IPostCollection } from '../../../model/PostCollection.model';
 import { PostCategories } from '../../../model/PostCategories.model';
+import tattoo_jpg from './tattoo.jpg';
 import moment from 'moment';
 
 const tattooRemovalData: IPostCollection = {
@@ -12,8 +13,7 @@ const tattooRemovalData: IPostCollection = {
   keywords: ['tattoo', 'removal', 'surgery'],
   link: '/tattoo-removal',
   date: moment(new Date('2020-06-07T00:00:00+0000')).toDate(),
-  widgetImage:
-    'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/cosmetician-performing-a-laser-depilation-on-a-royalty-free-image-1582657775.jpg?crop=1.00xw:0.751xh;0,0.173xh&resize=980:*',
+  widgetImage: tattoo_jpg,
   widgetImageAlt: 'Tattoo Removal',
   contentKey: 'tattooRemoval',
   dateCollection: [

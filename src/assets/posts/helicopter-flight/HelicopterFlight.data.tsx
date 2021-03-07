@@ -1,5 +1,6 @@
 import { IPostCollection } from '../../../model/PostCollection.model';
 import { PostCategories } from '../../../model/PostCategories.model';
+import helicopter_jpg from './helicopter.jpg';
 import moment from 'moment';
 
 const helicopterFlightData: IPostCollection = {
@@ -12,7 +13,7 @@ const helicopterFlightData: IPostCollection = {
   keywords: ['helicopter', 'flight', 'aerial'],
   link: '/helicopter-flight',
   date: moment(new Date('2020-06-29T00:00:00+0000')).toDate(),
-  widgetImage: 'https://airbus-h.assetsadobe2.com/is/image/content/dam/products-and-solutions/commercial-helicopters/h145/H145-landingPage.jpg?wid=1920&fit=fit,1&qlt=85,0',
+  widgetImage: helicopter_jpg,
   widgetImageAlt: 'Helicopter Flight',
   contentKey: 'helicopterFlight',
   dateCollection: [

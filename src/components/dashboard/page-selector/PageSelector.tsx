@@ -12,8 +12,6 @@ const PageSelectorContainer = styled.ul`
   box-sizing: border-box;
   padding: 0 0 45px 0;
   border: 0;
-  font-size: 100%;
-  font: inherit;
   vertical-align: baseline;
   list-style: none;
   cursor: default;

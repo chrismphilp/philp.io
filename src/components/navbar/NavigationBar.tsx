@@ -7,8 +7,8 @@ const Header = styled.header`
     left: 0;
     position: absolute;
     top: 0;
-    background-color: #202222;
-    color: #ffffff;
+    background-color: #ffffff;
+    color: #202222;
     cursor: default;
     height: 3.75em;
     line-height: 3.75em;
@@ -18,7 +18,7 @@ const Header = styled.header`
   HomeLink = styled.h2`
     font-weight: 300;
     cursor: pointer;
-    color: #ffffff;
+    color: #202222;
     height: inherit;
     left: 2.5em;
     line-height: inherit;
@@ -49,7 +49,7 @@ const Header = styled.header`
   `,
   NavigationLink = styled.a`
     transition: color 0.2s ease-in-out;
-    color: #cee8d8;
+    color: #202222;
     display: inline-block;
     text-decoration: none;
     cursor: pointer;

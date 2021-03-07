@@ -1,5 +1,6 @@
 import { IPostCollection } from '../../../model/PostCollection.model';
 import { PostCategories } from '../../../model/PostCategories.model';
+import cpp_jpg from './cpp.jpg';
 import moment from 'moment';
 
 const CPPPointersData: IPostCollection = {
@@ -12,7 +13,7 @@ const CPPPointersData: IPostCollection = {
   keywords: ['cpp', 'c++', 'pointers'],
   link: '/cpp-pointers',
   date: moment(new Date('2020-06-11T00:00:00+0000')).toDate(),
-  widgetImage: 'https://img-a.udemycdn.com/course/750x422/1026276_b23a_5.jpg',
+  widgetImage: cpp_jpg,
   widgetImageAlt: 'C++ Logo',
   contentKey: 'cppPointer',
   dateCollection: [],

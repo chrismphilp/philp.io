@@ -10,17 +10,15 @@ type NavigationButtonStyleProps = {
 };
 
 const NavigationButton = styled.li`
-          color: ${"#666"};
-          list-style: none;
-          cursor: ${(props: NavigationButtonStyleProps) => (props.disabled ? "default" : "pointer")};
-          box-sizing: border-box;
-          padding: 0;
-          border: 0;
-          font-size: 100%;
-          font: inherit;
-          vertical-align: baseline;
-          display: inline-block;
-          margin: 0 0.325em;
+    color: #666;
+    list-style: none;
+    cursor: ${(props: NavigationButtonStyleProps) => (props.disabled ? "default" : "pointer")};
+    box-sizing: border-box;
+    padding: 0;
+    border: 0;
+    vertical-align: baseline;
+    display: inline-block;
+    margin: 0 0.325em;
   `,
   NavigationButtonSpan = styled.span`
     list-style: none;
@@ -40,7 +38,6 @@ const NavigationButton = styled.li`
     line-height: 3.75em;
     height: 3.75em;
     border: 0;
-    border-radius: 4px;
     text-align: center;
     background: ${(props: NavigationButtonStyleProps) => (props.disabled ? "#c6c6c6" : "#5FCEC0")};
     color: #fff;

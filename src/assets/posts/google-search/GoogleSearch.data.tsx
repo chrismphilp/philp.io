@@ -1,5 +1,6 @@
 import { PostCategories } from '../../../model/PostCategories.model';
 import { IPostCollection } from '../../../model/PostCollection.model';
+import google_jpg from './google.jpg';
 import moment from 'moment';
 
 const googleSearchData: IPostCollection = {
@@ -12,7 +13,7 @@ const googleSearchData: IPostCollection = {
   keywords: ['google', 'search', 'engine', 'browser'],
   link: '/google-search',
   date: moment(new Date('2020-06-08T00:00:00+0000')).toDate(),
-  widgetImage: 'https://blog.hubspot.com/hubfs/image8-2.jpg',
+  widgetImage: google_jpg,
   widgetImageAlt: 'Google Logo',
   contentKey: 'googleSearch',
   dateCollection: [],

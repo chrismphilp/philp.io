@@ -1,5 +1,6 @@
 import { IPostCollection } from '../../../model/PostCollection.model';
 import { PostCategories } from '../../../model/PostCategories.model';
+import github_jpg from './github.jpg';
 import moment from 'moment';
 
 const GitFunctionalityData: IPostCollection = {
@@ -12,7 +13,7 @@ const GitFunctionalityData: IPostCollection = {
   keywords: ['git', 'rebase', 'version', 'control'],
   link: '/git',
   date: moment(new Date('2020-12-16T00:00:00+0000')).toDate(),
-  widgetImage: 'https://pngimg.com/uploads/github/github_PNG15.png',
+  widgetImage: github_jpg,
   widgetImageAlt: 'GitHub Logo',
   contentKey: 'git',
   dateCollection: [],

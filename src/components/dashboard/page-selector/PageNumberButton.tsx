@@ -11,9 +11,7 @@ const NumberButton = styled.li`
   cursor: pointer;
   box-sizing: border-box;
   padding: 0;
-  border: 0;
-  font-size: 100%;
-  font: inherit;
+  border: 1px solid #a5a9ad;
   vertical-align: baseline;
   display: inline-block;
   margin: 0 0.325em;
@@ -40,15 +38,14 @@ const NumberButtonLink = styled.a`
   line-height: 3em;
   width: 3em;
   text-align: center;
-  border-radius: 4px;
-  background: ${'#fff'};
-  border: solid 2px ${'#fff'};
+  background: #fff;
+  border: solid 2px #fff;
   color: ${(props: NumberButtonLinkStyleProps) => (props.selected ? '#ff6098' : '#000000')};
   border-color: ${(props: NumberButtonLinkStyleProps) => (props.selected ? '#ff6098' : '')};
 
   ${NumberButton}:hover & {
-    color: ${'#5fcec0'};
-    border-color: ${'#5fcec0'};
+    color: #5fcec0;
+    border-color: #5fcec0;
   }
 `;
 

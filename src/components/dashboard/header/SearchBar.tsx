@@ -3,14 +3,14 @@ import { bindActionCreators, Dispatch } from "redux";
 import { updateDashboardSearchValue } from "../../../redux/dashboard/dashboard.action";
 import { connect, ConnectedProps } from "react-redux";
 import { IAppState } from "../../../redux";
-import { BiSearchAlt2, BiTrash } from "react-icons/all";
+import { BiTrash } from "react-icons/all";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
-    display: flex;
-    height: 35px;
-    justify-content: center;
-    align-items: center;
+          display: flex;
+          height: 35px;
+          justify-content: center;
+          align-items: center;
   `,
   SearchBarForm = styled.form`
     display: flex;
@@ -34,7 +34,7 @@ const Wrapper = styled.div`
     cursor: pointer;
     line-height: 0;
     width: 65px;
-    height: 110%;
+    height: 108.25%;
     padding-left: 19.5px;
     background-color: ${"#f8f8f8"};
     border-radius: 0 2px 2px 0;

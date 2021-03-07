@@ -1,26 +1,23 @@
-import React, { FunctionComponent } from 'react';
-import styled from 'styled-components';
-import { RouteComponentProps, withRouter } from 'react-router-dom';
-import { IPostCollection } from '../../../model/PostCollection.model';
+import React, { FunctionComponent } from "react";
+import styled from "styled-components";
+import { RouteComponentProps, withRouter } from "react-router-dom";
+import { IPostCollection } from "../../../model/PostCollection.model";
 
 type PostArticleStyleProps = {
-  orientation: 'left' | 'right';
+  orientation: "left" | "right";
 };
 
 const PostArticle = styled.article`
     color: #777;
     cursor: pointer;
     box-sizing: border-box;
-    margin: 0;
+    border: gainsboro solid 1px;
     padding: 0;
-    border: 0;
-    font-size: 100%;
-    font: inherit;
     vertical-align: baseline;
     display: flex;
     align-items: center;
-    margin-bottom: 3em;
-    flex-direction: ${(props: PostArticleStyleProps) => (props.orientation === 'left' ? 'row' : 'row-reverse')};
+    margin: 0 0 3em;
+    flex-direction: ${(props: PostArticleStyleProps) => (props.orientation === "left" ? "row" : "row-reverse")};
     background-color: #fff;
   `,
   ImageContainer = styled.span`
@@ -54,7 +51,7 @@ const PostArticle = styled.article`
 
 type PostWidgetProps = {
   post: IPostCollection;
-  orientation: 'left' | 'right';
+  orientation: "left" | "right";
 };
 
 const PostWidget: FunctionComponent<PostWidgetProps & RouteComponentProps> = ({ post, orientation, history }) => {
@@ -66,7 +63,7 @@ const PostWidget: FunctionComponent<PostWidgetProps & RouteComponentProps> = ({ 
   return (
     <PostArticle orientation={orientation} onClick={(e) => onClick(e, post.link)}>
       <ImageContainer>
-        <Image src={post.widgetImage}></Image>
+        <Image src={post.widgetImage} />
       </ImageContainer>
       <PostInformation>
         <PostInformationHeader>{post.title}</PostInformationHeader>

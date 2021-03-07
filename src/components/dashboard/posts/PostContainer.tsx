@@ -7,7 +7,8 @@ import { IAppState } from "../../../redux";
 import { connect, ConnectedProps } from "react-redux";
 
 const PostWrapper = styled.div`
-          background-color: #eee;
+    background-color: #ffffff;
+    border-bottom: 1px solid #ffffff;
   `,
   PostSection = styled.section`
     display: flex;
@@ -20,7 +21,6 @@ const PostWrapper = styled.div`
     color: #777;
     box-sizing: border-box;
     padding: 0;
-    border: 0;
     font-size: 100%;
     font: inherit;
     vertical-align: baseline;

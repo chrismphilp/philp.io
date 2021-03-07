@@ -1,5 +1,6 @@
 import { IPostCollection } from '../../../../model/PostCollection.model';
 import { PostCategories } from '../../../../model/PostCategories.model';
+import origin_jpg from './origin_pt1.jpg';
 import moment from 'moment';
 
 const originOfSayingsPt1Data: IPostCollection = {
@@ -12,7 +13,7 @@ const originOfSayingsPt1Data: IPostCollection = {
   keywords: ['sayings', 'origin', 'etymology', 'words'],
   link: '/origin-of-sayings-part-one',
   date: moment(new Date('2020-06-09T00:00:00+0000')).toDate(),
-  widgetImage: 'https://upload.wikimedia.org/wikipedia/commons/7/7f/Frith_A_Private_View.jpg',
+  widgetImage: origin_jpg,
   widgetImageAlt: 'Victorian Art Museum',
   contentKey: 'originOfSayingsPt1',
   dateCollection: [],
