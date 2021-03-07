@@ -35,8 +35,6 @@ const PostArticle = styled.article`
     box-sizing: border-box;
     margin: 0;
     border: 0;
-    font-size: 100%;
-    font: inherit;
     vertical-align: baseline;
     padding: 2em 3em 0.1em 3em;
   `,
@@ -54,7 +52,9 @@ type PostWidgetProps = {
   orientation: "left" | "right";
 };
 
-const PostWidget: FunctionComponent<PostWidgetProps & RouteComponentProps> = ({ post, orientation, history }) => {
+const PostWidget: FunctionComponent<PostWidgetProps & RouteComponentProps> = (
+  { post, orientation, history }) => {
+
   const onClick = (event: React.MouseEvent<HTMLElement, MouseEvent>, link: string) => {
     event.preventDefault();
     history.push(link);

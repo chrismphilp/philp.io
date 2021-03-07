@@ -3,7 +3,7 @@ import { bindActionCreators, Dispatch } from "redux";
 import { updateDashboardSearchValue } from "../../../redux/dashboard/dashboard.action";
 import { connect, ConnectedProps } from "react-redux";
 import { IAppState } from "../../../redux";
-import { BiTrash } from "react-icons/all";
+import { MdClear } from "react-icons/all";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -18,6 +18,7 @@ const Wrapper = styled.div`
     height: 100%;
     border-right: none;
     border-radius: 0 2px 2px 0;
+    opacity: 0.8;
   `,
   SearchBarFormTextBox = styled.input`
     height: 100%;
@@ -34,7 +35,7 @@ const Wrapper = styled.div`
     cursor: pointer;
     line-height: 0;
     width: 65px;
-    height: 108.25%;
+    height: 37.75px;
     padding-left: 19.5px;
     background-color: ${"#f8f8f8"};
     border-radius: 0 2px 2px 0;
@@ -49,7 +50,7 @@ const Wrapper = styled.div`
   `,
   DeleteButtonIcon: FunctionComponent = () => (
     <ButtonIconContainer>
-      <BiTrash size={15} style={{ paddingTop: 12.5, paddingLeft: 12.5 }} />
+      <MdClear size={15} style={{ paddingTop: 12.5, paddingLeft: 12.5 }} />
     </ButtonIconContainer>
   );
 

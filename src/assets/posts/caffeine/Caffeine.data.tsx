@@ -14,7 +14,7 @@ const caffeineData: IPostCollection = {
   link: '/caffeine',
   date: moment(new Date('2020-07-04T00:00:00+0000')).toDate(),
   widgetImage: caffeine_jpg,
-  widgetImageAlt: 'Teapot',
+  widgetImageAlt: 'Coffee Beans',
   contentKey: 'caffeine',
   dateCollection: [
     {
