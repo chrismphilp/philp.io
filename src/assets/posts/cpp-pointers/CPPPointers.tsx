@@ -37,10 +37,8 @@ cout << &food; // Outputs the memory address of food (0x6dfed4)
 
       <p>
         A pointer on the other hand, is a variable that <b>stores the memory address of a variable as its value</b>, and
-        is
-        created using the <code className={'language-cpp'}>*</code> operator. A pointer can exist for <b>any data
-        type</b>, as
-        it merely points to a memory address of the variable.
+        is created using the <code className={'language-cpp'}>*</code> operator. A pointer can exist for{' '}
+        <b>any data type</b>, as it merely points to a memory address of the variable.
       </p>
 
       <pre>
@@ -191,7 +189,7 @@ void edit_two(int *x, int *y)
         </ol>
       </p>
 
-      <br/>
+      <br />
       <p>
         Hopefully this has cleared up any confusion surrounding pointers and you can begin to understand those
         insufferable <code className={'language-cpp'}>nullptr</code> exceptions.

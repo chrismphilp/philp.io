@@ -5,9 +5,7 @@ import SubjectPage from '../../../components/subject-page/SubjectPage';
 const Caffeine: FunctionComponent = () => {
   return (
     <SubjectPage post={content}>
-      <p>
-
-      </p>
+      <p></p>
     </SubjectPage>
   );
 };

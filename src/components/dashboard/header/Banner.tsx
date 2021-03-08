@@ -1,6 +1,6 @@
-import React, { FunctionComponent } from "react";
-import styled from "styled-components";
-import SearchBar from "./SearchBar";
+import React, { FunctionComponent } from 'react';
+import styled from 'styled-components';
+import SearchBar from './SearchBar';
 
 type BannerSectionStyleProps = {
   image: any;

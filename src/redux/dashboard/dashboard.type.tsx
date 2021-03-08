@@ -1,11 +1,11 @@
 export type DashboardState = {
   readonly pageNumber: number;
   readonly searchValue: string;
-}
+};
 
 export enum DashboardActionModel {
-  UPDATE_PAGE_NUMBER = "UPDATE_PAGE_NUMBER",
-  UPDATE_DASHBOARD_SEARCH_VALUE = "UPDATE_DASHBOARD_SEARCH_VALUE",
+  UPDATE_PAGE_NUMBER = 'UPDATE_PAGE_NUMBER',
+  UPDATE_DASHBOARD_SEARCH_VALUE = 'UPDATE_DASHBOARD_SEARCH_VALUE',
 }
 
 export interface UpdatePageNumber {

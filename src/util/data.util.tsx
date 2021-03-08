@@ -4,6 +4,4 @@ const splitArrayIntoGroups = (data: any[], groupSize: number): any[][] =>
     return accumulator;
   }, []);
 
-export {
-  splitArrayIntoGroups
-};
+export { splitArrayIntoGroups };

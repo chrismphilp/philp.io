@@ -4,7 +4,7 @@ import moment from 'moment';
 
 const GitFunctionalityData: IPostCollection = {
   title: 'Git Functionality',
-  subTitle: 'Let\'s rebase your thinking',
+  subTitle: "Let's rebase your thinking",
   sidebarHeader: '',
   sidebarSubHeader: '',
   author: 'Christopher Philp',

@@ -4,7 +4,7 @@ import moment from 'moment';
 
 const tattooRemovalData: IPostCollection = {
   title: 'The Wonders of Tattoo Removal',
-  subTitle: 'How can \'permanent\' ink be unwritten?',
+  subTitle: "How can 'permanent' ink be unwritten?",
   sidebarHeader: 'Some dates to prick your interest',
   sidebarSubHeader: 'And leave a mark...',
   author: 'Christopher Philp',

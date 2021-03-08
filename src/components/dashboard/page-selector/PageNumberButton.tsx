@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
-import { IAppState } from "../../../redux";
-import { connect, ConnectedProps } from "react-redux";
-import { bindActionCreators, Dispatch } from "redux";
-import { updatePageNumber } from "../../../redux/dashboard/dashboard.action";
+import { IAppState } from '../../../redux';
+import { connect, ConnectedProps } from 'react-redux';
+import { bindActionCreators, Dispatch } from 'redux';
+import { updatePageNumber } from '../../../redux/dashboard/dashboard.action';
 
 const NumberButton = styled.li`
   color: ${'#666'};
@@ -56,30 +56,33 @@ type PageNumberButtonProps = {
   buttonValue: number;
 };
 
-const PageNumberButton: FunctionComponent<PageNumberButtonProps & ConnectedProps<typeof connector>> =
-  ({ updatePage, buttonValue, page }) => {
-  const selected: boolean = buttonValue === page;
+const PageNumberButton: FunctionComponent<PageNumberButtonProps & ConnectedProps<typeof connector>> = ({
+    updatePage,
+    buttonValue,
+    page,
+  }) => {
+    const selected: boolean = buttonValue === page;
 
-  return (
-    <NumberButton onClick={() => updatePage(buttonValue)}>
-      <NumberButtonLink selected={selected}>{buttonValue}</NumberButtonLink>
-    </NumberButton>
-  );
-};
-
-const mapStateToProps = (state: IAppState): {
-  page: number
-} => ({
-  page: state.dashboardReducer.pageNumber
-});
-
-const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators({
-  updatePage: updatePageNumber
-}, dispatch);
-
-const connector = connect(
-  mapStateToProps,
-  mapDispatchToProps
-);
+    return (
+      <NumberButton onClick={() => updatePage(buttonValue)}>
+        <NumberButtonLink selected={selected}>{buttonValue}</NumberButtonLink>
+      </NumberButton>
+    );
+  },
+  mapStateToProps = (
+    state: IAppState,
+  ): {
+    page: number;
+  } => ({
+    page: state.dashboardReducer.pageNumber,
+  }),
+  mapDispatchToProps = (dispatch: Dispatch) =>
+    bindActionCreators(
+      {
+        updatePage: updatePageNumber,
+      },
+      dispatch,
+    ),
+  connector = connect(mapStateToProps, mapDispatchToProps);
 
 export default connector(PageNumberButton);

@@ -3,8 +3,8 @@ import { IPostCollection } from '../../../model/PostCollection.model';
 import moment from 'moment';
 
 const caffeineData: IPostCollection = {
-  title: 'What\'s your daily cuppa\' doing to your body?',
-  subTitle: 'Let\'s steam it over',
+  title: "What's your daily cuppa' doing to your body?",
+  subTitle: "Let's steam it over",
   sidebarHeader: '',
   sidebarSubHeader: '',
   author: 'Christopher Philp',
