@@ -8,17 +8,17 @@ type PostArticleStyleProps = {
 };
 
 const PostArticle = styled.article`
-          color: #777;
-          cursor: pointer;
-          box-sizing: border-box;
-          border: gainsboro solid 1px;
-          padding: 0;
-          vertical-align: baseline;
-          display: flex;
-          align-items: center;
-          margin: 0 0 3em;
-          flex-direction: ${(props: PostArticleStyleProps) => (props.orientation === 'left' ? 'row' : 'row-reverse')};
-          background-color: #fff;
+    color: #777;
+    cursor: pointer;
+    box-sizing: border-box;
+    border: gainsboro solid 1px;
+    padding: 0;
+    vertical-align: baseline;
+    display: flex;
+    align-items: center;
+    margin: 0 0 3em;
+    flex-direction: ${(props: PostArticleStyleProps) => (props.orientation === 'left' ? 'row' : 'row-reverse')};
+    background-color: #fff;
   `,
   ImageContainer = styled.span`
     width: 48%;
@@ -67,7 +67,7 @@ const PostWidget: FunctionComponent<PostWidgetProps & RouteComponentProps> = (
   return (
     <PostArticle orientation={orientation} onClick={(e) => onClick(e, post.link)}>
       <ImageContainer>
-        <Image src={post.widgetImage}/>
+        <Image src={post.widgetImage} />
       </ImageContainer>
       <PostInformation>
         <PostInformationHeader>{post.title}</PostInformationHeader>

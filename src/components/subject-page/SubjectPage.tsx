@@ -40,7 +40,13 @@ type SubjectPageProps = {
   sidebarPresent?: boolean;
 };
 
-const SubjectPage: FunctionComponent<SubjectPageProps> = ({ post, sidebarPresent = true, children }) => {
+const SubjectPage: FunctionComponent<SubjectPageProps> = (
+  {
+    post,
+    sidebarPresent = true,
+    children
+  }) => {
+
   useEffect(() => {
     ReactGA.initialize('UA-44048042-2', { testMode: process.env.NODE_ENV === 'test' });
     ReactGA.pageview(window.location.pathname.slice(0, -1) + post.link);

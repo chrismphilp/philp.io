@@ -42,11 +42,11 @@ const PostContainer: FunctionComponent<PostContainerProps & ConnectedProps<typeo
       <PostSection>
         <PostSectionInner>
           {posts[page - 1]?.map((post: IPostCollection, key: number) => (
-            <PostWidget key={key} post={post} orientation={key % 2 === 0 ? 'left' : 'right'}/>
+            <PostWidget key={key} post={post} orientation={key % 2 === 0 ? 'left' : 'right'} />
           ))}
         </PostSectionInner>
       </PostSection>
-      <PageSelector numberOfPages={posts.length}/>
+      <PageSelector numberOfPages={posts.length} />
     </PostWrapper>
   );
 };

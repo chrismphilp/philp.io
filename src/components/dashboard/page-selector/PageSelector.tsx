@@ -30,11 +30,11 @@ const PageSelector: FunctionComponent<PageSelectorProps & ConnectedProps<typeof 
   }) => {
   return (
     <PageSelectorContainer>
-      <PageNavigationButton disabled={page - 1 <= 0} buttonText={'Previous'} navigationDirection={'down'}/>
+      <PageNavigationButton disabled={page - 1 <= 0} buttonText={'Previous'} navigationDirection={'down'} />
       {[...Array(numberOfPages).keys()].map((value: number, key: number) => (
-        <PageNumberButton key={key} buttonValue={value + 1}/>
+        <PageNumberButton key={key} buttonValue={value + 1} />
       ))}
-      <PageNavigationButton disabled={page + 1 > numberOfPages} buttonText={'Next'} navigationDirection={'up'}/>
+      <PageNavigationButton disabled={page + 1 > numberOfPages} buttonText={'Next'} navigationDirection={'up'} />
     </PageSelectorContainer>
   );
 };

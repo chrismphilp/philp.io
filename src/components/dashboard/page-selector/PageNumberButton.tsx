@@ -59,6 +59,7 @@ const PageNumberButton: FunctionComponent<PageNumberButtonProps & ConnectedProps
     buttonValue,
     page,
   }) => {
+
   const selected: boolean = buttonValue === page;
 
   return (

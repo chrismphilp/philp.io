@@ -1,16 +1,16 @@
-import React, { FunctionComponent } from "react";
-import { bindActionCreators, Dispatch } from "redux";
-import { updateDashboardSearchValue } from "../../../redux/dashboard/dashboard.action";
-import { connect, ConnectedProps } from "react-redux";
-import { IAppState } from "../../../redux";
-import { MdClear } from "react-icons/all";
-import styled from "styled-components";
+import React, { FunctionComponent } from 'react';
+import { bindActionCreators, Dispatch } from 'redux';
+import { updateDashboardSearchValue } from '../../../redux/dashboard/dashboard.action';
+import { connect, ConnectedProps } from 'react-redux';
+import { IAppState } from '../../../redux';
+import { MdClear } from 'react-icons/all';
+import styled from 'styled-components';
 
 const Wrapper = styled.div`
-    display: flex;
-    height: 35px;
-    justify-content: center;
-    align-items: center;
+          display: flex;
+          height: 35px;
+          justify-content: center;
+          align-items: center;
   `,
   SearchBarForm = styled.form`
     display: flex;
@@ -37,7 +37,7 @@ const Wrapper = styled.div`
     width: 65px;
     height: 37.75px;
     padding-left: 19.5px;
-    background-color: ${"#f8f8f8"};
+    background-color: ${'#f8f8f8'};
     border-radius: 0 2px 2px 0;
     margin: 0;
   `,
@@ -55,8 +55,10 @@ const Wrapper = styled.div`
   );
 
 const SearchBar: FunctionComponent<ConnectedProps<typeof connector>> = (
-  { updateDashboardSearch, searchValue }) => {
-
+  {
+    updateDashboardSearch,
+    searchValue,
+  }) => {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
@@ -66,7 +68,7 @@ const SearchBar: FunctionComponent<ConnectedProps<typeof connector>> = (
 
   const onDelete = (event: React.MouseEvent<HTMLDivElement>) => {
     event.preventDefault();
-    updateDashboardSearch("");
+    updateDashboardSearch('');
   };
 
   return (
@@ -84,16 +86,16 @@ const SearchBar: FunctionComponent<ConnectedProps<typeof connector>> = (
 const mapStateToProps = (state: IAppState): {
   searchValue: string
 } => ({
-  searchValue: state.dashboardReducer.searchValue
+  searchValue: state.dashboardReducer.searchValue,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators({
-  updateDashboardSearch: updateDashboardSearchValue
+  updateDashboardSearch: updateDashboardSearchValue,
 }, dispatch);
 
 const connector = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 );
 
 export default connector(SearchBar);
