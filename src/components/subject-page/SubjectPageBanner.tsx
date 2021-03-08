@@ -90,7 +90,7 @@ const SubjectPageBanner: FunctionComponent<SubjectPageBannerProps> = ({ post }) 
         <PageBannerRow>
           <PageBannerSection>
             <ImageLink>
-              <Image src={post.widgetImage}></Image>
+              <Image src={post.widgetImage}/>
             </ImageLink>
           </PageBannerSection>
         </PageBannerRow>

@@ -1,5 +1,6 @@
 import { PostCategories } from '../../../model/PostCategories.model';
 import { IPostCollection } from '../../../model/PostCollection.model';
+import cloud_jpg from './cloud.jpg';
 import moment from 'moment';
 
 const cloudFormationData: IPostCollection = {
@@ -12,7 +13,7 @@ const cloudFormationData: IPostCollection = {
   keywords: ['cloud', 'nature', 'rain'],
   link: '/cloud-theory',
   date: moment(new Date('2020-06-05T00:00:00+0000')).toDate(),
-  widgetImage: 'https://hitinfrastructure.com/images/site/article_headers/_normal/Cloud.jpg',
+  widgetImage: cloud_jpg,
   widgetImageAlt: 'Cloud',
   contentKey: 'cloudFormation',
   dateCollection: [
@@ -27,7 +28,7 @@ const cloudFormationData: IPostCollection = {
       date: moment(new Date(340, 1)).toDate(),
       text:
         'Greek philosopher Aristotle wrote Meteorologica, in which precipitation and the clouds from which ' +
-        "precipitation fell were called meteors, originating from the Greek word meteoros, meaning 'high in the sky' " +
+        'precipitation fell were called meteors, originating from the Greek word meteoros, meaning \'high in the sky\' ' +
         '– and from this the modern term meteorology, the study of clouds and weather.',
       timePeriod: 'BC',
     },

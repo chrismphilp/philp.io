@@ -1,5 +1,6 @@
 import { IPostCollection } from '../../../../model/PostCollection.model';
 import { PostCategories } from '../../../../model/PostCategories.model';
+import origin_jpg from './origin_pt2.jpg';
 import moment from 'moment';
 
 const originOfSayingsPt2Data: IPostCollection = {
@@ -12,7 +13,7 @@ const originOfSayingsPt2Data: IPostCollection = {
   keywords: ['sayings', 'origin', 'etymology', 'words'],
   link: '/origin-of-sayings-part-two',
   date: moment(new Date('2020-06-09T00:00:01+0000')).toDate(),
-  widgetImage: 'https://jeremypaxman.co.uk/media/image/dickens.jpg',
+  widgetImage: origin_jpg,
   widgetImageAlt: 'Victorian Street',
   contentKey: 'originOfSayingsPt2',
   dateCollection: [],

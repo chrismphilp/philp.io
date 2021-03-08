@@ -7,7 +7,8 @@ import { IAppState } from '../../../redux';
 import { connect, ConnectedProps } from 'react-redux';
 
 const PostWrapper = styled.div`
-    background-color: #eee;
+    background-color: #ffffff;
+    border-bottom: 1px solid #ffffff;
   `,
   PostSection = styled.section`
     display: flex;
@@ -20,7 +21,6 @@ const PostWrapper = styled.div`
     color: #777;
     box-sizing: border-box;
     padding: 0;
-    border: 0;
     font-size: 100%;
     font: inherit;
     vertical-align: baseline;
@@ -32,27 +32,31 @@ type PostContainerProps = {
   posts: IPostCollection[][];
 };
 
-const PostContainer: FunctionComponent<PostContainerProps & ConnectedProps<typeof connector>> = ({ posts, page }) => {
-    return (
-      <PostWrapper>
-        <PostSection>
-          <PostSectionInner>
-            {posts[page - 1]?.map((post: IPostCollection, key: number) => (
-              <PostWidget key={key} post={post} orientation={key % 2 === 0 ? 'left' : 'right'} />
-            ))}
-          </PostSectionInner>
-        </PostSection>
-        <PageSelector numberOfPages={posts.length} />
-      </PostWrapper>
-    );
-  },
-  mapStateToProps = (
-    state: IAppState,
-  ): {
-    page: number;
-  } => ({
-    page: state.dashboardReducer.pageNumber,
-  }),
-  connector = connect(mapStateToProps);
+const PostContainer: FunctionComponent<PostContainerProps & ConnectedProps<typeof connector>> = (
+  {
+    posts,
+    page,
+  }) => {
+  return (
+    <PostWrapper>
+      <PostSection>
+        <PostSectionInner>
+          {posts[page - 1]?.map((post: IPostCollection, key: number) => (
+            <PostWidget key={key} post={post} orientation={key % 2 === 0 ? 'left' : 'right'}/>
+          ))}
+        </PostSectionInner>
+      </PostSection>
+      <PageSelector numberOfPages={posts.length}/>
+    </PostWrapper>
+  );
+};
+
+const mapStateToProps = (state: IAppState): {
+  page: number;
+} => ({
+  page: state.dashboardReducer.pageNumber,
+});
+
+const connector = connect(mapStateToProps);
 
 export default connector(PostContainer);

@@ -1,9 +1,10 @@
-import React, { FunctionComponent } from 'react';
-import styled from 'styled-components';
-import { bindActionCreators, Dispatch } from 'redux';
-import { updateDashboardSearchValue } from '../../../redux/dashboard/dashboard.action';
-import { connect, ConnectedProps } from 'react-redux';
-import { IAppState } from '../../../redux';
+import React, { FunctionComponent } from "react";
+import { bindActionCreators, Dispatch } from "redux";
+import { updateDashboardSearchValue } from "../../../redux/dashboard/dashboard.action";
+import { connect, ConnectedProps } from "react-redux";
+import { IAppState } from "../../../redux";
+import { MdClear } from "react-icons/all";
+import styled from "styled-components";
 
 const Wrapper = styled.div`
     display: flex;
@@ -17,6 +18,7 @@ const Wrapper = styled.div`
     height: 100%;
     border-right: none;
     border-radius: 0 2px 2px 0;
+    opacity: 0.8;
   `,
   SearchBarFormTextBox = styled.input`
     height: 100%;
@@ -29,74 +31,69 @@ const Wrapper = styled.div`
       outline: 0;
     }
   `,
-  SearchButtonContainer = styled.button`
+  ButtonContainer = styled.div`
     cursor: pointer;
     line-height: 0;
     width: 65px;
-    height: 110%;
+    height: 37.75px;
     padding-left: 19.5px;
-    border: 1px solid ${'#d3d3d3'};
-    background-color: ${'#f8f8f8'};
+    background-color: ${"#f8f8f8"};
     border-radius: 0 2px 2px 0;
     margin: 0;
-
-    :focus {
-      outline: 0;
-    }
   `,
-  SearchIconContainer = styled.div`
+  ButtonIconContainer = styled.div`
     width: 20px;
     height: 20px;
     color: ${'#333'};
     opacity: 0.6;
+    border-left: 5px;
   `,
-  SearchButtonIcon: FunctionComponent = () => (
-    <SearchIconContainer>
-      <svg viewBox="0 0 24 24" focusable="false" style={{ pointerEvents: 'none', width: '100%', height: '100%' }}>
-        <g className="style-scope yt-icon">
-          <path
-            d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"
-            className="style-scope yt-icon"
-          />
-        </g>
-      </svg>
-    </SearchIconContainer>
-  ),
-  SearchBar: FunctionComponent<ConnectedProps<typeof connector>> = ({ updateDashboardSearch, searchValue }) => {
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const value: string = event.target.value;
-        updateDashboardSearch(value.toLowerCase());
-      },
-      handleEnterKey = (event: React.KeyboardEvent<HTMLInputElement>) => {
-        const value: string = (event.target as HTMLInputElement).value;
-        if (event.key === 'Enter') updateDashboardSearch(value.toLowerCase());
-      };
+  DeleteButtonIcon: FunctionComponent = () => (
+    <ButtonIconContainer>
+      <MdClear size={15} style={{ paddingTop: 12.5, paddingLeft: 12.5 }} />
+    </ButtonIconContainer>
+  );
 
-    return (
-      <Wrapper>
-        <SearchBarForm>
-          <SearchBarFormTextBox value={searchValue} onChange={handleChange} onKeyDown={handleEnterKey} />
-          <SearchButtonContainer>
-            <SearchButtonIcon />
-          </SearchButtonContainer>
-        </SearchBarForm>
-      </Wrapper>
-    );
-  },
-  mapStateToProps = (
-    state: IAppState,
-  ): {
-    searchValue: string;
-  } => ({
-    searchValue: state.dashboardReducer.searchValue,
-  }),
-  mapDispatchToProps = (dispatch: Dispatch) =>
-    bindActionCreators(
-      {
-        updateDashboardSearch: updateDashboardSearchValue,
-      },
-      dispatch,
-    ),
-  connector = connect(mapStateToProps, mapDispatchToProps);
+const SearchBar: FunctionComponent<ConnectedProps<typeof connector>> = (
+  { updateDashboardSearch, searchValue }) => {
+
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault();
+    const value: string = event.target.value;
+    updateDashboardSearch(value.toLowerCase());
+  };
+
+  const onDelete = (event: React.MouseEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    updateDashboardSearch("");
+  };
+
+  return (
+    <Wrapper>
+      <SearchBarForm>
+        <SearchBarFormTextBox value={searchValue} onChange={handleChange} />
+        <ButtonContainer onClick={onDelete}>
+          <DeleteButtonIcon />
+        </ButtonContainer>
+      </SearchBarForm>
+    </Wrapper>
+  );
+};
+
+const mapStateToProps = (state: IAppState): {
+  searchValue: string
+} => ({
+  searchValue: state.dashboardReducer.searchValue
+});
+
+const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators({
+  updateDashboardSearch: updateDashboardSearchValue
+}, dispatch);
+
+const connector = connect(
+  mapStateToProps,
+  mapDispatchToProps
+);
 
 export default connector(SearchBar);

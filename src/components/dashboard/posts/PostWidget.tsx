@@ -8,20 +8,17 @@ type PostArticleStyleProps = {
 };
 
 const PostArticle = styled.article`
-    color: #777;
-    cursor: pointer;
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: 100%;
-    font: inherit;
-    vertical-align: baseline;
-    display: flex;
-    align-items: center;
-    margin-bottom: 3em;
-    flex-direction: ${(props: PostArticleStyleProps) => (props.orientation === 'left' ? 'row' : 'row-reverse')};
-    background-color: #fff;
+          color: #777;
+          cursor: pointer;
+          box-sizing: border-box;
+          border: gainsboro solid 1px;
+          padding: 0;
+          vertical-align: baseline;
+          display: flex;
+          align-items: center;
+          margin: 0 0 3em;
+          flex-direction: ${(props: PostArticleStyleProps) => (props.orientation === 'left' ? 'row' : 'row-reverse')};
+          background-color: #fff;
   `,
   ImageContainer = styled.span`
     width: 48%;
@@ -38,8 +35,6 @@ const PostArticle = styled.article`
     box-sizing: border-box;
     margin: 0;
     border: 0;
-    font-size: 100%;
-    font: inherit;
     vertical-align: baseline;
     padding: 2em 3em 0.1em 3em;
   `,
@@ -57,7 +52,13 @@ type PostWidgetProps = {
   orientation: 'left' | 'right';
 };
 
-const PostWidget: FunctionComponent<PostWidgetProps & RouteComponentProps> = ({ post, orientation, history }) => {
+const PostWidget: FunctionComponent<PostWidgetProps & RouteComponentProps> = (
+  {
+    post,
+    orientation,
+    history,
+  }) => {
+
   const onClick = (event: React.MouseEvent<HTMLElement, MouseEvent>, link: string) => {
     event.preventDefault();
     history.push(link);
@@ -66,7 +67,7 @@ const PostWidget: FunctionComponent<PostWidgetProps & RouteComponentProps> = ({ 
   return (
     <PostArticle orientation={orientation} onClick={(e) => onClick(e, post.link)}>
       <ImageContainer>
-        <Image src={post.widgetImage}></Image>
+        <Image src={post.widgetImage}/>
       </ImageContainer>
       <PostInformation>
         <PostInformationHeader>{post.title}</PostInformationHeader>

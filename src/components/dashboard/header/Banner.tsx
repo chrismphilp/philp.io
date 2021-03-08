@@ -20,13 +20,12 @@ const BannerSection = styled.section`
     border: 0;
     font: inherit;
     vertical-align: baseline;
-    font-size: 2em;
+    font-size: 3em;
   `,
   BannerSubHeader = styled.p`
     color: #fff;
     font-size: 1.05em;
     margin-bottom: 1.75em;
-    text-transform: uppercase;
   `;
 
 type BannerProps = {
@@ -35,11 +34,16 @@ type BannerProps = {
   subHeader: string;
 };
 
-const Banner: FunctionComponent<BannerProps> = ({ image, header, subHeader }) => (
+const Banner: FunctionComponent<BannerProps> = (
+  {
+    image,
+    header,
+    subHeader,
+  }) => (
   <BannerSection image={image}>
     <BannerHeader>{header}</BannerHeader>
     <BannerSubHeader>{subHeader}</BannerSubHeader>
-    <SearchBar />
+    <SearchBar/>
   </BannerSection>
 );
 

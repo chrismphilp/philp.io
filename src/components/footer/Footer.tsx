@@ -6,12 +6,10 @@ const FooterContainer = styled.footer`
     margin: 0;
     padding: 0;
     border: 0;
-    font-size: 100%;
-    font: inherit;
     vertical-align: baseline;
     display: block;
-    background-color: #1e2832;
-    color: rgba(255, 255, 255, 0.75);
+    background-color: #eee;
+    color: #202222;
     text-align: center;
   `,
   FooterContainerInner = styled.footer`
@@ -19,8 +17,6 @@ const FooterContainer = styled.footer`
     text-align: center;
     box-sizing: border-box;
     border: 0;
-    font-size: 100%;
-    font: inherit;
     vertical-align: baseline;
     padding: 6em 0 4em 0;
     border-top: solid 1px rgba(255, 255, 255, 0.1);
@@ -34,8 +30,7 @@ const FooterContainer = styled.footer`
     font: inherit;
     vertical-align: baseline;
     list-style: disc;
-    color: #a5a9ad;
-    font-size: 0.9em;
+    font-size: 1.05em;
     margin: 0 0 2em 0;
     padding: 0;
     text-transform: uppercase;
@@ -44,26 +39,24 @@ const FooterContainer = styled.footer`
     color: #a5a9ad;
     text-transform: uppercase;
     box-sizing: border-box;
-    padding: 0;
     border: 0;
-    font-size: 100%;
-    font: inherit;
     vertical-align: baseline;
-    padding-left: 0.5em;
+    padding: 0 0 0 0.5em;
     display: inline-block;
     list-style: none;
     margin: 0 0.1em;
-  `,
-  Footer: FunctionComponent = () => {
-    return (
-      <FooterContainer>
-        <FooterContainerInner>
-          <FooterCopyrightList>
-            <FooterCopyrightListItem>© Christopher Philp.</FooterCopyrightListItem>
-          </FooterCopyrightList>
-        </FooterContainerInner>
-      </FooterContainer>
-    );
-  };
+  `;
+
+const Footer: FunctionComponent = () => {
+  return (
+    <FooterContainer>
+      <FooterContainerInner>
+        <FooterCopyrightList>
+          <FooterCopyrightListItem>© Christopher Philp.</FooterCopyrightListItem>
+        </FooterCopyrightList>
+      </FooterContainerInner>
+    </FooterContainer>
+  );
+};
 
 export default Footer;

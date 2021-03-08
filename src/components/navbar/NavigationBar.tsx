@@ -7,8 +7,8 @@ const Header = styled.header`
     left: 0;
     position: absolute;
     top: 0;
-    background-color: #202222;
-    color: #ffffff;
+    background-color: #ffffff;
+    color: #202222;
     cursor: default;
     height: 3.75em;
     line-height: 3.75em;
@@ -18,7 +18,7 @@ const Header = styled.header`
   HomeLink = styled.h2`
     font-weight: 300;
     cursor: pointer;
-    color: #ffffff;
+    color: #202222;
     height: inherit;
     left: 2.5em;
     line-height: inherit;
@@ -49,35 +49,37 @@ const Header = styled.header`
   `,
   NavigationLink = styled.a`
     transition: color 0.2s ease-in-out;
-    color: #cee8d8;
+    color: #202222;
     display: inline-block;
     text-decoration: none;
     cursor: pointer;
-  `,
-  NavigationBar: FunctionComponent<RouteComponentProps> = ({ history }) => {
-    const [date, setDate] = useState<string>(moment().format('MMMM Do YYYY, h:mm:ss a'));
+  `;
 
-    useEffect(() => {
-      setInterval(() => setDate(moment().format('MMMM Do YYYY, h:mm:ss a')), 1000);
-    });
+const NavigationBar: FunctionComponent<RouteComponentProps> = ({ history }) => {
 
-    return (
-      <Header>
-        <HomeLink onClick={() => history.push('/')}>Home</HomeLink>
-        <NavigationContainer>
-          <NavigationList>
-            <NavigationItem>
-              <NavigationLink onClick={() => history.push('/about')}>About</NavigationLink>
-            </NavigationItem>
-            <NavigationItem>
-              <NavigationLink onClick={() => window.open('https://en.wikipedia.org/wiki/Greenwich_Mean_Time')}>
-                {date}
-              </NavigationLink>
-            </NavigationItem>
-          </NavigationList>
-        </NavigationContainer>
-      </Header>
-    );
-  };
+  const [date, setDate] = useState<string>(moment().format('MMMM Do YYYY, h:mm:ss a'));
+
+  useEffect(() => {
+    setInterval(() => setDate(moment().format('MMMM Do YYYY, h:mm:ss a')), 1000);
+  });
+
+  return (
+    <Header>
+      <HomeLink onClick={() => history.push('/')}>Home</HomeLink>
+      <NavigationContainer>
+        <NavigationList>
+          <NavigationItem>
+            <NavigationLink onClick={() => history.push('/about')}>About</NavigationLink>
+          </NavigationItem>
+          <NavigationItem>
+            <NavigationLink onClick={() => window.open('https://en.wikipedia.org/wiki/Greenwich_Mean_Time')}>
+              {date}
+            </NavigationLink>
+          </NavigationItem>
+        </NavigationList>
+      </NavigationContainer>
+    </Header>
+  );
+};
 
 export default withRouter(NavigationBar);
