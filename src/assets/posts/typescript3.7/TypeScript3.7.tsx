@@ -58,7 +58,7 @@ x = y?.z.execute();
           {`// New operator usage
 return arr?.[0];
 // Previous approach
-return (arr === null || arr === undefined) ? // undefined : // arr[0];
+return (arr === null || arr === undefined) ? undefined : arr[0];
 `}
         </code>
       </pre>
@@ -94,12 +94,13 @@ x = y.z?.execute?.();
         </code>
       </pre>
 
-      <br />
+      <br/>
       <h2>Nullish Coalescing</h2>
 
       <p>
         Nullish coalescing requires the use of the <code className="language-javascript">??</code> operator and is used
-        to fall back to a default value when similarly dealing with <code className="language-javascript">null</code> or{' '}
+        to fall back to a default value when similarly dealing with <code
+        className="language-javascript">null</code> or{' '}
         <code className="language-javascript">undefined</code>. The operator states that the value on the left of{' '}
         <code className="language-javascript">??</code> will be used if not equal to{' '}
         <code className="language-javascript">null</code> or <code className="language-javascript">undefined</code>,
@@ -142,7 +143,7 @@ total = x ?? 0.5;
         </code>
       </pre>
 
-      <br />
+      <br/>
       <h2>Combining the two operators</h2>
 
       <p>

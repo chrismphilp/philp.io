@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import dateContainer from '../../assets/images/date-container.jpg';
 import styled from 'styled-components';
-import { getMonthFromDateIndex } from '../../util/date.utils';
+import { getMonthFromDateIndex } from '../../util/date.util';
 import { DateField } from '../../model/DateField.model';
 
 const SubjectPageSidebarContainer = styled.div`

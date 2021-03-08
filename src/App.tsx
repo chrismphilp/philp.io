@@ -16,6 +16,7 @@ import CPPPointers from './assets/posts/cpp-pointers/CPPPointers';
 import HelicopterFlight from './assets/posts/helicopter-flight/HelicopterFlight';
 import Caffeine from './assets/posts/caffeine/Caffeine';
 import GitFunctionality from './assets/posts/git-functionality/GitFunctionality';
+import ScrollToTop from './components/util/ScrollToTop';
 import styled from 'styled-components';
 
 const AppRoot = styled.div`
@@ -25,24 +26,25 @@ const AppRoot = styled.div`
   `,
   App: FunctionComponent = () => {
     return (
-      <AppRoot>
+      <AppRoot id={"root"}>
         <HashRouter basename={process.env.PUBLIC_URL}>
-          <NavigationBar />
-          <Route exact path="/" component={Dashboard} />
-          <Route path="/about" component={About} />
-          <Route path="/tattoo-removal" component={TattooRemoval} />
-          <Route path="/cloud-theory" component={CloudFormation} />
-          <Route path="/infinite-madness" component={InfiniteMadness} />
-          <Route path="/google-search" component={GoogleSearch} />
-          <Route path="/typescript-3.7" component={TypeScript37} />
-          <Route path="/origin-of-sayings-part-one" component={OriginOfSayingsPt1} />
-          <Route path="/origin-of-sayings-part-two" component={OriginOfSayingsPt2} />
-          <Route path="/cpp-pointers" component={CPPPointers} />
-          <Route path="/helicopter-flight" component={HelicopterFlight} />
-          <Route path="/caffeine" component={Caffeine} />
-          <Route path="/git" component={GitFunctionality} />
+          <NavigationBar/>
+          <ScrollToTop/>
+          <Route exact path="/" component={Dashboard}/>
+          <Route path="/about" component={About}/>
+          <Route path="/tattoo-removal" component={TattooRemoval}/>
+          <Route path="/cloud-theory" component={CloudFormation}/>
+          <Route path="/infinite-madness" component={InfiniteMadness}/>
+          <Route path="/google-search" component={GoogleSearch}/>
+          <Route path="/typescript-3.7" component={TypeScript37}/>
+          <Route path="/origin-of-sayings-part-one" component={OriginOfSayingsPt1}/>
+          <Route path="/origin-of-sayings-part-two" component={OriginOfSayingsPt2}/>
+          <Route path="/cpp-pointers" component={CPPPointers}/>
+          <Route path="/helicopter-flight" component={HelicopterFlight}/>
+          <Route path="/caffeine" component={Caffeine}/>
+          <Route path="/git" component={GitFunctionality}/>
         </HashRouter>
-        <Footer />
+        <Footer/>
       </AppRoot>
     );
   };
