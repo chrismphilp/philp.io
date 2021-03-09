@@ -28,7 +28,7 @@ const NavigationButton = styled.li`
     vertical-align: baseline;
     text-decoration: none;
     transition: color 0.2s ease-in-out, box-shadow 0.2s ease-in-out, background 0.2s ease-in-out,
-      opacity 0.2s ease-in-out;
+    opacity 0.2s ease-in-out;
     -webkit-appearance: none;
     display: inline-block;
     text-transform: uppercase;

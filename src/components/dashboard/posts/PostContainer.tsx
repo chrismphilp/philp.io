@@ -21,8 +21,6 @@ const PostWrapper = styled.div`
     color: #777;
     box-sizing: border-box;
     padding: 0;
-    font-size: 100%;
-    font: inherit;
     vertical-align: baseline;
     margin: 0 auto;
     width: 70em;

@@ -26,7 +26,6 @@ module.exports = {
   ],
   rules: {
     "react/prop-types": [0],
-    "max-len": ["error", { "code": 80 }],
     "one-var": ["error", "never"],
     "function-paren-newline": ["error", "multiline-arguments"],
     "@typescript-eslint/no-explicit-any": [0],
