@@ -133,11 +133,12 @@ type SubjectPageSidebarProps = {
   dateCollection: DateField[];
 };
 
-const SubjectPageSidebar: FunctionComponent<SubjectPageSidebarProps> = ({
-  sidebarHeader,
-  sidebarSubHeader,
-  dateCollection,
-}) => {
+const SubjectPageSidebar: FunctionComponent<SubjectPageSidebarProps> = (
+  {
+    sidebarHeader,
+    sidebarSubHeader,
+    dateCollection,
+  }) => {
   return (
     <SubjectPageSidebarContainer>
       <SidebarSection>

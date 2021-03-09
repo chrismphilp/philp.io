@@ -43,7 +43,7 @@ const Banner: FunctionComponent<BannerProps> = (
   <BannerSection image={image}>
     <BannerHeader>{header}</BannerHeader>
     <BannerSubHeader>{subHeader}</BannerSubHeader>
-    <SearchBar/>
+    <SearchBar />
   </BannerSection>
 );
 

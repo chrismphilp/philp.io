@@ -7,10 +7,10 @@ import { MdClear } from 'react-icons/all';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-          display: flex;
-          height: 35px;
-          justify-content: center;
-          align-items: center;
+    display: flex;
+    height: 35px;
+    justify-content: center;
+    align-items: center;
   `,
   SearchBarForm = styled.form`
     display: flex;
