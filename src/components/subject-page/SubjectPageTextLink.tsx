@@ -14,8 +14,10 @@ type SubjectPageTextLinkProps = {
   history: History;
 };
 
-const SubjectPageTextLink: FunctionComponent<SubjectPageTextLinkProps> = ({ linkText, link, history }) => (
-  <TextLink onClick={() => history.push(link)}>{linkText}</TextLink>
-);
+const SubjectPageTextLink: FunctionComponent<SubjectPageTextLinkProps> = ({
+  linkText,
+  link,
+  history,
+}) => <TextLink onClick={() => history.push(link)}>{linkText}</TextLink>;
 
 export default SubjectPageTextLink;

@@ -23,31 +23,43 @@ type PageSelectorProps = {
   numberOfPages: number;
 };
 
-const PageSelector: FunctionComponent<PageSelectorProps & ConnectedProps<typeof connector>> = (
-  {
-    numberOfPages,
-    page,
-  }) => {
+const PageSelector: FunctionComponent<
+  PageSelectorProps & ConnectedProps<typeof connector>
+> = ({ numberOfPages, page }) => {
   return (
     <PageSelectorContainer>
-      <PageNavigationButton disabled={page - 1 <= 0} buttonText={'Previous'} navigationDirection={'down'} />
+      <PageNavigationButton
+        disabled={page - 1 <= 0}
+        buttonText={'Previous'}
+        navigationDirection={'down'}
+      />
       {[...Array(numberOfPages).keys()].map((value: number, key: number) => (
         <PageNumberButton key={key} buttonValue={value + 1} />
       ))}
-      <PageNavigationButton disabled={page + 1 > numberOfPages} buttonText={'Next'} navigationDirection={'up'} />
+      <PageNavigationButton
+        disabled={page + 1 > numberOfPages}
+        buttonText={'Next'}
+        navigationDirection={'up'}
+      />
     </PageSelectorContainer>
   );
 };
 
-const mapStateToProps = (state: IAppState): {
+const mapStateToProps = (
+  state: IAppState,
+): {
   page: number;
 } => ({
   page: state.dashboardReducer.pageNumber,
 });
 
-const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators({
-  updatePage: updatePageNumber,
-}, dispatch);
+const mapDispatchToProps = (dispatch: Dispatch) =>
+  bindActionCreators(
+    {
+      updatePage: updatePageNumber,
+    },
+    dispatch,
+  );
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
 

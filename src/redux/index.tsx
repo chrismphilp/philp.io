@@ -9,6 +9,7 @@ const rootReducer = combineReducers({
 
 export type IAppState = ReturnType<typeof rootReducer>;
 
-const configureStore = (): Store => createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
+const configureStore = (): Store =>
+  createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
 
 export default configureStore;

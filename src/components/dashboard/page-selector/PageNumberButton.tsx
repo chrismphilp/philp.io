@@ -29,7 +29,8 @@ const NumberButtonLink = styled.a`
   font: inherit;
   vertical-align: baseline;
   text-decoration: none;
-  transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out, background 0.2s ease-in-out;
+  transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out,
+    background 0.2s ease-in-out;
   display: inline-block;
   text-transform: uppercase;
   font-size: 0.9em;
@@ -53,13 +54,9 @@ type PageNumberButtonProps = {
   buttonValue: number;
 };
 
-const PageNumberButton: FunctionComponent<PageNumberButtonProps & ConnectedProps<typeof connector>> = (
-  {
-    updatePage,
-    buttonValue,
-    page,
-  }) => {
-
+const PageNumberButton: FunctionComponent<
+  PageNumberButtonProps & ConnectedProps<typeof connector>
+> = ({ updatePage, buttonValue, page }) => {
   const selected: boolean = buttonValue === page;
 
   return (
@@ -69,15 +66,21 @@ const PageNumberButton: FunctionComponent<PageNumberButtonProps & ConnectedProps
   );
 };
 
-const mapStateToProps = (state: IAppState): {
+const mapStateToProps = (
+  state: IAppState,
+): {
   page: number;
 } => ({
   page: state.dashboardReducer.pageNumber,
 });
 
-const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators({
-  updatePage: updatePageNumber,
-}, dispatch);
+const mapDispatchToProps = (dispatch: Dispatch) =>
+  bindActionCreators(
+    {
+      updatePage: updatePageNumber,
+    },
+    dispatch,
+  );
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
 

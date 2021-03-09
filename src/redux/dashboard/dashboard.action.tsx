@@ -1,4 +1,8 @@
-import { DashboardActionModel, UpdateDashboardSearchValue, UpdatePageNumber } from './dashboard.type';
+import {
+  DashboardActionModel,
+  UpdateDashboardSearchValue,
+  UpdatePageNumber,
+} from './dashboard.type';
 
 const updatePageNumber = (page: number): UpdatePageNumber => {
   return {

@@ -15,11 +15,12 @@ const Dashboard: FunctionComponent<ConnectedProps<typeof connector>> = ({ search
     ReactGA.pageview(window.location.pathname + window.location.search);
   }, []);
 
-  const [posts] = useState<IPostCollection[]>(PostCollection
-    .sort((a: any, b: any) => b.date - a.date));
+  const [posts] = useState<IPostCollection[]>(
+    PostCollection.sort((a: any, b: any) => b.date - a.date),
+  );
 
-  const getFilteredPosts = () => splitArrayIntoGroups(
-    searchValue === '' ? posts : posts.filter(filterPostCollection), 3);
+  const getFilteredPosts = () =>
+    splitArrayIntoGroups(searchValue === '' ? posts : posts.filter(filterPostCollection), 3);
 
   const filterPostCollection = (value: IPostCollection): boolean => {
     return (

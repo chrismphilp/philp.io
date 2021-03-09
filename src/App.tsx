@@ -20,33 +20,33 @@ import ScrollToTop from './components/util/ScrollToTop';
 import styled from 'styled-components';
 
 const AppRoot = styled.div`
-          width: 100%;
-          height: 100%;
-          overflow: auto;
-  `,
-  App: FunctionComponent = () => {
-    return (
-      <AppRoot id={'root'}>
-        <HashRouter basename={process.env.PUBLIC_URL}>
-          <NavigationBar />
-          <ScrollToTop />
-          <Route exact path='/' component={Dashboard} />
-          <Route path='/about' component={About} />
-          <Route path='/tattoo-removal' component={TattooRemoval} />
-          <Route path='/cloud-theory' component={CloudFormation} />
-          <Route path='/infinite-madness' component={InfiniteMadness} />
-          <Route path='/google-search' component={GoogleSearch} />
-          <Route path='/typescript-3.7' component={TypeScript37} />
-          <Route path='/origin-of-sayings-part-one' component={OriginOfSayingsPt1} />
-          <Route path='/origin-of-sayings-part-two' component={OriginOfSayingsPt2} />
-          <Route path='/cpp-pointers' component={CPPPointers} />
-          <Route path='/helicopter-flight' component={HelicopterFlight} />
-          <Route path='/caffeine' component={Caffeine} />
-          <Route path='/git' component={GitFunctionality} />
-        </HashRouter>
-        <Footer />
-      </AppRoot>
-    );
-  };
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+`;
+const App: FunctionComponent = () => {
+  return (
+    <AppRoot id={'root'}>
+      <HashRouter basename={process.env.PUBLIC_URL}>
+        <NavigationBar />
+        <ScrollToTop />
+        <Route exact path="/" component={Dashboard} />
+        <Route path="/about" component={About} />
+        <Route path="/tattoo-removal" component={TattooRemoval} />
+        <Route path="/cloud-theory" component={CloudFormation} />
+        <Route path="/infinite-madness" component={InfiniteMadness} />
+        <Route path="/google-search" component={GoogleSearch} />
+        <Route path="/typescript-3.7" component={TypeScript37} />
+        <Route path="/origin-of-sayings-part-one" component={OriginOfSayingsPt1} />
+        <Route path="/origin-of-sayings-part-two" component={OriginOfSayingsPt2} />
+        <Route path="/cpp-pointers" component={CPPPointers} />
+        <Route path="/helicopter-flight" component={HelicopterFlight} />
+        <Route path="/caffeine" component={Caffeine} />
+        <Route path="/git" component={GitFunctionality} />
+      </HashRouter>
+      <Footer />
+    </AppRoot>
+  );
+};
 
 export default App;

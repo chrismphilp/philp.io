@@ -7,34 +7,32 @@ import { IAppState } from '../../../redux';
 import { connect, ConnectedProps } from 'react-redux';
 
 const PostWrapper = styled.div`
-    background-color: #ffffff;
-    border-bottom: 1px solid #ffffff;
-  `,
-  PostSection = styled.section`
-    display: flex;
-    padding: 6em 0 2em 0;
-    color: #777;
-    width: 100%;
-    margin: 0 auto;
-  `,
-  PostSectionInner = styled.div`
-    color: #777;
-    box-sizing: border-box;
-    padding: 0;
-    vertical-align: baseline;
-    margin: 0 auto;
-    width: 70em;
-  `;
+  background-color: #ffffff;
+  border-bottom: 1px solid #ffffff;
+`;
+const PostSection = styled.section`
+  display: flex;
+  padding: 6em 0 2em 0;
+  color: #777;
+  width: 100%;
+  margin: 0 auto;
+`;
+const PostSectionInner = styled.div`
+  color: #777;
+  box-sizing: border-box;
+  padding: 0;
+  vertical-align: baseline;
+  margin: 0 auto;
+  width: 70em;
+`;
 
 type PostContainerProps = {
   posts: IPostCollection[][];
 };
 
-const PostContainer: FunctionComponent<PostContainerProps & ConnectedProps<typeof connector>> = (
-  {
-    posts,
-    page,
-  }) => {
+const PostContainer: FunctionComponent<
+  PostContainerProps & ConnectedProps<typeof connector>
+> = ({ posts, page }) => {
   return (
     <PostWrapper>
       <PostSection>
@@ -49,7 +47,9 @@ const PostContainer: FunctionComponent<PostContainerProps & ConnectedProps<typeo
   );
 };
 
-const mapStateToProps = (state: IAppState): {
+const mapStateToProps = (
+  state: IAppState,
+): {
   page: number;
 } => ({
   page: state.dashboardReducer.pageNumber,
