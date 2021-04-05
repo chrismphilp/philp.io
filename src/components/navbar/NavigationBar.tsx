@@ -72,8 +72,7 @@ const NavigationBar: FunctionComponent<RouteComponentProps> = ({ history }) => {
           </NavigationItem>
           <NavigationItem>
             <NavigationLink
-              onClick={() => window.open('https://en.wikipedia.org/wiki/Greenwich_Mean_Time')}
-            >
+              onClick={() => window.open('https://en.wikipedia.org/wiki/Greenwich_Mean_Time')}>
               {date}
             </NavigationLink>
           </NavigationItem>

@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from 'react';
+import { AiOutlineGithub, SiLeetcode } from 'react-icons/all';
 import styled from 'styled-components';
 
 const FooterContainer = styled.footer`
@@ -48,9 +49,17 @@ const FooterCopyrightListItem = styled.li`
 `;
 
 const Footer: FunctionComponent = () => {
+  const githubLink: string = 'https://github.com/chrismphilp';
+  const leetcodeLink: string = 'https://leetcode.com/chrismphilp';
   return (
     <FooterContainer>
       <FooterContainerInner>
+        <FooterCopyrightList>
+          <AiOutlineGithub size={55} style={{ cursor: 'pointer' }}
+                           onClick={() => window.open(githubLink)} />
+          <SiLeetcode size={55} style={{ paddingLeft: 15, cursor: 'pointer' }}
+                      onClick={() => window.open(leetcodeLink)} />
+        </FooterCopyrightList>
         <FooterCopyrightList>
           <FooterCopyrightListItem>© Christopher Philp.</FooterCopyrightListItem>
         </FooterCopyrightList>

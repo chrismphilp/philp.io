@@ -1,6 +1,6 @@
 import { IPostCollection } from '../../../model/PostCollection.model';
 import { PostCategories } from '../../../model/PostCategories.model';
-import github_jpg from './github.jpg';
+import github_jpg from './git.jpg';
 import moment from 'moment';
 
 const GitFunctionalityData: IPostCollection = {

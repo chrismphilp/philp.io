@@ -20,9 +20,10 @@ const PostArticle = styled.article`
   flex-direction: ${(props: PostArticleStyleProps) =>
     props.orientation === 'left' ? 'row' : 'row-reverse'};
   background-color: #fff;
+  box-shadow: 0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
 `;
 const ImageContainer = styled.span`
-  width: 48%;
+  width: 55%;
   margin: 0 auto;
 `;
 const Image = styled.img`
@@ -31,7 +32,7 @@ const Image = styled.img`
   display: block;
 `;
 const PostInformation = styled.div`
-  width: 52%;
+  width: 45%;
   color: #777;
   box-sizing: border-box;
   margin: 0;
@@ -41,10 +42,11 @@ const PostInformation = styled.div`
 `;
 const PostInformationHeader = styled.h2`
   color: #555;
-  font-size: 1.5em;
+  font-size: 1.75em;
   line-height: 1.5em;
 `;
 const PostInformationSubHeader = styled.p`
+  font-size: 1.25em;
   margin: 0 0 2em 0;
 `;
 

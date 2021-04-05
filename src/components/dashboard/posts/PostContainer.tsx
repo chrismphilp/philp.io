@@ -30,9 +30,8 @@ type PostContainerProps = {
   posts: IPostCollection[][];
 };
 
-const PostContainer: FunctionComponent<
-  PostContainerProps & ConnectedProps<typeof connector>
-> = ({ posts, page }) => {
+const PostContainer: FunctionComponent<PostContainerProps & ConnectedProps<typeof connector>> = (
+  { posts, page }) => {
   return (
     <PostWrapper>
       <PostSection>
