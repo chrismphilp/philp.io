@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
-import SubjectPage from '../../../../components/subject-page/SubjectPage';
+import SubjectPage from '../../../../../components/subject-page/SubjectPage';
 import content from './OriginOfSayings.pt2.data';
-import SubjectPageTextLink from '../../../../components/subject-page/SubjectPageTextLink';
+import SubjectPageTextLink from '../../../../../components/subject-page/SubjectPageTextLink';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 
 const OriginOfSayingsPt2: FunctionComponent<RouteComponentProps> = ({ history }) => {

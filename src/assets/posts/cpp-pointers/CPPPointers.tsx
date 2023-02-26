@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import content from './CPPPointers.data';
-import SubjectPage from '../../../components/subject-page/SubjectPage';
+import SubjectPage from '../../../../components/subject-page/SubjectPage';
 import 'prismjs/components/prism-cmake.min';
 import 'prismjs/components/prism-c.min';
 import 'prismjs/components/prism-cpp.min';

@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import content from './GitFunctionality.data';
-import SubjectPage from '../../../components/subject-page/SubjectPage';
+import SubjectPage from '../../../../components/subject-page/SubjectPage';
 import 'prismjs/components/prism-git.min';
 
 const GitFunctionality: FunctionComponent = () => {

@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import content from './TypeScript3.7.data';
-import SubjectPage from '../../../components/subject-page/SubjectPage';
+import SubjectPage from '../../../../components/subject-page/SubjectPage';
 import 'prismjs/components/prism-javascript.min';
 
 const TypeScript37: FunctionComponent = () => {

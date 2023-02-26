@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import SubjectPage from '../../../components/subject-page/SubjectPage';
+import SubjectPage from '../../../../components/subject-page/SubjectPage';
 import content from './GoogleSearch.data';
 
 const GoogleSearch: FunctionComponent = () => {

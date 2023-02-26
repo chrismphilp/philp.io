@@ -1,10 +1,6 @@
-import React, { FunctionComponent } from 'react';
-import content from './CloudFormation.data';
-import SubjectPage from '../../../components/subject-page/SubjectPage';
-
-const CloudFormation: FunctionComponent = () => {
+const CloudFormation = () => {
   return (
-    <SubjectPage post={content}>
+    <div className='text-gray-100'>
       <p>
         Ever wondered how these wondrous 500,000 tonne masses form and travel across the skyline each day? How come they
         don’t seem to shrink when it rains? Why do they appear angelically white? All great questions, so let’s break it
@@ -80,7 +76,7 @@ const CloudFormation: FunctionComponent = () => {
         So next time you’re on the way to work on a rainy day, you can give the scientific explanation to your boss as
         to why you’re soaked through.
       </p>
-    </SubjectPage>
+    </div>
   );
 };
 
