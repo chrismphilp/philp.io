@@ -1,12 +1,15 @@
 import Navigation from './Navigation';
+import Avatar from './Avatar';
+import ExternalLinks from './ExternalLinks';
+import profilePic from '../../public/images/me.png';
 
 const Header = () => {
   return (
-    <header className='h-12'>
-      <div className='flex'>
-        <div className='flex-1' />
+    <header className='mx-auto max-w-2xl h-16 pt-4'>
+      <div className='flex flex-row'>
+        <Avatar image={profilePic} alt='Picture of the Author' />
         <Navigation />
-        <div className='flex-1' />
+        <ExternalLinks />
       </div>
     </header>
   );

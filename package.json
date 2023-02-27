@@ -13,6 +13,7 @@
     "@mdx-js/loader": "latest",
     "@mdx-js/react": "latest",
     "@next/mdx": "latest",
+    "@tailwindcss/typography": "latest",
     "dayjs": "latest",
     "next": "latest",
     "prismjs": "latest",
@@ -23,7 +24,6 @@
     "styled-components": "latest"
   },
   "devDependencies": {
-    "@types/jest": "latest",
     "@types/node": "latest",
     "@types/prismjs": "latest",
     "@types/react": "latest",
@@ -31,11 +31,9 @@
     "@types/styled-components": "latest",
     "autoprefixer": "latest",
     "file-loader": "latest",
-    "jest": "latest",
     "postcss": "latest",
     "prettier": "latest",
     "tailwindcss": "latest",
-    "ts-jest": "latest",
     "typescript": "latest"
   },
   "browserslist": [

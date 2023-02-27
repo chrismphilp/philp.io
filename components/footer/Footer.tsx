@@ -1,4 +1,3 @@
-import React from 'react';
 import { AiOutlineGithub, SiLeetcode } from 'react-icons/all';
 
 const Footer = () => {
