@@ -1,7 +1,7 @@
 import { IPostCollection } from '../../../model/PostCollection.model';
 import { PostCategories } from '../../../model/PostCategories.model';
 import universe_jpg from './universe.jpg';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 const infiniteMadnessData: IPostCollection = {
   title: 'Infinite Madness',
@@ -12,7 +12,7 @@ const infiniteMadnessData: IPostCollection = {
   category: PostCategories.Mathematics,
   keywords: ['infinite', 'infinity', 'forever', 'madness'],
   link: '/infinite-madness',
-  date: moment('2020-06-25T00:00:00+0000').toDate(),
+  date: dayjs('2020-06-25T00:00:00+0000').toDate(),
   widgetImage: universe_jpg,
   widgetImageAlt: 'Infinity',
   contentKey: 'infiniteMadness',

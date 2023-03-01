@@ -1,9 +1,13 @@
+import Link from 'next/link';
+
 const Navigation = () => {
   return (
-    <nav className='basis-1/3 flex justify-center rounded-full text-gray-100 shadow-lg ring-1 backdrop-blur bg-zinc-800/90'>
-      <div className='cursor-pointer p-2 px-3 hover:text-orange-400'>Articles</div>
-      <div className='cursor-pointer p-2 px-3 hover:text-orange-400'>About</div>
-    </nav>
+    <div className='basis-1/3 px-5'>
+      <nav className='flex justify-center text-gray-400 backdrop-blur'>
+        <Link href='/articles' className='cursor-pointer p-2 px-3 hover:text-orange-400'>Articles</Link>
+        <Link href='/about' className='cursor-pointer p-2 px-3 hover:text-orange-400'>About</Link>
+      </nav>
+    </div>
   );
 };
 

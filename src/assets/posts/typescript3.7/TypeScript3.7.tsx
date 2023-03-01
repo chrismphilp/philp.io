@@ -1,11 +1,8 @@
-import React, { FunctionComponent } from 'react';
-import content from './TypeScript3.7.data';
-import SubjectPage from '../../../../components/subject-page/SubjectPage';
 import 'prismjs/components/prism-javascript.min';
 
-const TypeScript37: FunctionComponent = () => {
+const TypeScript37 = () => {
   return (
-    <SubjectPage post={content} sidebarPresent={false}>
+    <>
       <h2>Optional Chaining</h2>
       <h4>
         <code className="language-javascript">?.</code> Operator
@@ -169,7 +166,7 @@ let personsAge = person.details?.age ?? x;
         <i>Hopefully</i> you&apos;ve learnt something new, or if not confirmed your understanding of operators that you
         use in your daily development.
       </p>
-    </SubjectPage>
+    </>
   );
 };
 

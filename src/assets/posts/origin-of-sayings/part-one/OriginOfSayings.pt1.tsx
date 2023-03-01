@@ -1,12 +1,8 @@
-import React, { FunctionComponent } from 'react';
-import SubjectPage from '../../../../../components/subject-page/SubjectPage';
-import content from './OriginOfSayings.pt1.data';
-import { RouteComponentProps, withRouter } from 'react-router-dom';
-import SubjectPageTextLink from '../../../../../components/subject-page/SubjectPageTextLink';
+import React from 'react';
 
-const OriginOfSayingsPt1: FunctionComponent<RouteComponentProps> = ({ history }) => {
+const OriginOfSayingsPt1 = ({  }) => {
   return (
-    <SubjectPage post={content} sidebarPresent={false}>
+    <>
       <p>
         The English language is full of nuanced sayings that are used every day, whilst being rooted in history. Some
         you may even use yourself have some bizarre beginnings; so let’s investigate.
@@ -66,10 +62,9 @@ const OriginOfSayingsPt1: FunctionComponent<RouteComponentProps> = ({ history })
       <br />
       <p>
         If you liked this article, you can read the next part{' '}
-        <SubjectPageTextLink linkText={'here'} link={'/origin-of-sayings-part-two'} history={history} />.
       </p>
-    </SubjectPage>
+    </>
   );
 };
 
-export default withRouter(OriginOfSayingsPt1);
+export default OriginOfSayingsPt1;

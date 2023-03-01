@@ -1,10 +1,8 @@
 import React, { FunctionComponent } from 'react';
-import SubjectPage from '../../../../components/subject-page/SubjectPage';
-import content from './HelicopterFlight.data';
 
 const HelicopterFlight: FunctionComponent = () => {
   return (
-    <SubjectPage post={content}>
+    <>
       <p>
         So how do you effortlessly lift a 15 tonne object vertically? Unlike an aeroplane, a helicopter does not need to
         reach great speed to ascend (speed of the rotor actually provides no difference to the altitude of a
@@ -53,7 +51,7 @@ const HelicopterFlight: FunctionComponent = () => {
         was performed by Jean Boulet in 1972 after he reached an altitude of <b>12,440m</b>, where, due to a large
         temperature drop, the engine flamed out and could not be restarted.
       </p>
-    </SubjectPage>
+    </>
   );
 };
 

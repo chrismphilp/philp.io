@@ -1,10 +1,7 @@
-import React, { FunctionComponent } from 'react';
-import SubjectPage from '../../../../components/subject-page/SubjectPage';
-import content from './TattooRemoval.data';
 
-const TattooRemoval: FunctionComponent = () => {
+const TattooRemoval = () => {
   return (
-    <SubjectPage post={content}>
+    <>
       <p>
         <b>Lasers</b>. However, these are not the type that you saw in those classic James Bond movies, slowly advancing
         to the hero&apos;s groin. These are known as <b>Q-switched lasers</b> and are the most common way to remove
@@ -41,7 +38,7 @@ const TattooRemoval: FunctionComponent = () => {
         on the horizon with this amazing technology. So your mate Dave with his ‘<i>NO RAGRETS</i>’ motif across his
         chest can still have some optimism.
       </p>
-    </SubjectPage>
+    </>
   );
 };
 

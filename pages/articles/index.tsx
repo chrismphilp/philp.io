@@ -1,13 +1,14 @@
+import { articleFilePaths, ARTICLES_PATH } from '../../utils/mdxUtils';
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-import { articleFilePaths, ARTICLES_PATH } from '../utils/mdxUtils';
+import ArticleCard from '../../components/article/ArticleCard';
 
-const Homepage = ({ posts }) => {
+const Articles = ({ posts }) => {
   return (
-    <>
-      <h1>Home Page</h1>
-    </>
+    <div className='max-w-2xl mx-auto'>
+      {posts.map(post => <ArticleCard key={post.data.title} post={post} />)}
+    </div>
   );
 };
 
@@ -26,4 +27,4 @@ export function getStaticProps() {
   return { props: { posts } };
 }
 
-export default Homepage;
+export default Articles;

@@ -1,12 +1,6 @@
-import React, { FunctionComponent } from 'react';
-import SubjectPage from '../../../../../components/subject-page/SubjectPage';
-import content from './OriginOfSayings.pt2.data';
-import SubjectPageTextLink from '../../../../../components/subject-page/SubjectPageTextLink';
-import { RouteComponentProps, withRouter } from 'react-router-dom';
-
-const OriginOfSayingsPt2: FunctionComponent<RouteComponentProps> = ({ history }) => {
+const OriginOfSayingsPt2 = () => {
   return (
-    <SubjectPage post={content} sidebarPresent={false}>
+    <>
       <p>The English language is full of nuanced sayings that are used everyday, whilst being rooted in history.</p>
 
       <h3>Nail Your Colours to the Mast</h3>
@@ -83,10 +77,9 @@ const OriginOfSayingsPt2: FunctionComponent<RouteComponentProps> = ({ history })
       <br />
       <p>
         If you liked this article, you can read the previous part{' '}
-        <SubjectPageTextLink linkText={'here'} link={'/origin-of-sayings-part-one'} history={history} />.
       </p>
-    </SubjectPage>
+    </>
   );
 };
 
-export default withRouter(OriginOfSayingsPt2);
+export default OriginOfSayingsPt2;

@@ -1,7 +1,7 @@
 import { IPostCollection } from '../../../model/PostCollection.model';
 import { PostCategories } from '../../../model/PostCategories.model';
 import typescript_jpg from './typescript.jpg';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 const typeScript37Data: IPostCollection = {
   title: 'TypeScript 3.7 - What\'s New',
@@ -12,7 +12,7 @@ const typeScript37Data: IPostCollection = {
   category: PostCategories.Software_Development,
   keywords: ['typescript', 'coding', 'react'],
   link: '/typescript-3.7',
-  date: moment(new Date('2020-06-08T00:00:00+0000')).toDate(),
+  date: dayjs(new Date('2020-06-08T00:00:00+0000')).toDate(),
   widgetImage: typescript_jpg,
   widgetImageAlt: 'TypeScript Logo',
   contentKey: 'typeScript3.7',

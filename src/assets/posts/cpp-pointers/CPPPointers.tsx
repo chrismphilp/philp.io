@@ -1,13 +1,10 @@
-import React, { FunctionComponent } from 'react';
-import content from './CPPPointers.data';
-import SubjectPage from '../../../../components/subject-page/SubjectPage';
 import 'prismjs/components/prism-cmake.min';
 import 'prismjs/components/prism-c.min';
 import 'prismjs/components/prism-cpp.min';
 
-const CPPPointers: FunctionComponent = () => {
+const CPPPointers = () => {
   return (
-    <SubjectPage post={content} sidebarPresent={false}>
+    <>
       <h2>Introduction</h2>
 
       <p>
@@ -194,7 +191,7 @@ void edit_two(int *x, int *y)
         Hopefully this has cleared up any confusion surrounding pointers and you can begin to understand those
         insufferable <code className={'language-cpp'}>nullptr</code> exceptions.
       </p>
-    </SubjectPage>
+    </>
   );
 };
 

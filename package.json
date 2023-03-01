@@ -15,12 +15,18 @@
     "@next/mdx": "latest",
     "@tailwindcss/typography": "latest",
     "dayjs": "latest",
+    "gray-matter": "latest",
     "next": "latest",
+    "next-mdx-remote": "latest",
+    "next-themes": "latest",
     "prismjs": "latest",
     "react": "latest",
     "react-dom": "latest",
     "react-ga": "latest",
     "react-icons": "latest",
+    "rehype-code-titles": "latest",
+    "rehype-prism-plus": "latest",
+    "sharp": "latest",
     "styled-components": "latest"
   },
   "devDependencies": {

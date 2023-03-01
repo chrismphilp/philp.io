@@ -1,4 +1,5 @@
 import { DateField } from './DateField.model';
+import { StaticImageData } from 'next/image';
 
 export type IPostCollection = {
   title: string;
@@ -11,7 +12,7 @@ export type IPostCollection = {
   keywords: string[];
   link: string;
   date: Date;
-  widgetImage: string;
+  widgetImage: string | StaticImageData;
   widgetImageAlt: string;
   contentKey: string;
 };

@@ -1,11 +1,9 @@
 import React, { FunctionComponent } from 'react';
-import content from './GitFunctionality.data';
-import SubjectPage from '../../../../components/subject-page/SubjectPage';
 import 'prismjs/components/prism-git.min';
 
 const GitFunctionality: FunctionComponent = () => {
   return (
-    <SubjectPage post={content} sidebarPresent={false}>
+    <>
       <h2>Introduction</h2>
       <p>
         Git as a version control system has usage across the world. But many developers still limit themselves, staying
@@ -111,7 +109,7 @@ Date:   Wed Dec 16 14:38:59 2020 +0000
       <h3>Reset</h3>
       <h3>Revert</h3>
       https://www.atlassian.com/git/tutorials/resetting-checking-out-and-reverting
-    </SubjectPage>
+    </>
   );
 };
 
