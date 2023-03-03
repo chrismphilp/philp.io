@@ -1,0 +1,98 @@
+---
+title: What a Git
+description: Rebase your thinking
+date: '2020-12-15'
+---
+
+Git as a version control system has usage across the world. But many developers still limit themselves, staying
+within mainstay commands. This article will investigate these litany of commands, and hopefully increase your
+understanding and productivity.
+
+### Merge
+
+For example, take a common development team example. A team member has created a branch from *master*, and
+added new functionality to print their name when the application runs. While the developer has been doing this,
+the master branch has been advanced with 5 more features, leaving the new feature branch out-of-sync. A common
+practice is to therefore run *git merge*, creating a new single commit in the feature branch, which
+collects all of the commits made since the feature branch was diverged from master.
+
+This does have its pitfalls though. Given a large team where changes are consistently being pushed to the
+*master* branch, the feature branch will have a high number of merge commits polluting its history. This
+can be filtered away with an advanced git log, but without it, it may be confusing for other developers looking
+at your code to quickly understand where changes were made.
+
+### Rebase
+
+Rebasing is the process of moving or combining a sequence of commits to a new base commit. Similar to merge,
+*rebase* can used to integrate changes from one branch, into another. However, unlike merge (which is a
+non-destructive operation), rebase is used to move the entire feature branch, to the tip of the master branch,
+incorporating all of the previous commits from the master branch. This removes the need for the unnecessary
+commits from a merge, leaving a linear project history.
+
+### Squashing Commits
+
+There are times when you realise after you&apos;ve committed a new feature, you still need to make some changes.
+Commonly, a developer will make the change, and commit it to the branch, like so:
+
+```bash
+$ git log
+commit d84b3e1f899d48c49e8f513302293ff36d1b0421 (HEAD -> master)
+Author: Christopher Philp <email>
+Date:   Wed Dec 16 14:46:45 2020 +0000
+
+    [master] | Removing unused line
+
+commit 6a4e34b35dd3d5cd6e3fe34df9e04b3f80be0b85
+Author: Christopher Philp <email>
+Date:   Wed Dec 16 14:46:06 2020 +0000
+
+    [master] | Furthering altering Git instruction
+
+commit bd0a16d1ffbaba26aa2a3e3715eba19503b4c190
+Author: Christopher Philp <email>
+Date:   Wed Dec 16 14:45:46 2020 +0000
+
+    [master] | Altering Git instruction
+
+commit 0db3d898d87770b47a85c56c61a46bc46343e30a
+Author: Christopher Philp <email>
+Date:   Wed Dec 16 14:38:59 2020 +0000
+
+    [master] | Adding initial Git article
+```
+
+This has needlessly increased the size of the git history, with lots of commits that add nothing. In this case
+it is preferable to combine commits `d84b3e`,`6a4e34b`, and `bd0a16d`. A commit
+squash or fix can therefore be performed. This involves moving the commit/s into their parent node in the commit
+tree. A *squash* will aggregate the commit messages of the combined commits, whilst a *fix* will
+ignore them completely.
+
+As a side-note, rebasing does not actually alter the already made commits (as this is not possible in git
+through common commands), it creates new ones whilst removing any references to the old ones.
+
+```bash
+$ git rebase -i 0db3d898d87770b47a85c56c61a46bc46343e30a
+pick bd0a16d [master] | Altering Git instruction
+f 6a4e34b [master] | Furthering altering Git instruction
+f d84b3e1 [master] | Removing unused line
+
+$ git log
+commit dc08bbe95d71a0079f080d326376e2029f11ce3f (HEAD -> master)
+Author: Christopher Philp <email>
+Date:   Wed Dec 16 14:45:46 2020 +0000
+
+    [master] | Altering Git instruction
+
+commit 0db3d898d87770b47a85c56c61a46bc46343e30a
+Author: Christopher Philp <email>
+Date:   Wed Dec 16 14:38:59 2020 +0000
+
+    [master] | Adding initial Git article
+```
+
+Here we can see from the `git log` that `d84b3e` and `6a4e34b` have been now moved inside `d84b3e`, inheriting its
+commit message due to the use of the *fix* keyword.
+
+### Reset
+
+### Revert

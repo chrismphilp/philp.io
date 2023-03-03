@@ -24,9 +24,18 @@
     "react-dom": "latest",
     "react-ga": "latest",
     "react-icons": "latest",
+    "reading-time": "^1.5.0",
+    "rehype-autolink-headings": "latest",
     "rehype-code-titles": "latest",
+    "rehype-pretty-code": "^0.9.4",
+    "rehype-prism": "^2.2.0",
     "rehype-prism-plus": "latest",
+    "rehype-shiki": "^0.0.9",
+    "rehype-slug": "latest",
+    "remark-gfm": "^3.0.1",
+    "sass": "^1.58.3",
     "sharp": "latest",
+    "shiki": "^0.14.1",
     "styled-components": "latest"
   },
   "devDependencies": {

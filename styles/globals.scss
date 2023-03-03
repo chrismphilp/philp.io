@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+body > div:first-child,
+div#__next{
+    height: 100%;
+}
+
+html.dark {
+    pre[data-theme="light"],
+    code[data-theme="light"]{
+        display: none;
+    }
+}
+
+html.light {
+    pre[data-theme="dark"],
+    code[data-theme="dark"]{
+        display: none;
+    }
+}

@@ -13,9 +13,12 @@ const HeaderIcon = ({ onClick, children }: { onClick?: () => void, children }) =
 const ThemeToggle = () => {
   const { theme, setTheme } = useTheme();
 
+  // https://delba.dev/blog/next-blog-build-time-syntax-highlighting#dark-and-light-mode
+  // https://github.com/shikijs/shiki
+
   return (
     <HeaderIcon onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
-      {theme === 'light' ? <RiMoonClearLine size={25} /> : <RiSunLine size={25} />}
+      {theme === 'light' ? <RiMoonClearLine size={35} /> : <RiSunLine size={35} />}
     </HeaderIcon>
   );
 };
@@ -24,7 +27,7 @@ const HeaderIcons = () => {
   return (
     <div className='basis-1/3 flex justify-end'>
       <ThemeToggle />
-      <HeaderIcon><FiGithub size={25} /></HeaderIcon>
+      <HeaderIcon><FiGithub size={35} /></HeaderIcon>
     </div>
   );
 };

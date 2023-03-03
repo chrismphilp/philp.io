@@ -1,12 +1,16 @@
 import path from 'path';
 import fs from 'fs';
 import { articleFilePaths, ARTICLES_PATH } from '../../utils/mdxUtils';
-import matter from 'gray-matter';
 import { serialize } from 'next-mdx-remote/serialize';
 import { MDXRemote } from 'next-mdx-remote';
 import Article from '../../components/article/Article';
-import rehypePrism from 'rehype-prism-plus';
 import rehypeCodeTitles from 'rehype-code-titles';
+import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+import rehypeSlug from 'rehype-slug';
+import rehypePrettyCode from 'rehype-pretty-code';
+import remarkGfm from 'remark-gfm';
+import readingTime from 'reading-time';
+import matter from 'gray-matter';
 
 const Articles = ({ source, frontMatter }) => {
   return (
@@ -21,15 +25,26 @@ const Articles = ({ source, frontMatter }) => {
 export const getStaticProps = async ({ params }) => {
   const articleFilePath = path.join(ARTICLES_PATH, `${params.slug}.mdx`);
   const source = fs.readFileSync(articleFilePath);
-
   const { content, data } = matter(source);
 
   const mdxSource = await serialize(content, {
+    parseFrontmatter: true,
     mdxOptions: {
-      remarkPlugins: [],
+      format: 'mdx',
+      remarkPlugins: [
+        remarkGfm
+      ],
       rehypePlugins: [
+        rehypeSlug,
         rehypeCodeTitles,
-        rehypePrism,
+        [rehypeAutolinkHeadings, { behavior: 'wrap', properties: {className: ['anchor'] } }],
+        [rehypePrettyCode, {
+          theme: {
+            dark: "monokai",
+            light: "one-dark-pro",
+          },
+          keepBackground: true,
+        }]
       ],
     },
     scope: data,
@@ -39,6 +54,8 @@ export const getStaticProps = async ({ params }) => {
     props: {
       source: mdxSource,
       frontMatter: data,
+      wordCount: content.split(/\s+/gu).length,
+      readingTime: readingTime(content).text,
     },
   };
 };

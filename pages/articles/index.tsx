@@ -22,7 +22,7 @@ export function getStaticProps() {
       data,
       filePath,
     };
-  });
+  }).sort((post1, post2) => (post1.data.date > post2.data.date ? -1 : 1));
 
   return { props: { posts } };
 }

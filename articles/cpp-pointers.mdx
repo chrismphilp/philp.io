@@ -8,13 +8,13 @@ date: '2020-09-11'
 
 C and C++ unlike a lot of other languages provide the ability to directly interact with hardware memory -
 normally described as a middle-level or &apos;systems&apos; language - through the use of
-<b>pointers</b>. Every variable declared in any language has a memory location, and every memory location has an
+*pointers*. Every variable declared in any language has a memory location, and every memory location has an
 address used to locate it - C++ gives you the power to directly modify this memory.
 
 ### Accessing Memory
 
-In C++, the <b>memory address</b> (where a value lives) of a variable can be accessed through the{' '}
-<code className={'language-cpp'}>&</code> operator - see the example below.
+In C++, the *memory address* (where a value lives) of a variable can be accessed through the
+`&{:cpp}` operator - see the example below.
 
 ```cpp
 std::string food = "Pizza";
@@ -27,7 +27,7 @@ cout << &food; // Outputs the memory address of food (0x6dfed4)
 A pointer on the other hand, is a variable that *stores the memory address of a variable as its value*, and
 is created using the `*` operator. A pointer can exist for *any data type*, as it merely points to a memory address of the variable.
 
-```cpp
+```cpp {1-3}
 int x = 5;
 int* y = &x;
 // Equivalent to
@@ -39,11 +39,10 @@ cout << &y; // Outputs the memory address of y (0x6ffd4)
 cout << *y; // Outputs the value of x (5)
 ```
 
-### Arrow Operator <code className={'language-cpp'}>-&gt;</code>
+### Arrow Operator
 
-The arrow operator is a <b>shorthand method for accessing the contents of a</b>{' '}
-<code className={'language-cpp'}>struct</code> <b>or</b> <code className={'language-cpp'}>class</code>{' '}
-<b>pointer</b> - normally the <code className={'language-cpp'}>.</code> operator would be used for non-pointer
+The arrow operator is a shorthand method for accessing the contents of a
+`struct<` *or* `class` *pointer* - normally the `.` operator would be used for non-pointer
 access. The example below shows the equivalences.
 
 ```cpp
@@ -119,8 +118,8 @@ void square(int &n)
 ### Benefits of Pointers
 
 There are a number of benefits to using pointers:
-- Values that are passed in to a function <b>do not have to be copied</b>, especially useful with large objects.
-- They allow <b>more than one value to be returned from a function</b>.
+- Values that are passed in to a function *do not have to be copie*, especially useful with large objects.
+- They allow *more than one value to be returned from a function*.
 - Memory access through pointers is stated to be *more efficient than through an array*.
 
 ```cpp

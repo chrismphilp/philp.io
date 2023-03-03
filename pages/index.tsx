@@ -5,9 +5,9 @@ import { articleFilePaths, ARTICLES_PATH } from '../utils/mdxUtils';
 
 const Homepage = ({ posts }) => {
   return (
-    <>
-      <h1>Home Page</h1>
-    </>
+    <div className='flex flex-col items-center justify-center'>
+      <h1 className='text-6xl font-bold'>Homepage</h1>
+    </div>
   );
 };
 
