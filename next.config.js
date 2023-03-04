@@ -10,7 +10,10 @@ const withMDX = require('@next/mdx')({
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
-  transpilePackages: ['react-icons']
+  transpilePackages: ['react-icons'],
+  experimental: {
+    runtime: 'edge',
+  },
 }
 
 // Merge MDX config with Next.js config
