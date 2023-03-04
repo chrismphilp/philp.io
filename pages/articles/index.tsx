@@ -15,7 +15,7 @@ const Articles = ({ posts }) => {
   );
 };
 
-type ArticleData = {
+export type ArticleData = {
   title: string;
   description: string;
   date: string;

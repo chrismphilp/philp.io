@@ -9,6 +9,9 @@ const Article = ({ frontMatter, children }) => {
     <div className='pt-10'>
       <Head>
         <title>{frontMatter.title}</title>
+        <meta name='title' content={frontMatter.title} />
+        <meta name='description' content={frontMatter.description} />
+        <meta name='date' content={frontMatter.date} />
       </Head>
       <article className='prose dark:prose-invert prose-sm prose-a:no-underline'>
         <div className='pb-5'>

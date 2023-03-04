@@ -5,7 +5,7 @@ import '../styles/globals.scss';
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (
-    <ThemeProvider attribute='class' enableColorScheme storageKey={'philp.io.key'}>
+    <ThemeProvider attribute='class' enableColorScheme>
       <Layout>
         <Component {...pageProps} />
       </Layout>
