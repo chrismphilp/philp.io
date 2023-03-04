@@ -7,7 +7,7 @@ import { articleFilePaths, ARTICLES_PATH } from 'utils/mdxUtils';
 
 const Articles = ({ posts }) => {
   return (
-    <div className='max-w-2xl mx-auto pt-5'>
+    <div className='max-w-2xl mx-auto py-5'>
       <div className='border-l-0 md:border-l pb-5 px-5'>
       {posts.map(post => <ArticleCard key={post.data.title} post={post} />)}
       </div>
