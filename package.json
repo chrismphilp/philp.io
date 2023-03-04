@@ -18,6 +18,7 @@
     "@mdx-js/react": "latest",
     "@next/mdx": "latest",
     "@tailwindcss/typography": "latest",
+    "autoprefixer": "latest",
     "dayjs": "latest",
     "gray-matter": "latest",
     "next": "latest",
@@ -45,6 +46,7 @@
     "@types/react-dom": "latest",
     "prettier": "latest",
     "tailwindcss": "latest",
-    "typescript": "latest"
+    "typescript": "latest",
+    "vercel": "latest"
   }
 }
