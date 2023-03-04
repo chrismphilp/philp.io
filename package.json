@@ -13,6 +13,10 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "engines" : {
+    "npm" : ">9.0.0",
+    "node" : ">=19.0.0"
+  },
   "dependencies": {
     "@mdx-js/loader": "latest",
     "@mdx-js/react": "latest",
