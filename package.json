@@ -14,8 +14,8 @@
     "lint": "next lint"
   },
   "engines" : {
-    "npm" : ">9.0.0",
-    "node" : ">=19.0.0"
+    "npm" : ">=8.0.0",
+    "node" : ">=17.0.0"
   },
   "dependencies": {
     "@mdx-js/loader": "latest",
