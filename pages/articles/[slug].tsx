@@ -5,7 +5,6 @@ import { serialize } from 'next-mdx-remote/serialize';
 import { MDXRemote } from 'next-mdx-remote';
 import Image from 'next/image';
 import Article from 'components/article/Article';
-import rehypeCodeTitles from 'rehype-code-titles';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeSlug from 'rehype-slug';
 import rehypePrettyCode from 'rehype-pretty-code';
@@ -42,7 +41,6 @@ export const getStaticProps = async ({ params }) => {
       ],
       rehypePlugins: [
         rehypeSlug,
-        rehypeCodeTitles,
         [rehypeAutolinkHeadings, { behavior: 'wrap', properties: { className: ['anchor'] } }],
         [rehypePrettyCode, {
           theme: {
