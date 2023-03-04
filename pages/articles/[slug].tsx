@@ -1,9 +1,10 @@
 import path from 'path';
 import fs from 'fs';
-import { articleFilePaths, ARTICLES_PATH } from '../../utils/mdxUtils';
+import { articleFilePaths, ARTICLES_PATH } from 'utils/mdxUtils';
 import { serialize } from 'next-mdx-remote/serialize';
 import { MDXRemote } from 'next-mdx-remote';
-import Article from '../../components/article/Article';
+import Image from 'next/image';
+import Article from 'components/article/Article';
 import rehypeCodeTitles from 'rehype-code-titles';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeSlug from 'rehype-slug';
@@ -11,12 +12,17 @@ import rehypePrettyCode from 'rehype-pretty-code';
 import remarkGfm from 'remark-gfm';
 import readingTime from 'reading-time';
 import matter from 'gray-matter';
+import rehypeImgSize from 'rehype-img-size';
+
+const components = {
+  img: (props) => <Image {...props} placeholder='blur' role='img' blurDataURL={props.src} quality={75} />,
+};
 
 const Articles = ({ source, frontMatter }) => {
   return (
     <main className='flex flex-col items-center py-2'>
       <Article frontMatter={frontMatter}>
-        <MDXRemote {...source} />
+        <MDXRemote {...source} components={components} />
       </Article>
     </main>
   );
@@ -32,19 +38,20 @@ export const getStaticProps = async ({ params }) => {
     mdxOptions: {
       format: 'mdx',
       remarkPlugins: [
-        remarkGfm
+        remarkGfm,
       ],
       rehypePlugins: [
         rehypeSlug,
         rehypeCodeTitles,
-        [rehypeAutolinkHeadings, { behavior: 'wrap', properties: {className: ['anchor'] } }],
+        [rehypeAutolinkHeadings, { behavior: 'wrap', properties: { className: ['anchor'] } }],
         [rehypePrettyCode, {
           theme: {
-            dark: "monokai",
-            light: "one-dark-pro",
+            dark: 'monokai',
+            light: 'one-dark-pro',
           },
           keepBackground: true,
-        }]
+        }],
+        [rehypeImgSize, { dir: 'public/' }],
       ],
     },
     scope: data,

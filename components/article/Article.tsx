@@ -10,7 +10,7 @@ const Article = ({ frontMatter, children }) => {
       <Head>
         <title>{frontMatter.title}</title>
       </Head>
-      <article className='prose dark:prose-invert prose-lg prose-a:no-underline'>
+      <article className='prose dark:prose-invert prose-sm prose-a:no-underline'>
         <div className='pb-5'>
           <FaArrowLeft onClick={() => router.back()} className='cursor-pointer text-gray-400 hover:text-gray-500' size={25} />
         </div>

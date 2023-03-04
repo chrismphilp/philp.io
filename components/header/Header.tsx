@@ -1,7 +1,7 @@
 import Navigation from './Navigation';
 import Avatar from './Avatar';
 import HeaderIcons from './HeaderIcons';
-import profilePic from '../../public/images/me.png';
+import profilePic from '../../public/blog/images/me.png';
 
 const Header = () => {
   return (
