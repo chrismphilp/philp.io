@@ -13,7 +13,7 @@ import ExportedImage from 'next-image-export-optimizer';
 import matter from 'gray-matter';
 
 const components = {
-  img: (props) => <ExportedImage {...props} role='img' />,
+  img: (props) => <ExportedImage {...props} priority={true} placeholder="blur" loading='eager' role='img' />,
 };
 
 const Articles = ({ source, frontMatter }) => {
