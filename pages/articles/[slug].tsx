@@ -3,18 +3,17 @@ import fs from 'fs';
 import { articleFilePaths, ARTICLES_PATH } from 'utils/mdxUtils';
 import { serialize } from 'next-mdx-remote/serialize';
 import { MDXRemote } from 'next-mdx-remote';
-import Image from 'next/image';
 import Article from 'components/article/Article';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeSlug from 'rehype-slug';
 import rehypePrettyCode from 'rehype-pretty-code';
 import remarkGfm from 'remark-gfm';
 import readingTime from 'reading-time';
+import ExportedImage from 'next-image-export-optimizer';
 import matter from 'gray-matter';
-import rehypeImgSize from 'rehype-img-size';
 
 const components = {
-  img: (props) => <Image {...props} placeholder='blur' role='img' blurDataURL={props.src} quality={75} />,
+  img: (props) => <ExportedImage {...props} role='img' />,
 };
 
 const Articles = ({ source, frontMatter }) => {
@@ -49,7 +48,6 @@ export const getStaticProps = async ({ params }) => {
           },
           keepBackground: true,
         }],
-        [rehypeImgSize, { dir: 'public/' }],
       ],
     },
     scope: data,

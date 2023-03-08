@@ -11,11 +11,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "static": "next build && next export && next-image-export-optimizer",
     "lint": "next lint"
   },
-  "engines" : {
-    "npm" : ">=8.0.0",
-    "node" : ">=17.0.0"
+  "engines": {
+    "npm": ">=8.0.0",
+    "node": ">=17.0.0"
   },
   "dependencies": {
     "@mdx-js/loader": "latest",
@@ -26,6 +27,7 @@
     "dayjs": "latest",
     "gray-matter": "latest",
     "next": "latest",
+    "next-image-export-optimizer": "latest",
     "next-mdx-remote": "latest",
     "next-themes": "latest",
     "react": "latest",

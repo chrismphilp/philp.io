@@ -13,6 +13,9 @@
 
 # production
 /build
+/out
+**/nextImageExportOptimizer/**
+**/next-image-export-optimizer-hashes.json
 
 # misc
 .idea*

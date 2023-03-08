@@ -1,5 +1,6 @@
 import { FiGithub, RiMoonClearLine, RiSunLine } from 'react-icons/all';
 import { useTheme } from 'next-themes';
+import Link from 'next/link';
 
 const HeaderIcon = ({ onClick, children }: { onClick?: () => void, children }) => {
   return (
@@ -24,7 +25,9 @@ const HeaderIcons = () => {
   return (
     <div className='basis-1/3 flex justify-end'>
       <ThemeToggle />
-      <HeaderIcon><FiGithub size={25} /></HeaderIcon>
+      <Link href="https://github.com/chrismphilp/philp.io">
+        <HeaderIcon><FiGithub size={25} /></HeaderIcon>
+      </Link>
     </div>
   );
 };
