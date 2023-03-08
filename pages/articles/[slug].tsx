@@ -6,6 +6,7 @@ import { MDXRemote } from 'next-mdx-remote';
 import Article from 'components/article/Article';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeSlug from 'rehype-slug';
+import rehypeImgSize from 'rehype-img-size';
 import rehypePrettyCode from 'rehype-pretty-code';
 import remarkGfm from 'remark-gfm';
 import readingTime from 'reading-time';
@@ -13,7 +14,7 @@ import ExportedImage from 'next-image-export-optimizer';
 import matter from 'gray-matter';
 
 const components = {
-  img: (props) => <ExportedImage {...props} priority={true} placeholder="blur" loading='eager' role='img' />,
+  img: (props) => <ExportedImage {...props} priority={true} placeholder='blur' loading='eager' role='img' />,
 };
 
 const Articles = ({ source, frontMatter }) => {
@@ -48,6 +49,7 @@ export const getStaticProps = async ({ params }) => {
           },
           keepBackground: true,
         }],
+        [rehypeImgSize, { dir: 'public' }],
       ],
     },
     scope: data,
