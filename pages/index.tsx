@@ -13,17 +13,23 @@ const Homepage = ({ posts }) => {
       <Head>
         <title>Home</title>
       </Head>
-      <div className='max-w-2xl mx-auto pt-5'>
 
-        <div>
-          <h5>Welcome to the blog</h5>
+      <div className='max-w-2xl mx-auto pt-5'>
+        <div className='prose dark:prose-invert pt-7 pb-9'>
+          <h2>Welcome to the blog 👋</h2>
+          <ul>
+            <li>I'm Chris, a software engineer from the UK 🇬🇧</li>
+            <li>Programming in the financial sector 🏦</li>
+            <li>Writing about topics that interest me ✏️</li>
+            <li>Learning new things every day 💡</li>
+          </ul>
         </div>
 
-        <div>
-          <h5 className='pb-2'>Recent Articles</h5>
-          <div className='border-l-0 md:border-l pb-5 px-5'>
-            {posts.map(post => <ArticleCard key={post.data.title} post={post} />)}
-          </div>
+        <div className='prose dark:prose-invert'>
+          <h3 className='pb-2'>Recent Articles 📚</h3>
+        </div>
+        <div className='border-l-0 md:border-l px-5'>
+          {posts.map(post => <ArticleCard key={post.data.title} post={post} />)}
         </div>
       </div>
     </>
@@ -44,7 +50,7 @@ export function getStaticProps() {
       } as ArticleData,
       filePath,
     };
-  }).slice(3);
+  }).sort((post1, post2) => (post1.data.date > post2.data.date ? -1 : 1)).slice(0, 5);
 
   return { props: { posts } };
 }

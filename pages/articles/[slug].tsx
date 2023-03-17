@@ -48,6 +48,10 @@ export const getStaticProps = async ({ params }) => {
             light: 'one-dark-pro',
           },
           keepBackground: true,
+          onVisitHighlightedLine(node) {
+            // Each line node by default has `class="line"`.
+            node.properties.className.push('highlighted');
+          },
         }],
         [rehypeImgSize, { dir: 'public' }],
       ],
