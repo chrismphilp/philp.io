@@ -5,12 +5,13 @@ import ArticleCard from 'components/article/ArticleCard';
 import readingTime from 'reading-time';
 import { articleFilePaths, ARTICLES_PATH } from 'utils/mdxUtils';
 import Head from 'next/head';
+import { ArticleData } from '../types';
 
 const Articles = ({ posts }) => {
   return (
     <>
       <Head>
-        <title>Articles</title>
+        <title>Tech</title>
       </Head>
       <div className='max-w-2xl mx-auto py-8'>
         <div className='border-l-0 md:border-l px-5'>
@@ -20,14 +21,6 @@ const Articles = ({ posts }) => {
     </>
   );
 };
-
-export type ArticleData = {
-  title: string;
-  description: string;
-  date: string;
-  wordCount: number;
-  readingTime: string;
-}
 
 export function getStaticProps() {
   const posts = articleFilePaths.map((filePath) => {
@@ -43,7 +36,8 @@ export function getStaticProps() {
       } as ArticleData,
       filePath,
     };
-  }).sort((post1, post2) => (post1.data.date > post2.data.date ? -1 : 1));
+  }).filter(v => v.data.category === 'Technology')
+    .sort((post1, post2) => (post1.data.date > post2.data.date ? -1 : 1));
 
   return {
     props: {

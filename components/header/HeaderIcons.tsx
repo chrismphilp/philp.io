@@ -1,5 +1,6 @@
 import { FiGithub, RiMoonClearLine, RiSunLine } from 'react-icons/all';
 import { useTheme } from 'next-themes';
+import { motion } from 'framer-motion';
 import Link from 'next/link';
 
 const HeaderIcon = ({ onClick, children }: { onClick?: () => void, children }) => {
@@ -15,9 +16,11 @@ const ThemeToggle = () => {
   const { theme, setTheme } = useTheme();
 
   return (
-    <HeaderIcon onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
-      {theme === 'light' ? <RiMoonClearLine size={25} /> : <RiSunLine size={25} />}
-    </HeaderIcon>
+    <motion.div className='p-1' whileTap={{ rotate: 360 }}>
+      <HeaderIcon onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
+        {theme === 'light' ? <RiMoonClearLine size={25} /> : <RiSunLine size={25} />}
+      </HeaderIcon>
+    </motion.div>
   );
 };
 

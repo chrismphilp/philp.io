@@ -6,6 +6,7 @@ import ArticleCard from 'components/article/ArticleCard';
 import readingTime from 'reading-time';
 import { ArticleData } from './articles';
 import Head from 'next/head';
+import { motion } from 'framer-motion';
 
 const Homepage = ({ posts }) => {
   return (
@@ -16,7 +17,7 @@ const Homepage = ({ posts }) => {
 
       <div className='max-w-2xl mx-auto pt-5'>
         <div className='prose dark:prose-invert pt-7 pb-9'>
-          <h2>Welcome to the blog 👋</h2>
+          <h2>Welcome to the blog <HandWaving/></h2>
           <ul>
             <li>I'm Chris, a software engineer from the UK 🇬🇧</li>
             <li>Programming in the financial sector 🏦</li>
@@ -55,4 +56,21 @@ export function getStaticProps() {
   return { props: { posts } };
 }
 
+const HandWaving = () => {
+  return (
+    <motion.div
+      className='inline-block pl-1'
+      animate={{ rotate: 20 }}
+      transition={{
+        from: 0,
+        duration: 0.75,
+        repeat: Infinity,
+        repeatType: 'reverse',
+        ease: 'easeInOut',
+        type: 'tween',
+      }}>
+      👋
+    </motion.div>
+  );
+}
 export default Homepage;

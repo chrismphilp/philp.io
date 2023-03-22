@@ -25,6 +25,7 @@
     "@tailwindcss/typography": "latest",
     "autoprefixer": "latest",
     "dayjs": "latest",
+    "framer-motion": "latest",
     "gray-matter": "latest",
     "next": "latest",
     "next-image-export-optimizer": "latest",
