@@ -14,7 +14,7 @@ const Articles = ({ posts }) => {
         <title>Tech</title>
       </Head>
       <div className='max-w-2xl mx-auto py-8'>
-        <div className='border-l-0 md:border-l px-5'>
+        <div className=''>
           {posts.map(post => <ArticleCard key={post.data.title} post={post} />)}
         </div>
       </div>
