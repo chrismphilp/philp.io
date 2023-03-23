@@ -2,10 +2,10 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import ArticleCard from 'components/article/ArticleCard';
+import { ArticleData } from 'components/types';
 import readingTime from 'reading-time';
 import { articleFilePaths, ARTICLES_PATH } from 'utils/mdxUtils';
 import Head from 'next/head';
-import { ArticleData } from '../types';
 
 const Articles = ({ posts }) => {
   return (
