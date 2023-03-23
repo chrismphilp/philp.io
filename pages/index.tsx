@@ -4,8 +4,8 @@ import matter from 'gray-matter';
 import { articleFilePaths, ARTICLES_PATH } from '../utils/mdxUtils';
 import ArticleCard from 'components/article/ArticleCard';
 import readingTime from 'reading-time';
-import { ArticleData } from './articles';
 import Head from 'next/head';
+import { ArticleData } from './types';
 import { motion } from 'framer-motion';
 
 const Homepage = ({ posts }) => {

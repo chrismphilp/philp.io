@@ -14,9 +14,7 @@ const Articles = ({ posts }) => {
         <title>Tech</title>
       </Head>
       <div className='max-w-2xl mx-auto py-8'>
-        <div className=''>
-          {posts.map(post => <ArticleCard key={post.data.title} post={post} />)}
-        </div>
+        {posts.map(post => <ArticleCard key={post.data.title} post={post} />)}
       </div>
     </>
   );
