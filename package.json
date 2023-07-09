@@ -9,11 +9,15 @@
   "scripts": {
     "format": "prettier --write \"src/**/*.tsx\"",
     "dev": "next dev",
+    "version": "npm version patcch",
     "build": "next build",
     "start": "next start",
     "static": "next build && next export && next-image-export-optimizer",
     "lint": "next lint"
   },
+  "pre-push": [
+    "version"
+  ],
   "engines": {
     "npm": ">=8.0.0",
     "node": ">=17.0.0"
@@ -50,6 +54,7 @@
     "@types/node": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
+    "pre-push": "^0.1.4",
     "prettier": "latest",
     "tailwindcss": "latest",
     "typescript": "latest",
