@@ -1,6 +1,6 @@
 {
   "name": "blog",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "homepage": "https://philp.io",
   "repository": "https://github.com/chrismphilp/philp.io",
   "description": "My personal blog",
@@ -9,7 +9,7 @@
   "scripts": {
     "format": "prettier --write \"src/**/*.tsx\"",
     "dev": "next dev",
-    "version": "npm version patch",
+    "version": "version patch",
     "build": "next build",
     "start": "next start",
     "static": "next build && next export && next-image-export-optimizer",
