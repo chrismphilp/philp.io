@@ -2,6 +2,7 @@ import { FiGithub, RiMoonClearLine, RiSunLine } from 'react-icons/all';
 import { useTheme } from 'next-themes';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
 const HeaderIcon = ({ onClick, children }: { onClick?: () => void, children }) => {
   return (
@@ -13,7 +14,12 @@ const HeaderIcon = ({ onClick, children }: { onClick?: () => void, children }) =
 };
 
 const ThemeToggle = () => {
+  const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
+
+  useEffect(() => setMounted(true), []);
+
+  if (!mounted) return <></>;
 
   return (
     <motion.div className='p-1' whileTap={{ rotate: 360 }}>
