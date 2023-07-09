@@ -1,6 +1,6 @@
 {
   "name": "blog",
-  "version": "0.1.54",
+  "version": "0.1.55",
   "homepage": "https://philp.io",
   "repository": "https://github.com/chrismphilp/philp.io",
   "description": "My personal blog",
@@ -54,7 +54,7 @@
     "@types/node": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
-    "pre-commit": "^1.2.2",
+    "pre-commit": "latest",
     "prettier": "latest",
     "tailwindcss": "latest",
     "typescript": "latest",
