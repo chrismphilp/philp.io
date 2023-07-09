@@ -9,7 +9,7 @@
   "scripts": {
     "format": "prettier --write \"src/**/*.tsx\"",
     "dev": "next dev",
-    "version": "npm version patcch",
+    "version": "npm version patch",
     "build": "next build",
     "start": "next start",
     "static": "next build && next export && next-image-export-optimizer",
