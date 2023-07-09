@@ -1,4 +1,4 @@
-import { FaArrowLeft } from 'react-icons/all';
+import { FaArrowLeft } from 'react-icons/fa';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import dayjs from 'dayjs';
@@ -7,7 +7,7 @@ const Article = ({ frontMatter, children }) => {
   const router = useRouter();
 
   return (
-    <div className='pt-10'>
+    <div className='pt-5 md:pt-10'>
       <Head>
         <title>{frontMatter.title}</title>
         <meta name='title' content={frontMatter.title} />

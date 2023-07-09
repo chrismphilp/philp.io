@@ -6,7 +6,6 @@ const withMDX = require('@next/mdx')({
     rehypePlugins: [],
     providerImportSource: '@mdx-js/react',
   },
-
 });
 
 const mdxConfig = {
@@ -15,7 +14,7 @@ const mdxConfig = {
   images: {
     loader: "custom",
     imageSizes: [16, 64, 128, 256, 384],
-    deviceSizes: [640, 1080, 1920, 2048, 3840],
+    deviceSizes: [320, 640, 1080, 1920, 2048],
   },
   env: {
     nextImageExportOptimizer_imageFolderPath: "public",

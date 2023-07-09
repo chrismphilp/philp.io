@@ -19,7 +19,7 @@ const components = {
 
 const Articles = ({ source, frontMatter }) => {
   return (
-    <main className='flex flex-col items-center py-2'>
+    <main className='flex flex-col items-stretch md:items-center py-2'>
       <Article frontMatter={frontMatter}>
         <MDXRemote {...source} components={components} />
       </Article>

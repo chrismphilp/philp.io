@@ -15,9 +15,9 @@ const Homepage = ({ posts }) => {
         <title>Home</title>
       </Head>
 
-      <div className='max-w-2xl mx-auto pt-5'>
+      <div className='max-w-2xl sm:mx-auto'>
         <div className='prose dark:prose-invert pt-7 pb-9'>
-          <h2>Welcome to the blog <HandWaving/></h2>
+          <h2>Welcome to the blog <HandWaving /></h2>
           <ul>
             <li>I'm Chris, a software engineer from the UK 🇬🇧</li>
             <li>Programming in the financial sector 🏦</li>
@@ -29,8 +29,10 @@ const Homepage = ({ posts }) => {
         <div className='prose dark:prose-invert'>
           <h3 className='pb-2'>Recent Articles 📚</h3>
         </div>
-        <div className='border-l-0 md:border-l px-5'>
-          {posts.map(post => <ArticleCard key={post.data.title} post={post} />)}
+        <div className='border-l-0 py-5'>
+          <div className='md:border-l md:px-5'>
+            {posts.map(post => <ArticleCard key={post.data.title} post={post} />)}
+          </div>
         </div>
       </div>
     </>
@@ -72,5 +74,5 @@ const HandWaving = () => {
       👋
     </motion.div>
   );
-}
+};
 export default Homepage;

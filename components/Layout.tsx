@@ -11,7 +11,7 @@ const Layout = ({ children }) => {
   return (
     <div className={`flex flex-col min-h-screen ${sourceCodePro.variable} font-sans bg-white dark:bg-gray-800`}>
       <Header />
-      <main className='grow'>{children}</main>
+      <div className='grow'>{children}</div>
       <Footer />
     </div>
   )

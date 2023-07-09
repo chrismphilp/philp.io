@@ -7,7 +7,7 @@ category: Technology
 
 ## Starting Point
 
-Don't laugh at the image below, the blog started out pretty rough.
+Don't laugh, the blog started out pretty rough.
 
 ![Picture of the Original Blog](/articles/images/original_blog.png)
 
@@ -72,9 +72,17 @@ and integrates quite nicely with `tailwind`.
 
 ```tsx {1-10}
 import { useTheme } from 'next-themes';
+import { useEffect,useState } from 'react';
+import { RiMoonClearLine,RiSunLine } from 'react-icons/ri';
 
 const ThemeToggle = () => {
+  const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
+
+  // When mounted on client, now we can show the UI to alleviate hydration issues
+  useEffect(() => setMounted(true), []);
+
+  if (!mounted) return <></>;
 
   return (
     <HeaderIcon onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>

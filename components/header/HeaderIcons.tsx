@@ -1,4 +1,5 @@
-import { FiGithub, RiMoonClearLine, RiSunLine } from 'react-icons/all';
+import { RiMoonClearLine, RiSunLine } from 'react-icons/ri';
+import { FiGithub } from 'react-icons/fi';
 import { useTheme } from 'next-themes';
 import { motion } from 'framer-motion';
 import Link from 'next/link';

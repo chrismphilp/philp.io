@@ -14,15 +14,13 @@ const Articles = ({ posts }) => {
         <title>Misc</title>
       </Head>
       <div className='max-w-2xl mx-auto py-8'>
-        <div className='border-l-0 md:border-l px-5'>
-          {posts.map(post => <ArticleCard key={post.data.title} post={post} />)}
-        </div>
+        {posts.map(post => <ArticleCard key={post.data.title} post={post} />)}
       </div>
     </>
   );
 };
 
-export function getStaticProps() {
+export const getStaticProps = () => {
   const posts = articleFilePaths.map((filePath) => {
     const source = fs.readFileSync(path.join(ARTICLES_PATH, filePath));
     const { content, data } = matter(source);
@@ -44,6 +42,6 @@ export function getStaticProps() {
       posts,
     },
   };
-}
+};
 
 export default Articles;

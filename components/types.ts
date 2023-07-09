@@ -5,4 +5,9 @@ export type ArticleData = {
   category: string;
   wordCount: number;
   readingTime: string;
+};
+
+export enum ArticleType {
+  TECHNOLOGY = 'Technology',
+
 }
