@@ -7,7 +7,7 @@ import Article from 'components/article/Article';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeSlug from 'rehype-slug';
 import rehypeImgSize from 'rehype-img-size';
-import rehypePrettyCode from 'rehype-pretty-code';
+import rehypePrettyCode, { LineElement } from 'rehype-pretty-code';
 import remarkGfm from 'remark-gfm';
 import readingTime from 'reading-time';
 import ExportedImage from 'next-image-export-optimizer';
@@ -48,9 +48,9 @@ export async function getStaticProps({ params }) {
             light: 'one-dark-pro',
           },
           keepBackground: true,
-          onVisitHighlightedLine(node) {
+          onVisitHighlightedLine(node: LineElement) {
             // Each line node by default has `class="line"`.
-            node.properties?.className?.push('highlighted');
+            node.properties.className?.push('highlighted');
           },
         }],
         [rehypeImgSize, { dir: 'public' }],

@@ -54,9 +54,5 @@ code[data-line-numbers][data-line-numbers-max-digits="3"] > .line::before {
 }
 
 .line.highlighted {
-  filter: saturate(2);
-}
-
-.line:not(.highlighted) {
-  opacity: 75%;
+  filter: saturate(1);
 }
