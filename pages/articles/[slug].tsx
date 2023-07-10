@@ -27,7 +27,7 @@ const Articles = ({ source, frontMatter }) => {
   );
 };
 
-export const getStaticProps = async ({ params }) => {
+export async function getStaticProps({ params }) {
   const articleFilePath = path.join(ARTICLES_PATH, `${params.slug}.mdx`);
   const source = fs.readFileSync(articleFilePath);
   const { content, data } = matter(source);
@@ -50,7 +50,7 @@ export const getStaticProps = async ({ params }) => {
           keepBackground: true,
           onVisitHighlightedLine(node) {
             // Each line node by default has `class="line"`.
-            node.properties.className.push('highlighted');
+            node.properties?.className?.push('highlighted');
           },
         }],
         [rehypeImgSize, { dir: 'public' }],
@@ -69,7 +69,7 @@ export const getStaticProps = async ({ params }) => {
   };
 };
 
-export const getStaticPaths = async () => {
+export function getStaticPaths() {
   const paths = articleFilePaths
     .map((path) => path.replace(/\.mdx?$/, ''))
     .map((slug) => ({ params: { slug } }));
@@ -78,6 +78,6 @@ export const getStaticPaths = async () => {
     paths,
     fallback: false,
   };
-};
+}
 
 export default Articles;

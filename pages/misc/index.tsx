@@ -20,7 +20,7 @@ const Articles = ({ posts }) => {
   );
 };
 
-export const getStaticProps = () => {
+export function getStaticProps() {
   const posts = articleFilePaths.map((filePath) => {
     const source = fs.readFileSync(path.join(ARTICLES_PATH, filePath));
     const { content, data } = matter(source);
@@ -42,6 +42,6 @@ export const getStaticProps = () => {
       posts,
     },
   };
-};
+}
 
 export default Articles;
