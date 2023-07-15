@@ -14,18 +14,16 @@ import ExportedImage from 'next-image-export-optimizer';
 import matter from 'gray-matter';
 
 const components = {
-  img: (props) => <ExportedImage {...props} priority={true} placeholder='blur' loading='eager' role='img' />,
+  img: (props) => <ExportedImage className='mx-auto' {...props} priority={true} placeholder='blur' loading='eager' role='img' />,
 };
 
-const Articles = ({ source, frontMatter }) => {
-  return (
-    <main className='flex flex-col items-stretch md:items-center py-2'>
-      <Article frontMatter={frontMatter}>
-        <MDXRemote {...source} components={components} />
-      </Article>
-    </main>
-  );
-};
+const Articles = ({ source, frontMatter }) => (
+  <main className='flex flex-col items-stretch md:items-center py-2'>
+    <Article frontMatter={frontMatter}>
+      <MDXRemote {...source} components={components} />
+    </Article>
+  </main>
+);
 
 export async function getStaticProps({ params }) {
   const articleFilePath = path.join(ARTICLES_PATH, `${params.slug}.mdx`);
@@ -67,7 +65,7 @@ export async function getStaticProps({ params }) {
       readingTime: readingTime(content).text,
     },
   };
-};
+}
 
 export function getStaticPaths() {
   const paths = articleFilePaths

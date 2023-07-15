@@ -7,18 +7,16 @@ import readingTime from 'reading-time';
 import { articleFilePaths, ARTICLES_PATH } from 'utils/mdxUtils';
 import Head from 'next/head';
 
-const Articles = ({ posts }) => {
-  return (
-    <>
-      <Head>
-        <title>Tech</title>
-      </Head>
-      <div className='max-w-2xl md:mx-auto py-8'>
-        {posts.map(post => <ArticleCard key={post.data.title} post={post} />)}
-      </div>
-    </>
-  );
-};
+const Articles = ({ posts }) => (
+  <>
+    <Head>
+      <title>Tech</title>
+    </Head>
+    <div className='max-w-2xl md:mx-auto py-8'>
+      {posts.map(post => <ArticleCard key={post.data.title} post={post} />)}
+    </div>
+  </>
+);
 
 export function getStaticProps() {
   const posts = articleFilePaths.map((filePath) => {
