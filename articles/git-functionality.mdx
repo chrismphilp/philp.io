@@ -22,6 +22,8 @@ This does have its pitfalls though. Given a large team where changes are consist
 can be filtered away with an advanced **git log**, but without it, it may be confusing for other developers looking
 at your code to quickly understand where changes were made.
 
+![Git Merge Example](/articles/images/git-merge.svg)
+
 ### Rebase
 
 Rebasing is the process of moving or combining a sequence of commits to a new base commit. Similar to merge,
@@ -29,6 +31,8 @@ Rebasing is the process of moving or combining a sequence of commits to a new ba
 non-destructive operation), rebase is used to move the entire **feature** branch, to the tip of the **master** branch,
 incorporating all the previous commits from the **master** branch. This removes the need for unnecessary
 commits from a merge, leaving a linear project history.
+
+![Git Rebase Example](/articles/images/git-rebase.svg)
 
 #### Pushing
 
