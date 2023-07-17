@@ -8,9 +8,9 @@ category: Technology
 ## Introduction
 
 C and C++ unlike a lot of other languages provide the ability to directly interact with hardware memory -
-normally described as a middle-level or &apos;systems&apos; language - through the use of
+normally described as a middle-level or systems language - through the use of
 *pointers*. Every variable declared in any language has a memory location, and every memory location has an
-address used to locate it - C++ gives you the power to directly modify this memory.
+address used to locate it. C++ gives you the power to directly modify this memory.
 
 ### Accessing Memory
 
@@ -43,7 +43,7 @@ cout << *y; // outputs the value of x (5)
 ### Arrow Operator
 
 The arrow operator is a shorthand method for accessing the contents of a
-`struct<` *or* `class` *pointer* - normally the `.` operator would be used for non-pointer
+`struct` or `class` *pointer* - normally the `.{:cpp}` operator would be used for non-pointer
 access. The example below shows the equivalences.
 
 ```cpp {1-15}
@@ -63,10 +63,10 @@ p_rect->area;
 ### References and Pointers
 
 By default, arguments to a function in C++ are passed by value, and the changes made to any arguments inside the
-function will not affect the original value, and instead are made to a copy. The 3 main ways - including pass by
-value - to pass arguments to a function are shown below.
+function will not affect the original value, and instead are made to a copy. The 3 primary ways to pass arguments
+are shown below.
 
-#### Call by <b>value</b>:
+#### Call by **value**
 
 ```cpp {1-7}
 int square1(int n)
@@ -120,9 +120,9 @@ void square(int &n)
 ### Benefits of Pointers
 
 There are a number of benefits to using pointers:
-- Values that are passed in to a function *do not have to be copied*, especially useful with large objects.
-- They allow *more than one value to be returned from a function*.
-- Memory access through pointers is stated to be *more efficient than through an array*.
+- Values that are passed in to a function do not have to be copied, especially useful with large objects.
+- They allow more than one value to be returned from a function.
+- Memory access through pointers is stated to be more efficient than through an array.
 
 ```cpp {1-15}
 int x = 5;
@@ -140,5 +140,5 @@ void edit_two(int *x, int *y)
 }
 ```
 
-Hopefully this has cleared up any confusion surrounding pointers and you can begin to understand those
+Hopefully this has cleared up any confusion surrounding pointers, and you can begin to understand those
 insufferable `nullptr` exceptions.

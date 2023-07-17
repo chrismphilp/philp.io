@@ -1,0 +1,121 @@
+---
+title: TypeScript - Let's Learn
+description: A quick look at some of the new features in TypeScript 3.7
+date: '2020-11-23'
+category: Technology
+---
+
+## Optional Chaining
+
+Optional chaining allows expressions to only run until the point one of the accessed fields is equal to `null{:js}` or `undefined{:js}`.
+This is through the use of the `?.{:js}` operator - *optional property access* -
+allowing anything expressed on the right of the question mark to continue executing, until `undefined{:js}` or `null{:js}` is encountered.
+
+```js
+let y = null;
+
+// x === undefined
+let x = y?.z.execute();
+
+// Identical to the above
+x = (y === null || y === undefined) ? undefined : y.z.execute();
+
+y = {
+  z: {
+    execute: () => 5
+  }
+}
+// x === 5
+x = y?.z.execute();
+```
+
+The new operator is less verbose and more readable. Optional chaining can also be
+used in two further areas – optional element access and optional calls.
+
+### Optional Element Access
+
+The optional chaining operator can be used when accessing to non-identifier properties. For instance if
+accessing an index of an array.
+
+```js
+// New operator usage
+return arr?.[0];
+// Previous approach
+return (arr === null || arr === undefined) ? undefined : arr[0];
+```
+
+### Optional Calls
+
+These allow us to conditionally call expressions if they’re not returning `undefined{:js}` or `null{:js}`.
+
+```js
+let y = {
+  z: {
+    execute: undefined
+  }
+}
+
+// x === undefined
+let x = y.z?.execute?.();
+
+y.z.execute = () => 5;
+
+// x === 5
+x = y.z?.execute?.();
+
+y.z.execute = 5;
+
+// This will still result in a type error
+x = y.z?.execute?.();
+```
+
+## Nullish Coalescing
+
+Nullish coalescing requires the use of the `??{:js}` operator and is used to fall back to a default value
+when similarly dealing with `undefined{:js}` or `null{:js}`. The operator states that the value on the left of `??{:js}`
+will be used if not equal to `undefined{:js}` or `null{:js}`, else use the expression to the right. See the example below:
+
+```js
+let y = null;
+let z = 5;
+
+// x === z === 5
+let x = y ?? z;
+
+y = 55;
+
+// x === y === 55
+x = y ?? z;
+```
+
+The `??{:js}` operator can replace uses of `||{:js}` when trying to use a default value, which gives better behaviour for falsy values.
+
+```js
+// ?? is better than using || as it avoids falsy behaviours
+let x = 0;
+let y = 0.5;
+
+// total === y === 0.5 -> unlikely to be intended
+let total = x || y;
+
+// total === x === 0
+total = x ?? y;
+```
+
+## Combining the two operators
+
+Finally, the two operators can be combined to set a default value when `undefined{:js}` or `null{:js}` are encountered.
+
+```js
+let person = {
+  name: 'Chris',
+  details: undefined
+};
+let x = 5;
+
+// personsAge === x === 5;
+let personsAge = person.details?.age ?? x;
+```
+
+*Hopefully* you've learnt something new, or if not confirmed your understanding of operators that you use in
+your daily development.
