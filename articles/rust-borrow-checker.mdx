@@ -1,0 +1,87 @@
+---
+title: Rust Borrow Checker in Five
+description: Lending you a hand
+date: '2023-07-17'
+category: Technology
+---
+
+Learning Rust has been a personal project of mine but coming from Java the concept of ownership was alien.
+To solidify this knowledge and also help others for future reference I'm going to summarise in ~5 minutes
+what I've learnt.
+
+## Ownership
+
+Each variable in Rust has an owner. Once ownership is declared, there is exactly one binding to any given resource.
+
+Once ownership is moved, the previous owner no longer has access.
+
+```rust
+let x = vec![1];
+let y = x;
+
+println!("{}", x[0])
+
+//: # (error[E0382]: borrow of moved value: `x`)
+```
+
+### Copies
+
+Ownership rules do not apply to **primitive** types, or anything that implements the `Copy{:rust}` trait (which gives
+a type **copy semantics** instead of **move semantics**).
+
+```rust
+let a = 5 as i32;
+let _y = a as i64;
+
+println!("{}", a);
+
+//: Finished [] target(s) in 0.65s
+```
+
+### Functions
+
+A function can also take ownership of a variable via its parameters, w.
+
+```rust
+fn new_owner(_x: Vec<i32>) {
+  // my_vec is now owned by the new_owner function
+}
+
+let my_vec: Vec<i32> = vec![1]; // vector containing a single element, 1
+new_owner(my_vec);
+
+print!("{}", my_vec[0]);
+// error[E0382]: borrow of moved value: `my_vec`
+```
+
+## Borrowing
+
+Instead of taking ownership, a resource can be borrowed. Rather than passing by value, we can pass by reference.
+The reference borrows ownership of the variable, until the period where it is released again, at
+which point the prior owner can manipulate the data.
+
+```rust
+fn new_owner(_x: &Vec<i32>) {
+  // my_vec is now borrowed by the new_owner function
+  print!("{}", _x[0]);
+}
+
+let my_vec: Vec<i32> = vec![1]; // vector containing a single element, 1
+new_owner(&my_vec);
+
+print!("{}", my_vec[0]);
+// Compiles and prints: 11
+```
+
+The references are immutable, so changes to internal state are forbidden.
+
+```rust
+fn new_owner(_x: &Vec<i32>) {
+  _x.insert(0, 1);
+}
+// error[E0596]: cannot borrow `*_x` as mutable, as it is behind a `&` reference
+```
+
+### Mutable References
+
+A mutable reference allows the mutation of borrowed resources.

@@ -1,0 +1,62 @@
+---
+title: A Better Version
+description:
+date: '2023-07-19'
+category: Technology
+---
+
+When deploying this blog I wanted a quick way to monitor that specific versions of the blog had rolled to the public.
+The eventual solution is outlined below.
+
+### Versioning package.json
+
+Using the [pre-commit](https://www.npmjs.com/package/pre-commit) package a hook can be setup that runs prior to any commit.
+This looks like:
+
+```json
+"scripts": {
+    "patch": "npm version --no-commit-hooks --no-git-tag-version patch && git add package.json package-lock.json",
+  },
+```
+
+- `commit-hooks`: Disable any default node hooks which could interfere
+- `git-tag-version`: Creates a version commit and tag - I wanted the version change to be part of the existing commit
+
+### Going Meta
+
+To then display this version as part of the `<meta>` required some small tweaks.
+
+```js title="next.config.js"
+const { version } = require('./package.json');
+
+module.exports = {
+  ...mdx,
+  publicRuntimeConfig: {
+    version,
+  }
+}
+```
+
+```tsx title="Layout.tsx"
+import getConfig from 'next/config';
+
+const { publicRuntimeConfig } = getConfig();
+
+const Layout = ({ children }) => {
+  return (
+    <Head>
+      <meta name='version' content={publicRuntimeConfig?.version} />
+    </Head>
+    ...
+  );
+};
+```
+
+And voilà - the data now appears in the header:
+
+```html
+<head>
+  <meta name="version" content="0.1.65">
+  ...
+</head>
+```

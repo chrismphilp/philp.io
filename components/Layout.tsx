@@ -1,6 +1,10 @@
 import Header from './header/Header';
 import Footer from './footer/Footer';
 import { Bitter } from 'next/font/google';
+import Head from 'next/head';
+import getConfig from 'next/config';
+
+const { publicRuntimeConfig } = getConfig();
 
 const sourceCodePro = Bitter({
   subsets: ['latin'],
@@ -9,12 +13,17 @@ const sourceCodePro = Bitter({
 
 const Layout = ({ children }) => {
   return (
-    <div className={`flex flex-col min-h-screen ${sourceCodePro.variable} font-sans bg-white dark:bg-gray-800`}>
-      <Header />
-      <div className='grow'>{children}</div>
-      <Footer />
-    </div>
-  )
+    <>
+      <Head>
+        <meta name='version' content={publicRuntimeConfig?.version} />
+      </Head>
+      <div className={`flex flex-col min-h-screen ${sourceCodePro.variable} font-sans bg-white dark:bg-gray-800`}>
+        <Header />
+        <div className='grow'>{children}</div>
+        <Footer />
+      </div>
+    </>
+  );
 };
 
 export default Layout;
