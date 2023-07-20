@@ -15,12 +15,13 @@ This looks like:
 
 ```json
 "scripts": {
-    "patch": "npm version --no-commit-hooks --no-git-tag-version patch && git add package.json package-lock.json",
+    "patch": "npm version --no-commit-hooks --no-git-tag-version patch && git add package*.json",
   },
 ```
 
 - `commit-hooks`: Disable any default node hooks which could interfere
 - `git-tag-version`: Creates a version commit and tag - I wanted the version change to be part of the existing commit
+- `git add package*.json`: Add the updated versioning files to the commit
 
 ### Going Meta
 
