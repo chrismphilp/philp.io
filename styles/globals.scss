@@ -10,8 +10,13 @@ div#__next {
 }
 
 // Shiki Styling
+pre > code {
+  display: grid;
+}
+
 html.dark {
   pre[data-theme="light"],
+  div[data-theme="light"],
   code[data-theme="light"] {
     display: none;
   }
@@ -19,9 +24,15 @@ html.dark {
 
 html.light {
   pre[data-theme="dark"],
+  div[data-theme="dark"],
   code[data-theme="dark"] {
     display: none;
   }
+}
+
+div[data-rehype-pretty-code-title] {
+  margin-bottom: -2rem;
+  text-decoration: underline;
 }
 
 .prose :where(code):not(:where([class~="not-prose"] *))::before,

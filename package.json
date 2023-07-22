@@ -1,6 +1,6 @@
 {
   "name": "blog",
-  "version": "0.1.67",
+  "version": "0.1.68",
   "homepage": "https://philp.io",
   "repository": "https://github.com/chrismphilp/philp.io",
   "description": "My personal blog",
@@ -39,6 +39,7 @@
     "react-dom": "18.2.0",
     "react-ga": "3.3.1",
     "react-icons": "4.10.1",
+    "react-markdown": "^8.0.7",
     "reading-time": "1.5.0",
     "rehype-autolink-headings": "6.1.1",
     "rehype-img-size": "1.0.1",
