@@ -1,6 +1,6 @@
 ---
-title: A Better Version
-description:
+title: The Best Version
+description: Including version metadata in NextJS
 date: '2023-07-19'
 category: Technology
 ---
@@ -15,8 +15,8 @@ This looks like:
 
 ```json
 "scripts": {
-    "patch": "npm version --no-commit-hooks --no-git-tag-version patch && git add package*.json",
-  },
+  "patch": "npm version --no-commit-hooks --no-git-tag-version patch && git add package*.json",
+},
 ```
 
 - `commit-hooks`: Disable any default node hooks which could interfere
@@ -39,7 +39,8 @@ module.exports = {
 ```
 
 ```tsx title="Layout.tsx"
-import getConfig from 'next/config';
+import Head from 'next/head';
+import getConfig from 'next/config'; 
 
 const { publicRuntimeConfig } = getConfig();
 
@@ -48,16 +49,14 @@ const Layout = ({ children }) => {
     <Head>
       <meta name='version' content={publicRuntimeConfig?.version} />
     </Head>
-    ...
   );
 };
 ```
 
-And voilà - the data now appears in the header:
+And voilà - the version now appears in the header:
 
 ```html
 <head>
   <meta name="version" content="0.1.65">
-  ...
 </head>
 ```

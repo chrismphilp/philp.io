@@ -10,10 +10,6 @@ div#__next {
 }
 
 // Shiki Styling
-pre > code {
-  display: grid;
-}
-
 html.dark {
   pre[data-theme="light"],
   div[data-theme="light"],
@@ -34,6 +30,12 @@ div[data-rehype-pretty-code-title] {
   margin-bottom: -2rem;
   text-decoration: underline;
 }
+
+.word-highlighted {
+  @apply bg-zinc-600/50 rounded;
+  box-shadow: 0 0 0 4px rgb(82 82 91 / 0.5);
+}
+
 
 .prose :where(code):not(:where([class~="not-prose"] *))::before,
 .prose :where(code):not(:where([class~="not-prose"] *))::after {

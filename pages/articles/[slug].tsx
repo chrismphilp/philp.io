@@ -50,6 +50,9 @@ export async function getStaticProps({ params }) {
             // Each line node by default has `class="line"`.
             node.properties.className?.push('highlighted');
           },
+          onVisitHighlightedWord(node) {
+            node.properties.className = ["word-highlighted"]
+          },
         }],
         [rehypeImgSize, { dir: 'public' }],
       ],
