@@ -5,8 +5,8 @@ date: '2023-07-17'
 category: Technology
 ---
 
-Learning Rust has been a personal project of mine but coming from Java the concept of ownership was alien.
-To solidify this knowledge I'm going to attempt a brief summary in ~5 minutes.
+Coming from Java the concept of ownership was alien - so to solidify this knowledge I'm going to attempt a brief summary 
+in ~5 minutes.
 
 ### Ownership
 
@@ -55,7 +55,7 @@ print!("{}", my_vec[0]);
 
 Whenever you see `f(value){:rust}` you can know that **f** has received ownership of **value**.
 
-## Borrowing
+### Borrowing
 
 Instead of taking ownership, a resource can be **borrowed**. Rather than passing by value, we can pass by reference.
 The reference borrows ownership of the variable, until the period where it is released again, at
@@ -175,26 +175,40 @@ fn main() {
 
 ### Smart Pointers
 
-Smart pointer types act similarly to standard pointers, but allow further fine-grained control over pointer behaviour.
+Smart pointer types act similarly to standard pointers, but allow further fine-grained control over behaviour.
 When a developer uses memory that contains dynamically allocated data with smart pointers, they are automatically 
-de-allocated or cleaned up.
+de-allocated.
 
 #### Reference Cell
 
-A reference cell is a smart pointer type that executes the borrowing rules at runtime rather than at compile time. A 
-design pattern in Rust called **interior mutability** allows you to mutate this data with immutable references. 
-`RefCell<T>{:rust}` uses this mutability design pattern with unsafe code in data and enforces the borrowing rules at runtime.
+A reference cell is a smart pointer type that executes the borrowing rules at runtime rather than at compile time. 
 
 `RefCell<T>{:rust}` has the following rules:
 - If there is no reference to `T{:rust}`, you may get either a mutable or immutable reference.
 - If there is already a mutable reference to `T{:rust}`, you must wait until this reference is dropped.
 - If there are one or more immutable references to `T{:rust}`, you may get an immutable reference.
 
+```rust
+use std::cell::RefCell;
+let container = RefCell::new(11);
+
+{
+    let _c = container.borrow();
+    // You may borrow immutably multiple times
+    assert!(container.try_borrow().is_ok());
+    // Cannot borrow as mutable because it is already borrowed as immutable.
+    assert!(container.try_borrow_mut().is_err());
+}
+```
+
 #### Reference Counting
 
-Reference counts (`Rc<T>{:rust}`) sum up the number of references made to an object, and in case of no references the data can be
-cleaned. A reference-counted pointer to an item allows shared ownership of the data, breaking one of the initial rules outlined
-earlier, and allowing data leakage within Rust.
+Reference counts (`Rc<T>{:rust}`) sum up the number of references made to an object, and where no references exist, the data can be
+de-allocated. A reference-counted pointer to an item allows shared ownership of the data, breaking one of the initial rules outlined
+earlier, and allowing data leakage within Rust, so must be used with care. 
+
+Graph data structures use `Rc<T>{:rust}`, as multiple edges might point to the same node, and that node is conceptually 
+owned by all of the edges that point to it.
 
 ```rust
 use std::rc::Rc;
