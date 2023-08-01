@@ -6,12 +6,11 @@ category: Technology
 ---
 
 Learning Rust has been a personal project of mine but coming from Java the concept of ownership was alien.
-To solidify this knowledge and also help others for future reference I'm going to summarise in ~5 minutes
-what I've learnt.
+To solidify this knowledge I'm going to attempt a brief summary in ~5 minutes.
 
-## Ownership
+### Ownership
 
-Each variable in Rust has an owner. Once ownership is declared, there is exactly one binding to any given resource.
+Each variable in Rust has an owner. Once ownership is declared, there is exactly one binding to any given resource[*](#reference-counting).
 
 Once ownership is moved, the previous owner no longer has access.
 
@@ -40,7 +39,7 @@ println!("{}", a);
 
 ### Functions
 
-A function can also take ownership of a variable via its parameters, w.
+A function can also take ownership of a variable via its parameters.
 
 ```rust
 fn new_owner(_x: Vec<i32>) {
@@ -54,9 +53,11 @@ print!("{}", my_vec[0]);
 // error[E0382]: borrow of moved value: `my_vec`
 ```
 
+Whenever you see `f(value){:rust}` you can know that **f** has received ownership of **value**.
+
 ## Borrowing
 
-Instead of taking ownership, a resource can be borrowed. Rather than passing by value, we can pass by reference.
+Instead of taking ownership, a resource can be **borrowed**. Rather than passing by value, we can pass by reference.
 The reference borrows ownership of the variable, until the period where it is released again, at
 which point the prior owner can manipulate the data.
 
@@ -74,6 +75,9 @@ print!("{}", my_vec[0]);
 ```
 
 The references are immutable, so changes to internal state are forbidden.
+
+You can take a reference (pointer) to an item, but you have to give it back. In particular, you have to give it back 
+before the lifetime of the underlying item expires, as tracked by the compiler.
 
 ```rust
 fn new_owner(_x: &Vec<i32>) {
@@ -112,7 +116,7 @@ println!("{}, {}", r1, r2);
 error[E0499]: cannot borrow `s` as mutable more than once at a time
 ```
 
-- At any given time, you can have either one mutable reference or any number of immutable references.
+- At any given time, you can have either one mutable reference **or** any number of immutable references.
 
 ```rust /mut/5-6
 let mut s = String::from("Test");
@@ -122,5 +126,90 @@ let r2 = &mut s;
 
 println!("{}, {}, and {}", r1, r2);
 error[E0502]: cannot borrow `s` as mutable because it is also borrowed as immutable
+```
+
+### Lifetimes
+
+Borrowing references to objects and then passing them around can be dangerous. If a resource that has been borrowed
+is deallocated by its owner we must ensure that other users can no longer access the value. In Rust this is done using 
+lifetimes, which describe the scope of how long a particular reference is valid for.
+
+Lifetimes are defined using the `'a` syntax, which means '*the lifetime a*'. 
+
+```rust
+fn hello_world<'a>(x: &'a i32) { ... }
+```
+
+The functions seen before have implicit lifetimes provided through a process known as *lifetime elision*.
+
+```rust
+fn print(s: &str); // elided (implicit)
+
+fn print<'a>(s: &'a str); // expanded (explicit)
+```
+
+#### Structs
+
+`struct{:rust}`s must define explicit lifetimes when containing a reference. This ensures that any reference to internal 
+reference data within an object does not live longer than the owner.
+
+```rust
+struct Point {
+  x: &'a i32,
+  y: &'b i32,
+}
+
+fn main() {
+  let tmp; 
+
+  {
+    let x: &i32 = &1;
+    let y: &i32 = &2;
+    let p1 = Point { x, y }; 
+    tmp = &p1.x;
+  } // p1 has exited its scope here
+  
+  println!("{}", tmp); // `p1.x` does not live long enough
+}
+```
+
+### Smart Pointers
+
+Smart pointer types act similarly to standard pointers, but allow further fine-grained control over pointer behaviour.
+When a developer uses memory that contains dynamically allocated data with smart pointers, they are automatically 
+de-allocated or cleaned up.
+
+#### Reference Cell
+
+A reference cell is a smart pointer type that executes the borrowing rules at runtime rather than at compile time. A 
+design pattern in Rust called **interior mutability** allows you to mutate this data with immutable references. 
+`RefCell<T>{:rust}` uses this mutability design pattern with unsafe code in data and enforces the borrowing rules at runtime.
+
+`RefCell<T>{:rust}` has the following rules:
+- If there is no reference to `T{:rust}`, you may get either a mutable or immutable reference.
+- If there is already a mutable reference to `T{:rust}`, you must wait until this reference is dropped.
+- If there are one or more immutable references to `T{:rust}`, you may get an immutable reference.
+
+#### Reference Counting
+
+Reference counts (`Rc<T>{:rust}`) sum up the number of references made to an object, and in case of no references the data can be
+cleaned. A reference-counted pointer to an item allows shared ownership of the data, breaking one of the initial rules outlined
+earlier, and allowing data leakage within Rust.
+
+```rust
+use std::rc::Rc;
+use std::cell::RefCell;
+
+struct Node {
+    next: RefCell<Option<Rc<Node>>>,
+    val: i32
+}
+
+fn main() {
+    let foo1 = Rc::new(Node { next: RefCell::new(None), val: 5 });
+    let foo2 = Rc::new(Node { next: RefCell::new(Some(foo1.clone())), val: 10 });
+    *foo1.next.borrow_mut() = Some(foo2.clone());
+    // Node with value 10 <-> Node with value 5
+}
 ```
 
