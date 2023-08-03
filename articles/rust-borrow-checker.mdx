@@ -3,6 +3,7 @@ title: Rust Borrow Checker in Five
 description: Lending you a hand
 date: '2023-07-17'
 category: Technology
+draft: false
 ---
 
 Coming from Java the concept of ownership was alien - so to solidify this knowledge I'm going to attempt a brief summary 
@@ -208,8 +209,8 @@ de-allocated. A reference-counted pointer to an item allows shared ownership of 
 earlier, and allowing data leakage within Rust, so must be used with care. 
 
 Graph data structures use `Rc<T>{:rust}`, as multiple edges might point to the same node, and that node is conceptually 
-owned by all of the edges that point to it.
-
+owned by all the edges that point to it.
+a
 ```rust
 use std::rc::Rc;
 use std::cell::RefCell;

@@ -32,7 +32,8 @@ export function getStaticProps() {
       } as ArticleData,
       filePath,
     };
-  }).filter(v => v.data.category === ArticleType.TECHNOLOGY)
+  }).filter(v => !v.data.draft)
+    .filter(v => v.data.category === ArticleType.TECHNOLOGY)
     .sort((post1, post2) => (post1.data.date > post2.data.date ? -1 : 1));
 
   return {

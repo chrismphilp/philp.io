@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import ArticleCard from 'components/article/ArticleCard';
-import { ArticleData } from 'components/types';
+import { ArticleData, ArticleType } from 'components/types';
 import readingTime from 'reading-time';
 import { articleFilePaths, ARTICLES_PATH } from 'utils/mdxUtils';
 import Head from 'next/head';
@@ -32,7 +32,8 @@ export function getStaticProps() {
       } as ArticleData,
       filePath,
     };
-  }).filter(v => v.data.category !== 'Technology')
+  }).filter(v => !v.data.draft)
+    .filter(v => v.data.category !== ArticleType.TECHNOLOGY)
     .sort((post1, post2) => (post1.data.date > post2.data.date ? -1 : 1));
 
   return {
