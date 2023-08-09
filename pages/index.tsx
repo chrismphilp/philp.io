@@ -51,7 +51,8 @@ export function getStaticProps() {
       } as ArticleData,
       filePath,
     };
-  }).sort((post1, post2) => (post1.data.date > post2.data.date ? -1 : 1))
+  }).filter(v => !v.data.draft)
+    .sort((post1, post2) => (post1.data.date > post2.data.date ? -1 : 1))
     .slice(0, 5);
 
   return { props: { posts } };
