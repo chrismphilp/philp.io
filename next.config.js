@@ -1,4 +1,5 @@
 const { version } = require('./package.json');
+const prod = process.env.NODE_ENV === 'PROD';
 
 /** @type {import('next').NextConfig} */
 const withMDX = require('@next/mdx')({
@@ -15,8 +16,8 @@ const mdxConfig = {
   transpilePackages: ['react-icons', 'next-image-export-optimizer'],
   images: {
     loader: 'custom',
-    imageSizes: [16, 64, 128, 256, 384],
-    deviceSizes: [320, 640, 1080, 1920, 2048],
+    imageSizes: [16, 64, 128, 256],
+    deviceSizes: [320, 1080, 1920],
   },
   env: {
     nextImageExportOptimizer_imageFolderPath: 'public',
@@ -31,8 +32,13 @@ const mdxConfig = {
 // Merge MDX config with Next.js config
 const mdx = withMDX(mdxConfig);
 
+const withPWA = require('next-pwa')({
+  dest: 'public',
+  disable: prod ? false : true,
+});
+
 module.exports = {
-  ...mdx,
+  ...withPWA(mdx),
   publicRuntimeConfig: {
     version,
   }

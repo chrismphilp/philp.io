@@ -1,7 +1,7 @@
 ---
 title: How Green is the Blog?
 description: Net Zero Readers
-date: '2023-08-03'
+date: '2023-08-14'
 category: Technology
 draft: true
 ---
@@ -9,3 +9,80 @@ draft: true
 I've been reading quite a bit of climate literature recently, and it got me thinking of what my impact is in the 
 world. This will probably be a multiple part series, but as a starter for ten I wondered how climate friendly is this
 blog. And if it's not, how could it be improved.
+
+To start with it's worth investigating the current state. 
+
+### Current State
+
+An evaluation on [websitecarbon](https://www.websitecarbon.com/website/philp-io) shows that we're pretty good, only 0.06g of carbon produced
+on a site visit, but we can probably do better.
+
+[!Carbon Evaluation](/images/carbonwebsite.png)
+
+[Going through some of the suggestions](https://www.wholegraindigital.com/blog/website-energy-efficiency/) there was some pretty quick wins in
+terms of increasing efficiency and reducing the footprint.
+
+### Reducing Image Size
+
+Currently images are generated in a variety of different sizes to aid slower browsers. However they are slightly over-eager currently.
+
+```tsx
+  images: {
+    loader: 'custom',
+    imageSizes: [16, 64, 128, 256, 384],
+    deviceSizes: [320, 640, 1080, 1920, 2048],
+  },
+```
+
+Cutting this back reduces the eventual generated images by nearly half. Big success.
+
+```tsx
+  images: {
+    loader: 'custom',
+    imageSizes: [16, 64, 128, 256],
+    deviceSizes: [320, 1080, 1920],
+  },
+```
+
+### Progressive Web Apps (PWA)
+
+PWAs allow web applications to be directly installed onto a users device, offering the ability to work while a users device is offline.
+Alongside this they are also able to update content in the background, and display notifications utilising the OS notification system. 
+
+I'll probably have a separate article devoted to PWAs in the future, but for the moment the main point I'll be focussing on is the caching 
+support. This reduces the number of calls being made for images, and improving the performance for the user. 
+
+A barebones PWAs implementation for Next is pretty simple using `next-pwa`.
+
+Updating from the existing
+
+```js
+const mdx = withMDX(mdxConfig);
+
+module.exports = {
+  ...mdx,
+  publicRuntimeConfig: {
+    version,
+  }
+}
+```
+
+to
+
+```js
+// Merge MDX config with Next.js config
+const mdx = withMDX(mdxConfig);
+
+const withPWA = require('next-pwa')({
+  dest: 'public'
+});
+
+module.exports = {
+  ...withPWA(mdx),
+  publicRuntimeConfig: {
+    version,
+  }
+}
+```
+
+
