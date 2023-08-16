@@ -1,5 +1,5 @@
 const { version } = require('./package.json');
-const prod = process.env.NODE_ENV === 'PROD';
+const prod = process.env.NODE_ENV === 'production';
 
 /** @type {import('next').NextConfig} */
 const withMDX = require('@next/mdx')({
@@ -34,7 +34,7 @@ const mdx = withMDX(mdxConfig);
 
 const withPWA = require('next-pwa')({
   dest: 'public',
-  disable: prod ? false : true,
+  disable: !prod,
 });
 
 module.exports = {
