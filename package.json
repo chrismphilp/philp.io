@@ -1,6 +1,6 @@
 {
   "name": "blog",
-  "version": "0.1.79",
+  "version": "0.1.80",
   "homepage": "https://philp.io",
   "repository": "https://github.com/chrismphilp/philp.io",
   "description": "My personal blog",
@@ -20,7 +20,7 @@
   ],
   "engines": {
     "npm": ">=8.0.0",
-    "node": ">=17.0.1"
+    "node": ">=18.17.0"
   },
   "dependencies": {
     "@mdx-js/loader": "2.3.0",
@@ -31,7 +31,7 @@
     "dayjs": "1.11.9",
     "framer-motion": "10.12.18",
     "gray-matter": "4.0.3",
-    "next": "13.4.1",
+    "next": "14.2.0-canary.52",
     "next-image-export-optimizer": "1.8.1",
     "next-mdx-remote": "4.4.1",
     "next-pwa": "^5.6.0",
@@ -49,7 +49,7 @@
     "rehype-slug": "5.1.0",
     "remark-gfm": "3.0.1",
     "sass": "1.63.6",
-    "sharp": "0.32.1",
+    "sharp": "0.33.3",
     "shiki": "0.14.3"
   },
   "devDependencies": {
