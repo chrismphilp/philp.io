@@ -20,7 +20,7 @@ const Homepage: FC<HomepageProps> = ({ posts }) => (
           Welcome to the blog <HandWave />
         </h2>
         <ul>
-          <li>I'm Chris, a software engineer from the UK 🇬🇧</li>
+          <li>I&apos;m Chris, a software engineer from the UK 🇬🇧</li>
           <li>Programming in the financial sector 🏦</li>
           <li>Writing about topics that interest me ✏️</li>
           <li>Learning new things every day 💡</li>
