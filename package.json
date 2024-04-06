@@ -1,6 +1,6 @@
 {
   "name": "blog",
-  "version": "0.1.86",
+  "version": "0.1.87",
   "homepage": "https://philp.io",
   "repository": "https://github.com/chrismphilp/philp.io",
   "description": "My personal blog",
@@ -9,7 +9,7 @@
   "scripts": {
     "format": "prettier --write \"**/*.tsx\"",
     "dev": "next dev",
-    "patch": "npm version --no-commit-hooks --no-git-tag-version patch && git add package.json package-lock.json",
+    "patch": "npm version --no-commit-hooks --no-git-tag-version patch && git add package.json package-lock.json && git commit -m \"[main] | Bumping version",
     "build": "next build",
     "start": "next start",
     "static": "next build && next export && next-image-export-optimizer",
