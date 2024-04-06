@@ -12,6 +12,7 @@ const withMDX = require('@next/mdx')({
 });
 
 const mdxConfig = {
+  output: 'export',
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
   transpilePackages: ['react-icons', 'next-image-export-optimizer'],
   images: {
@@ -22,10 +23,10 @@ const mdxConfig = {
   env: {
     nextImageExportOptimizer_imageFolderPath: 'public',
     nextImageExportOptimizer_exportFolderPath: 'out',
-    nextImageExportOptimizer_quality: 75,
-    nextImageExportOptimizer_storePicturesInWEBP: true,
+    nextImageExportOptimizer_quality: '75',
+    nextImageExportOptimizer_storePicturesInWEBP: 'true',
     nextImageExportOptimizer_exportFolderName: 'nextImageExportOptimizer',
-    nextImageExportOptimizer_generateAndUseBlurImages: true,
+    nextImageExportOptimizer_generateAndUseBlurImages: 'true',
   },
 };
 

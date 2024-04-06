@@ -11,8 +11,8 @@
     "dev": "next dev",
     "patch": "npm version --no-commit-hooks --no-git-tag-version patch && git add package.json package-lock.json && git commit -m \"[main] | Bumping version\"",
     "build": "next build",
-    "start": "next start",
-    "static": "next build && next export && next-image-export-optimizer",
+    "start": "npx serve@latest out",
+    "static": "next build && next-image-export-optimizer",
     "lint": "next lint"
   },
   "pre-push": [
