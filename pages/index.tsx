@@ -1,14 +1,14 @@
-import fs from 'fs';
-import path from 'path';
-import matter from 'gray-matter';
-import { articleFilePaths, ARTICLES_PATH } from '../utils/mdxUtils';
+import { getPosts, PostData } from '../utils/mdxUtils';
 import ArticleCard from 'components/article/ArticleCard';
-import { ArticleData } from 'components/types';
-import readingTime from 'reading-time';
 import Head from 'next/head';
 import HandWave from '../components/animation/HandWave';
+import { FC } from 'react';
 
-const Homepage = ({ posts }) => (
+type HomepageProps = {
+  posts: PostData[];
+}
+
+const Homepage: FC<HomepageProps> = ({ posts }) => (
   <>
     <Head>
       <title>Home</title>
@@ -38,20 +38,8 @@ const Homepage = ({ posts }) => (
 );
 
 export function getStaticProps() {
-  const posts = articleFilePaths.map((filePath) => {
-    const source = fs.readFileSync(path.join(ARTICLES_PATH, filePath));
-    const { content, data } = matter(source);
-
-    return {
-      content,
-      data: {
-        ...data,
-        wordCount: content.split(/\s+/gu).length,
-        readingTime: readingTime(content).text,
-      } as ArticleData,
-      filePath,
-    };
-  }).filter(v => !v.data.draft)
+  const posts = getPosts()
+    .filter(v => !v.data.draft)
     .sort((post1, post2) => (post1.data.date > post2.data.date ? -1 : 1))
     .slice(0, 5);
 
