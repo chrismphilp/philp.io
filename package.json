@@ -1,6 +1,6 @@
 {
   "name": "blog",
-  "version": "0.1.80",
+  "version": "0.1.83",
   "homepage": "https://philp.io",
   "repository": "https://github.com/chrismphilp/philp.io",
   "description": "My personal blog",
@@ -31,8 +31,8 @@
     "dayjs": "1.11.9",
     "framer-motion": "10.12.18",
     "gray-matter": "4.0.3",
-    "next": "14.2.0-canary.52",
-    "next-image-export-optimizer": "1.8.1",
+    "next": "14.1.4",
+    "next-image-export-optimizer": "1.12.3",
     "next-mdx-remote": "4.4.1",
     "next-pwa": "^5.6.0",
     "next-themes": "0.2.1",
