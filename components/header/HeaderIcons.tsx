@@ -5,8 +5,11 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
-const HeaderIcon = ({ onClick, children }: { onClick?: () => void, children }) => (
-  <div className='cursor-pointer rounded-full text-gray-400 hover:text-orange-400 p-1 pt-2' onClick={onClick}>
+const HeaderIcon = ({ onClick, children }: { onClick?: () => void; children }) => (
+  <div
+    className="cursor-pointer rounded-full text-gray-400 hover:text-orange-400 p-1 pt-2"
+    onClick={onClick}
+  >
     {children}
   </div>
 );
@@ -29,10 +32,10 @@ const ThemeToggle = () => {
 };
 
 const HeaderIcons = () => (
-  <div className='basis-1/3 flex justify-end'>
+  <div className="basis-1/3 flex justify-end">
     <ThemeToggle />
     <HeaderIcon>
-      <Link title='Github Link' href='https://github.com/chrismphilp/philp.io'>
+      <Link title="Github Link" href="https://github.com/chrismphilp/philp.io">
         <FiGithub size={25} />
       </Link>
     </HeaderIcon>

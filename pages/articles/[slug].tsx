@@ -14,11 +14,20 @@ import ExportedImage from 'next-image-export-optimizer';
 import matter from 'gray-matter';
 
 const components = {
-  img: (props) => <ExportedImage className='mx-auto' {...props} priority={true} placeholder='blur' loading='eager' role='img' />,
+  img: (props) => (
+    <ExportedImage
+      className="mx-auto"
+      {...props}
+      priority={true}
+      placeholder="blur"
+      loading="eager"
+      role="img"
+    />
+  ),
 };
 
 const Articles = ({ source, frontMatter }) => (
-  <main className='flex flex-col items-stretch md:items-center py-2'>
+  <main className="flex flex-col items-stretch md:items-center py-2">
     <Article frontMatter={frontMatter}>
       <MDXRemote {...source} components={components} />
     </Article>
@@ -34,26 +43,27 @@ export async function getStaticProps({ params }) {
     parseFrontmatter: true,
     mdxOptions: {
       format: 'mdx',
-      remarkPlugins: [
-        remarkGfm,
-      ],
+      remarkPlugins: [remarkGfm],
       rehypePlugins: [
         rehypeSlug,
         [rehypeAutolinkHeadings, { behavior: 'wrap', properties: { className: ['anchor'] } }],
-        [rehypePrettyCode, {
-          theme: {
-            dark: 'monokai',
-            light: 'one-dark-pro',
+        [
+          rehypePrettyCode,
+          {
+            theme: {
+              dark: 'monokai',
+              light: 'one-dark-pro',
+            },
+            keepBackground: true,
+            onVisitHighlightedLine(node) {
+              // Each line node by default has `class="line"`.
+              node.properties.className?.push('highlighted');
+            },
+            onVisitHighlightedWord(node) {
+              node.properties.className = ['word-highlighted'];
+            },
           },
-          keepBackground: true,
-          onVisitHighlightedLine(node) {
-            // Each line node by default has `class="line"`.
-            node.properties.className?.push('highlighted');
-          },
-          onVisitHighlightedWord(node) {
-            node.properties.className = ["word-highlighted"]
-          },
-        }],
+        ],
         [rehypeImgSize, { dir: 'public' }],
       ],
     },

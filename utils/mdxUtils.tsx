@@ -15,24 +15,24 @@ export const articleFilePaths = fs
   // Only include md(x) files
   .filter((path) => /\.mdx?$/.test(path));
 
-
 export type PostData = {
   content: string;
   data: ArticleData;
   filePath: string;
 };
 
-export const getPosts = (): PostData[] => articleFilePaths.map((filePath) => {
-  const source = fs.readFileSync(path.join(ARTICLES_PATH, filePath));
-  const { content, data } = matter(source);
+export const getPosts = (): PostData[] =>
+  articleFilePaths.map((filePath) => {
+    const source = fs.readFileSync(path.join(ARTICLES_PATH, filePath));
+    const { content, data } = matter(source);
 
-  return {
-    content,
-    data: {
-      ...data,
-      wordCount: content.split(/\s+/gu).length,
-      readingTime: readingTime(content).text,
-    } as ArticleData,
-    filePath,
-  };
-});
+    return {
+      content,
+      data: {
+        ...data,
+        wordCount: content.split(/\s+/gu).length,
+        readingTime: readingTime(content).text,
+      } as ArticleData,
+      filePath,
+    };
+  });

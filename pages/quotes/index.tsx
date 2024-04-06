@@ -9,8 +9,8 @@ import readingTime from 'reading-time';
 import matter from 'gray-matter';
 
 const Quotes = ({ source }) => (
-  <main className='flex flex-col items-stretch md:items-center py-5'>
-    <article className='prose dark:prose-invert prose-lg prose-a:no-underline text-sm sm:text-base'>
+  <main className="flex flex-col items-stretch md:items-center py-5">
+    <article className="prose dark:prose-invert prose-lg prose-a:no-underline text-sm sm:text-base">
       <MDXRemote {...source} />
     </article>
   </main>

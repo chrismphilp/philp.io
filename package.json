@@ -7,7 +7,7 @@
   "author": "Chris Philp",
   "license": "MIT",
   "scripts": {
-    "format": "prettier --write \"src/**/*.tsx\"",
+    "format": "prettier --write \"**/*.tsx\"",
     "dev": "next dev",
     "patch": "npm version --no-commit-hooks --no-git-tag-version patch && git add package.json package-lock.json",
     "build": "next build",

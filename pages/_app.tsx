@@ -4,7 +4,7 @@ import { ThemeProvider } from 'next-themes';
 import '../styles/globals.scss';
 
 const App = ({ Component, pageProps }: AppProps) => (
-  <ThemeProvider attribute='class' defaultTheme='light' enableColorScheme>
+  <ThemeProvider attribute="class" defaultTheme="light" enableColorScheme>
     <Layout>
       <Component {...pageProps} />
     </Layout>

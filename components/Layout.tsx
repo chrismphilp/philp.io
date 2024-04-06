@@ -15,11 +15,13 @@ const Layout = ({ children }) => {
   return (
     <>
       <Head>
-        <meta name='version' content={publicRuntimeConfig?.version} />
+        <meta name="version" content={publicRuntimeConfig?.version} />
       </Head>
-      <div className={`flex flex-col min-h-screen ${sourceCodePro.variable} font-sans bg-white dark:bg-gray-800`}>
+      <div
+        className={`flex flex-col min-h-screen ${sourceCodePro.variable} font-sans bg-white dark:bg-gray-800`}
+      >
         <Header />
-        <div className='grow px-2 md:px-0'>{children}</div>
+        <div className="grow px-2 md:px-0">{children}</div>
         <Footer />
       </div>
     </>
