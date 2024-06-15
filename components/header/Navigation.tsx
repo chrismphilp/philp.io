@@ -9,9 +9,6 @@ const Navigation = () => (
       <Link href="/misc" className="cursor-pointer p-2 md:px-3 hover:text-orange-400">
         Misc
       </Link>
-      <Link href="/quotes" className="cursor-pointer p-2 md:px-3 hover:text-orange-400">
-        Quotes
-      </Link>
     </nav>
   </div>
 );
