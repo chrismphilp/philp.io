@@ -6,7 +6,7 @@ import getConfig from 'next/config';
 
 const { publicRuntimeConfig } = getConfig();
 
-const sourceCodePro = Bitter({
+const bitter = Bitter({
   subsets: ['latin'],
   variable: '--font-source-code',
 });
@@ -18,10 +18,11 @@ const Layout = ({ children }) => {
         <meta name="version" content={publicRuntimeConfig?.version} />
       </Head>
       <div
-        className={`flex flex-col min-h-screen ${sourceCodePro.variable} font-sans bg-white dark:bg-gray-800`}
+        className={`flex flex-col min-h-screen ${bitter.variable} font-serif`}
+        style={{ minHeight: '100vh' }}
       >
         <Header />
-        <div className="grow px-2 md:px-0">{children}</div>
+        <main className="grow px-6 md:px-12 lg:px-24 max-w-6xl mx-auto w-full">{children}</main>
         <Footer />
       </div>
     </>

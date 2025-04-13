@@ -2,13 +2,14 @@ import Link from 'next/link';
 import ExportedImage from 'next-image-export-optimizer';
 
 const Avatar = ({ image, alt }) => (
-  <div className="basis-1/3 sm:flex items-center pl-2 md:pl-0">
-    <Link href="/" className="hover:none">
+  <div className="flex items-center">
+    <Link href="/" className="relative overflow-hidden group">
+      <div className="absolute inset-0 border-thin border-accent-dark rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
       <ExportedImage
-        className="rounded-full shadow-lg ring-[0.85px] ring-orange-400 backdrop-blur sm:mr-4 cursor-pointer hover:ring-[1.15px]"
+        className="rounded-full saturate-[0.85] hover:saturate-[1.1] transition-all duration-500 border border-accent-subtle"
         src={image}
-        width={37.5}
-        height={37.5}
+        width={48}
+        height={48}
         alt={alt}
         priority
       />

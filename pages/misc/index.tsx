@@ -13,11 +13,19 @@ const Misc: FC<MiscProps> = ({ posts }) => (
     <Head>
       <title>Misc</title>
     </Head>
-    <div className="max-w-2xl mx-auto py-8">
-      {posts.map((post) => (
-        <ArticleCard key={post.data.title} post={post} />
-      ))}
-    </div>
+    <section className="pb-32 relative">
+      <div className="absolute left-0 top-0 w-1/4 h-px bg-accent opacity-40"></div>
+
+      <h3 className="text-lg tracking-widest mb-12 pt-2 font-light"/>
+      
+      <div className="asymmetric-element space-y-6">
+        {posts.map((post) => (
+          <ArticleCard key={post.data.title} post={post} />
+        ))}
+      </div>
+      
+      <div className="absolute bottom-0 left-1/4 w-16 h-16 border-b border-l border-accent-subtle opacity-20 hidden md:block"></div>
+    </section>
   </>
 );
 
@@ -27,11 +35,7 @@ export function getStaticProps() {
     .filter((v) => v.data.category !== ArticleType.TECHNOLOGY)
     .sort((post1, post2) => (post1.data.date > post2.data.date ? -1 : 1));
 
-  return {
-    props: {
-      posts,
-    },
-  };
+  return { props: { posts } };
 }
 
 export default Misc;

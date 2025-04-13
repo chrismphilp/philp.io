@@ -1,16 +1,17 @@
 import Link from 'next/link';
 
 const Navigation = () => (
-  <div className="basis-1/3 px-1 md:px-5">
-    <nav className="flex justify-center text-xl text-gray-400 backdrop-blur">
-      <Link href="/tech" className="cursor-pointer p-2 md:px-3 hover:text-orange-400">
-        Tech
-      </Link>
-      <Link href="/misc" className="cursor-pointer p-2 md:px-3 hover:text-orange-400">
-        Misc
-      </Link>
-    </nav>
-  </div>
+  <nav className="text-primary tracking-wider text-sm font-light flex flex-wrap justify-center">
+    <Link href="/" className="mr-6 hover:text-accent-highlight underline-effect my-1">
+      Home
+    </Link>
+    <Link href="/tech" className="mr-6 hover:text-accent-highlight underline-effect my-1">
+      Tech
+    </Link>
+    <Link href="/misc" className="hover:text-accent-highlight underline-effect my-1">
+      Misc
+    </Link>
+  </nav>
 );
 
 export default Navigation;

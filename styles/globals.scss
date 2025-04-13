@@ -2,19 +2,68 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500&display=swap');
+
 html,
 body,
 body > div:first-child,
 div#__next {
   height: 100%;
+  min-height: 100vh;
+  font-family: 'Noto Serif JP', serif;
+  letter-spacing: 0.03em;
+  color: #2D2A24;
+  background-color: #FBFAF2;
 }
 
-// Shiki Styling
+// Dark mode styling
 html.dark {
+  background-color: #2D2A24;
+  
   pre[data-theme="light"],
   div[data-theme="light"],
   code[data-theme="light"] {
     display: none;
+  }
+  
+  body,
+  body > div:first-child,
+  div#__next,
+  html {
+    color: #F0EFE7;
+    background-color: #2D2A24;
+  }
+  
+  .text-primary {
+    color: #F0EFE7 !important;
+  }
+  
+  .text-secondary {
+    color: #BFB0A3 !important;
+  }
+  
+  .border-accent, .border-accent-subtle {
+    border-color: #504A40;
+  }
+  
+  .bg-accent, .bg-accent-subtle {
+    background-color: #504A40;
+  }
+  
+  a {
+    color: #F0EFE7;
+  }
+  
+  a:hover {
+    color: #C84630;
+  }
+  
+  a.underline-effect::after {
+    background-color: #C84630;
+  }
+  
+  .vertical-text {
+    color: #BFB0A3;
   }
 }
 
@@ -28,14 +77,14 @@ html.light {
 
 div[data-rehype-pretty-code-title] {
   margin-bottom: -1.5rem;
-  text-decoration: underline;
+  font-style: italic;
+  font-size: 0.9rem;
 }
 
 .word-highlighted {
-  @apply bg-zinc-600/50 rounded;
-  box-shadow: 0 0 0 4px rgb(82 82 91 / 0.5);
+  @apply bg-accent-subtle rounded;
+  box-shadow: 0 0 0 4px rgba(217, 208, 199, 0.3);
 }
-
 
 .prose :where(code):not(:where([class~="not-prose"] *))::before,
 .prose :where(code):not(:where([class~="not-prose"] *))::after {
@@ -55,7 +104,7 @@ code[data-line-numbers] > .line::before {
   width: 0.1rem;
   margin-right: 2rem;
   text-align: right;
-  color: gray;
+  color: #5D5D5D;
 }
 
 code[data-line-numbers][data-line-numbers-max-digits="2"] > .line::before {
@@ -68,4 +117,70 @@ code[data-line-numbers][data-line-numbers-max-digits="3"] > .line::before {
 
 .line.highlighted {
   filter: saturate(1);
+}
+
+/* Japanese minimalist styling */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+a {
+  color: #2D2A24;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+a:hover {
+  color: #C84630;
+}
+
+a.underline-effect::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 1px;
+  bottom: -2px;
+  left: 0;
+  background-color: #C84630;
+  transition: width 0.3s ease;
+}
+
+a.underline-effect:hover::after {
+  width: 100%;
+}
+
+.page-section {
+  margin: 5rem 0;
+}
+
+.article-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 3rem;
+}
+
+/* Japanese inspired border */
+.border-vertical {
+  border-left: 1px solid #BFB0A3;
+  margin-left: 1rem;
+  padding-left: 2rem;
+}
+
+.vertical-text {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+
+/* Asymmetric layout element */
+.asymmetric-element {
+  transform: translateX(2rem);
+}
+
+@media (max-width: 768px) {
+  .asymmetric-element {
+    transform: none;
+  }
 }

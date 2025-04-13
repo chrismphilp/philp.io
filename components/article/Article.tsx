@@ -1,4 +1,3 @@
-import { FaArrowLeft } from 'react-icons/fa';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import dayjs from 'dayjs';
@@ -14,17 +13,18 @@ const Article = ({ frontMatter, children }) => {
         <meta name="description" content={frontMatter.description} />
         <meta name="date" content={frontMatter.date} />
       </Head>
-      <article className="prose dark:prose-invert prose-lg prose-a:no-underline text-sm sm:text-base">
+      <article className="prose dark:prose-invert md:prose-lg lg:prose-xl prose-a:no-underline text-sm sm:text-base mx-auto">
         <div className="pb-5">
-          <FaArrowLeft
-            onClick={() => router.back()}
-            className="cursor-pointer text-gray-400 hover:text-gray-500"
-            size={25}
-          />
+          <button 
+            onClick={() => router.back()} 
+            className="text-secondary hover:text-primary transition-colors duration-300 flex items-center group"
+          >
+            <span className="border-b border-accent-subtle transition-all duration-300 group-hover:border-primary mr-2 w-6"></span>
+            <span className="text-sm">Back</span>
+          </button>
         </div>
-        <time className="order-first flex items-center text-zinc-400 dark:text-zinc-500">
-          <span className="h-4 w-0.5 rounded-full bg-zinc-200 dark:bg-zinc-500"></span>
-          <span className="ml-3">{dayjs(frontMatter.date).format('MMMM DD, YYYY')}</span>
+        <time className="order-first flex items-center text-secondary">
+          <span className="text-sm font-light tracking-wider">{dayjs(frontMatter.date).format('YYYY.MM.DD')}</span>
         </time>
         <section className="text-justify">{children}</section>
       </article>

@@ -19,7 +19,6 @@
 
 # misc
 .idea*
-yarn.lock
 .DS_Store
 .env.local
 .env.development.local
