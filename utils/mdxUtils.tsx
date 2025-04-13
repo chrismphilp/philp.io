@@ -30,7 +30,7 @@ export const getPosts = (): PostData[] =>
       content,
       data: {
         ...data,
-        wordCount: content.split(/\s+/gu).length,
+        wordCount: content.split(/\s+/g).length,
         readingTime: readingTime(content).text,
       } as ArticleData,
       filePath,
