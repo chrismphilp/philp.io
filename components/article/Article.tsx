@@ -15,8 +15,8 @@ const Article = ({ frontMatter, children }) => {
       </Head>
       <article className="prose dark:prose-invert md:prose-lg lg:prose-xl prose-a:no-underline text-sm sm:text-base mx-auto">
         <div className="pb-5">
-          <button 
-            onClick={() => router.back()} 
+          <button
+            onClick={() => router.back()}
             className="text-secondary hover:text-primary transition-colors duration-300 flex items-center group"
           >
             <span className="border-b border-accent-subtle transition-all duration-300 group-hover:border-primary mr-2 w-6"></span>
@@ -24,7 +24,9 @@ const Article = ({ frontMatter, children }) => {
           </button>
         </div>
         <time className="order-first flex items-center text-secondary">
-          <span className="text-sm font-light tracking-wider">{dayjs(frontMatter.date).format('YYYY.MM.DD')}</span>
+          <span className="text-sm font-light tracking-wider">
+            {dayjs(frontMatter.date).format('YYYY.MM.DD')}
+          </span>
         </time>
         <section className="text-justify">{children}</section>
       </article>

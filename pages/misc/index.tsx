@@ -16,15 +16,13 @@ const Misc: FC<MiscProps> = ({ posts }) => (
     <section className="pb-32 relative">
       <div className="absolute left-0 top-0 w-1/4 h-px bg-accent opacity-40"></div>
 
-      <h3 className="text-lg tracking-widest mb-12 pt-2 font-light"/>
-      
+      <h3 className="text-lg tracking-widest mb-12 pt-2 font-light" />
+
       <div className="asymmetric-element space-y-6">
         {posts.map((post) => (
           <ArticleCard key={post.data.title} post={post} />
         ))}
       </div>
-      
-      <div className="absolute bottom-0 left-1/4 w-16 h-16 border-b border-l border-accent-subtle opacity-20 hidden md:block"></div>
     </section>
   </>
 );

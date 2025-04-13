@@ -22,7 +22,9 @@ const Layout = ({ children }) => {
         style={{ minHeight: '100vh' }}
       >
         <Header />
-        <main className="grow px-6 md:px-12 lg:px-24 max-w-6xl mx-auto w-full">{children}</main>
+        <main className="grow px-6 md:px-12 lg:px-24 max-w-6xl mx-auto w-full">
+          {children}
+        </main>
         <Footer />
       </div>
     </>

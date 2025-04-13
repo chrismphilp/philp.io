@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 
 const HeaderIcon = ({ onClick, children }: { onClick?: () => void; children }) => (
   <div
-    className="cursor-pointer text-primary hover:text-accent-highlight p-1 transition-colors duration-300"
+    className="cursor-pointer text-primary hover:text-accent-highlight p-1 transition-colors duration-300 flex items-center justify-center"
     onClick={onClick}
   >
     {children}
@@ -23,10 +23,7 @@ const ThemeToggle = () => {
   if (!mounted) return <></>;
 
   return (
-    <motion.div 
-      whileTap={{ rotate: 180 }}
-      transition={{ duration: 0.5 }}
-    >
+    <motion.div whileTap={{ rotate: 180 }} transition={{ duration: 0.5 }} className="flex items-center">
       <HeaderIcon onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
         {theme === 'light' ? <RiMoonClearLine size={20} /> : <RiSunLine size={20} />}
       </HeaderIcon>
@@ -38,7 +35,11 @@ const HeaderIcons = () => (
   <div className="flex items-center border-l border-accent-subtle pl-6 ml-6">
     <ThemeToggle />
     <HeaderIcon>
-      <Link title="Github Link" href="https://github.com/chrismphilp/philp.io" className="inline-block">
+      <Link
+        title="Github Link"
+        href="https://github.com/chrismphilp/philp.io"
+        className="flex items-center justify-center"
+      >
         <FiGithub size={20} />
       </Link>
     </HeaderIcon>
