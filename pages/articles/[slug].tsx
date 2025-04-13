@@ -52,7 +52,7 @@ export async function getStaticProps({ params }) {
           {
             theme: {
               dark: 'monokai',
-              light: 'one-dark-pro',
+              light: 'github-light',
             },
             keepBackground: true,
             onVisitHighlightedLine(node) {

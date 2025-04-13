@@ -13,7 +13,7 @@ const Article = ({ frontMatter, children }) => {
         <meta name="description" content={frontMatter.description} />
         <meta name="date" content={frontMatter.date} />
       </Head>
-      <article className="prose dark:prose-invert md:prose-lg lg:prose-xl prose-a:no-underline text-sm sm:text-base mx-auto">
+      <article className="prose prose-slate dark:prose-invert dark:text-background-dark md:prose-lg lg:prose-xl prose-a:no-underline text-sm sm:text-base mx-auto">
         <div className="pb-5">
           <button
             onClick={() => router.back()}
@@ -28,7 +28,7 @@ const Article = ({ frontMatter, children }) => {
             {dayjs(frontMatter.date).format('YYYY.MM.DD')}
           </span>
         </time>
-        <section className="text-justify">{children}</section>
+        <section className="text-justify dark:text-background-dark">{children}</section>
       </article>
     </div>
   );
