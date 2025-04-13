@@ -74,7 +74,7 @@ export async function getStaticProps({ params }) {
     props: {
       source: mdxSource,
       frontMatter: data,
-      wordCount: content.split(/\s+/gu).length,
+      wordCount: content.split(/\s+/g).length,
       readingTime: readingTime(content).text,
     },
   };
