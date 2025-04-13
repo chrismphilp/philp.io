@@ -39,13 +39,15 @@ const InfiniteArticleList = ({ allPosts, initialPostCount = 5 }: InfiniteArticle
       { rootMargin: '100px' },
     );
 
-    if (loader.current) {
-      observer.observe(loader.current);
+    const currentLoaderRef = loader.current;
+
+    if (currentLoaderRef) {
+      observer.observe(currentLoaderRef);
     }
 
     return () => {
-      if (loader.current) {
-        observer.unobserve(loader.current);
+      if (currentLoaderRef) {
+        observer.unobserve(currentLoaderRef);
       }
     };
   }, [page, hasMore, allPosts, postsPerPage]);
