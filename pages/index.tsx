@@ -13,7 +13,7 @@ const Homepage: FC<HomepageProps> = ({ posts }) => (
       <title>Christopher Philp</title>
     </Head>
 
-    <section className="pb-32 relative">
+    <section className="pb-16 relative">
       <h3 className="text-lg tracking-widest mb-12 pt-2 font-light" />
 
       <div className="asymmetric-element">
