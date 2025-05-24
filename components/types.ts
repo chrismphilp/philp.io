@@ -11,5 +11,6 @@ export type ArticleData = {
 export enum ArticleType {
   TECHNOLOGY = 'Technology',
   SCIENCE = 'Science',
+  ETHICS = 'Ethics',
   LANGUAGE = 'Language',
 }
