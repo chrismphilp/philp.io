@@ -13,4 +13,5 @@ export enum ArticleType {
   SCIENCE = 'Science',
   ETHICS = 'Ethics',
   LANGUAGE = 'Language',
+  CHARITY = 'Charity',
 }
