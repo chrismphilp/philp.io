@@ -2,7 +2,7 @@ import type { AppProps } from 'next/app';
 import Layout from 'components/Layout';
 import { ThemeProvider } from 'next-themes';
 import '../styles/globals.scss';
-import '../components/instrumentation-client';
+import '../components/metrics/instrumentation-client';
 
 const App = ({ Component, pageProps }: AppProps) => (
   <ThemeProvider attribute="class" defaultTheme="light" enableColorScheme>
