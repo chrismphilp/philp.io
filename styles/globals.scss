@@ -184,3 +184,44 @@ a.underline-effect:hover::after {
     transform: none;
   }
 }
+
+/* Remark GFM footnotes tweaks */
+.footnotes {
+  margin-top: 2rem;
+}
+
+/* Make the Footnotes header smaller */
+.footnotes > h2 {
+  font-size: 0.9rem; /* smaller than regular h2 */
+  font-weight: 500;
+  margin: 0.5rem 0 0.75rem 0;
+}
+
+/* Make the footnote text and links smaller */
+.footnotes li,
+.footnotes a {
+  font-size: 0.85rem;
+  line-height: 1.35;
+}
+
+/* Optional: soften the divider */
+.footnotes > hr {
+  margin: 1.5rem 0 0.75rem;
+  border-color: #BFB0A3;
+}
+
+/* Reduce gap between footnote items */
+.footnotes ol {
+  /* neutralize any large top margin typography might add to the list itself */
+  margin-top: 0.25rem;
+}
+
+/* Only add spacing after the first item to keep list compact */
+.footnotes ol > li + li {
+  margin-top: 0.25rem;
+}
+
+/* Tighten paragraphs inside footnote items to avoid extra inner gaps */
+.footnotes ol > li > p {
+  margin: 0.1rem 0;
+}
