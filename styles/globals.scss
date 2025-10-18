@@ -225,3 +225,17 @@ a.underline-effect:hover::after {
 .footnotes ol > li > p {
   margin: 0.1rem 0;
 }
+
+/* Fix footnotes overflow on small screens: allow long URLs/text to wrap */
+@media (max-width: 768px) {
+  .footnotes,
+  .footnotes ol,
+  .footnotes li,
+  .footnotes p,
+  .footnotes a {
+    overflow-wrap: anywhere;
+    word-wrap: break-word; /* legacy alias */
+    word-break: break-word; /* Safari/iOS friendly */
+    white-space: normal;
+  }
+}
