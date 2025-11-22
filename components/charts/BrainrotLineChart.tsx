@@ -40,8 +40,7 @@ const BrainrotLineChart: React.FC<BrainrotLineChartProps> = ({
 
   const xStep = categories.length > 1 ? innerWidth / (categories.length - 1) : 0;
 
-  const valueToY = (v: number) =>
-    paddingTop + innerHeight - (v / maxValue) * innerHeight;
+  const valueToY = (v: number) => paddingTop + innerHeight - (v / maxValue) * innerHeight;
 
   const textColor = isDark ? '#e5e7eb' : '#374151';
   const gridColor = isDark ? '#374151' : '#e5e7eb';
@@ -56,12 +55,7 @@ const BrainrotLineChart: React.FC<BrainrotLineChartProps> = ({
   return (
     <figure className="w-full overflow-x-auto text-sm">
       <figcaption className="mb-2 text-center text-secondary">{title}</figcaption>
-      <svg
-        width="100%"
-        viewBox={`0 0 ${width} ${chartHeight}`}
-        role="img"
-        aria-label={title}
-      >
+      <svg width="100%" viewBox={`0 0 ${width} ${chartHeight}`} role="img" aria-label={title}>
         {/* Grid lines */}
         {yTicks.map(({ y, value }) =>
           value === 0 ? null : (
@@ -178,26 +172,13 @@ const BrainrotLineChart: React.FC<BrainrotLineChartProps> = ({
           const pathD =
             points.length === 0
               ? ''
-              : points
-                  .map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x} ${p.y}`)
-                  .join(' ');
+              : points.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x} ${p.y}`).join(' ');
 
           return (
             <g key={s.name}>
-              <path
-                d={pathD}
-                fill="none"
-                stroke={stroke}
-                strokeWidth={2}
-              />
+              <path d={pathD} fill="none" stroke={stroke} strokeWidth={2} />
               {points.map((p, i) => (
-                <circle
-                  key={s.name + i}
-                  cx={p.x}
-                  cy={p.y}
-                  r={3}
-                  fill={stroke}
-                />
+                <circle key={s.name + i} cx={p.x} cy={p.y} r={3} fill={stroke} />
               ))}
             </g>
           );
@@ -212,19 +193,8 @@ const BrainrotLineChart: React.FC<BrainrotLineChartProps> = ({
 
           return (
             <g key={`legend-${s.name}`}>
-              <rect
-                x={legendX}
-                y={legendY - 8}
-                width="10"
-                height="2"
-                fill={stroke}
-              />
-              <text
-                x={legendX + 16}
-                y={legendY}
-                fill={textColor}
-                fontSize="10"
-              >
+              <rect x={legendX} y={legendY - 8} width="10" height="2" fill={stroke} />
+              <text x={legendX + 16} y={legendY} fill={textColor} fontSize="10">
                 {s.name}
               </text>
             </g>
