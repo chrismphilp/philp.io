@@ -64,6 +64,8 @@
     "@types/minimatch": "^5.1.2",
     "@types/react": "18.2.14",
     "@types/react-dom": "18.2.6",
+    "eslint": "^9",
+    "eslint-config-next": "16.0.3",
     "next-sitemap": "^4.2.3",
     "pre-push": "^0.1.4",
     "prettier": "3.0.0",
