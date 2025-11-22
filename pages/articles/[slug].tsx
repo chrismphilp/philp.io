@@ -42,26 +42,26 @@ export async function getStaticProps({ params }) {
   const { content, data } = matter(source);
 
   const mdxSource = await serialize(content, {
-    parseFrontmatter: true,
-      mdxOptions: {
-        format: 'mdx',
-        remarkPlugins: [remarkGfm],
-        rehypePlugins: [
-          rehypeSlug,
-          [rehypeAutolinkHeadings, { behavior: 'wrap', properties: { className: ['anchor'] } }],
-          [
-            rehypePrettyCode,
-            {
-              theme: {
-                dark: 'monokai',
-                light: 'github-light',
-              },
-              keepBackground: true,
+    mdxOptions: {
+      format: 'mdx',
+      remarkPlugins: [remarkGfm],
+      rehypePlugins: [
+        rehypeSlug,
+        [rehypeAutolinkHeadings, { behavior: 'wrap', properties: { className: ['anchor'] } }],
+        [
+          rehypePrettyCode,
+          {
+            theme: {
+              dark: 'monokai',
+              light: 'github-light',
             },
-          ],
-          [rehypeImgSize, { dir: 'public' }],
+            keepBackground: true,
+          },
         ],
-      },
+        [rehypeImgSize, { dir: 'public' }],
+      ],
+    },
+    parseFrontmatter: true,
     scope: data,
   });
 

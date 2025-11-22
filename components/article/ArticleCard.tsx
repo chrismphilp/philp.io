@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import dayjs from 'dayjs';
 import { useRouter } from 'next/router';
+import { formatDate } from '../../utils/dateUtils';
 
 const ArticleCard = ({ post }) => {
   const router = useRouter();
@@ -13,14 +13,14 @@ const ArticleCard = ({ post }) => {
     >
       <div className="absolute left-0 top-0 bottom-0 hidden md:flex flex-col items-center">
         <div className="vertical-text text-xs text-accent-dark tracking-wider opacity-70 transform rotate-180">
-          {dayjs(post.data.date).format('YYYY.MM.DD')}
+          {formatDate(post.data.date)}
         </div>
         <div className="flex-grow border-l border-accent-subtle mt-4"></div>
       </div>
 
       <div className="md:ml-10">
         <div className="text-accent-dark text-xs md:hidden mb-2 tracking-wider">
-          {dayjs(post.data.date).format('YYYY.MM.DD')} — {post.data.readingTime}
+          {formatDate(post.data.date)} — {post.data.readingTime}
         </div>
 
         <Link

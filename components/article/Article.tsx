@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import Head from 'next/head';
-import dayjs from 'dayjs';
+import { formatDate } from '../../utils/dateUtils';
 
 const Article = ({ frontMatter, children }) => {
   const router = useRouter();
@@ -25,7 +25,7 @@ const Article = ({ frontMatter, children }) => {
         </div>
         <time className="order-first flex items-center text-secondary">
           <span className="text-sm font-light tracking-wider">
-            {dayjs(frontMatter.date).format('YYYY.MM.DD')}
+            {formatDate(frontMatter.date)}
           </span>
         </time>
         <section className="text-justify dark:text-background-dark">{children}</section>
