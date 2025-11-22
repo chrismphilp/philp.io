@@ -43,32 +43,25 @@ export async function getStaticProps({ params }) {
 
   const mdxSource = await serialize(content, {
     parseFrontmatter: true,
-    mdxOptions: {
-      format: 'mdx',
-      remarkPlugins: [remarkGfm],
-      rehypePlugins: [
-        rehypeSlug,
-        [rehypeAutolinkHeadings, { behavior: 'wrap', properties: { className: ['anchor'] } }],
-        [
-          rehypePrettyCode,
-          {
-            theme: {
-              dark: 'monokai',
-              light: 'github-light',
+      mdxOptions: {
+        format: 'mdx',
+        remarkPlugins: [remarkGfm],
+        rehypePlugins: [
+          rehypeSlug,
+          [rehypeAutolinkHeadings, { behavior: 'wrap', properties: { className: ['anchor'] } }],
+          [
+            rehypePrettyCode,
+            {
+              theme: {
+                dark: 'monokai',
+                light: 'github-light',
+              },
+              keepBackground: true,
             },
-            keepBackground: true,
-            onVisitHighlightedLine(node) {
-              // Each line node by default has `class="line"`.
-              node.properties.className?.push('highlighted');
-            },
-            onVisitHighlightedWord(node) {
-              node.properties.className = ['word-highlighted'];
-            },
-          },
+          ],
+          [rehypeImgSize, { dir: 'public' }],
         ],
-        [rehypeImgSize, { dir: 'public' }],
-      ],
-    },
+      },
     scope: data,
   });
 

@@ -27,6 +27,7 @@ const ArticleCard = ({ post }) => {
           className="block text-primary text-xl md:text-2xl mb-2 hover:text-accent-highlight transition-colors duration-300 font-light tracking-wide"
           as={link}
           href={'/articles/[slug]'}
+          prefetch={false}
         >
           {post.data.title}
         </Link>
