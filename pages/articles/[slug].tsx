@@ -4,6 +4,7 @@ import { articleFilePaths, ARTICLES_PATH } from 'utils/mdxUtils';
 import { serialize } from 'next-mdx-remote/serialize';
 import { MDXRemote } from 'next-mdx-remote';
 import Article from 'components/article/Article';
+import BrainrotLineChart from 'components/charts/BrainrotLineChart';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeSlug from 'rehype-slug';
 import rehypeImgSize from 'rehype-img-size';
@@ -24,6 +25,7 @@ const components = {
       role="img"
     />
   ),
+  BrainrotLineChart: BrainrotLineChart,
 };
 
 const Articles = ({ source, frontMatter }) => (

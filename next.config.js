@@ -1,5 +1,8 @@
 const { version } = require('./package.json');
 const prod = process.env.NODE_ENV === 'production';
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+});
 
 /** @type {import('next').NextConfig} */
 const withMDX = require('@next/mdx')({
@@ -38,7 +41,8 @@ const withPWA = require('next-pwa')({
   disable: !prod,
 });
 
-module.exports = {
+/** @type {import('next').NextConfig} */
+const baseConfig = {
   ...withPWA(mdx),
   publicRuntimeConfig: {
     version,
@@ -58,3 +62,5 @@ module.exports = {
   // This is required to support PostHog trailing slash API requests
   skipTrailingSlashRedirect: true,
 };
+
+module.exports = withBundleAnalyzer(baseConfig);

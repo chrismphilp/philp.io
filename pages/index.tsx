@@ -1,10 +1,10 @@
-import { getPosts, PostData } from '../utils/mdxUtils';
+import { getPostMetadata, PostMeta } from '../utils/mdxUtils';
 import Head from 'next/head';
 import { FC } from 'react';
 import InfiniteArticleList from 'components/article/InfiniteArticleList';
 
 type HomepageProps = {
-  posts: PostData[];
+  posts: PostMeta[];
 };
 
 const Homepage: FC<HomepageProps> = ({ posts }) => (
@@ -24,7 +24,7 @@ const Homepage: FC<HomepageProps> = ({ posts }) => (
 );
 
 export function getStaticProps() {
-  const posts = getPosts()
+  const posts = getPostMetadata()
     .filter((v) => !v.data.draft)
     .sort((post1, post2) => (post1.data.date > post2.data.date ? -1 : 1));
 

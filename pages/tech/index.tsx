@@ -1,11 +1,11 @@
 import { ArticleType } from 'components/types';
-import { getPosts, PostData } from 'utils/mdxUtils';
+import { getPostMetadata, PostMeta } from 'utils/mdxUtils';
 import Head from 'next/head';
 import { FC } from 'react';
 import InfiniteArticleList from 'components/article/InfiniteArticleList';
 
 type TechProps = {
-  posts: PostData[];
+  posts: PostMeta[];
 };
 
 const Tech: FC<TechProps> = ({ posts }) => (
@@ -24,7 +24,7 @@ const Tech: FC<TechProps> = ({ posts }) => (
 );
 
 export function getStaticProps() {
-  const posts = getPosts()
+  const posts = getPostMetadata()
     .filter((v) => !v.data.draft)
     .filter((v) => v.data.category === ArticleType.TECHNOLOGY)
     .sort((post1, post2) => (post1.data.date > post2.data.date ? -1 : 1));

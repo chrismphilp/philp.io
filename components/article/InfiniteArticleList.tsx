@@ -1,14 +1,14 @@
 import { useState, useEffect, useRef } from 'react';
 import ArticleCard from './ArticleCard';
-import { PostData } from '../../utils/mdxUtils';
+import { PostMeta } from '../../utils/mdxUtils';
 
 interface InfiniteArticleListProps {
-  allPosts: PostData[];
+  allPosts: PostMeta[];
   initialPostCount?: number;
 }
 
 const InfiniteArticleList = ({ allPosts, initialPostCount = 5 }: InfiniteArticleListProps) => {
-  const [displayedPosts, setDisplayedPosts] = useState<PostData[]>([]);
+  const [displayedPosts, setDisplayedPosts] = useState<PostMeta[]>([]);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const loader = useRef<HTMLDivElement>(null);
