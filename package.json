@@ -25,6 +25,9 @@
     "npm": ">=8.0.0",
     "node": ">=18.17.0"
   },
+  "resolutions": {
+    "vscode-textmate": "8.0.0"
+  },
   "dependencies": {
     "@mdx-js/loader": "2.3.0",
     "@mdx-js/react": "2.3.0",
