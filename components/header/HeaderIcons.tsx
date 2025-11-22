@@ -1,7 +1,6 @@
 import { RiMoonClearLine, RiSunLine } from 'react-icons/ri';
 import { FiGithub } from 'react-icons/fi';
 import { useTheme } from 'next-themes';
-import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
@@ -26,15 +25,11 @@ const ThemeToggle = () => {
   if (!mounted) return <></>;
 
   return (
-    <motion.div
-      whileTap={{ rotate: 180 }}
-      transition={{ duration: 0.5 }}
-      className="flex items-center"
-    >
+    <div className="theme-toggle flex items-center">
       <HeaderIcon onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
         {theme === 'light' ? <RiMoonClearLine size={20} /> : <RiSunLine size={20} />}
       </HeaderIcon>
-    </motion.div>
+    </div>
   );
 };
 

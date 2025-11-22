@@ -91,6 +91,26 @@ div[data-rehype-pretty-code-title] {
   content: "";
 }
 
+/* Theme toggle spin animation */
+.theme-toggle {
+  transition: transform 0.35s ease-out;
+  transform-origin: center;
+  will-change: transform;
+}
+
+.theme-toggle:active {
+  animation: theme-toggle-spin 0.35s ease-out;
+}
+
+@keyframes theme-toggle-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 code[data-line-numbers] {
   counter-reset: line;
 }
