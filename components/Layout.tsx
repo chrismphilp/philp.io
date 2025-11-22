@@ -2,9 +2,7 @@ import Header from './header/Header';
 import Footer from './footer/Footer';
 import { Bitter } from 'next/font/google';
 import Head from 'next/head';
-import getConfig from 'next/config';
-
-const { publicRuntimeConfig } = getConfig();
+import pkg from '../package.json';
 
 const bitter = Bitter({
   subsets: ['latin'],
@@ -15,7 +13,7 @@ const Layout = ({ children }) => {
   return (
     <>
       <Head>
-        <meta name="version" content={publicRuntimeConfig?.version} />
+        <meta name="version" content={pkg.version} />
       </Head>
       <div
         className={`flex flex-col min-h-screen ${bitter.variable} font-serif`}

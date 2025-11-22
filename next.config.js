@@ -1,4 +1,3 @@
-const { version } = require('./package.json');
 const prod = process.env.NODE_ENV === 'production';
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
@@ -44,9 +43,6 @@ const withPWA = require('next-pwa')({
 /** @type {import('next').NextConfig} */
 const baseConfig = {
   ...withPWA(mdx),
-  publicRuntimeConfig: {
-    version,
-  },
 };
 
 module.exports = withBundleAnalyzer(baseConfig);
