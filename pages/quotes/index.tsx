@@ -16,7 +16,7 @@ const Quotes = ({ source }) => (
   </main>
 );
 
-export async function getStaticProps({ params }) {
+export async function getStaticProps() {
   const quotesFilePath = path.join(QUOTES_PATH, 'quotes.mdx');
   const source = fs.readFileSync(quotesFilePath);
   const { content, data } = matter(source);

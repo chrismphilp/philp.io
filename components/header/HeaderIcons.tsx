@@ -18,7 +18,10 @@ const ThemeToggle = () => {
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
 
-  useEffect(() => setMounted(true), []);
+  useEffect(() => {
+    // react-hooks/set-state-in-effect
+    setMounted(true);
+  }, []);
 
   if (!mounted) return <></>;
 

@@ -4,7 +4,6 @@ let withBundleAnalyzer;
 try {
   // Optional in production environments (e.g. Cloudflare) where the analyzer
   // devDependency may not be installed.
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
   const analyzer = require('@next/bundle-analyzer');
   withBundleAnalyzer = analyzer({ enabled: process.env.ANALYZE === 'true' });
 } catch {

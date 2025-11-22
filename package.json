@@ -14,7 +14,7 @@
     "postbuild": "next-sitemap",
     "start": "npx serve@latest out",
     "static": "next build && next-image-export-optimizer",
-    "lint": "next lint"
+    "lint": "eslint ."
   },
   "pre-push": [
     "format",

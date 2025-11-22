@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import readingTime from 'reading-time';
-import { ArticleData, ArticleType } from '../components/types';
+import { ArticleData } from '../components/types';
 
 // ARTICLES_PATH is useful when you want to get the path to a specific file
 export const ARTICLES_PATH = path.join(process.cwd(), 'articles');
