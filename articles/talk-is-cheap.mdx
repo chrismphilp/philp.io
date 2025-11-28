@@ -1,0 +1,43 @@
+---
+title: Talk is Cheap
+description: Productivity Maximisation
+date: '2025-11-28'
+category: Technology
+draft: false
+---
+
+I consume a lot of tech blogs about engineering, which discuss how developers optimise their workflows in the age of LLMs. There
+seems to be a growing trend in improving productivity and output by engaging with coding tools such as
+Cursor, parallelising workloads, and chaining together agents. I'm still of the opinion that being agentic as an individual
+is the primary separator between those who can single-handedly impact a piece of software, and those who are merely
+contributors.
+
+So, what is being agentic? It does not mean embracing AI in every part of your life. For me, it is the determination and
+willpower to drive change consistently in areas that others either struggle with or are not willing to engage with.
+These areas are usually difficult because of bureaucracy, technical complexity, legacy decisions, or group-think.
+They have no simple solutions and they demand research and time.
+
+Yet, it seems like there has never been a better time to utilise an agentic mindset with the AI tooling available.
+Want to understand an obscure domain or architecture? Load up Cursor, set a model to thinking mode, and ask it to dissect
+the structure and flows that an application offers.
+
+Need to learn a new subject? An approach I've found beneficial is to ask ChatGPT 5.1
+to link to a number of sources related to the topic. Once I have read these, I then ask it to design 10 questions which test
+my core understanding. Any fundamental mistakes - repeat the process. I've begun to do this while
+I redecorate my house using voice mode (I think the current limit for the Pro plan is 1 hour per day).
+
+Want to make a PR description easy to grok? Ask your model of choice to generate a MermaidJS diagram, highlighting the main
+changes (this is supported in Markdown). Checking out a branch and asking an agent to use the diff to explain the changes
+made, and highlight any high-risk edits removes computational load for other areas.
+
+LLMs have also become my sanity check. Given any problem, I first formulate a core strategy. Be it a coding task, this may
+take the form of an instruction list of the required changes to the codebase or some pseudo-code. If it's a design document,
+an overview of the approach I intend to take. A prompt I like to use is:
+
+> I work for a Work OS company focused on project planning and execution. Given the overview of X below, analyse the
+> approach and suggest improvements. Ignore minor wording edits; focus on the core design and risks. If it’s code,
+> point me to similar open-source patterns with links. If it’s a design, call out missing steps (such as approaching stakeholders)
+> and early steps that would de-risk the work.
+
+We have long ago passed the point where AI tooling is a gimmick. The real gap is between people who talk about
+productivity and people who own problems, use the tools ruthlessly, and ship. Talk is cheap.
