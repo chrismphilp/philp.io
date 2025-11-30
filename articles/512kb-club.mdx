@@ -11,7 +11,7 @@ While browsing HackerNews I stumbled across the [512KB Club](https://512kb.club/
 
 Investigating Cloudflare's analytics, my blog was sitting at a surprisingly large 1.52MB of uncompressed assets.
 The goal was to get under **512KB** without turning the blog into a lifeless HTML document, and permit entry to the
-hallowed club.
+hallowed institution.
 
 ---
 
@@ -74,7 +74,7 @@ The theme toggle used `framer-motion` to spin the sun/moon icon on tap. Fun libr
 Using Codex, it was rewritten as:
 
 ```tsx
-// JSX
+// TSX
 <div className="theme-toggle flex items-center">
   <HeaderIcon onClick={...}>
     {theme === 'light' ? <RiMoonClearLine /> : <RiSunLine />}
@@ -109,13 +109,13 @@ A few smaller changes also helped:
 - Making the bundle analyzer optional in `next.config.js` so production builds don’t need `@next/bundle-analyzer` installed.
 - Avoiding extra MDX work on pages that don't use it, such as `rehype-shiki` code highlighting.
 
-Individually these were small; but together they knocked another chunk off the JS and config overhead.
+Individually these were small, but together they knocked another chunk off the JS and config overhead.
 
 ---
 
 ### Where I ended up
 
-I started at roughly **1.52MB** of bundle and shaved it down to about **424KB**.
+I started at roughly **1.52MB** of bundle and shaved it down to around **424KB**.
 
 Nothing important went away:
 
