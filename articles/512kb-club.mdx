@@ -1,0 +1,128 @@
+---
+title: 512KB Club
+description:
+date: '2025-11-29'
+category: Technology
+draft: false
+---
+
+I stumbled across the [512KB Club](https://512kb.club/) when browsing HackerNews, a directory of websites who stay under
+512KB of network cost, and immediately wanted to join.
+
+Investigating Cloudflare's analytics, my blog was sitting at 1.52MB of uncompressed assets.
+The goal was to get under **512KB** without turning the blog into a lifeless HTML document, and permit entry to the
+hallowed club.
+
+---
+
+### 1. Scrapping Big Brother (~550KB)
+
+The first big win was analytics. I had a tiny PostHog client imported in `_app.tsx`, which pulled `posthog-js` into
+every page just to send events to a new analytics platform I was testing. Removing that client dropped a fairly chunky
+analytics SDK from the shared bundle, and now lets me live in blissful ignorance that anyone is actually reading my posts.
+
+---
+
+### 2. Slimmer article data on the Homepage (~400KB)
+
+Next.js writes JSON for each statically generated route. Code heavy posts like my Rust borrow checker article
+produced ~200KB+ JSON blobs.
+
+I split the data into two layers:
+
+```ts
+export const getPostMetadata = () => [
+  { data: { title, date, description, readingTime, ... }, filePath }
+];
+
+export const getPosts = () => [
+  { ...meta, content }
+];
+```
+
+Then I:
+
+- Switched `/`, `/tech`, and `/misc` to use `getPostMetadata()`.
+- Added `prefetch={false}` to article `Link`s so their JSON doesn't prefetch.
+
+The homepage now downloads just one small `index.json` file with metadata, not multiple full article payloads.
+
+---
+
+### 3. Replacing tiny libraries with code (~20KB)
+
+`dayjs` was in the bundle solely to format dates as `YYYY.MM.DD` in a couple of places.
+
+I replaced it with a small helper from Codex:
+
+```ts
+export const formatDate = (value: string | Date) => {
+  const d = new Date(value);
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${y}.${m}.${day}`;
+};
+```
+
+---
+
+### 4. Swapping JavaScript animation for CSS (~20KB)
+
+The theme toggle used `framer-motion` to spin the sun/moon icon on tap. Fun library, but expensive for a single interaction.
+
+Using Codex, it was rewritten as:
+
+```tsx
+// JSX
+<div className="theme-toggle flex items-center">
+  <HeaderIcon onClick={...}>
+    {theme === 'light' ? <RiMoonClearLine /> : <RiSunLine />}
+  </HeaderIcon>
+</div>
+```
+
+```scss
+/* CSS */
+.theme-toggle {
+  transition: transform 0.35s ease-out;
+  transform-origin: center;
+  will-change: transform;
+}
+
+.theme-toggle:active {
+  animation: theme-toggle-spin 0.35s ease-out;
+}
+
+@keyframes theme-toggle-spin {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+```
+
+---
+
+### 5. Miscellaneous tidy‑ups (~50–100KB)
+
+A few smaller changes also helped:
+
+- Making the bundle analyzer optional in `next.config.js` so production builds don’t need `@next/bundle-analyzer` installed.
+- Avoiding extra MDX work on pages that don't use it, such as `rehype-shiki` code highlighting.
+
+Individually these were small; but together they knocked another chunk off the JS and config overhead.
+
+---
+
+### Where I ended up
+
+I started at roughly **1.52MB** of bundle and shaved it down to about **424KB**.
+
+Nothing important went away:
+
+- Dark mode still works, with the spinning theme toggle.
+- MDX and syntax highlighting are still there.
+- The home page still lists posts with dates, descriptions and reading times.
+
+The only change is that the heavy stuff waits its turn instead of loading up front.
+
+More importantly, you can now find `philp.io` on the [512KB Club](https://512kb.club/)!
