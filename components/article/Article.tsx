@@ -6,7 +6,7 @@ const Article = ({ frontMatter, children }) => {
   const router = useRouter();
 
   return (
-    <div className="pt-5 md:pt-10">
+    <div className="pt-5 md:pt-10 w-full min-w-full">
       <Head>
         <title>{frontMatter.title}</title>
         <meta name="title" content={frontMatter.title} />
