@@ -1,6 +1,6 @@
 import path from 'path';
 import fs from 'fs';
-import { articleFilePaths, ARTICLES_PATH } from 'utils/mdxUtils';
+import { articleFilePaths, ARTICLES_PATH, getPostMetadata } from 'utils/mdxUtils';
 import { serialize } from 'next-mdx-remote/serialize';
 import { MDXRemote } from 'next-mdx-remote';
 import Article from 'components/article/Article';
@@ -28,16 +28,28 @@ const components = {
   BrainrotLineChart: BrainrotLineChart,
 };
 
-const Articles = ({ source, frontMatter }) => (
+const Articles = ({ source, frontMatter, previousPost, nextPost }) => (
   <main className="flex flex-col items-stretch md:items-center py-2">
-    <Article frontMatter={frontMatter}>
+    <Article frontMatter={frontMatter} previousPost={previousPost} nextPost={nextPost}>
       <MDXRemote {...source} components={components} />
     </Article>
   </main>
 );
 
+const postSlugFromPath = (filePath: string) => filePath.replace(/\.mdx?$/, '');
+
+const buildNavItem = (post) =>
+  post
+    ? {
+        title: post.data.title,
+        description: post.data.description,
+        slug: postSlugFromPath(post.filePath),
+      }
+    : null;
+
 export async function getStaticProps({ params }) {
-  const articleFilePath = path.join(ARTICLES_PATH, `${params.slug}.mdx`);
+  const slug = params.slug;
+  const articleFilePath = path.join(ARTICLES_PATH, `${slug}.mdx`);
   const source = fs.readFileSync(articleFilePath);
   const { content, data } = matter(source);
 
@@ -65,12 +77,22 @@ export async function getStaticProps({ params }) {
     scope: data,
   });
 
+  const sortedPosts = getPostMetadata()
+    .filter((post) => !post.data.draft)
+    .sort((post1, post2) => (post1.data.date > post2.data.date ? -1 : 1));
+
+  const currentIndex = sortedPosts.findIndex((post) => postSlugFromPath(post.filePath) === slug);
+  const nextPost = currentIndex > 0 ? sortedPosts[currentIndex - 1] : null;
+  const previousPost = currentIndex >= 0 && currentIndex < sortedPosts.length - 1 ? sortedPosts[currentIndex + 1] : null;
+
   return {
     props: {
       source: mdxSource,
-      frontMatter: data,
+      frontMatter: { ...data, slug },
       wordCount: content.split(/\s+/g).length,
       readingTime: readingTime(content).text,
+      previousPost: buildNavItem(previousPost),
+      nextPost: buildNavItem(nextPost),
     },
   };
 }

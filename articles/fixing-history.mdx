@@ -1,0 +1,109 @@
+---
+title: Fixing History
+description: It's all in the past
+date: '2025-12-05'
+category: Technology
+draft: false
+---
+
+When I first added a `Back` button to my articles I assumed readers would always arrive via the homepage. The button
+simply called `router.back()` and life was simple. Until I opened another persons blog from my writing club and tried to
+replicate the observed behaviour. It instantly dropped me on the homepage as there was no history entry.
+Then after adding `Previous`/`Next` links (another copied feature), the problem got worse.
+
+## The Symptom
+
+1. Open any article directly.
+2. Click the in-article back button.  
+3. The browser reports no history entry, so `router.back()` does nothing.
+
+## A Practical Fix
+
+I attempted the back navigation to only fall back to `/` if nothing happened:
+
+```tsx {1-20}
+const handleBackClick = () => {
+  if (typeof window === 'undefined') return;
+
+  setExitSlug(frontMatter.slug);
+  const currentPath = router.asPath;
+  let fallbackTimeout: number | null = null;
+
+  const cleanup = () => {
+    if (fallbackTimeout) {
+      window.clearTimeout(fallbackTimeout);
+    }
+    router.events.off('routeChangeComplete', handleRouteChangeComplete);
+    setExitSlug(null);
+  };
+
+  const handleRouteChangeComplete = () => cleanup();
+
+  router.events.on('routeChangeComplete', handleRouteChangeComplete);
+  router.back();
+
+  fallbackTimeout = window.setTimeout(() => {
+    router.events.off('routeChangeComplete', handleRouteChangeComplete);
+    if (router.asPath === currentPath) {
+      router.push('/');
+    }
+  }, 300);
+};
+```
+
+The flow:
+
+- `router.back()` is processed immediately so real history entries remain quick
+- Listen for `routeChangeComplete` and when it fires remove the transition animation
+- If nothing changes in **300ms** there was no back stack so we return to the homepage
+
+## Hiding the Flicker
+
+Pressing `Back` left the article body visible until the router navigated elsewhere, causing a flash of stale content.
+Hydration workarounds suggested `useEffect` plus `setState`.
+
+Instead of boolean flags, I tracked the currently visible page and the one being directed to:
+
+```tsx {1-12}
+const [visibleSlug, setVisibleSlug] = useState(frontMatter.slug);
+const [exitSlug, setExitSlug] = useState<string | null>(null);
+
+useEffect(() => {
+  if (typeof window === 'undefined') return;
+
+  const frame = window.requestAnimationFrame(() => {
+    setVisibleSlug(frontMatter.slug);
+  });
+
+  return () => window.cancelAnimationFrame(frame);
+}, [frontMatter.slug]);
+
+const isExiting = exitSlug === frontMatter.slug;
+const isContentVisible = visibleSlug === frontMatter.slug && !isExiting;
+```
+
+This allowed fading the article out before navigation and back in after the new page mounts.
+
+## Cleaner Navigation Blocks
+
+The navigation blocks were simple cards placed at the bottom of the `Article` component, rendering once each for
+`Previous` and `Next`:
+
+```tsx {1-12}
+const NavLink = ({ label, post }: { label: 'Previous' | 'Next'; post: ArticleNavItem }) => (
+  <Link
+    prefetch={false}
+    href={`/articles/${post.slug}`}
+    className="group block rounded-md border border-transparent p-4 transition-colors duration-300 hover:border-accent-highlight"
+  >
+    <span className="text-xs uppercase tracking-widest text-secondary">{label}</span>
+    <p className="text-primary text-lg font-light group-hover:text-accent-highlight">{post.title}</p>
+    <p className="text-secondary text-sm mt-1">{post.description}</p>
+  </Link>
+);
+```
+
+### Histrionics
+
+Relatively small changes, but the blog now feels slightly more polished reading app: no surprise redirects,
+no glitchy fades, and an easy way to jump between posts in either direction. History is rewritten.
