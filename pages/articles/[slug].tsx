@@ -81,9 +81,14 @@ export async function getStaticProps({ params }) {
     .filter((post) => !post.data.draft)
     .sort((post1, post2) => (post1.data.date > post2.data.date ? -1 : 1));
 
-  const currentIndex = sortedPosts.findIndex((post) => postSlugFromPath(post.filePath) === slug);
+  const currentIndex = sortedPosts.findIndex(
+    (post) => postSlugFromPath(post.filePath) === slug,
+  );
   const nextPost = currentIndex > 0 ? sortedPosts[currentIndex - 1] : null;
-  const previousPost = currentIndex >= 0 && currentIndex < sortedPosts.length - 1 ? sortedPosts[currentIndex + 1] : null;
+  const previousPost =
+    currentIndex >= 0 && currentIndex < sortedPosts.length - 1
+      ? sortedPosts[currentIndex + 1]
+      : null;
 
   return {
     props: {
