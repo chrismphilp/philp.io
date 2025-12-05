@@ -26,7 +26,9 @@ const NavigationLink = ({
     className="group block rounded-md border border-transparent p-4 transition-colors duration-300 hover:border-accent-highlight"
   >
     <span className="text-xs uppercase tracking-widest text-secondary">{label}</span>
-    <p className="text-primary text-lg font-light group-hover:text-accent-highlight">{post.title}</p>
+    <p className="text-primary text-lg font-light group-hover:text-accent-highlight">
+      {post.title}
+    </p>
     <p className="text-secondary text-sm mt-1">{post.description}</p>
   </Link>
 );
