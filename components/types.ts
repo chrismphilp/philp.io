@@ -16,6 +16,7 @@ export enum ArticleType {
   CHARITY = 'Charity',
   COMEDY = 'Comedy',
   GAMING = 'Gaming',
+  FILM = 'Film',
   FAMILY = 'Family',
   POETRY = 'Poetry',
   MISC = 'Misc',
