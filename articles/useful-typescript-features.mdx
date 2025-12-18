@@ -1,0 +1,94 @@
+---
+title: Useful TypeScript Features
+description: Some Small Finds
+date: '2025-12-18'
+category: Technology
+draft: false
+---
+
+### Template Literal Types
+
+Template literal types let you build a union of valid strings - ideal for topic names, metric keys, routes,
+feature flags, etc. This gives both autocomplete and compile-time errors.
+
+```ts
+type Domain = "user" | "org"
+type Service = "event_bus" | "archival"
+type Topic = `${Domain}.${Service}`
+
+const t: Topic = "user.archival"
+// const bad: Topic = "user.create" // error
+```
+
+### Something Satisfying
+
+The `satisfies` operator is for when you want TypeScript to check that a value matches a type, without forcing the value
+to become that type. It validates shape and constraints, but keeps the narrower inferred types you actually wrote.
+
+```ts
+type TopicDef = {
+  topic: `${string}.${string}`
+  keyField: string
+  partitions: number
+}
+
+type TopicRegistry = Record<string, TopicDef>
+
+export const topics = {
+  userCreated: { topic: "user.created", keyField: "userId", partitions: 12 },
+  userDeleted: { topic: "user.deleted", keyField: "userId", partitions: 12 },
+
+  // billingPaid: { topic: "billingpaid", keyField: "invoiceId", partitions: 6 },
+  //                           ^ error: does not match `${string}.${string}`
+} satisfies TopicRegistry
+
+type KnownTopic = (typeof topics)[keyof typeof topics]["topic"]
+
+export function produce(topic: KnownTopic, key: string, value: unknown) {
+  kafkaProducer.send({ topic, messages: [{ key, value: JSON.stringify(value) }] })
+}
+
+// produce("user.created", "123", { ... })  ok
+// produce("user.create",  "123", { ... })  error: not in KnownTopic
+```
+
+If you wrote `const topics: TopicRegistry = { ... }`, you would lose the literal topic union and `KnownTopic` would widen,
+making produce accept any value matching the registry's pattern, not just the specific topics you listed. `satisfies`
+avoids that.
+
+```ts
+const topics: TopicRegistry = {
+  userCreated: { topic: "user.created", keyField: "userId", partitions: 12 },
+  userDeleted: { topic: "user.deleted", keyField: "userId", partitions: 12 },
+}
+
+// Hover KnownTopicA: it is `${string}.${string}` (not the two literals)
+type KnownTopic = (typeof topics)[keyof typeof topics]["topic"]
+
+const produce = (topic: KnownTopic) => {}
+produce("payments.refunded") // ok, because it matches `${string}.${string}`, even though not declared
+produce("payments")          // error, no dot
+```
+
+### Exhaustive Switches
+
+TypeScript will happily let you write a non-exhaustive `switch` over an `enum`.
+
+The solution is a default of `never`. When your enum grows, the value in default is no longer `never`, giving a
+compile error until you add the missing case.
+
+```ts
+type Status = "queued" | "running" | "done"
+
+const f = (s: Status) => {
+  switch (s) {
+    case "queued": return
+    case "running": return
+    case "done": return
+    default: {
+      const _x: never = s
+      return _x
+    }
+  }
+}
+```
