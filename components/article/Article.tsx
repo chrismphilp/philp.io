@@ -7,7 +7,7 @@ const Article = ({ frontMatter, children, previousPost, nextPost }) => {
       <div className="max-w-6xl mx-auto flex flex-col lg:flex-row lg:items-start lg:gap-12 xl:gap-20">
         
         {/* LHS Metadata Column */}
-        <aside className="lg:w-40 lg:flex-shrink-0 lg:sticky lg:top-24 mb-2 lg:mb-0 lg:text-right border-l-[1.5px] lg:border-l-0 lg:border-r-[1.5px] border-accent-subtle/60 pl-5 lg:pl-0 lg:pr-6 py-1">
+        <aside className="lg:w-40 lg:flex-shrink-0 lg:sticky lg:top-24 mb-8 lg:mb-0 lg:text-right border-l-[1.5px] lg:border-l-0 lg:border-r-[1.5px] border-accent-subtle/60 pl-5 lg:pl-0 lg:pr-6 py-1">
           <time className="block text-sm text-secondary font-light tracking-[0.2em] uppercase">
             {formatDate(frontMatter.date)}
           </time>
