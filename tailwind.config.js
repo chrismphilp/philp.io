@@ -11,7 +11,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['var(--font-source-code)', ...fontFamily.sans],
+        sans: ['var(--font-professional)', ...fontFamily.sans],
         serif: ['var(--font-professional)', 'Times New Roman', 'Georgia', 'serif'],
       },
       colors: {
@@ -49,8 +49,9 @@ module.exports = {
             maxWidth: '65ch',
             color: '#2D2A24',
             fontWeight: '100',
-            lineHeight: '2.2',
-            letterSpacing: '0.03em',
+            lineHeight: '2.5',
+            letterSpacing: '0.08em',
+            fontSize: '1.1rem',
             a: {
               color: '#2D2A24',
               '&:hover': {
@@ -60,20 +61,23 @@ module.exports = {
             },
             h1: {
               fontWeight: '200',
-              fontSize: '2.5em',
-              letterSpacing: '0.15em',
+              fontSize: '3em',
+              lineHeight: '1.2',
+              letterSpacing: '0.25em',
               textTransform: 'uppercase',
             },
             h2: {
               fontWeight: '200',
-              fontSize: '2em',
-              letterSpacing: '0.12em',
+              fontSize: '2.25em',
+              lineHeight: '1.2',
+              letterSpacing: '0.2em',
               textTransform: 'uppercase',
             },
             h3: {
               fontWeight: '200',
               fontSize: '1.75em',
-              letterSpacing: '0.1em',
+              lineHeight: '1.2',
+              letterSpacing: '0.15em',
               textTransform: 'uppercase',
             },
           },
