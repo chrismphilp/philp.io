@@ -1,3 +1,4 @@
+"use client";
 import { RiMoonClearLine, RiSunLine } from 'react-icons/ri';
 import { FiGithub } from 'react-icons/fi';
 import { useTheme } from 'next-themes';

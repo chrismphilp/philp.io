@@ -51,6 +51,7 @@ const withPWA = require('next-pwa')({
 /** @type {import('next').NextConfig} */
 const baseConfig = {
   ...withPWA(mdx),
+  turbopack: {},
 };
 
 module.exports = withBundleAnalyzer(baseConfig);

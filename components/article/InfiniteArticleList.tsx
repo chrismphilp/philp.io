@@ -1,3 +1,4 @@
+"use client";
 import { useState, useEffect, useRef } from 'react';
 import ArticleCard from './ArticleCard';
 import { PostMeta } from '../../utils/mdxUtils';
