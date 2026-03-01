@@ -11,6 +11,8 @@
     letter-spacing: 0.03em;
     color: #2D2A24;
     background-color: #FBFAF2;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   html.dark body,

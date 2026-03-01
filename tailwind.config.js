@@ -48,10 +48,11 @@ module.exports = {
           css: {
             maxWidth: '65ch',
             color: '#2D2A24',
-            fontWeight: '400',
+            fontWeight: '300',
             lineHeight: '1.8',
             letterSpacing: '0.04em',
             fontSize: '1.05rem',
+            color: 'rgba(45, 42, 36, 0.9)',
             a: {
               color: '#2D2A24',
               '&:hover': {
@@ -60,21 +61,21 @@ module.exports = {
               },
             },
             h1: {
-              fontWeight: '400',
+              fontWeight: '300',
               fontSize: '2.5em',
               lineHeight: '1.2',
               letterSpacing: '0.1em',
               textTransform: 'uppercase',
             },
             h2: {
-              fontWeight: '400',
+              fontWeight: '300',
               fontSize: '2em',
               lineHeight: '1.2',
               letterSpacing: '0.08em',
               textTransform: 'uppercase',
             },
             h3: {
-              fontWeight: '400',
+              fontWeight: '300',
               fontSize: '1.5em',
               lineHeight: '1.2',
               letterSpacing: '0.06em',

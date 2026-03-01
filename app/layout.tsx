@@ -1,11 +1,11 @@
 import { ThemeProvider } from 'next-themes';
 import Header from '../components/header/Header';
 import Footer from '../components/footer/Footer';
-import { Bellefair } from 'next/font/google';
+import { Spectral } from 'next/font/google';
 import '../styles/globals.css';
 
-const professionalFont = Bellefair({
-  weight: ['400'],
+const professionalFont = Spectral({
+  weight: ['300'],
   subsets: ['latin'],
   variable: '--font-professional',
 });
