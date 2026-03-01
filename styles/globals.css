@@ -46,36 +46,34 @@
 
 @layer components {
   /* Shiki syntax highlighting dual theme */
-  pre {
-    background-color: var(--shiki-light-bg);
-    color: var(--shiki-light);
+  .prose pre {
+    background-color: var(--shiki-light-bg) !important;
+    color: var(--shiki-light) !important;
   }
   
-  code {
-    background-color: var(--shiki-light-bg, transparent);
+  .prose code {
     color: var(--shiki-light, inherit);
   }
   
-  span[style*="--shiki-light"] {
-    color: var(--shiki-light);
-    font-style: var(--shiki-light-font-style, inherit);
-    font-weight: var(--shiki-light-font-weight, inherit);
+  .prose span[style*="--shiki-light"] {
+    color: var(--shiki-light) !important;
+    font-style: var(--shiki-light-font-style, inherit) !important;
+    font-weight: var(--shiki-light-font-weight, inherit) !important;
   }
 
-  html.dark pre {
-    background-color: var(--shiki-dark-bg);
-    color: var(--shiki-dark);
+  html.dark .prose pre {
+    background-color: var(--shiki-dark-bg) !important;
+    color: var(--shiki-dark) !important;
   }
   
-  html.dark code {
-    background-color: var(--shiki-dark-bg, transparent);
+  html.dark .prose code {
     color: var(--shiki-dark, inherit);
   }
   
-  html.dark span[style*="--shiki-dark"] {
-    color: var(--shiki-dark);
-    font-style: var(--shiki-dark-font-style, inherit);
-    font-weight: var(--shiki-dark-font-weight, inherit);
+  html.dark .prose span[style*="--shiki-dark"] {
+    color: var(--shiki-dark) !important;
+    font-style: var(--shiki-dark-font-style, inherit) !important;
+    font-weight: var(--shiki-dark-font-weight, inherit) !important;
   }
   
   html.dark .text-primary { color: #F0EFE7 !important; }
