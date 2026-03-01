@@ -1,11 +1,10 @@
 import { ThemeProvider } from 'next-themes';
 import Header from '../components/header/Header';
 import Footer from '../components/footer/Footer';
-import { Lora } from 'next/font/google';
+import { Geist } from 'next/font/google';
 import '../styles/globals.css';
 
-const japaneseFont = Lora({
-  weight: ['400', '500', '600'],
+const japaneseFont = Geist({
   subsets: ['latin'],
   variable: '--font-japanese',
 });
@@ -30,7 +29,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`flex flex-col min-h-screen ${japaneseFont.variable} font-serif`}>
+      <body className={`flex flex-col min-h-screen ${japaneseFont.variable} font-sans`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableColorScheme>
           <Header />
           <main className="grow px-6 md:px-12 lg:px-24 max-w-6xl mx-auto w-full">
