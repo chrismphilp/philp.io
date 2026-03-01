@@ -1,11 +1,11 @@
 import { ThemeProvider } from 'next-themes';
 import Header from '../components/header/Header';
 import Footer from '../components/footer/Footer';
-import { Cormorant_Garamond } from 'next/font/google';
+import { Raleway } from 'next/font/google';
 import '../styles/globals.css';
 
-const professionalFont = Cormorant_Garamond({
-  weight: ['300'],
+const professionalFont = Raleway({
+  weight: ['100', '200'],
   subsets: ['latin'],
   variable: '--font-professional',
 });

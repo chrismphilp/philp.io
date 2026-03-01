@@ -48,7 +48,7 @@ module.exports = {
           css: {
             maxWidth: '65ch',
             color: '#2D2A24',
-            fontWeight: '300',
+            fontWeight: '100',
             a: {
               color: '#2D2A24',
               '&:hover': {
@@ -57,17 +57,17 @@ module.exports = {
               },
             },
             h1: {
-              fontWeight: '300',
+              fontWeight: '200',
               fontSize: '2.25em',
               letterSpacing: '0.05em',
             },
             h2: {
-              fontWeight: '300',
+              fontWeight: '200',
               fontSize: '1.75em',
               letterSpacing: '0.05em',
             },
             h3: {
-              fontWeight: '300',
+              fontWeight: '200',
               fontSize: '1.5em',
               letterSpacing: '0.05em',
             },
