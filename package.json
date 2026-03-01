@@ -23,7 +23,7 @@
   ],
   "engines": {
     "npm": ">=8.0.0",
-    "node": ">=18.17.0"
+    "node": ">=22.0.0"
   },
   "resolutions": {
     "vscode-textmate": "8.0.0"
