@@ -1,11 +1,11 @@
 import { ThemeProvider } from 'next-themes';
 import Header from '../components/header/Header';
 import Footer from '../components/footer/Footer';
-import { Raleway } from 'next/font/google';
+import { Antonio } from 'next/font/google';
 import '../styles/globals.css';
 
-const professionalFont = Raleway({
-  weight: ['100', '200'],
+const professionalFont = Antonio({
+  weight: ['100', '200', '300'],
   subsets: ['latin'],
   variable: '--font-professional',
 });
