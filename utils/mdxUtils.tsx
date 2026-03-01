@@ -2,7 +2,8 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import readingTime from 'reading-time';
-import { ArticleData } from '../components/types';
+import { z } from 'zod';
+import { ArticleData, ArticleType } from '../components/types';
 
 // ARTICLES_PATH is useful when you want to get the path to a specific file
 export const ARTICLES_PATH = path.join(process.cwd(), 'articles');
@@ -24,14 +25,25 @@ export type PostData = PostMeta & {
   content: string;
 };
 
+const FrontmatterSchema = z.object({
+  title: z.string(),
+  description: z.string().nullable().transform((val) => val ?? ''),
+  date: z.string(),
+  category: z.nativeEnum(ArticleType),
+  draft: z.boolean().optional().default(false),
+});
+
 export const getPostMetadata = (): PostMeta[] =>
   articleFilePaths.map((filePath) => {
     const source = fs.readFileSync(path.join(ARTICLES_PATH, filePath));
     const { content, data } = matter(source);
 
+    // Validate frontmatter to ensure type safety
+    const validatedData = FrontmatterSchema.parse(data);
+
     return {
       data: {
-        ...data,
+        ...validatedData,
         wordCount: content.split(/\s+/g).length,
         readingTime: readingTime(content).text,
       } as ArticleData,
