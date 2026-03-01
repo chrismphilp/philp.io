@@ -1,11 +1,11 @@
 import { ThemeProvider } from 'next-themes';
 import Header from '../components/header/Header';
 import Footer from '../components/footer/Footer';
-import { BIZ_UDPMincho } from 'next/font/google';
+import { Lora } from 'next/font/google';
 import '../styles/globals.css';
 
-const japaneseFont = BIZ_UDPMincho({
-  weight: ['400'],
+const japaneseFont = Lora({
+  weight: ['400', '500', '600'],
   subsets: ['latin'],
   variable: '--font-japanese',
 });
