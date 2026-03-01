@@ -1,10 +1,10 @@
 import { ThemeProvider } from 'next-themes';
 import Header from '../components/header/Header';
 import Footer from '../components/footer/Footer';
-import { Shippori_Mincho } from 'next/font/google';
+import { Zen_Old_Mincho } from 'next/font/google';
 import '../styles/globals.css';
 
-const japaneseFont = Shippori_Mincho({
+const japaneseFont = Zen_Old_Mincho({
   weight: ['400', '500'],
   subsets: ['latin'],
   variable: '--font-japanese',
