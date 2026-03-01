@@ -29,7 +29,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`flex flex-col min-h-screen ${bitter.variable} font-serif bg-white dark:bg-zinc-950 text-black dark:text-white`}>
+      <body className={`flex flex-col min-h-screen ${bitter.variable} font-serif`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableColorScheme>
           <Header />
           <main className="grow px-6 md:px-12 lg:px-24 max-w-6xl mx-auto w-full">
