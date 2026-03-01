@@ -21,23 +21,25 @@ const Article = ({ frontMatter, children, previousPost, nextPost }) => {
   };
 
   return (
-    <div className="pt-5 md:pt-10 w-full min-w-full">
-      <article className="prose prose-slate dark:prose-invert dark:text-background-dark md:prose-lg lg:prose-xl prose-a:no-underline text-sm sm:text-base mx-auto">
-        <div className="pb-8 mb-6 border-b border-accent-subtle/30">
-          <button
-            onClick={handleBackClick}
-            className="group flex items-center gap-3 text-secondary hover:text-primary transition-all duration-300"
-            aria-label="Go back to previous page"
-          >
-            <div className="relative flex items-center justify-center w-8 h-8 rounded-full border border-accent-subtle/50 group-hover:border-primary/50 group-hover:bg-primary/5 transition-all duration-300 overflow-hidden">
-              <span className="absolute transform -translate-x-1 group-hover:translate-x-0 transition-transform duration-300 opacity-0 group-hover:opacity-100 text-xs">
-                ←
-              </span>
-              <span className="w-3 h-[1px] bg-secondary group-hover:bg-primary transition-colors duration-300 group-hover:opacity-0" />
-            </div>
-            <span className="text-sm tracking-widest uppercase font-light">Return</span>
-          </button>
-        </div>
+    <div className="pt-2 md:pt-6 w-full min-w-full">
+      {/* Fixed/Absolute positioning on larger screens, relative on mobile */}
+      <div className="mb-8 md:mb-12 relative md:absolute md:-ml-20 lg:-ml-28 md:mt-2">
+        <button
+          onClick={handleBackClick}
+          className="group flex items-center gap-2 text-secondary hover:text-primary transition-all duration-300"
+          aria-label="Go back to previous page"
+        >
+          <div className="relative flex items-center justify-center w-6 h-6 rounded-full border border-accent-subtle/50 group-hover:border-primary/50 group-hover:bg-primary/5 transition-all duration-300 overflow-hidden">
+            <span className="absolute transform -translate-x-1 group-hover:translate-x-0 transition-transform duration-300 opacity-0 group-hover:opacity-100 text-[10px]">
+              ←
+            </span>
+            <span className="w-2.5 h-[1px] bg-secondary group-hover:bg-primary transition-colors duration-300 group-hover:opacity-0" />
+          </div>
+          <span className="text-xs tracking-[0.2em] uppercase font-light mt-[1px]">Return</span>
+        </button>
+      </div>
+
+      <article className="prose prose-slate dark:prose-invert dark:text-background-dark md:prose-lg lg:prose-xl prose-a:no-underline text-sm sm:text-base mx-auto relative">
         <time className="order-first flex items-center text-secondary">
           <span className="text-sm font-light tracking-wider">
             {formatDate(frontMatter.date)}
