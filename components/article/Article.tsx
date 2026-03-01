@@ -1,59 +1,28 @@
 "use client";
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
 import { formatDate } from '../../utils/dateUtils';
 import ArticleNavigation from './ArticleNavigation';
 
 const Article = ({ frontMatter, children, previousPost, nextPost }) => {
   const router = useRouter();
-  const [visibleSlug, setVisibleSlug] = useState<string>(frontMatter.slug);
-  const [exitSlug, setExitSlug] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (typeof window === 'undefined') {
-      return;
-    }
-
-    let frame: number | null = null;
-
-    frame = window.requestAnimationFrame(() => {
-      setVisibleSlug(frontMatter.slug);
-    });
-
-    return () => {
-      if (frame) {
-        window.cancelAnimationFrame(frame);
-      }
-    };
-  }, [frontMatter.slug]);
-
-  const isExiting = exitSlug === frontMatter.slug;
-  const isContentVisible = visibleSlug === frontMatter.slug && !isExiting;
 
   const handleBackClick = () => {
     if (typeof window === 'undefined') return;
-    setExitSlug(frontMatter.slug);
     
-    // Fallback: If navigating back doesn't change the path quickly, push to home.
-    // This often happens if the user landed on the article directly.
+    // Fallback: If navigating back doesn't change the path, push to home.
     const currentPath = window.location.pathname;
     setTimeout(() => {
       if (window.location.pathname === currentPath) {
         router.push('/');
       }
-    }, 300);
+    }, 100);
 
     router.back();
   };
 
   return (
     <div className="pt-5 md:pt-10 w-full min-w-full">
-      <article
-        aria-busy={!isContentVisible || isExiting}
-        className={`prose prose-slate dark:prose-invert dark:text-background-dark md:prose-lg lg:prose-xl prose-a:no-underline text-sm sm:text-base mx-auto transition-opacity duration-300 ease-out ${
-          isContentVisible && !isExiting ? 'opacity-100' : 'opacity-0 pointer-events-none'
-        }`}
-      >
+      <article className="prose prose-slate dark:prose-invert dark:text-background-dark md:prose-lg lg:prose-xl prose-a:no-underline text-sm sm:text-base mx-auto">
         <div className="pb-5">
           <button
             onClick={handleBackClick}
@@ -72,11 +41,6 @@ const Article = ({ frontMatter, children, previousPost, nextPost }) => {
 
         <ArticleNavigation previousPost={previousPost} nextPost={nextPost} />
       </article>
-      {!isContentVisible && (
-        <div className="py-8 text-center text-secondary text-xs tracking-[0.3em] uppercase">
-          Loading article...
-        </div>
-      )}
     </div>
   );
 };
