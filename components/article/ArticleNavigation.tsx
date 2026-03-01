@@ -14,42 +14,24 @@ type ArticleNavigationProps = {
 const getArticlePath = (slug: string) => `/articles/${slug}`;
 
 const NavigationLink = ({
-  direction,
+  label,
   post,
 }: {
-  direction: 'previous' | 'next';
+  label: 'Previous' | 'Next';
   post: ArticleNavItem;
-}) => {
-  const isNext = direction === 'next';
-  
-  return (
-    <Link
-      prefetch={false}
-      href={getArticlePath(post.slug)}
-      className={`group block transition-colors duration-300 ${
-        isNext ? 'text-right' : 'text-left'
-      }`}
-    >
-      <span className={`text-xs uppercase tracking-[0.2em] text-secondary font-light mb-3 flex items-center gap-3 ${isNext ? 'justify-end' : 'justify-start'}`}>
-        {!isNext && (
-          <span className="text-accent-highlight transform transition-transform duration-300 group-hover:-translate-x-1">←</span>
-        )}
-        {isNext ? 'Next' : 'Previous'}
-        {isNext && (
-          <span className="text-accent-highlight transform transition-transform duration-300 group-hover:translate-x-1">→</span>
-        )}
-      </span>
-      <h4 className="text-primary text-lg md:text-xl font-medium tracking-wide group-hover:text-accent-highlight transition-colors duration-300">
-        {post.title}
-      </h4>
-      {post.description && (
-        <p className="text-secondary/70 text-sm mt-2 font-light line-clamp-2">
-          {post.description}
-        </p>
-      )}
-    </Link>
-  );
-};
+}) => (
+  <Link
+    prefetch={false}
+    href={getArticlePath(post.slug)}
+    className="group block rounded-md border border-transparent p-4 transition-colors duration-300 hover:border-accent-highlight"
+  >
+    <span className="text-xs uppercase tracking-widest text-secondary">{label}</span>
+    <p className="text-primary text-lg font-light group-hover:text-accent-highlight">
+      {post.title}
+    </p>
+    <p className="text-secondary text-sm mt-1">{post.description}</p>
+  </Link>
+);
 
 const ArticleNavigation = ({ previousPost, nextPost }: ArticleNavigationProps) => {
   if (!previousPost && !nextPost) {
@@ -57,13 +39,9 @@ const ArticleNavigation = ({ previousPost, nextPost }: ArticleNavigationProps) =
   }
 
   return (
-    <nav className="mt-16 md:mt-24 pt-10 border-t-[0.5px] border-accent-subtle/50 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-8">
-      <div className="w-full">
-        {previousPost && <NavigationLink direction="previous" post={previousPost} />}
-      </div>
-      <div className="w-full">
-        {nextPost && <NavigationLink direction="next" post={nextPost} />}
-      </div>
+    <nav className="mt-10 pt-6 border-t border-accent-subtle grid gap-6 md:grid-cols-2">
+      {previousPost && <NavigationLink label="Previous" post={previousPost} />}
+      {nextPost && <NavigationLink label="Next" post={nextPost} />}
     </nav>
   );
 };
