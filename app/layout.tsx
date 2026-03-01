@@ -1,10 +1,11 @@
 import { ThemeProvider } from 'next-themes';
 import Header from '../components/header/Header';
 import Footer from '../components/footer/Footer';
-import { Inter } from 'next/font/google';
+import { Noto_Serif_JP } from 'next/font/google';
 import '../styles/globals.css';
 
-const professionalFont = Inter({
+const professionalFont = Noto_Serif_JP({
+  weight: ['200', '300'],
   subsets: ['latin'],
   variable: '--font-professional',
 });

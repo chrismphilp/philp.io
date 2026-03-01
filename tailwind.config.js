@@ -11,8 +11,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['var(--font-professional)', 'var(--font-source-code)', ...fontFamily.sans],
-        serif: ['Times New Roman', 'Georgia', 'serif'],
+        sans: ['var(--font-source-code)', ...fontFamily.sans],
+        serif: ['var(--font-professional)', 'Times New Roman', 'Georgia', 'serif'],
       },
       colors: {
         primary: {
@@ -48,6 +48,7 @@ module.exports = {
           css: {
             maxWidth: '65ch',
             color: '#2D2A24',
+            fontWeight: '300',
             a: {
               color: '#2D2A24',
               '&:hover': {
@@ -56,17 +57,17 @@ module.exports = {
               },
             },
             h1: {
-              fontWeight: '400',
+              fontWeight: '300',
               fontSize: '2.25em',
               letterSpacing: '0.05em',
             },
             h2: {
-              fontWeight: '400',
+              fontWeight: '300',
               fontSize: '1.75em',
               letterSpacing: '0.05em',
             },
             h3: {
-              fontWeight: '400',
+              fontWeight: '300',
               fontSize: '1.5em',
               letterSpacing: '0.05em',
             },
