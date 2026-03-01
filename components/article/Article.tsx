@@ -21,9 +21,9 @@ const Article = ({ frontMatter, children, previousPost, nextPost }) => {
   };
 
   return (
-    <div className="pt-2 md:pt-6 w-full min-w-full">
-      {/* Fixed/Absolute positioning on larger screens, relative on mobile */}
-      <div className="mb-8 md:mb-12 relative md:absolute md:-ml-20 lg:-ml-28 md:mt-2">
+    <div className="pt-4 md:pt-10 w-full min-w-full">
+      {/* Return button always stays in flow, above the article content */}
+      <div className="mb-6 md:mb-10 max-w-[65ch] md:max-w-[75ch] lg:max-w-[85ch] mx-auto flex items-center">
         <button
           onClick={handleBackClick}
           className="group flex items-center gap-2 text-secondary hover:text-primary transition-all duration-300"
