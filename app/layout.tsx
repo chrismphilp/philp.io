@@ -1,11 +1,11 @@
 import { ThemeProvider } from 'next-themes';
 import Header from '../components/header/Header';
 import Footer from '../components/footer/Footer';
-import { Zen_Old_Mincho } from 'next/font/google';
+import { Noto_Serif_JP } from 'next/font/google';
 import '../styles/globals.css';
 
-const japaneseFont = Zen_Old_Mincho({
-  weight: ['400', '500'],
+const japaneseFont = Noto_Serif_JP({
+  weight: ['300', '400', '500'],
   subsets: ['latin'],
   variable: '--font-japanese',
 });
