@@ -2,7 +2,7 @@ import { ThemeProvider } from 'next-themes';
 import Header from '../components/header/Header';
 import Footer from '../components/footer/Footer';
 import { Bitter } from 'next/font/google';
-import '../styles/globals.scss';
+import '../styles/globals.css';
 
 const bitter = Bitter({
   subsets: ['latin'],

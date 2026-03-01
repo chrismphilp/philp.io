@@ -1,0 +1,202 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500&display=swap');
+
+@layer base {
+  html,
+  body,
+  body > div:first-child,
+  div#__next {
+    height: 100%;
+    min-height: 100vh;
+    font-family: 'Noto Serif JP', serif;
+    letter-spacing: 0.03em;
+    color: #2D2A24;
+    background-color: #FBFAF2;
+  }
+
+  html.dark body,
+  html.dark body > div:first-child,
+  html.dark div#__next,
+  html.dark {
+    color: #F0EFE7;
+    background-color: #2D2A24;
+  }
+
+  html.dark a {
+    color: #F0EFE7;
+  }
+  
+  html.dark a:hover {
+    color: #C84630;
+  }
+
+  a {
+    color: #2D2A24;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  a:hover {
+    color: #C84630;
+  }
+}
+
+@layer components {
+  /* Dark mode overrides */
+  html.dark pre[data-theme="light"],
+  html.dark div[data-theme="light"],
+  html.dark code[data-theme="light"] {
+    display: none;
+  }
+  
+  html.dark .text-primary { color: #F0EFE7 !important; }
+  html.dark .text-secondary { color: #BFB0A3 !important; }
+  html.dark .border-accent, 
+  html.dark .border-accent-subtle { border-color: #504A40; }
+  html.dark .bg-accent, 
+  html.dark .bg-accent-subtle { background-color: #504A40; }
+  html.dark a.underline-effect::after { background-color: #C84630; }
+  html.dark .vertical-text { color: #BFB0A3; }
+
+  html.light pre[data-theme="dark"],
+  html.light div[data-theme="dark"],
+  html.light code[data-theme="dark"] {
+    display: none;
+  }
+
+  div[data-rehype-pretty-code-title] {
+    margin-bottom: -1.5rem;
+    font-style: italic;
+    font-size: 0.9rem;
+  }
+
+  .word-highlighted {
+    @apply bg-accent-subtle rounded;
+    box-shadow: 0 0 0 4px rgba(217, 208, 199, 0.3);
+  }
+
+  .prose :where(code):not(:where([class~="not-prose"] *))::before,
+  .prose :where(code):not(:where([class~="not-prose"] *))::after {
+    content: "";
+  }
+
+  /* Theme toggle spin animation */
+  .theme-toggle {
+    transition: transform 0.35s ease-out;
+    transform-origin: center;
+    will-change: transform;
+  }
+
+  .theme-toggle:active {
+    animation: theme-toggle-spin 0.35s ease-out;
+  }
+
+  code[data-line-numbers] {
+    counter-reset: line;
+  }
+
+  code[data-line-numbers] > .line::before {
+    counter-increment: line;
+    content: counter(line);
+    display: inline-block;
+    width: 0.1rem;
+    margin-right: 2rem;
+    text-align: right;
+    color: #5D5D5D;
+  }
+
+  code[data-line-numbers][data-line-numbers-max-digits="2"] > .line::before { width: 0.25rem; }
+  code[data-line-numbers][data-line-numbers-max-digits="3"] > .line::before { width: 0.35rem; }
+
+  .line.highlighted {
+    filter: saturate(1);
+  }
+
+  /* Japanese minimalist styling */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  a.underline-effect::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 1px;
+    bottom: -2px;
+    left: 0;
+    background-color: #C84630;
+    transition: width 0.3s ease;
+  }
+
+  a.underline-effect:hover::after {
+    width: 100%;
+  }
+
+  .page-section { margin: 5rem 0; }
+
+  .article-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem;
+  }
+
+  /* Japanese inspired border */
+  .border-vertical {
+    border-left: 1px solid #BFB0A3;
+    margin-left: 1rem;
+    padding-left: 2rem;
+  }
+
+  .vertical-text {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+  }
+
+  /* Asymmetric layout element */
+  .asymmetric-element {
+    transform: translateX(2rem);
+  }
+
+  @media (max-width: 768px) {
+    .asymmetric-element { transform: none; }
+  }
+
+  /* Remark GFM footnotes tweaks */
+  .footnotes { margin-top: 2rem; }
+  .footnotes > h2 {
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin: 0.5rem 0 0.75rem 0;
+  }
+  .footnotes li, .footnotes a {
+    font-size: 0.85rem;
+    line-height: 1.35;
+  }
+  .footnotes > hr {
+    margin: 1.5rem 0 0.75rem;
+    border-color: #BFB0A3;
+  }
+  .footnotes ol { margin-top: 0.25rem; }
+  .footnotes ol > li + li { margin-top: 0.25rem; }
+  .footnotes ol > li > p { margin: 0.1rem 0; }
+  
+  @media (max-width: 768px) {
+    .footnotes, .footnotes ol, .footnotes li, .footnotes p, .footnotes a {
+      overflow-wrap: anywhere;
+      word-wrap: break-word;
+      word-break: break-word;
+      white-space: normal;
+    }
+  }
+}
+
+@keyframes theme-toggle-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
