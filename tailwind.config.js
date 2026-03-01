@@ -1,6 +1,6 @@
 const { fontFamily } = require('tailwindcss/defaultTheme')
 
-/** @type {import('tailwindcss').Config} \*/
+/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
     './app/**/*.{js,ts,jsx,tsx}',
@@ -48,10 +48,10 @@ module.exports = {
           css: {
             maxWidth: '65ch',
             color: '#2D2A24',
-            fontWeight: '100',
+            fontWeight: '400',
             lineHeight: '2.5',
-            letterSpacing: '0.08em',
-            fontSize: '1.1rem',
+            letterSpacing: '0.05em',
+            fontSize: '1.2rem',
             a: {
               color: '#2D2A24',
               '&:hover': {
@@ -60,24 +60,24 @@ module.exports = {
               },
             },
             h1: {
-              fontWeight: '200',
-              fontSize: '3em',
-              lineHeight: '1.2',
-              letterSpacing: '0.25em',
+              fontWeight: '400',
+              fontSize: '3.5em',
+              lineHeight: '1.1',
+              letterSpacing: '0.15em',
               textTransform: 'uppercase',
             },
             h2: {
-              fontWeight: '200',
-              fontSize: '2.25em',
-              lineHeight: '1.2',
-              letterSpacing: '0.2em',
+              fontWeight: '400',
+              fontSize: '2.5em',
+              lineHeight: '1.1',
+              letterSpacing: '0.12em',
               textTransform: 'uppercase',
             },
             h3: {
-              fontWeight: '200',
-              fontSize: '1.75em',
-              lineHeight: '1.2',
-              letterSpacing: '0.15em',
+              fontWeight: '400',
+              fontSize: '2em',
+              lineHeight: '1.1',
+              letterSpacing: '0.1em',
               textTransform: 'uppercase',
             },
           },

@@ -1,11 +1,11 @@
 import { ThemeProvider } from 'next-themes';
 import Header from '../components/header/Header';
 import Footer from '../components/footer/Footer';
-import { Saira_Extra_Condensed } from 'next/font/google';
+import { Bodoni_Moda } from 'next/font/google';
 import '../styles/globals.css';
 
-const professionalFont = Saira_Extra_Condensed({
-  weight: ['100', '200', '300'],
+const professionalFont = Bodoni_Moda({
+  weight: ['400'],
   subsets: ['latin'],
   variable: '--font-professional',
 });
