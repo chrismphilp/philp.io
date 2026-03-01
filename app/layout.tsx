@@ -1,12 +1,12 @@
 import { ThemeProvider } from 'next-themes';
 import Header from '../components/header/Header';
 import Footer from '../components/footer/Footer';
-import { Geist } from 'next/font/google';
+import { Inter } from 'next/font/google';
 import '../styles/globals.css';
 
-const japaneseFont = Geist({
+const professionalFont = Inter({
   subsets: ['latin'],
-  variable: '--font-japanese',
+  variable: '--font-professional',
 });
 
 export const metadata = {
@@ -29,7 +29,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`flex flex-col min-h-screen ${japaneseFont.variable} font-sans`}>
+      <body className={`flex flex-col min-h-screen ${professionalFont.variable} font-sans`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableColorScheme>
           <Header />
           <main className="grow px-6 md:px-12 lg:px-24 max-w-6xl mx-auto w-full">

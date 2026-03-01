@@ -11,7 +11,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['var(--font-japanese)', 'var(--font-source-code)', ...fontFamily.sans],
+        sans: ['var(--font-professional)', 'var(--font-source-code)', ...fontFamily.sans],
         serif: ['Times New Roman', 'Georgia', 'serif'],
       },
       colors: {
