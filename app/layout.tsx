@@ -1,10 +1,10 @@
 import { ThemeProvider } from 'next-themes';
 import Header from '../components/header/Header';
 import Footer from '../components/footer/Footer';
-import { Bodoni_Moda } from 'next/font/google';
+import { Bellefair } from 'next/font/google';
 import '../styles/globals.css';
 
-const professionalFont = Bodoni_Moda({
+const professionalFont = Bellefair({
   weight: ['400'],
   subsets: ['latin'],
   variable: '--font-professional',
