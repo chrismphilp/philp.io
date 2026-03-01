@@ -1,11 +1,11 @@
 import { ThemeProvider } from 'next-themes';
 import Header from '../components/header/Header';
 import Footer from '../components/footer/Footer';
-import { Noto_Serif_JP } from 'next/font/google';
+import { Cormorant_Garamond } from 'next/font/google';
 import '../styles/globals.css';
 
-const professionalFont = Noto_Serif_JP({
-  weight: ['200', '300'],
+const professionalFont = Cormorant_Garamond({
+  weight: ['300'],
   subsets: ['latin'],
   variable: '--font-professional',
 });
