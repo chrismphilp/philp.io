@@ -81,6 +81,19 @@ module.exports = {
               letterSpacing: '0.06em',
               textTransform: 'uppercase',
             },
+            pre: {
+              padding: '1.5rem',
+              borderRadius: '0.25rem',
+              fontSize: '0.85rem',
+              lineHeight: '1.7',
+            },
+            code: {
+              fontWeight: '300',
+              fontSize: '0.9em',
+              backgroundColor: 'rgba(191, 176, 163, 0.15)',
+              padding: '0.2em 0.4em',
+              borderRadius: '0.2rem',
+            },
           },
         },
         lg: {

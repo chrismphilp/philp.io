@@ -46,12 +46,15 @@
 @layer components {
   /* Shiki syntax highlighting dual theme */
   .prose pre {
-    background-color: var(--shiki-light-bg) !important;
+    background-color: #F5F4EC !important; /* Slightly darker than page #FBFAF2 */
     color: var(--shiki-light) !important;
+    border: 0.5px solid rgba(191, 176, 163, 0.3); /* Muted taupe border */
+    border-radius: 4px;
   }
   
   .prose code {
     color: var(--shiki-light, inherit);
+    font-size: 0.9em;
   }
   
   .prose span[style*="--shiki-light"] {
@@ -61,8 +64,9 @@
   }
 
   html.dark .prose pre {
-    background-color: var(--shiki-dark-bg) !important;
+    background-color: #1E1C16 !important; /* Slightly lighter/softer than page #2D2A24 */
     color: var(--shiki-dark) !important;
+    border: 0.5px solid rgba(80, 74, 64, 0.5);
   }
   
   html.dark .prose code {
