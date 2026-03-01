@@ -45,11 +45,39 @@
 }
 
 @layer components {
-  /* Dark mode overrides */
-  html.dark pre[data-theme="light"],
-  html.dark div[data-theme="light"],
-  html.dark code[data-theme="light"] {
-    display: none;
+  /* Shiki syntax highlighting dual theme */
+  pre {
+    background-color: var(--shiki-light-bg);
+    color: var(--shiki-light);
+  }
+  
+  code {
+    background-color: var(--shiki-light-bg, transparent);
+    color: var(--shiki-light, inherit);
+  }
+  
+  span[style*="--shiki-light"] {
+    color: var(--shiki-light);
+    font-style: var(--shiki-light-font-style, inherit);
+    font-weight: var(--shiki-light-font-weight, inherit);
+    text-decoration: var(--shiki-light-text-decoration, inherit);
+  }
+
+  html.dark pre {
+    background-color: var(--shiki-dark-bg);
+    color: var(--shiki-dark);
+  }
+  
+  html.dark code {
+    background-color: var(--shiki-dark-bg, transparent);
+    color: var(--shiki-dark, inherit);
+  }
+  
+  html.dark span[style*="--shiki-dark"] {
+    color: var(--shiki-dark);
+    font-style: var(--shiki-dark-font-style, inherit);
+    font-weight: var(--shiki-dark-font-weight, inherit);
+    text-decoration: var(--shiki-dark-text-decoration, inherit);
   }
   
   html.dark .text-primary { color: #F0EFE7 !important; }
@@ -61,11 +89,7 @@
   html.dark a.underline-effect::after { background-color: #C84630; }
   html.dark .vertical-text { color: #BFB0A3; }
 
-  html.light pre[data-theme="dark"],
-  html.light div[data-theme="dark"],
-  html.light code[data-theme="dark"] {
-    display: none;
-  }
+
 
   div[data-rehype-pretty-code-title] {
     margin-bottom: -1.5rem;
