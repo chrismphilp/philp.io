@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -10,7 +8,6 @@
   body > div:first-child,
   div#__next {
     min-height: 100vh;
-    font-family: 'Noto Serif JP', serif;
     letter-spacing: 0.03em;
     color: #2D2A24;
     background-color: #FBFAF2;

@@ -1,12 +1,13 @@
 import { ThemeProvider } from 'next-themes';
 import Header from '../components/header/Header';
 import Footer from '../components/footer/Footer';
-import { Bitter } from 'next/font/google';
+import { Shippori_Mincho } from 'next/font/google';
 import '../styles/globals.css';
 
-const bitter = Bitter({
+const japaneseFont = Shippori_Mincho({
+  weight: ['400', '500'],
   subsets: ['latin'],
-  variable: '--font-source-code',
+  variable: '--font-japanese',
 });
 
 export const metadata = {
@@ -29,7 +30,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`flex flex-col min-h-screen ${bitter.variable} font-serif`}>
+      <body className={`flex flex-col min-h-screen ${japaneseFont.variable} font-serif`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableColorScheme>
           <Header />
           <main className="grow px-6 md:px-12 lg:px-24 max-w-6xl mx-auto w-full">
