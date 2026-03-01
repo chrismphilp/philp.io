@@ -1,11 +1,11 @@
 import { ThemeProvider } from 'next-themes';
 import Header from '../components/header/Header';
 import Footer from '../components/footer/Footer';
-import { Noto_Serif_JP } from 'next/font/google';
+import { BIZ_UDPMincho } from 'next/font/google';
 import '../styles/globals.css';
 
-const japaneseFont = Noto_Serif_JP({
-  weight: ['300', '400', '500'],
+const japaneseFont = BIZ_UDPMincho({
+  weight: ['400'],
   subsets: ['latin'],
   variable: '--font-japanese',
 });
