@@ -19,5 +19,6 @@ export enum ArticleType {
   FILM = 'Film',
   FAMILY = 'Family',
   POETRY = 'Poetry',
+  POLITICS = 'Politics',
   MISC = 'Misc',
 }
