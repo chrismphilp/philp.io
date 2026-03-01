@@ -1,5 +1,5 @@
-import { useRouter } from 'next/router';
-import Head from 'next/head';
+"use client";
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { formatDate } from '../../utils/dateUtils';
 import ArticleNavigation from './ArticleNavigation';
@@ -33,41 +33,21 @@ const Article = ({ frontMatter, children, previousPost, nextPost }) => {
   const handleBackClick = () => {
     if (typeof window === 'undefined') return;
     setExitSlug(frontMatter.slug);
-
-    const currentPath = router.asPath;
-    let fallbackTimeout: number | null = null;
-
-    const cleanup = () => {
-      if (fallbackTimeout) {
-        window.clearTimeout(fallbackTimeout);
-      }
-      router.events.off('routeChangeComplete', handleRouteChangeComplete);
-    };
-
-    const handleRouteChangeComplete = () => {
-      cleanup();
-      setExitSlug(null);
-    };
-
-    router.events.on('routeChangeComplete', handleRouteChangeComplete);
-    router.back();
-
-    fallbackTimeout = window.setTimeout(() => {
-      router.events.off('routeChangeComplete', handleRouteChangeComplete);
-      if (router.asPath === currentPath) {
-        void router.push('/');
+    
+    // Fallback: If navigating back doesn't change the path quickly, push to home.
+    // This often happens if the user landed on the article directly.
+    const currentPath = window.location.pathname;
+    setTimeout(() => {
+      if (window.location.pathname === currentPath) {
+        router.push('/');
       }
     }, 300);
+
+    router.back();
   };
 
   return (
     <div className="pt-5 md:pt-10 w-full min-w-full">
-      <Head>
-        <title>{frontMatter.title}</title>
-        <meta name="title" content={frontMatter.title} />
-        <meta name="description" content={frontMatter.description} />
-        <meta name="date" content={frontMatter.date} />
-      </Head>
       <article
         aria-busy={!isContentVisible || isExiting}
         className={`prose prose-slate dark:prose-invert dark:text-background-dark md:prose-lg lg:prose-xl prose-a:no-underline text-sm sm:text-base mx-auto transition-opacity duration-300 ease-out ${

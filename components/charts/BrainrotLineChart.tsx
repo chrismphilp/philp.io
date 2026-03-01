@@ -1,3 +1,4 @@
+"use client";
 import React from 'react';
 import { useTheme } from 'next-themes';
 
@@ -17,8 +18,8 @@ export type BrainrotLineChartProps = {
 
 const BrainrotLineChart: React.FC<BrainrotLineChartProps> = ({
   title = 'Brain-rot Metrics',
-  categories,
-  series,
+  categories = [],
+  series = [],
   height = 320,
   xAxisLabel = '',
   yAxisLabel = '',
