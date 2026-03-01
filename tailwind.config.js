@@ -65,21 +65,18 @@ module.exports = {
               fontSize: '2.5em',
               lineHeight: '1.2',
               letterSpacing: '0.1em',
-              textTransform: 'uppercase',
             },
             h2: {
               fontWeight: '300',
               fontSize: '2em',
               lineHeight: '1.2',
               letterSpacing: '0.08em',
-              textTransform: 'uppercase',
             },
             h3: {
               fontWeight: '300',
               fontSize: '1.5em',
               lineHeight: '1.2',
               letterSpacing: '0.06em',
-              textTransform: 'uppercase',
             },
             pre: {
               padding: '1.5rem',
