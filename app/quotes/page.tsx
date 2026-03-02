@@ -22,7 +22,9 @@ export default function Quotes() {
           source={content}
           options={{
             mdxOptions: {
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
               remarkPlugins: [remarkGfm as any],
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
               rehypePlugins: [rehypeSlug as any],
             },
           }}

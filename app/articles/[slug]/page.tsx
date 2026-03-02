@@ -1,7 +1,6 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-import readingTime from 'reading-time';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import Article from '../../../components/article/Article';
 import BrainrotLineChart from '../../../components/charts/BrainrotLineChart';
@@ -11,13 +10,15 @@ import rehypeImgSize from 'rehype-img-size';
 import rehypePrettyCode from 'rehype-pretty-code';
 import remarkGfm from 'remark-gfm';
 import ExportedImage from 'next-image-export-optimizer';
-import { ARTICLES_PATH, articleFilePaths, getPostMetadata } from '../../../utils/mdxUtils';
+import { ARTICLES_PATH, articleFilePaths, getPostMetadata, PostMeta } from '../../../utils/mdxUtils';
 
 const components = {
-  img: (props: any) => (
+  img: (props: React.ImgHTMLAttributes<HTMLImageElement>) => (
     <ExportedImage
       className="mx-auto"
       {...props}
+      src={props.src || ''}
+      alt={props.alt || ''}
       priority={true}
       placeholder="blur"
       loading="eager"
@@ -29,7 +30,7 @@ const components = {
 
 const postSlugFromPath = (filePath: string) => filePath.replace(/\.mdx?$/, '');
 
-const buildNavItem = (post: any) =>
+const buildNavItem = (post: PostMeta | null) =>
   post
     ? {
         title: post.data.title,
@@ -85,13 +86,18 @@ export default async function ArticlePage(props: { params: Promise<{ slug: strin
       >
         <MDXRemote
           source={content}
-          components={components}
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          components={components as any}
           options={{
             mdxOptions: {
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
               remarkPlugins: [remarkGfm as any],
               rehypePlugins: [
                 rehypeSlug,
-                [rehypeAutolinkHeadings, { behavior: 'wrap', properties: { className: ['anchor'] } }],
+                [
+                  rehypeAutolinkHeadings,
+                  { behavior: 'wrap', properties: { className: ['anchor'] } },
+                ],
                 [
                   rehypePrettyCode,
                   {
@@ -101,7 +107,9 @@ export default async function ArticlePage(props: { params: Promise<{ slug: strin
                     },
                     keepBackground: true,
                   },
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 ] as any,
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 [rehypeImgSize, { dir: 'public' }] as any,
               ],
             },
