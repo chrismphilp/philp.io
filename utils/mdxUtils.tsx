@@ -27,7 +27,10 @@ export type PostData = PostMeta & {
 
 const FrontmatterSchema = z.object({
   title: z.string(),
-  description: z.string().nullable().transform((val) => val ?? ''),
+  description: z
+    .string()
+    .nullable()
+    .transform((val) => val ?? ''),
   date: z.string(),
   category: z.nativeEnum(ArticleType),
   draft: z.boolean().optional().default(false),

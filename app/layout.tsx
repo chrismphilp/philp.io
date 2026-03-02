@@ -23,11 +23,7 @@ export const metadata = {
   manifest: '/blog/site.webmanifest',
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`flex flex-col min-h-screen ${professionalFont.variable} font-sans`}>
