@@ -3,14 +3,12 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
-  --font-sans: var(--font-professional), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-serif: var(--font-professional), "Times New Roman", Georgia, serif;
-  --font-mono: var(--font-source-code), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-sans: var(--font-professional), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-professional), Georgia, serif;
+  --font-mono: var(--font-source-code), ui-monospace, monospace;
 
   --color-primary: #2D2A24;
-  --color-primary-light: #504A40;
   --color-secondary: #5D5D5D;
-  --color-secondary-light: #8A8A8A;
   --color-background: #FBFAF2;
   --color-background-dark: #F0EFE7;
   --color-accent: #BFB0A3;
@@ -29,11 +27,8 @@
   body > div:first-child,
   div#__next {
     min-height: 100vh;
-    letter-spacing: 0.03em;
     color: var(--color-primary);
     background-color: var(--color-background);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
   }
 
   html.dark body,
@@ -245,7 +240,7 @@
 
 /* Custom Typography Overrides for Spectral Classy look */
 .prose {
-  font-family: inherit;
+  font-family: var(--font-professional), serif;
   --tw-prose-body: var(--color-primary);
   --tw-prose-headings: var(--color-primary);
   --tw-prose-links: var(--color-primary);
@@ -266,9 +261,9 @@
 .prose p {
   font-weight: 300;
   line-height: 1.8;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.02em;
   font-size: 1.05rem;
-  color: rgba(45, 42, 36, 0.9);
+  color: #2D2A24;
 }
 
 .prose h1 {
