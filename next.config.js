@@ -2,29 +2,18 @@ const prod = process.env.NODE_ENV === 'production';
 
 let withBundleAnalyzer;
 try {
-  // Optional in production environments (e.g. Cloudflare) where the analyzer
-  // devDependency may not be installed.
   const analyzer = require('@next/bundle-analyzer');
   withBundleAnalyzer = analyzer({ enabled: process.env.ANALYZE === 'true' });
 } catch {
-  // Fallback: no-op wrapper if bundle analyzer is unavailable
   withBundleAnalyzer = (config) => config;
 }
 
 /** @type {import('next').NextConfig} */
-const withMDX = require('@next/mdx')({
-  extension: /\.mdx?$/,
-  options: {
-    remarkPlugins: [],
-    rehypePlugins: [],
-    providerImportSource: '@mdx-js/react',
-  },
-});
-
-const mdxConfig = {
+const nextConfig = {
   output: 'export',
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
   transpilePackages: ['react-icons', 'next-image-export-optimizer'],
+  turbopack: {},
   images: {
     loader: 'custom',
     imageSizes: [16, 64, 128, 256],
@@ -40,18 +29,9 @@ const mdxConfig = {
   },
 };
 
-// Merge MDX config with Next.js config
-const mdx = withMDX(mdxConfig);
-
-const withPWA = require('next-pwa')({
+const withPWA = require('@ducanh2912/next-pwa').default({
   dest: 'public',
   disable: !prod,
 });
 
-/** @type {import('next').NextConfig} */
-const baseConfig = {
-  ...withPWA(mdx),
-  turbopack: {},
-};
-
-module.exports = withBundleAnalyzer(baseConfig);
+module.exports = withBundleAnalyzer(withPWA(nextConfig));

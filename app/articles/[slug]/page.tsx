@@ -2,7 +2,6 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import { MDXRemote } from 'next-mdx-remote/rsc';
-import type { PluggableList } from 'unified';
 import Article from '../../../components/article/Article';
 import BrainrotLineChart from '../../../components/charts/BrainrotLineChart';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
@@ -17,8 +16,8 @@ const components = {
   img: (props: React.ImgHTMLAttributes<HTMLImageElement>) => (
     <ExportedImage
       className="mx-auto"
-      {...props}
-      src={props.src || ''}
+      {...(props as unknown as React.ComponentProps<typeof ExportedImage>)}
+      src={(props.src as string) || ''}
       alt={props.alt || ''}
       priority={true}
       placeholder="blur"
@@ -90,7 +89,8 @@ export default async function ArticlePage(props: { params: Promise<{ slug: strin
           components={components}
           options={{
             mdxOptions: {
-              remarkPlugins: [remarkGfm] as unknown as PluggableList,
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              remarkPlugins: [remarkGfm] as any,
               rehypePlugins: [
                 rehypeSlug,
                 [
@@ -108,7 +108,8 @@ export default async function ArticlePage(props: { params: Promise<{ slug: strin
                   },
                 ],
                 [rehypeImgSize, { dir: 'public' }],
-              ] as unknown as PluggableList,
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              ] as any,
             },
           }}
         />

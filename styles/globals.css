@@ -1,6 +1,27 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --font-sans: var(--font-professional), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-serif: var(--font-professional), "Times New Roman", Georgia, serif;
+  --font-mono: var(--font-source-code), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+  --color-primary: #2D2A24;
+  --color-primary-light: #504A40;
+  --color-secondary: #5D5D5D;
+  --color-secondary-light: #8A8A8A;
+  --color-background: #FBFAF2;
+  --color-background-dark: #F0EFE7;
+  --color-accent: #BFB0A3;
+  --color-accent-subtle: #D9D0C7;
+  --color-accent-dark: #8C7B6B;
+  --color-accent-highlight: #C84630;
+
+  --spacing-128: 32rem;
+
+  --shadow-washi: 0 2px 15px rgba(0, 0, 0, 0.03);
+}
 
 @layer base {
   html,
@@ -9,8 +30,8 @@
   div#__next {
     min-height: 100vh;
     letter-spacing: 0.03em;
-    color: #2D2A24;
-    background-color: #FBFAF2;
+    color: var(--color-primary);
+    background-color: var(--color-background);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -19,27 +40,27 @@
   html.dark body > div:first-child,
   html.dark div#__next,
   html.dark {
-    color: #F0EFE7;
-    background-color: #2D2A24;
+    color: var(--color-background-dark);
+    background-color: var(--color-primary);
   }
 
   html.dark a {
-    color: #F0EFE7;
+    color: var(--color-background-dark);
   }
   
   html.dark a:hover {
-    color: #C84630;
+    color: var(--color-accent-highlight);
   }
 
   a {
-    color: #2D2A24;
+    color: var(--color-primary);
     text-decoration: none;
     transition: all 0.3s ease;
     position: relative;
   }
 
   a:hover {
-    color: #C84630;
+    color: var(--color-accent-highlight);
   }
 }
 
@@ -88,8 +109,6 @@
   html.dark a.underline-effect::after { background-color: #C84630; }
   html.dark .vertical-text { color: #BFB0A3; }
 
-
-
   div[data-rehype-pretty-code-title] {
     margin-bottom: -1.5rem;
     font-style: italic;
@@ -97,7 +116,8 @@
   }
 
   .word-highlighted {
-    @apply bg-accent-subtle rounded;
+    background-color: var(--color-accent-subtle);
+    border-radius: 0.25rem;
     box-shadow: 0 0 0 4px rgba(217, 208, 199, 0.3);
   }
 
@@ -221,4 +241,67 @@
 @keyframes theme-toggle-spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+/* Custom Typography Overrides for Spectral Classy look */
+.prose {
+  --tw-prose-body: var(--color-primary);
+  --tw-prose-headings: var(--color-primary);
+  --tw-prose-links: var(--color-primary);
+  --tw-prose-bold: var(--color-primary);
+  --tw-prose-counters: var(--color-secondary);
+  --tw-prose-bullets: var(--color-accent);
+  --tw-prose-hr: var(--color-accent-subtle);
+  --tw-prose-quotes: var(--color-primary);
+  --tw-prose-quote-borders: var(--color-accent-highlight);
+  --tw-prose-captions: var(--color-secondary);
+  --tw-prose-code: var(--color-primary);
+  --tw-prose-pre-code: var(--color-secondary);
+  --tw-prose-pre-bg: #F5F4EC;
+  --tw-prose-th-borders: var(--color-accent-subtle);
+  --tw-prose-td-borders: var(--color-accent-subtle);
+}
+
+.prose p {
+  font-weight: 300;
+  line-height: 1.8;
+  letter-spacing: 0.04em;
+  font-size: 1.05rem;
+  color: rgba(45, 42, 36, 0.9);
+}
+
+.prose h1 {
+  font-weight: 300;
+  font-size: 2.5em;
+  line-height: 1.2;
+  letter-spacing: 0.1em;
+}
+
+.prose h2 {
+  font-weight: 300;
+  font-size: 2em;
+  line-height: 1.2;
+  letter-spacing: 0.08em;
+}
+
+.prose h3 {
+  font-weight: 300;
+  font-size: 1.5em;
+  line-height: 1.2;
+  letter-spacing: 0.06em;
+}
+
+.prose pre {
+  padding: 1.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.85rem;
+  line-height: 1.7;
+}
+
+.prose :not(pre) > code {
+  font-weight: 300;
+  font-size: 0.9em;
+  background-color: rgba(191, 176, 163, 0.15);
+  padding: 0.2em 0.4em;
+  border-radius: 0.2rem;
 }
