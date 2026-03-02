@@ -33,7 +33,9 @@
     "@ducanh2912/next-pwa": "^10.2.9",
     "@tailwindcss/postcss": "^4.2.1",
     "@tailwindcss/typography": "0.5.9",
-    "@types/node": "^22.14.1",
+    "@types/node": "^25.3.3",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
     "autoprefixer": "^10.4.27",
     "gray-matter": "4.0.3",
     "next": "^16.1.6",
@@ -55,13 +57,12 @@
     "remark-gfm": "^4.0.1",
     "sharp": "^0.34.5",
     "shiki": "^3.23.0",
+    "typescript": "^5.9.3",
     "zod": "^4.3.6"
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^14.2.33",
     "@types/minimatch": "^5.1.2",
-    "@types/react": "^19.2.14",
-    "@types/react-dom": "^19.2.3",
     "baseline-browser-mapping": "^2.10.0",
     "eslint": "^9.39.1",
     "eslint-config-next": "^16.1.6",
@@ -69,7 +70,6 @@
     "pre-push": "^0.1.4",
     "prettier": "3.0.0",
     "tailwindcss": "^4.2.1",
-    "typescript": "^5.8.3",
     "vercel": "^28.16.15"
   },
   "optionalDependencies": {
