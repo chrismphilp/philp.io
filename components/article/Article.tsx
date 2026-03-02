@@ -19,9 +19,7 @@ const Article = ({ frontMatter, children, previousPost, nextPost }) => {
 
         {/* Main Content */}
         <article className="prose dark:prose-invert md:prose-lg lg:prose-xl prose-a:no-underline text-sm sm:text-base flex-grow min-w-0 max-w-[65ch] md:max-w-[75ch] lg:max-w-[80ch]">
-          <section className="text-justify [&>*:first-child]:mt-0">
-            {children}
-          </section>
+          <section className="text-justify [&>*:first-child]:mt-0">{children}</section>
 
           <ArticleNavigation previousPost={previousPost} nextPost={nextPost} />
         </article>

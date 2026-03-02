@@ -10,7 +10,12 @@ import rehypeImgSize from 'rehype-img-size';
 import rehypePrettyCode from 'rehype-pretty-code';
 import remarkGfm from 'remark-gfm';
 import ExportedImage from 'next-image-export-optimizer';
-import { ARTICLES_PATH, articleFilePaths, getPostMetadata, PostMeta } from '../../../utils/mdxUtils';
+import {
+  ARTICLES_PATH,
+  articleFilePaths,
+  getPostMetadata,
+  PostMeta,
+} from '../../../utils/mdxUtils';
 
 const components = {
   img: (props: React.ImgHTMLAttributes<HTMLImageElement>) => (
