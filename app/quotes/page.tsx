@@ -2,6 +2,7 @@ import path from 'path';
 import fs from 'fs';
 import { QUOTES_PATH } from '../../utils/mdxUtils';
 import { MDXRemote } from 'next-mdx-remote/rsc';
+import type { PluggableList } from 'unified';
 import rehypeSlug from 'rehype-slug';
 import remarkGfm from 'remark-gfm';
 import matter from 'gray-matter';
@@ -22,10 +23,8 @@ export default function Quotes() {
           source={content}
           options={{
             mdxOptions: {
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              remarkPlugins: [remarkGfm as any],
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              rehypePlugins: [rehypeSlug as any],
+              remarkPlugins: [remarkGfm] as unknown as PluggableList,
+              rehypePlugins: [rehypeSlug] as unknown as PluggableList,
             },
           }}
         />

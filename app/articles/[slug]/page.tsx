@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import { MDXRemote } from 'next-mdx-remote/rsc';
+import type { PluggableList } from 'unified';
 import Article from '../../../components/article/Article';
 import BrainrotLineChart from '../../../components/charts/BrainrotLineChart';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
@@ -86,12 +87,10 @@ export default async function ArticlePage(props: { params: Promise<{ slug: strin
       >
         <MDXRemote
           source={content}
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          components={components as any}
+          components={components}
           options={{
             mdxOptions: {
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              remarkPlugins: [remarkGfm as any],
+              remarkPlugins: [remarkGfm] as unknown as PluggableList,
               rehypePlugins: [
                 rehypeSlug,
                 [
@@ -107,11 +106,9 @@ export default async function ArticlePage(props: { params: Promise<{ slug: strin
                     },
                     keepBackground: true,
                   },
-                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                ] as any,
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                [rehypeImgSize, { dir: 'public' }] as any,
-              ],
+                ],
+                [rehypeImgSize, { dir: 'public' }],
+              ] as unknown as PluggableList,
             },
           }}
         />
