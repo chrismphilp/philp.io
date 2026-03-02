@@ -73,8 +73,11 @@
     "vercel": "^28.16.15"
   },
   "optionalDependencies": {
+    "@img/sharp-linux-x64": "^0.34.5",
     "@next/swc-linux-x64-gnu": "^16.1.6",
     "@next/swc-linux-x64-musl": "^16.1.6",
+    "@tailwindcss/oxide-linux-x64-gnu": "^4.2.1",
+    "@tailwindcss/oxide-linux-x64-musl": "^4.2.1",
     "lightningcss-linux-x64-gnu": "^1.31.1",
     "lightningcss-linux-x64-musl": "^1.31.1"
   }
