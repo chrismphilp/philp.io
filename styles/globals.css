@@ -116,9 +116,9 @@
     box-shadow: 0 0 0 4px rgba(217, 208, 199, 0.3);
   }
 
-  .prose :where(code):not(:where([class~="not-prose"] *))::before,
-  .prose :where(code):not(:where([class~="not-prose"] *))::after {
-    content: "";
+  .prose code::before,
+  .prose code::after {
+    content: "" !important;
   }
 
   /* Theme toggle spin animation */
