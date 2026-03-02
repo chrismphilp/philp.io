@@ -20,7 +20,7 @@ export const metadata = {
     ],
     apple: '/blog/images/apple-touch-icon.png',
   },
-  manifest: '/blog/site.webmanifest',
+  manifest: '/manifest.json',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
