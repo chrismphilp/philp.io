@@ -245,6 +245,7 @@
 
 /* Custom Typography Overrides for Spectral Classy look */
 .prose {
+  font-family: inherit;
   --tw-prose-body: var(--color-primary);
   --tw-prose-headings: var(--color-primary);
   --tw-prose-links: var(--color-primary);
