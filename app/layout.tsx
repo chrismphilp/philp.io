@@ -1,7 +1,9 @@
+import type { Metadata } from 'next';
 import { ThemeProvider } from 'next-themes';
 import Header from '../components/header/Header';
 import Footer from '../components/footer/Footer';
 import { Spectral } from 'next/font/google';
+import { siteConfig } from '../utils/siteMetadata';
 import '../styles/globals.css';
 
 const professionalFont = Spectral({
@@ -10,9 +12,35 @@ const professionalFont = Spectral({
   variable: '--font-spectral',
 });
 
-export const metadata = {
-  title: 'philp.io',
-  description: 'A personal blog',
+export const metadata: Metadata = {
+  metadataBase: new URL(siteConfig.url),
+  title: {
+    default: siteConfig.title,
+    template: `%s | ${siteConfig.siteName}`,
+  },
+  description: siteConfig.description,
+  applicationName: siteConfig.siteName,
+  authors: [siteConfig.author],
+  creator: siteConfig.author.name,
+  publisher: siteConfig.author.name,
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    title: siteConfig.title,
+    description: siteConfig.description,
+    url: '/',
+    siteName: siteConfig.siteName,
+    locale: siteConfig.locale,
+    type: 'website',
+    images: [siteConfig.image],
+  },
+  twitter: {
+    card: 'summary',
+    title: siteConfig.title,
+    description: siteConfig.description,
+    images: [siteConfig.image.url],
+  },
   icons: {
     icon: [
       { url: '/blog/images/favicon-32x32.png', sizes: '32x32', type: 'image/png' },

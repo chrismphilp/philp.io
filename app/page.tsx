@@ -1,9 +1,12 @@
+import { buildStaticMetadata, siteConfig } from '../utils/siteMetadata';
 import { getPostMetadata } from '../utils/mdxUtils';
 import InfiniteArticleList from '../components/article/InfiniteArticleList';
 
-export const metadata = {
-  title: 'Christopher Philp',
-};
+export const metadata = buildStaticMetadata({
+  title: siteConfig.title,
+  description: siteConfig.description,
+  path: '/',
+});
 
 export default function Homepage() {
   const posts = getPostMetadata()

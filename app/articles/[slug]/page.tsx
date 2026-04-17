@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
@@ -10,6 +11,7 @@ import rehypeImgSize from 'rehype-img-size';
 import rehypePrettyCode from 'rehype-pretty-code';
 import remarkGfm from 'remark-gfm';
 import ExportedImage from 'next-image-export-optimizer';
+import { buildArticleMetadata } from '../../../utils/siteMetadata';
 import {
   ARTICLES_PATH,
   articleFilePaths,
@@ -51,15 +53,24 @@ export async function generateStaticParams() {
   return paths;
 }
 
-export async function generateMetadata(props: { params: Promise<{ slug: string }> }) {
+export async function generateMetadata(props: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
   const params = await props.params;
   const articleFilePath = path.join(ARTICLES_PATH, `${params.slug}.mdx`);
   const source = fs.readFileSync(articleFilePath, 'utf8');
   const { data } = matter(source);
-  return {
-    title: data.title,
-    description: data.description,
-  };
+
+  return buildArticleMetadata({
+    title: typeof data.title === 'string' ? data.title : 'Article',
+    description:
+      typeof data.description === 'string' && data.description.length > 0
+        ? data.description
+        : 'Read the latest post on philp.io.',
+    path: `/articles/${params.slug}`,
+    publishedTime: typeof data.date === 'string' ? data.date : new Date().toISOString(),
+    section: typeof data.category === 'string' ? data.category : undefined,
+  });
 }
 
 export default async function ArticlePage(props: { params: Promise<{ slug: string }> }) {

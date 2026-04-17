@@ -1,10 +1,13 @@
 import { ArticleType } from '../../components/types';
+import { buildStaticMetadata } from '../../utils/siteMetadata';
 import { getPostMetadata } from '../../utils/mdxUtils';
 import InfiniteArticleList from '../../components/article/InfiniteArticleList';
 
-export const metadata = {
+export const metadata = buildStaticMetadata({
   title: 'Tech',
-};
+  description: 'Technology posts from Christopher Philp.',
+  path: '/tech',
+});
 
 export default function Tech() {
   const posts = getPostMetadata()

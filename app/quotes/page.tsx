@@ -1,14 +1,17 @@
 import path from 'path';
 import fs from 'fs';
+import { buildStaticMetadata } from '../../utils/siteMetadata';
 import { QUOTES_PATH } from '../../utils/mdxUtils';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import rehypeSlug from 'rehype-slug';
 import remarkGfm from 'remark-gfm';
 import matter from 'gray-matter';
 
-export const metadata = {
+export const metadata = buildStaticMetadata({
   title: 'Quotes',
-};
+  description: 'A collection of favourite quotes and excerpts.',
+  path: '/quotes',
+});
 
 export default function Quotes() {
   const quotesFilePath = path.join(QUOTES_PATH, 'quotes.mdx');
