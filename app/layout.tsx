@@ -1,8 +1,10 @@
+import type { Metadata } from 'next';
 import { ThemeProvider } from 'next-themes';
 import Header from '../components/header/Header';
 import Footer from '../components/footer/Footer';
 import { Spectral } from 'next/font/google';
 import '../styles/globals.css';
+import { siteConfig } from '../utils/seo';
 
 const professionalFont = Spectral({
   weight: ['300'],
@@ -10,9 +12,51 @@ const professionalFont = Spectral({
   variable: '--font-spectral',
 });
 
-export const metadata = {
-  title: 'philp.io',
-  description: 'A personal blog',
+export const metadata: Metadata = {
+  metadataBase: new URL(siteConfig.url),
+  title: {
+    default: siteConfig.siteName,
+    template: `%s | ${siteConfig.siteName}`,
+  },
+  description: siteConfig.description,
+  applicationName: siteConfig.siteName,
+  authors: [{ name: siteConfig.author, url: siteConfig.url }],
+  creator: siteConfig.author,
+  publisher: siteConfig.author,
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    title: siteConfig.siteName,
+    description: siteConfig.description,
+    url: siteConfig.url,
+    siteName: siteConfig.siteName,
+    locale: siteConfig.locale,
+    type: 'website',
+    images: [
+      {
+        url: siteConfig.socialImage,
+        alt: siteConfig.siteName,
+      },
+    ],
+  },
+  robots: {
+    follow: true,
+    googleBot: {
+      follow: true,
+      index: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    },
+    index: true,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: siteConfig.siteName,
+    description: siteConfig.description,
+    images: [siteConfig.socialImage],
+  },
   icons: {
     icon: [
       { url: '/blog/images/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
@@ -25,7 +69,7 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en-GB" suppressHydrationWarning>
       <body className={`flex flex-col min-h-screen ${professionalFont.variable}`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableColorScheme>
           <Header />

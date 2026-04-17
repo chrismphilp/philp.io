@@ -24,14 +24,15 @@ const ArticleCard = ({ post }) => {
           {formatDate(post.data.date)} — {post.data.readingTime}
         </div>
 
-        <Link
-          className="block text-primary text-xl md:text-2xl mb-2 hover:text-accent-highlight transition-colors duration-300 font-light tracking-wide"
-          as={link}
-          href={'/articles/[slug]'}
-          prefetch={false}
-        >
-          {post.data.title}
-        </Link>
+        <h2 className="text-primary text-xl md:text-2xl mb-2 font-light tracking-wide">
+          <Link
+            className="block hover:text-accent-highlight transition-colors duration-300"
+            href={link}
+            prefetch={false}
+          >
+            {post.data.title}
+          </Link>
+        </h2>
 
         <p className="text-secondary text-base leading-relaxed pr-0 md:pr-12 font-light">
           {post.data.description}

@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import Navigation from './Navigation';
 import Avatar from './Avatar';
 import HeaderIcons from './HeaderIcons';
@@ -10,9 +11,12 @@ const Header = () => (
 
       <div className="flex items-center mb-6 md:mb-0">
         <Avatar image={profilePic} alt="Picture of the Author" />
-        <h1 className="ml-5 text-base md:text-lg tracking-widest text-primary font-light whitespace-nowrap">
+        <Link
+          href="/"
+          className="ml-5 text-base md:text-lg tracking-widest text-primary font-light whitespace-nowrap"
+        >
           Christopher <span className="text-accent-highlight">Philp</span>
-        </h1>
+        </Link>
       </div>
 
       <div className="flex flex-wrap items-center justify-center md:justify-end">

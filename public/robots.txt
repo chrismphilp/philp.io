@@ -1,2 +1,4 @@
 User-agent: *
-Disallow: /quotes
+Allow: /
+
+Sitemap: https://philp.io/sitemap.xml

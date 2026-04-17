@@ -2,6 +2,7 @@ export type ArticleData = {
   title: string;
   description: string;
   date: string;
+  lastModified: string;
   category: ArticleType;
   wordCount: number;
   readingTime: string;

@@ -9,32 +9,18 @@ interface InfiniteArticleListProps {
 }
 
 const InfiniteArticleList = ({ allPosts, initialPostCount = 5 }: InfiniteArticleListProps) => {
-  const [displayedPosts, setDisplayedPosts] = useState<PostMeta[]>([]);
   const [page, setPage] = useState(1);
-  const [hasMore, setHasMore] = useState(true);
   const loader = useRef<HTMLDivElement>(null);
   const postsPerPage = initialPostCount;
-
-  // Initialize with the first batch of posts
-  useEffect(() => {
-    setDisplayedPosts(allPosts.slice(0, initialPostCount));
-    setHasMore(allPosts.length > initialPostCount);
-  }, [allPosts, initialPostCount]);
+  const displayedPosts = allPosts.slice(0, page * postsPerPage);
+  const hasMore = displayedPosts.length < allPosts.length;
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         const target = entries[0];
-        if (target.isIntersecting && hasMore) {
-          const nextPage = page + 1;
-          const newPosts = allPosts.slice(0, nextPage * postsPerPage);
-
-          setDisplayedPosts(newPosts);
-          setPage(nextPage);
-
-          if (newPosts.length >= allPosts.length) {
-            setHasMore(false);
-          }
+        if (target?.isIntersecting && hasMore) {
+          setPage((currentPage) => currentPage + 1);
         }
       },
       { rootMargin: '100px' },

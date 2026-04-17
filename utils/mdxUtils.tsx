@@ -36,31 +36,62 @@ const FrontmatterSchema = z.object({
   draft: z.boolean().optional().default(false),
 });
 
+const buildPostData = (filePath: string): PostData => {
+  const fullPath = path.join(ARTICLES_PATH, filePath);
+  const source = fs.readFileSync(fullPath);
+  const { content, data } = matter(source);
+  const validatedData = FrontmatterSchema.parse(data);
+
+  return {
+    content,
+    data: {
+      ...validatedData,
+      lastModified: new Date(validatedData.date).toISOString(),
+      wordCount: content.split(/\s+/g).length,
+      readingTime: readingTime(content).text,
+    } as ArticleData,
+    filePath,
+  };
+};
+
 export const getPostMetadata = (): PostMeta[] =>
   articleFilePaths.map((filePath) => {
-    const source = fs.readFileSync(path.join(ARTICLES_PATH, filePath));
-    const { content, data } = matter(source);
-
-    // Validate frontmatter to ensure type safety
-    const validatedData = FrontmatterSchema.parse(data);
+    const { data } = buildPostData(filePath);
 
     return {
-      data: {
-        ...validatedData,
-        wordCount: content.split(/\s+/g).length,
-        readingTime: readingTime(content).text,
-      } as ArticleData,
+      data,
       filePath,
     };
   });
 
-export const getPosts = (): PostData[] =>
-  getPostMetadata().map((meta) => {
-    const source = fs.readFileSync(path.join(ARTICLES_PATH, meta.filePath));
-    const { content } = matter(source);
+export const getPublishedPostMetadata = (): PostMeta[] =>
+  getPostMetadata().filter((post) => !post.data.draft);
 
-    return {
-      ...meta,
-      content,
-    };
-  });
+export const getPosts = (): PostData[] =>
+  articleFilePaths.map((filePath) => buildPostData(filePath));
+
+const getArticleFilePathBySlug = (slug: string) =>
+  articleFilePaths.find((filePath) => filePath.replace(/\.mdx?$/, '') === slug);
+
+export const getPostBySlug = (slug: string): PostData | null => {
+  const filePath = getArticleFilePathBySlug(slug);
+
+  if (!filePath) {
+    return null;
+  }
+
+  return buildPostData(filePath);
+};
+
+export const getPublishedPostBySlug = (slug: string): PostData | null => {
+  const post = getPostBySlug(slug);
+
+  if (!post || post.data.draft) {
+    return null;
+  }
+
+  return post;
+};
+
+export const sortPostsByDateDescending = <T extends PostMeta>(posts: T[]) =>
+  [...posts].sort((post1, post2) => (post1.data.date > post2.data.date ? -1 : 1));
