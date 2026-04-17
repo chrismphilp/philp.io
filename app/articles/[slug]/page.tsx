@@ -19,19 +19,31 @@ import {
   PostMeta,
 } from '../../../utils/mdxUtils';
 
+type ArticleImageProps = React.ImgHTMLAttributes<HTMLImageElement> & {
+  'data-priority'?: string;
+};
+
 const components = {
-  img: (props: React.ImgHTMLAttributes<HTMLImageElement>) => (
-    <ExportedImage
-      className="mx-auto"
-      {...(props as unknown as React.ComponentProps<typeof ExportedImage>)}
-      src={(props.src as string) || ''}
-      alt={props.alt || ''}
-      priority={true}
-      placeholder="blur"
-      loading="eager"
-      role="img"
-    />
-  ),
+  img: ({ className, sizes, src, alt, 'data-priority': dataPriority, ...props }: ArticleImageProps) => {
+    const priority = dataPriority === 'true';
+
+    return (
+      <ExportedImage
+        className={className ? `mx-auto ${className}` : 'mx-auto'}
+        {...(props as unknown as Omit<
+          React.ComponentProps<typeof ExportedImage>,
+          'alt' | 'className' | 'loading' | 'priority' | 'sizes' | 'src'
+        >)}
+        src={src || ''}
+        alt={alt || ''}
+        sizes={sizes || '(min-width: 1024px) 80ch, 100vw'}
+        priority={priority}
+        placeholder="blur"
+        loading={priority ? 'eager' : 'lazy'}
+        role="img"
+      />
+    );
+  },
   BrainrotLineChart: BrainrotLineChart,
 };
 
