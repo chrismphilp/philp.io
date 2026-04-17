@@ -26,6 +26,9 @@ type ArticleImageProps = React.ImgHTMLAttributes<HTMLImageElement> & {
 const components = {
   img: ({ className, sizes, src, alt, 'data-priority': dataPriority, ...props }: ArticleImageProps) => {
     const priority = dataPriority === 'true';
+    const imageSrc = typeof src === 'string' ? src : '';
+    const imageAlt = typeof alt === 'string' ? alt : '';
+    const imageSizes = typeof sizes === 'string' ? sizes : '(min-width: 1024px) 80ch, 100vw';
 
     return (
       <ExportedImage
@@ -34,9 +37,9 @@ const components = {
           React.ComponentProps<typeof ExportedImage>,
           'alt' | 'className' | 'loading' | 'priority' | 'sizes' | 'src'
         >)}
-        src={src || ''}
-        alt={alt || ''}
-        sizes={sizes || '(min-width: 1024px) 80ch, 100vw'}
+        src={imageSrc}
+        alt={imageAlt}
+        sizes={imageSizes}
         priority={priority}
         placeholder="blur"
         loading={priority ? 'eager' : 'lazy'}
