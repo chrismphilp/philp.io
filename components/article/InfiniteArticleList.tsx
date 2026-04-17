@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import ArticleCard from './ArticleCard';
 import { PostMeta } from '../../utils/mdxUtils';
 
@@ -9,49 +9,41 @@ interface InfiniteArticleListProps {
 }
 
 const InfiniteArticleList = ({ allPosts, initialPostCount = 5 }: InfiniteArticleListProps) => {
-  const [displayedPosts, setDisplayedPosts] = useState<PostMeta[]>([]);
   const [page, setPage] = useState(1);
-  const [hasMore, setHasMore] = useState(true);
   const loader = useRef<HTMLDivElement>(null);
   const postsPerPage = initialPostCount;
-
-  // Initialize with the first batch of posts
-  useEffect(() => {
-    setDisplayedPosts(allPosts.slice(0, initialPostCount));
-    setHasMore(allPosts.length > initialPostCount);
-  }, [allPosts, initialPostCount]);
+  const totalPages = Math.max(1, Math.ceil(allPosts.length / postsPerPage));
+  const currentPage = Math.min(page, totalPages);
+  const displayedPosts = allPosts.slice(0, currentPage * postsPerPage);
+  const hasMore = currentPage < totalPages;
 
   useEffect(() => {
+    if (!hasMore) {
+      return;
+    }
+
+    const currentLoaderRef = loader.current;
+
+    if (!currentLoaderRef) {
+      return;
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
-        const target = entries[0];
-        if (target.isIntersecting && hasMore) {
-          const nextPage = page + 1;
-          const newPosts = allPosts.slice(0, nextPage * postsPerPage);
-
-          setDisplayedPosts(newPosts);
-          setPage(nextPage);
-
-          if (newPosts.length >= allPosts.length) {
-            setHasMore(false);
-          }
+        const entry = entries[0];
+        if (entry?.isIntersecting) {
+          observer.unobserve(entry.target);
+          setPage((current) => Math.min(current + 1, totalPages));
         }
       },
       { rootMargin: '100px' },
     );
-
-    const currentLoaderRef = loader.current;
-
-    if (currentLoaderRef) {
-      observer.observe(currentLoaderRef);
-    }
+    observer.observe(currentLoaderRef);
 
     return () => {
-      if (currentLoaderRef) {
-        observer.unobserve(currentLoaderRef);
-      }
+      observer.disconnect();
     };
-  }, [page, hasMore, allPosts, postsPerPage]);
+  }, [hasMore, totalPages]);
 
   return (
     <div className="space-y-6">
