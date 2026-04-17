@@ -19,6 +19,17 @@ const Article = ({ frontMatter, children, previousPost, nextPost }) => {
 
         {/* Main Content */}
         <article className="prose dark:prose-invert md:prose-lg lg:prose-xl prose-a:no-underline text-sm sm:text-base flex-grow min-w-0 max-w-[65ch] md:max-w-[75ch] lg:max-w-[80ch]">
+          <header className="not-prose mb-10 border-b border-accent-subtle/60 pb-8">
+            <h1 className="text-4xl md:text-5xl font-light leading-tight tracking-tight text-primary">
+              {frontMatter.title}
+            </h1>
+            {frontMatter.description && (
+              <p className="mt-4 max-w-3xl text-lg leading-relaxed text-secondary font-light">
+                {frontMatter.description}
+              </p>
+            )}
+          </header>
+
           <section className="text-justify [&>*:first-child]:mt-0">{children}</section>
 
           <ArticleNavigation previousPost={previousPost} nextPost={nextPost} />
