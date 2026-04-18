@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import { ThemeProvider } from 'next-themes';
+import { IBM_Plex_Sans, Spectral } from 'next/font/google';
 import Header from '../components/header/Header';
 import Footer from '../components/footer/Footer';
-import { Spectral } from 'next/font/google';
 import '../styles/globals.css';
 import { siteConfig } from '../utils/seo';
 
@@ -10,6 +10,12 @@ const professionalFont = Spectral({
   weight: ['300'],
   subsets: ['latin'],
   variable: '--font-spectral',
+});
+
+const interfaceFont = IBM_Plex_Sans({
+  weight: ['400', '500', '600'],
+  subsets: ['latin'],
+  variable: '--font-plex-sans',
 });
 
 export const metadata: Metadata = {
@@ -70,7 +76,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en-GB" suppressHydrationWarning>
-      <body className={`flex flex-col min-h-screen ${professionalFont.variable}`}>
+      <body
+        className={`flex flex-col min-h-screen ${professionalFont.variable} ${interfaceFont.variable}`}
+      >
         <ThemeProvider attribute="class" defaultTheme="light" enableColorScheme>
           <Header />
           <main className="grow px-6 md:px-12 lg:px-24 max-w-6xl mx-auto w-full">

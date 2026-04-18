@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 
 const HeaderIcon = ({ onClick, children }: { onClick?: () => void; children }) => (
   <div
-    className="cursor-pointer text-primary hover:text-accent-highlight p-1 transition-colors duration-300 flex items-center justify-center"
+    className="cursor-pointer text-primary hover:text-accent-highlight p-1.5 transition-colors duration-300 flex items-center justify-center"
     onClick={onClick}
   >
     {children}
@@ -35,13 +35,14 @@ const ThemeToggle = () => {
 };
 
 const HeaderIcons = () => (
-  <div className="flex items-center border-l border-accent-subtle pl-6 ml-6">
+  <div className="flex items-center border-l border-accent-subtle/70 pl-5 ml-5">
     <ThemeToggle />
     <HeaderIcon>
       <Link
         title="Github Link"
         href="https://github.com/chrismphilp/philp.io"
         className="flex items-center justify-center"
+        aria-label="View source on GitHub"
       >
         <FiGithub size={20} />
       </Link>

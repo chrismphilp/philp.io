@@ -1,52 +1,114 @@
+import type { ReactNode } from 'react';
 import type { ArticleData } from '../types';
 import { formatDate } from '../../utils/dateUtils';
-import ArticleNavigation from './ArticleNavigation';
-
-type ArticleNavItem = {
-  title: string;
-  description: string;
-  slug: string;
-} | null;
+import type { ArticleHeading } from '../../utils/mdxUtils';
+import ArticleNavigation, { type ArticleNavItem } from './ArticleNavigation';
+import ReadingProgress from './ReadingProgress';
 
 type ArticleProps = {
   frontMatter: ArticleData & { slug: string };
-  children: React.ReactNode;
-  previousPost: ArticleNavItem;
-  nextPost: ArticleNavItem;
+  children: ReactNode;
+  previousPost?: ArticleNavItem | null;
+  nextPost?: ArticleNavItem | null;
+  headings?: ArticleHeading[];
 };
 
-const Article = ({ frontMatter, children, previousPost, nextPost }: ArticleProps) => {
+const Article = ({
+  frontMatter,
+  children,
+  previousPost,
+  nextPost,
+  headings = [],
+}: ArticleProps) => {
   return (
-    <div className="pt-4 md:pt-10 w-full min-w-full">
+    <div className="pt-4 md:pt-8 w-full min-w-full">
+      <ReadingProgress />
+
       <div className="max-w-6xl mx-auto flex flex-col lg:flex-row lg:items-start lg:gap-12 xl:gap-20">
-        {/* LHS Metadata Column */}
-        <aside className="lg:w-40 lg:flex-shrink-0 lg:sticky lg:top-24 mb-8 lg:mb-0 lg:text-right border-l-[1.5px] lg:border-l-0 lg:border-r-[1.5px] border-accent-subtle/60 pl-5 lg:pl-0 lg:pr-6 py-1">
-          <time className="block text-sm text-secondary font-light tracking-[0.2em] uppercase">
-            {formatDate(frontMatter.date)}
-          </time>
-          {frontMatter.category && (
-            <span className="block mt-2 text-[10px] text-secondary/60 tracking-widest uppercase font-medium">
-              {frontMatter.category}
-            </span>
-          )}
-          <span className="block mt-4 text-xs text-secondary/70 tracking-widest uppercase">
-            {frontMatter.readingTime}
-          </span>
+        <aside className="lg:w-56 lg:flex-shrink-0 mb-10 lg:mb-0">
+          <div className="lg:sticky lg:top-28 space-y-8">
+            <div className="rounded-[1.5rem] border border-accent-subtle/70 bg-[rgba(240,239,231,0.72)] px-5 py-5 shadow-washi dark:bg-[rgba(53,49,43,0.92)]">
+              <p className="font-sans text-[11px] uppercase tracking-[0.3em] text-secondary">
+                Published
+              </p>
+              <time className="mt-2 block text-base text-primary font-light">
+                {formatDate(frontMatter.date)}
+              </time>
+
+              <div className="mt-5 grid grid-cols-2 gap-4 border-t border-accent-subtle/70 pt-4 font-sans">
+                <div>
+                  <p className="text-[11px] uppercase tracking-[0.24em] text-secondary">
+                    Category
+                  </p>
+                  <p className="mt-1 text-sm text-primary">{frontMatter.category}</p>
+                </div>
+                <div>
+                  <p className="text-[11px] uppercase tracking-[0.24em] text-secondary">
+                    Reading
+                  </p>
+                  <p className="mt-1 text-sm text-primary">{frontMatter.readingTime}</p>
+                </div>
+                <div>
+                  <p className="text-[11px] uppercase tracking-[0.24em] text-secondary">
+                    Length
+                  </p>
+                  <p className="mt-1 text-sm text-primary">
+                    {frontMatter.wordCount.toLocaleString()} words
+                  </p>
+                </div>
+                <div>
+                  <p className="text-[11px] uppercase tracking-[0.24em] text-secondary">
+                    Format
+                  </p>
+                  <p className="mt-1 text-sm text-primary">Essay</p>
+                </div>
+              </div>
+            </div>
+
+            {headings.length > 0 && (
+              <nav
+                className="hidden lg:block rounded-[1.5rem] border border-accent-subtle/70 px-5 py-5 shadow-washi"
+                aria-label="Table of contents"
+              >
+                <p className="font-sans text-[11px] uppercase tracking-[0.3em] text-secondary">
+                  On this page
+                </p>
+                <ol className="mt-4 space-y-3">
+                  {headings.map((heading) => (
+                    <li key={heading.id} className={heading.level === 3 ? 'pl-4' : ''}>
+                      <a
+                        href={`#${heading.id}`}
+                        className="block font-sans text-sm leading-6 text-secondary hover:text-accent-highlight transition-colors duration-300"
+                      >
+                        {heading.title}
+                      </a>
+                    </li>
+                  ))}
+                </ol>
+              </nav>
+            )}
+          </div>
         </aside>
 
-        {/* Main Content */}
-        <article className="prose dark:prose-invert md:prose-lg lg:prose-xl prose-a:no-underline text-sm sm:text-base flex-grow min-w-0 max-w-[65ch] md:max-w-[75ch] lg:max-w-[80ch]">
-          <header className="mb-10 border-b border-accent-subtle pb-8 not-prose">
-            <h1 className="text-4xl md:text-5xl font-light tracking-tight text-primary leading-tight">
+        <article
+          className="prose dark:prose-invert md:prose-lg lg:prose-xl prose-a:no-underline text-sm sm:text-base flex-grow min-w-0 max-w-[68ch] xl:max-w-[72ch]"
+          data-reading-root
+        >
+          <header className="not-prose border-b border-accent-subtle/70 pb-8 md:pb-10 mb-10 md:mb-12">
+            <p className="font-sans text-[11px] uppercase tracking-[0.32em] text-secondary">
+              {frontMatter.category}
+            </p>
+            <h1 className="mt-4 text-4xl sm:text-5xl lg:text-6xl leading-tight tracking-[-0.03em] text-primary font-light max-w-4xl">
               {frontMatter.title}
             </h1>
             {frontMatter.description && (
-              <p className="mt-4 max-w-3xl text-base md:text-lg text-secondary leading-relaxed">
+              <p className="mt-6 max-w-3xl text-lg md:text-xl leading-8 text-secondary font-light">
                 {frontMatter.description}
               </p>
             )}
           </header>
-          <section className="text-justify [&>*:first-child]:mt-0">{children}</section>
+
+          <section className="[&>*:first-child]:mt-0">{children}</section>
 
           <ArticleNavigation previousPost={previousPost} nextPost={nextPost} />
         </article>

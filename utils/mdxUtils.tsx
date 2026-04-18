@@ -14,7 +14,7 @@ export const QUOTES_PATH = path.join(process.cwd(), 'app/quotes');
 export const articleFilePaths = fs
   .readdirSync(ARTICLES_PATH)
   // Only include md(x) files
-  .filter((path) => /\.mdx?$/.test(path));
+  .filter((filePath) => /\.mdx?$/.test(filePath));
 
 export type PostMeta = {
   data: ArticleData;
@@ -23,6 +23,12 @@ export type PostMeta = {
 
 export type PostData = PostMeta & {
   content: string;
+};
+
+export type ArticleHeading = {
+  id: string;
+  title: string;
+  level: 2 | 3;
 };
 
 const FrontmatterSchema = z.object({
@@ -95,3 +101,66 @@ export const getPublishedPostBySlug = (slug: string): PostData | null => {
 
 export const sortPostsByDateDescending = <T extends PostMeta>(posts: T[]) =>
   [...posts].sort((post1, post2) => (post1.data.date > post2.data.date ? -1 : 1));
+
+const createHeadingId = (value: string, slugCounts: Map<string, number>) => {
+  const baseSlug = value
+    .toLowerCase()
+    .trim()
+    .replace(/&/g, ' and ')
+    .replace(/[^\w\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-');
+
+  if (!baseSlug) {
+    return null;
+  }
+
+  const duplicateCount = slugCounts.get(baseSlug) ?? 0;
+  slugCounts.set(baseSlug, duplicateCount + 1);
+
+  return duplicateCount === 0 ? baseSlug : `${baseSlug}-${duplicateCount}`;
+};
+
+export const extractArticleHeadings = (content: string): ArticleHeading[] => {
+  const headings: ArticleHeading[] = [];
+  const slugCounts = new Map<string, number>();
+  let insideCodeFence = false;
+
+  for (const rawLine of content.split('\n')) {
+    const line = rawLine.trim();
+
+    if (line.startsWith('```')) {
+      insideCodeFence = !insideCodeFence;
+      continue;
+    }
+
+    if (insideCodeFence) {
+      continue;
+    }
+
+    const match = /^(##|###)\s+(.*)$/.exec(line);
+
+    if (!match) {
+      continue;
+    }
+
+    const [, hashes, rawTitle] = match;
+    const title = rawTitle
+      .replace(/\[(.*?)\]\(.*?\)/g, '$1')
+      .replace(/[`*_~]/g, '')
+      .trim();
+    const id = createHeadingId(title, slugCounts);
+
+    if (!id) {
+      continue;
+    }
+
+    headings.push({
+      id,
+      title,
+      level: hashes.length as 2 | 3,
+    });
+  }
+
+  return headings;
+};

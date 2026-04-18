@@ -2,11 +2,11 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="py-12 border-t border-accent-subtle relative">
-      <div className="absolute left-1/3 top-0 bottom-0 w-px bg-accent-subtle opacity-30 hidden md:block"></div>
+    <footer className="py-12 border-t border-accent-subtle/70 relative mt-10">
+      <div className="absolute left-1/3 top-0 bottom-0 w-px bg-accent-subtle opacity-20 hidden md:block"></div>
 
       <div className="max-w-6xl mx-auto px-6 md:px-12 lg:px-24 flex flex-col md:flex-row justify-between items-center">
-        <div className="text-primary dark:text-background-dark text-sm tracking-wider mb-8 md:mb-0 font-light flex items-center">
+        <div className="font-sans text-primary dark:text-background-dark text-[11px] uppercase tracking-[0.24em] mb-8 md:mb-0 font-light flex items-center">
           © {currentYear}
           <span className="text-accent-highlight mx-2">⦁</span>
           Philp
@@ -17,7 +17,7 @@ const Footer = () => {
             href="https://github.com/chrismphilp"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-primary dark:text-background-dark text-sm tracking-wider hover:text-accent-highlight underline-effect font-light"
+            className="font-sans text-primary dark:text-background-dark text-[11px] uppercase tracking-[0.24em] hover:text-accent-highlight underline-effect font-light"
           >
             GitHub
           </a>

@@ -20,7 +20,7 @@ export default function Tech() {
     .sort((post1, post2) => (post1.data.date > post2.data.date ? -1 : 1));
 
   return (
-    <section className="pb-32 relative">
+    <section className="pb-24 md:pb-28 relative pt-6 md:pt-8">
       <StructuredData
         data={buildCollectionSchema({
           title: 'Tech',
@@ -30,17 +30,17 @@ export default function Tech() {
         })}
       />
 
-      <header className="mb-12 pt-6 md:pt-10 max-w-3xl">
-        <p className="text-xs tracking-[0.3em] uppercase text-accent-dark mb-4">
-          Category
+      <div className="paper-surface rounded-[2rem] px-6 py-7 md:px-8 md:py-8 mb-10">
+        <p className="font-sans text-[11px] uppercase tracking-[0.32em] text-secondary">
+          Tech archive
         </p>
-        <h1 className="text-4xl md:text-5xl font-light tracking-tight text-primary leading-tight">
-          Tech
+        <h1 className="mt-4 text-3xl md:text-4xl text-primary font-light tracking-[-0.03em]">
+          Software, tooling, and engineering notes.
         </h1>
-        <p className="mt-4 text-base md:text-lg text-secondary leading-relaxed">
-          Notes on software engineering, front-end architecture, tooling, and the odd language feature worth keeping.
+        <p className="mt-4 max-w-2xl text-base md:text-lg leading-8 text-secondary">
+          {posts.length} posts on building, debugging, and arguing with the ecosystem.
         </p>
-      </header>
+      </div>
 
       <div className="asymmetric-element">
         <InfiniteArticleList allPosts={posts} initialPostCount={10} />
