@@ -10,7 +10,6 @@ import rehypePrettyCode from 'rehype-pretty-code';
 import remarkGfm from 'remark-gfm';
 import ExportedImage from 'next-image-export-optimizer';
 import {
-  extractArticleHeadings,
   getPublishedPostBySlug,
   getPublishedPostMetadata,
   PostMeta,
@@ -86,11 +85,11 @@ export default async function ArticlePage(props: { params: Promise<{ slug: strin
   }
 
   const { content, data } = post;
-  const headings = extractArticleHeadings(content);
+
   const sortedPosts = sortPostsByDateDescending(getPublishedPostMetadata());
 
   const currentIndex = sortedPosts.findIndex(
-    (sortedPost) => postSlugFromPath(sortedPost.filePath) === slug,
+    (post) => postSlugFromPath(post.filePath) === slug,
   );
   const nextPost = currentIndex > 0 ? sortedPosts[currentIndex - 1] : null;
   const previousPost =
@@ -99,14 +98,13 @@ export default async function ArticlePage(props: { params: Promise<{ slug: strin
       : null;
 
   return (
-    <main className="flex flex-col items-stretch md:items-center py-2 md:py-4">
+    <section className="flex flex-col items-stretch md:items-center py-2">
       <StructuredData data={buildArticleSchema({ slug, post })} />
 
       <Article
         frontMatter={{ ...data, slug }}
         previousPost={buildNavItem(previousPost)}
         nextPost={buildNavItem(nextPost)}
-        headings={headings}
       >
         <MDXRemote
           source={content}
@@ -138,6 +136,6 @@ export default async function ArticlePage(props: { params: Promise<{ slug: strin
           }}
         />
       </Article>
-    </main>
+    </section>
   );
 }

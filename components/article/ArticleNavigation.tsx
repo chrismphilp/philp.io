@@ -23,15 +23,13 @@ const NavigationLink = ({
   <Link
     prefetch={false}
     href={getArticlePath(post.slug)}
-    className="group block rounded-[1.5rem] border border-accent-subtle/70 px-5 py-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent-highlight hover:shadow-washi"
+    className="group block rounded-md border border-transparent p-4 transition-colors duration-300 hover:border-accent-highlight"
   >
-    <span className="font-sans text-[11px] uppercase tracking-[0.3em] text-secondary">
-      {label}
-    </span>
-    <p className="mt-3 text-primary text-xl font-light leading-snug group-hover:text-accent-highlight">
+    <span className="text-xs uppercase tracking-widest text-secondary">{label}</span>
+    <p className="text-primary text-lg font-light group-hover:text-accent-highlight">
       {post.title}
     </p>
-    <p className="text-secondary text-sm mt-2 leading-6">{post.description}</p>
+    <p className="text-secondary text-sm mt-1">{post.description}</p>
   </Link>
 );
 
@@ -41,7 +39,7 @@ const ArticleNavigation = ({ previousPost, nextPost }: ArticleNavigationProps) =
   }
 
   return (
-    <nav className="mt-14 mb-16 pt-8 border-t border-accent-subtle/70 grid gap-6 md:grid-cols-2">
+    <nav className="mt-10 mb-16 pt-6 border-t border-accent-subtle grid gap-6 md:grid-cols-2">
       {previousPost && <NavigationLink label="Previous" post={previousPost} />}
       {nextPost && <NavigationLink label="Next" post={nextPost} />}
     </nav>

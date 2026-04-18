@@ -3,7 +3,7 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
-  --font-sans: var(--font-plex-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-spectral), ui-sans-serif, system-ui, sans-serif;
   --font-serif: var(--font-spectral), Georgia, serif;
   --font-mono: var(--font-source-code), ui-monospace, monospace;
 
@@ -11,10 +11,6 @@
   --color-secondary: #5D5D5D;
   --color-background: #FBFAF2;
   --color-background-dark: #F0EFE7;
-  --color-surface: #F7F4EA;
-  --color-surface-strong: #F2EEE2;
-  --color-surface-dark: #35312B;
-  --color-surface-dark-strong: #2F2B25;
   --color-accent: #BFB0A3;
   --color-accent-subtle: #D9D0C7;
   --color-accent-highlight: #C84630;
@@ -24,10 +20,6 @@
 }
 
 @layer base {
-  html {
-    scroll-padding-top: 6rem;
-  }
-
   html,
   body,
   body > div:first-child,
@@ -35,13 +27,8 @@
     min-height: 100vh;
     color: var(--color-primary);
     background-color: var(--color-background);
-    background-image:
-      radial-gradient(circle at top left, rgba(200, 70, 48, 0.05), transparent 28%),
-      radial-gradient(circle at 82% 18%, rgba(191, 176, 163, 0.22), transparent 24%),
-      linear-gradient(180deg, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0));
     font-family: var(--font-spectral), serif;
     font-weight: 300;
-    text-rendering: optimizeLegibility;
   }
 
   html.dark body,
@@ -50,10 +37,6 @@
   html.dark {
     color: var(--color-background-dark);
     background-color: var(--color-primary);
-    background-image:
-      radial-gradient(circle at top left, rgba(200, 70, 48, 0.12), transparent 26%),
-      radial-gradient(circle at 82% 18%, rgba(191, 176, 163, 0.09), transparent 26%),
-      linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0));
   }
 
   html.dark a {
@@ -74,98 +57,15 @@
   a:hover {
     color: var(--color-accent-highlight);
   }
-
-  ::selection {
-    background-color: rgba(200, 70, 48, 0.18);
-  }
 }
 
 @layer components {
-  .frosted-header {
-    background-color: rgba(251, 250, 242, 0.84);
-    backdrop-filter: blur(18px);
-  }
-
-  html.dark .frosted-header {
-    background-color: rgba(45, 42, 36, 0.82);
-  }
-
-  .paper-surface,
-  .paper-hero {
-    position: relative;
-    overflow: hidden;
-    border: 1px solid rgba(191, 176, 163, 0.5);
-    background:
-      linear-gradient(180deg, rgba(255, 255, 255, 0.46), rgba(240, 239, 231, 0.82)),
-      var(--color-surface);
-    box-shadow: var(--shadow-washi);
-  }
-
-  .paper-surface::before,
-  .paper-hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      linear-gradient(130deg, rgba(255, 255, 255, 0.35), transparent 42%),
-      linear-gradient(transparent, rgba(255, 255, 255, 0.14));
-    pointer-events: none;
-  }
-
-  .paper-hero {
-    background:
-      radial-gradient(circle at top left, rgba(200, 70, 48, 0.09), transparent 32%),
-      radial-gradient(circle at 88% 16%, rgba(191, 176, 163, 0.25), transparent 28%),
-      linear-gradient(135deg, rgba(255, 255, 255, 0.58), rgba(240, 239, 231, 0.88)),
-      var(--color-surface-strong);
-  }
-
-  html.dark .paper-surface,
-  html.dark .paper-hero {
-    border-color: rgba(191, 176, 163, 0.15);
-    background:
-      linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0)),
-      var(--color-surface-dark);
-    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.28);
-  }
-
-  html.dark .paper-hero {
-    background:
-      radial-gradient(circle at top left, rgba(200, 70, 48, 0.16), transparent 30%),
-      radial-gradient(circle at 88% 16%, rgba(191, 176, 163, 0.1), transparent 28%),
-      linear-gradient(135deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0)),
-      var(--color-surface-dark-strong);
-  }
-
-  .reading-progress {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 60;
-    height: 3px;
-    background-color: rgba(191, 176, 163, 0.18);
-    pointer-events: none;
-  }
-
-  .reading-progress span {
-    display: block;
-    height: 100%;
-    width: 100%;
-    transform-origin: left center;
-    background: linear-gradient(90deg, rgba(200, 70, 48, 0.75), var(--color-accent-highlight));
-  }
-
-  html.dark .reading-progress {
-    background-color: rgba(240, 239, 231, 0.08);
-  }
-
   /* Shiki syntax highlighting dual theme */
   .prose pre {
     background-color: #F5F4EC !important; /* Slightly darker than page #FBFAF2 */
     color: var(--shiki-light) !important;
     border: 0.5px solid rgba(191, 176, 163, 0.3); /* Muted taupe border */
-    border-radius: 18px;
+    border-radius: 4px;
   }
   
   .prose code {
@@ -265,7 +165,7 @@
     position: absolute;
     width: 0;
     height: 1px;
-    bottom: -4px;
+    bottom: -2px;
     left: 0;
     background-color: #C84630;
     transition: width 0.3s ease;
@@ -360,39 +260,38 @@
 
 .prose p {
   font-weight: 300;
-  line-height: 1.85;
-  letter-spacing: 0.012em;
-  font-size: 1.08rem;
+  line-height: 1.8;
+  letter-spacing: 0.02em;
+  font-size: 1.05rem;
   color: inherit;
 }
 
 .prose h1, .prose h2, .prose h3, .prose h4 {
   font-weight: 300;
   color: inherit;
-  text-wrap: balance;
 }
 
 .prose h1 {
   font-size: 2.5em;
   line-height: 1.2;
-  letter-spacing: -0.03em;
+  letter-spacing: 0.1em;
 }
 
 .prose h2 {
   font-size: 2em;
   line-height: 1.2;
-  letter-spacing: -0.02em;
+  letter-spacing: 0.08em;
 }
 
 .prose h3 {
   font-size: 1.5em;
   line-height: 1.2;
-  letter-spacing: -0.015em;
+  letter-spacing: 0.06em;
 }
 
 .prose pre {
   padding: 1.5rem;
-  border-radius: 1rem;
+  border-radius: 0.25rem;
   font-size: 0.85rem;
   line-height: 1.7;
 }
@@ -403,14 +302,4 @@
   background-color: rgba(191, 176, 163, 0.15);
   padding: 0.2em 0.4em;
   border-radius: 0.2rem;
-}
-
-.prose :is(h2, h3, h4) {
-  scroll-margin-top: 6.5rem;
-}
-
-.prose blockquote {
-  font-size: 1.05em;
-  line-height: 1.8;
-  border-left-width: 2px;
 }

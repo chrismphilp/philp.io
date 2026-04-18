@@ -20,7 +20,7 @@ export default function Misc() {
     .sort((post1, post2) => (post1.data.date > post2.data.date ? -1 : 1));
 
   return (
-    <section className="pb-24 md:pb-28 relative pt-6 md:pt-8">
+    <section className="pb-32 relative">
       <StructuredData
         data={buildCollectionSchema({
           title: 'Misc',
@@ -30,18 +30,19 @@ export default function Misc() {
         })}
       />
 
-      <div className="paper-surface rounded-[2rem] px-6 py-7 md:px-8 md:py-8 mb-10">
-        <p className="font-sans text-[11px] uppercase tracking-[0.32em] text-secondary">
-          Misc archive
+      <div className="absolute left-0 top-0 w-1/4 h-px bg-accent opacity-40"></div>
+
+      <header className="mb-12 pt-6 md:pt-10 max-w-3xl">
+        <p className="text-xs tracking-[0.3em] uppercase text-accent-dark mb-4">
+          Category
         </p>
-        <h1 className="mt-4 text-3xl md:text-4xl text-primary font-light tracking-[-0.03em]">
-          Essays outside the software lane.
+        <h1 className="text-4xl md:text-5xl font-light tracking-tight text-primary leading-tight">
+          Misc
         </h1>
-        <p className="mt-4 max-w-2xl text-base md:text-lg leading-8 text-secondary">
-          {posts.length} pieces on language, ethics, science, film, and anything else that
-          refused to fit a single category.
+        <p className="mt-4 text-base md:text-lg text-secondary leading-relaxed">
+          Writing on the things that sit outside the technical pile: books, science, family, ethics, and everything else.
         </p>
-      </div>
+      </header>
 
       <div className="asymmetric-element">
         <InfiniteArticleList allPosts={posts} initialPostCount={10} />

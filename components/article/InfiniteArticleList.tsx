@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useRef, useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import ArticleCard from './ArticleCard';
 import { PostMeta } from '../../utils/mdxUtils';
 
@@ -37,7 +37,7 @@ const InfiniteArticleList = ({ allPosts, initialPostCount = 5 }: InfiniteArticle
         observer.unobserve(currentLoaderRef);
       }
     };
-  }, [hasMore]);
+  }, [page, hasMore, allPosts, postsPerPage]);
 
   return (
     <div className="space-y-6">

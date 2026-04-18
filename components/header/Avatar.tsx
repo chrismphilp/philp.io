@@ -4,12 +4,12 @@ import ExportedImage from 'next-image-export-optimizer';
 const Avatar = ({ image, alt }) => (
   <div className="flex items-center">
     <Link href="/" className="relative overflow-hidden group">
-      <div className="absolute inset-0 border border-accent-dark rounded-full opacity-0 scale-90 group-hover:opacity-100 group-hover:scale-100 transition-all duration-500"></div>
+      <div className="absolute inset-0 border-thin border-accent-dark rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
       <ExportedImage
-        className="rounded-full saturate-[0.9] hover:saturate-[1.05] transition-all duration-500 border border-accent-subtle shadow-washi"
+        className="rounded-full saturate-[0.85] hover:saturate-[1.1] transition-all duration-500 border border-accent-subtle"
         src={image}
-        width={56}
-        height={56}
+        width={48}
+        height={48}
         alt={alt}
         priority
       />
