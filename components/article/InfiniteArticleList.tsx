@@ -43,7 +43,7 @@ const InfiniteArticleList = ({ allPosts, initialPostCount = 5 }: InfiniteArticle
     return () => {
       observer.disconnect();
     };
-  }, [hasMore, totalPages]);
+  }, [currentPage, hasMore, totalPages]);
 
   return (
     <div className="space-y-6">
