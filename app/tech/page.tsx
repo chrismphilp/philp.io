@@ -31,14 +31,13 @@ export default function Tech() {
       />
 
       <header className="mb-12 pt-6 md:pt-10 max-w-3xl">
-        <p className="text-xs tracking-[0.3em] uppercase text-accent-dark mb-4">
-          Category
-        </p>
+        <p className="text-xs tracking-[0.3em] uppercase text-accent-dark mb-4">Category</p>
         <h1 className="text-4xl md:text-5xl font-light tracking-tight text-primary leading-tight">
           Tech
         </h1>
         <p className="mt-4 text-base md:text-lg text-secondary leading-relaxed">
-          Notes on software engineering, front-end architecture, tooling, and the odd language feature worth keeping.
+          Notes on software engineering, front-end architecture, tooling, and the odd language
+          feature worth keeping.
         </p>
       </header>
 

@@ -33,14 +33,13 @@ export default function Misc() {
       <div className="absolute left-0 top-0 w-1/4 h-px bg-accent opacity-40"></div>
 
       <header className="mb-12 pt-6 md:pt-10 max-w-3xl">
-        <p className="text-xs tracking-[0.3em] uppercase text-accent-dark mb-4">
-          Category
-        </p>
+        <p className="text-xs tracking-[0.3em] uppercase text-accent-dark mb-4">Category</p>
         <h1 className="text-4xl md:text-5xl font-light tracking-tight text-primary leading-tight">
           Misc
         </h1>
         <p className="mt-4 text-base md:text-lg text-secondary leading-relaxed">
-          Writing on the things that sit outside the technical pile: books, science, family, ethics, and everything else.
+          Writing on the things that sit outside the technical pile: books, science, family,
+          ethics, and everything else.
         </p>
       </header>
 
