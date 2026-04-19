@@ -98,7 +98,7 @@ export default async function ArticlePage(props: { params: Promise<{ slug: strin
       : null;
 
   return (
-    <section className="flex flex-col items-stretch md:items-center py-2">
+    <section className="flex flex-col items-stretch py-2">
       <StructuredData data={buildArticleSchema({ slug, post })} />
 
       <Article
