@@ -14,7 +14,10 @@ const BreadcrumbTrail = ({ items }: { items: BreadcrumbItem[] }) => (
           {isCurrentPage ? (
             <span aria-current="page">{item.name}</span>
           ) : (
-            <Link href={item.pathname} className="hover:text-accent-highlight underline-effect">
+            <Link
+              href={item.pathname}
+              className="hover:text-accent-highlight underline-effect"
+            >
               {item.name}
             </Link>
           )}
