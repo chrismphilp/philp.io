@@ -1,14 +1,21 @@
 import { ArticleType } from '../../components/types';
+import BreadcrumbTrail from '../../components/seo/BreadcrumbTrail';
 import StructuredData from '../../components/seo/StructuredData';
 import { getPostMetadata } from '../../utils/mdxUtils';
 import InfiniteArticleList from '../../components/article/InfiniteArticleList';
-import { buildCollectionSchema, buildMetadata } from '../../utils/seo';
+import {
+  buildBreadcrumbSchema,
+  buildCollectionBreadcrumbs,
+  buildCollectionSchema,
+  buildMetadata,
+} from '../../utils/seo';
 
 const techDescription =
   'Technical writing on TypeScript, Next.js, Rust, Git, and practical software engineering.';
+const techBreadcrumbs = buildCollectionBreadcrumbs('Tech', '/tech');
 
 export const metadata = buildMetadata({
-  title: 'Tech',
+  title: 'Technical essays on TypeScript, Next.js, Rust, and Git',
   description: techDescription,
   pathname: '/tech',
 });
@@ -21,6 +28,7 @@ export default function Tech() {
 
   return (
     <section className="pb-32 relative">
+      <StructuredData data={buildBreadcrumbSchema(techBreadcrumbs)} />
       <StructuredData
         data={buildCollectionSchema({
           title: 'Tech',
@@ -31,6 +39,7 @@ export default function Tech() {
       />
 
       <header className="mb-12 pt-6 md:pt-10 max-w-3xl">
+        <BreadcrumbTrail items={techBreadcrumbs} />
         <p className="text-xs tracking-[0.3em] uppercase text-accent-dark mb-4">Category</p>
         <h1 className="text-4xl md:text-5xl font-light tracking-tight text-primary leading-tight">
           Tech

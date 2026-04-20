@@ -1,5 +1,7 @@
 import type { ArticleData } from '../types';
 import { formatDate } from '../../utils/dateUtils';
+import type { BreadcrumbItem } from '../../utils/seo';
+import BreadcrumbTrail from '../seo/BreadcrumbTrail';
 import ArticleNavigation from './ArticleNavigation';
 
 type ArticleNavItem = {
@@ -10,12 +12,19 @@ type ArticleNavItem = {
 
 type ArticleProps = {
   frontMatter: ArticleData & { slug: string };
+  breadcrumbs: BreadcrumbItem[];
   children: React.ReactNode;
   previousPost: ArticleNavItem;
   nextPost: ArticleNavItem;
 };
 
-const Article = ({ frontMatter, children, previousPost, nextPost }: ArticleProps) => {
+const Article = ({
+  frontMatter,
+  breadcrumbs,
+  children,
+  previousPost,
+  nextPost,
+}: ArticleProps) => {
   return (
     <div className="article-shell w-full pt-4">
       <div className="article-shell-inner mx-auto flex w-full flex-col md:items-center md:pt-6 lg:items-start">
@@ -39,6 +48,7 @@ const Article = ({ frontMatter, children, previousPost, nextPost }: ArticleProps
         {/* Main Content */}
         <article className="prose dark:prose-invert w-full min-w-0 max-w-full text-sm sm:max-w-[65ch] sm:text-base md:prose-lg md:max-w-[75ch] lg:prose-xl lg:max-w-none">
           <header className="mb-10 border-b border-accent-subtle pb-8 not-prose">
+            <BreadcrumbTrail items={breadcrumbs} />
             <h1 className="text-4xl md:text-5xl font-light tracking-tight text-primary leading-tight">
               {frontMatter.title}
             </h1>

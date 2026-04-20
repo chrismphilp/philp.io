@@ -1,13 +1,13 @@
 import StructuredData from '../components/seo/StructuredData';
 import InfiniteArticleList from '../components/article/InfiniteArticleList';
 import { getPublishedPostMetadata, sortPostsByDateDescending } from '../utils/mdxUtils';
-import { buildHomeSchema, buildMetadata, siteConfig } from '../utils/seo';
+import { buildHomeSchema, buildMetadata } from '../utils/seo';
 
 const homeDescription =
   'Essays and articles by Christopher Philp on software, science, ethics, language, books, and everyday life.';
 
 export const metadata = buildMetadata({
-  absoluteTitle: siteConfig.siteName,
+  title: 'Essays on software, science, ethics, and books',
   description: homeDescription,
   pathname: '/',
 });

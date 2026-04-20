@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { ArticleType } from '../components/types';
 import type { PostMeta } from './mdxUtils';
 
 export const siteConfig = {
@@ -10,6 +11,12 @@ export const siteConfig = {
   socialImage: '/blog/images/me.png',
   url: 'https://philp.io',
   githubUrl: 'https://github.com/chrismphilp',
+  googleSiteVerification: process.env.GOOGLE_SITE_VERIFICATION,
+};
+
+export type BreadcrumbItem = {
+  name: string;
+  pathname: string;
 };
 
 type MetadataOptions = {
@@ -39,6 +46,17 @@ const maxPreviewRobots = {
 
 export const buildAbsoluteUrl = (pathname = '/') =>
   new URL(pathname, siteConfig.url).toString();
+
+export const getCategoryCollection = (category: ArticleType) =>
+  category === ArticleType.TECHNOLOGY
+    ? {
+        pathname: '/tech',
+        title: 'Tech',
+      }
+    : {
+        pathname: '/misc',
+        title: 'Misc',
+      };
 
 export const buildMetadata = ({
   title,
@@ -109,6 +127,39 @@ export const buildMetadata = ({
 
 export const serializeJsonLd = (data: Record<string, unknown>) =>
   JSON.stringify(data).replace(/</g, '\\u003c');
+
+export const buildBreadcrumbSchema = (items: BreadcrumbItem[]) => ({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: items.map((item, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: item.name,
+    item: buildAbsoluteUrl(item.pathname),
+  })),
+});
+
+export const buildCollectionBreadcrumbs = (
+  title: string,
+  pathname: string,
+): BreadcrumbItem[] => [
+  { name: 'Home', pathname: '/' },
+  { name: title, pathname },
+];
+
+export const buildArticleBreadcrumbs = (
+  slug: string,
+  category: ArticleType,
+  title: string,
+): BreadcrumbItem[] => {
+  const collection = getCategoryCollection(category);
+
+  return [
+    { name: 'Home', pathname: '/' },
+    { name: collection.title, pathname: collection.pathname },
+    { name: title, pathname: `/articles/${slug}` },
+  ];
+};
 
 const buildItemList = (posts: PostMeta[]) =>
   posts.map((post, index) => ({

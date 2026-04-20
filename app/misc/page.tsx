@@ -1,14 +1,21 @@
 import { ArticleType } from '../../components/types';
+import BreadcrumbTrail from '../../components/seo/BreadcrumbTrail';
 import StructuredData from '../../components/seo/StructuredData';
 import { getPostMetadata } from '../../utils/mdxUtils';
 import InfiniteArticleList from '../../components/article/InfiniteArticleList';
-import { buildCollectionSchema, buildMetadata } from '../../utils/seo';
+import {
+  buildBreadcrumbSchema,
+  buildCollectionBreadcrumbs,
+  buildCollectionSchema,
+  buildMetadata,
+} from '../../utils/seo';
 
 const miscDescription =
   'Essays on books, science, ethics, family, film, and the non-technical side of philp.io.';
+const miscBreadcrumbs = buildCollectionBreadcrumbs('Misc', '/misc');
 
 export const metadata = buildMetadata({
-  title: 'Misc',
+  title: 'Essays on books, science, ethics, film, and family',
   description: miscDescription,
   pathname: '/misc',
 });
@@ -21,6 +28,7 @@ export default function Misc() {
 
   return (
     <section className="pb-32 relative">
+      <StructuredData data={buildBreadcrumbSchema(miscBreadcrumbs)} />
       <StructuredData
         data={buildCollectionSchema({
           title: 'Misc',
@@ -33,6 +41,7 @@ export default function Misc() {
       <div className="absolute left-0 top-0 w-1/4 h-px bg-accent opacity-40"></div>
 
       <header className="mb-12 pt-6 md:pt-10 max-w-3xl">
+        <BreadcrumbTrail items={miscBreadcrumbs} />
         <p className="text-xs tracking-[0.3em] uppercase text-accent-dark mb-4">Category</p>
         <h1 className="text-4xl md:text-5xl font-light tracking-tight text-primary leading-tight">
           Misc

@@ -15,7 +15,12 @@ import {
   PostMeta,
   sortPostsByDateDescending,
 } from '../../../utils/mdxUtils';
-import { buildArticleSchema, buildMetadata } from '../../../utils/seo';
+import {
+  buildArticleBreadcrumbs,
+  buildArticleSchema,
+  buildBreadcrumbSchema,
+  buildMetadata,
+} from '../../../utils/seo';
 
 const components = {
   img: (props: React.ImgHTMLAttributes<HTMLImageElement>) => (
@@ -85,6 +90,7 @@ export default async function ArticlePage(props: { params: Promise<{ slug: strin
   }
 
   const { content, data } = post;
+  const breadcrumbs = buildArticleBreadcrumbs(slug, data.category, data.title);
 
   const sortedPosts = sortPostsByDateDescending(getPublishedPostMetadata());
 
@@ -99,10 +105,12 @@ export default async function ArticlePage(props: { params: Promise<{ slug: strin
 
   return (
     <section className="flex flex-col items-stretch py-2">
+      <StructuredData data={buildBreadcrumbSchema(breadcrumbs)} />
       <StructuredData data={buildArticleSchema({ slug, post })} />
 
       <Article
         frontMatter={{ ...data, slug }}
+        breadcrumbs={breadcrumbs}
         previousPost={buildNavItem(previousPost)}
         nextPost={buildNavItem(nextPost)}
       >
