@@ -30,7 +30,7 @@ export default function Quotes() {
         </p>
       </header>
 
-      <article className="prose dark:prose-invert prose-lg prose-a:no-underline text-sm sm:text-base">
+      <article className="prose dark:prose-invert prose-lg text-sm sm:text-base">
         <MDXRemote
           source={content}
           options={{

@@ -37,7 +37,7 @@ const Article = ({ frontMatter, children, previousPost, nextPost }: ArticleProps
         </aside>
 
         {/* Main Content */}
-        <article className="prose dark:prose-invert prose-a:no-underline w-full min-w-0 max-w-full text-sm sm:max-w-[65ch] sm:text-base md:prose-lg md:max-w-[75ch] lg:prose-xl lg:max-w-none">
+        <article className="prose dark:prose-invert w-full min-w-0 max-w-full text-sm sm:max-w-[65ch] sm:text-base md:prose-lg md:max-w-[75ch] lg:prose-xl lg:max-w-none">
           <header className="mb-10 border-b border-accent-subtle pb-8 not-prose">
             <h1 className="text-4xl md:text-5xl font-light tracking-tight text-primary leading-tight">
               {frontMatter.title}
