@@ -12,7 +12,9 @@ const BreadcrumbTrail = ({ items }: { items: BreadcrumbItem[] }) => (
       return (
         <span key={`${item.pathname}-${item.name}`} className="flex items-center gap-2">
           {isCurrentPage ? (
-            <span aria-current="page">{item.name}</span>
+            <span aria-current="page" className="text-secondary dark:text-secondary">
+              {item.name}
+            </span>
           ) : (
             <Link
               href={item.pathname}
@@ -21,7 +23,11 @@ const BreadcrumbTrail = ({ items }: { items: BreadcrumbItem[] }) => (
               {item.name}
             </Link>
           )}
-          {!isCurrentPage && <span aria-hidden="true">/</span>}
+          {!isCurrentPage && (
+            <span aria-hidden="true" className="text-accent dark:text-accent">
+              /
+            </span>
+          )}
         </span>
       );
     })}

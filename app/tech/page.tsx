@@ -40,7 +40,6 @@ export default function Tech() {
 
       <header className="mb-12 pt-6 md:pt-10 max-w-3xl">
         <BreadcrumbTrail items={techBreadcrumbs} />
-        <p className="text-xs tracking-[0.3em] uppercase text-accent-dark mb-4">Category</p>
         <h1 className="text-4xl md:text-5xl font-light tracking-tight text-primary leading-tight">
           Tech
         </h1>
