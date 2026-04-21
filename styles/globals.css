@@ -266,6 +266,16 @@
   color: inherit;
 }
 
+.prose :where(h1, h2, h3, h4, h5, h6) > :where(a.anchor) {
+  color: inherit;
+  font-weight: inherit;
+  text-decoration: none;
+}
+
+.prose :where(h1, h2, h3, h4, h5, h6) > :where(a.anchor):hover {
+  color: inherit;
+}
+
 .prose :where(a):not(:where([class~="not-prose"] *)):not(.anchor) {
   font-weight: 400;
   text-decoration-line: underline;
