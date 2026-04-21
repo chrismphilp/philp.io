@@ -2,25 +2,25 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="py-12 border-t border-accent-subtle relative">
-      <div className="absolute left-1/3 top-0 bottom-0 w-px bg-accent-subtle opacity-30 hidden md:block"></div>
+    <footer className="relative border-t border-accent-subtle py-12">
+      <div className="mx-auto w-full max-w-[75ch] px-6 md:max-w-4xl md:px-10 lg:max-w-[52rem] lg:px-8 xl:max-w-[56rem] xl:px-10">
+        <div className="flex flex-col gap-6 md:grid md:grid-cols-2 md:gap-0 md:items-center">
+          <div className="flex items-center text-sm tracking-wider text-primary font-light dark:text-background-dark md:border-r md:border-accent-subtle/30 md:pr-10 lg:pr-12">
+            © {currentYear}
+            <span className="text-accent-highlight mx-2">⦁</span>
+            Philp
+          </div>
 
-      <div className="max-w-6xl mx-auto px-6 md:px-12 lg:px-24 flex flex-col md:flex-row justify-between items-center">
-        <div className="text-primary dark:text-background-dark text-sm tracking-wider mb-8 md:mb-0 font-light flex items-center">
-          © {currentYear}
-          <span className="text-accent-highlight mx-2">⦁</span>
-          Philp
-        </div>
-
-        <div className="flex flex-wrap gap-8 md:gap-12 justify-center">
-          <a
-            href="https://github.com/chrismphilp"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-primary dark:text-background-dark text-sm tracking-wider hover:text-accent-highlight underline-effect font-light"
-          >
-            GitHub
-          </a>
+          <div className="flex md:justify-end md:pl-10 lg:pl-12">
+            <a
+              href="https://github.com/chrismphilp"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm tracking-wider text-primary font-light underline-effect hover:text-accent-highlight dark:text-background-dark"
+            >
+              GitHub
+            </a>
+          </div>
         </div>
       </div>
 

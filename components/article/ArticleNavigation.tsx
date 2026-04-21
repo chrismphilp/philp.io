@@ -39,7 +39,7 @@ const ArticleNavigation = ({ previousPost, nextPost }: ArticleNavigationProps) =
   }
 
   return (
-    <nav className="not-prose mt-10 mb-16 grid gap-6 border-t border-accent-subtle pt-6 md:grid-cols-2">
+    <nav className="not-prose mt-10 mb-16 grid gap-6 border-t border-accent-subtle pt-6 md:grid-cols-2 lg:mb-[4.125rem] xl:mb-[5.125rem]">
       {previousPost && <NavigationLink label="Previous" post={previousPost} />}
       {nextPost && <NavigationLink label="Next" post={nextPost} />}
     </nav>
