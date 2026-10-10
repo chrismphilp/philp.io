@@ -8,7 +8,8 @@ import rehypeSlug from 'rehype-slug';
 import rehypeImgSize from 'rehype-img-size';
 import rehypePrettyCode from 'rehype-pretty-code';
 import remarkGfm from 'remark-gfm';
-import ExportedImage from 'next-image-export-optimizer';
+import ProgressiveImage from '../../../components/images/ProgressiveImage';
+import { getImagePlaceholder } from '../../../utils/imagePlaceholder';
 import {
   getPublishedPostBySlug,
   getPublishedPostMetadata,
@@ -23,19 +24,22 @@ import {
 } from '../../../utils/seo';
 
 const components = {
-  img: (props: React.ImgHTMLAttributes<HTMLImageElement>) => (
-    <ExportedImage
-      className="mx-auto"
-      {...(props as unknown as React.ComponentProps<typeof ExportedImage>)}
-      src={(props.src as string) || ''}
-      alt={props.alt || ''}
-      priority={props.loading === 'eager'}
-      placeholder="blur"
-      loading={props.loading ?? 'lazy'}
-      role="img"
-      sizes="(min-width: 1024px) 80ch, 100vw"
-    />
-  ),
+  img: async (props: React.ImgHTMLAttributes<HTMLImageElement>) => {
+    const blurDataURL = await getImagePlaceholder((props.src as string) || '');
+    return (
+      <ProgressiveImage
+        className="mx-auto"
+        {...(props as unknown as React.ComponentProps<typeof ProgressiveImage>)}
+        src={(props.src as string) || ''}
+        alt={props.alt || ''}
+        priority={props.loading === 'eager'}
+        blurDataURL={blurDataURL}
+        loading={props.loading ?? 'lazy'}
+        role="img"
+        sizes="(min-width: 1024px) 80ch, 100vw"
+      />
+    );
+  },
   BrainrotLineChart: BrainrotLineChart,
 };
 

@@ -10,11 +10,12 @@
     "format": "prettier --write \"**/*.tsx\"",
     "dev": "next dev",
     "patch": "npm version --no-commit-hooks --no-git-tag-version patch && git add package.json package-lock.json && git commit -m \"[main] | Bumping version\"",
-    "build": "next build",
+    "build": "next build --webpack && next-image-export-optimizer",
     "start": "npx serve@latest out",
-    "static": "next build && next-image-export-optimizer",
-    "build:cloudflare": "next build --webpack && next-image-export-optimizer",
-    "lint": "eslint ."
+    "static": "npm run build",
+    "build:cloudflare": "npm run build",
+    "lint": "eslint .",
+    "test:images": "playwright test"
   },
   "pre-push": [
     "format",
@@ -61,6 +62,7 @@
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^14.2.33",
+    "@playwright/test": "1.58.2",
     "@types/minimatch": "^5.1.2",
     "baseline-browser-mapping": "^2.10.0",
     "eslint": "^9.39.1",
