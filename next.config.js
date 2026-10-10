@@ -32,6 +32,22 @@ const nextConfig = {
 const withPWA = require('@ducanh2912/next-pwa').default({
   dest: 'public',
   disable: !prod,
+  // Cache photos when viewed, rather than downloading the library on install.
+  publicExcludes: [
+    '!noprecache/**/*',
+    '!articles/images/**/*',
+    '!**/nextImageExportOptimizer/**/*',
+    '!**/next-image-export-optimizer-hashes.json',
+  ],
+  workboxOptions: {
+    // Next's static export omits this file; precaching it prevents SW installation.
+    manifestTransforms: [
+      async (manifest) => ({
+        manifest: manifest.filter(({ url }) => !url.endsWith('/dynamic-css-manifest.json')),
+        warnings: [],
+      }),
+    ],
+  },
 });
 
 module.exports = withBundleAnalyzer(withPWA(nextConfig));
