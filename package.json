@@ -10,10 +10,10 @@
     "format": "prettier --write \"**/*.tsx\"",
     "dev": "next dev",
     "patch": "npm version --no-commit-hooks --no-git-tag-version patch && git add package.json package-lock.json && git commit -m \"[main] | Bumping version\"",
-    "build": "next build --webpack && next-image-export-optimizer",
+    "build": "next build",
     "start": "npx serve@latest out",
-    "static": "npm run build",
-    "build:cloudflare": "npm run build",
+    "static": "next build && next-image-export-optimizer",
+    "build:cloudflare": "next build --webpack && next-image-export-optimizer",
     "lint": "eslint .",
     "test:images": "playwright test"
   },

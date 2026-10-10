@@ -9,5 +9,5 @@ export default defineConfig({
   },
   webServer: process.env.IMAGE_TEST_URL
     ? undefined
-    : { command: 'node tests/serve-export.mjs', port: 4175 },
+    : { command: 'npm start -- --listen tcp://127.0.0.1:4175', port: 4175 },
 });

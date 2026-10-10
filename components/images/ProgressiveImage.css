@@ -15,17 +15,17 @@
 }
 
 /* The image remains visible without JS. Only arm the fade after hydration. */
-.progressive-image[data-preview][data-state='loading'] > img {
+.progressive-image[data-state='loading'] > img {
   opacity: 0;
 }
 
-.progressive-image[data-preview][data-state='loaded'] > img {
+.progressive-image[data-state='loaded'] > img {
   opacity: 1;
   animation: progressive-image-reveal 200ms ease-out;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .progressive-image[data-preview][data-state='loaded'] > img {
+  .progressive-image[data-state='loaded'] > img {
     animation: none;
   }
 }

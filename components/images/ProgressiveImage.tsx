@@ -7,7 +7,7 @@ import ExportedImage, { type ExportedImageProps } from 'next-image-export-optimi
 type Props = Omit<ExportedImageProps, 'placeholder'> & {
   wrapperClassName?: string;
 };
-type LoadingState = 'initial' | 'loading' | 'loaded' | 'complete' | 'error';
+type LoadingState = 'initial' | 'loading' | 'loaded' | 'complete';
 
 function ImageWithPreview({
   src,
@@ -20,21 +20,20 @@ function ImageWithPreview({
 }: Props) {
   const [state, setState] = useState<LoadingState>('initial');
   const preview = blurDataURL ?? (typeof src === 'object' ? src.blurDataURL : undefined);
-  const hasPreview = Boolean(preview);
-  const imageRef = useCallback((image: HTMLImageElement | null) => {
-    // Do not hide or animate an image that finished before hydration.
-    if (image && !image.complete) setState('loading');
-  }, []);
+  const imageRef = useCallback(
+    (image: HTMLImageElement | null) => {
+      // Do not hide or animate an image that finished before hydration.
+      if (preview && image && !image.complete) setState('loading');
+    },
+    [preview],
+  );
 
   return (
     <span
       className={`progressive-image ${wrapperClassName}`}
       data-state={state}
-      data-preview={hasPreview || undefined}
       style={
-        preview && state !== 'complete' && state !== 'error'
-          ? { backgroundImage: `url("${preview}")` }
-          : undefined
+        preview && state !== 'complete' ? { backgroundImage: `url("${preview}")` } : undefined
       }
     >
       <ExportedImage
@@ -50,15 +49,14 @@ function ImageWithPreview({
         }}
         onLoad={(event) => {
           // Next.js waits for decoding before calling onLoad.
-          const shouldFade =
-            hasPreview && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          const shouldFade = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
           setState((previous) =>
             previous === 'loading' && shouldFade ? 'loaded' : 'complete',
           );
           onLoad?.(event);
         }}
         onError={(event) => {
-          setState('error');
+          setState('complete');
           onError?.(event);
         }}
         onAnimationEnd={(event) => {

@@ -1,98 +1,81 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, type Page } from '@playwright/test';
 import sharp from 'sharp';
 import { getImagePlaceholder } from '../utils/imagePlaceholder';
 
 const article = '/articles/top-of-the-film-reel';
 const firstPhoto = 'article .progressive-image';
 
-test('slow photos show an inline preview, then fade without moving the page', async ({
-  page,
-}) => {
+async function holdRequests(page: Page, pattern: string) {
   let release!: () => void;
   const gate = new Promise<void>((resolve) => {
     release = resolve;
   });
-  const requests: string[] = [];
-  const errors: string[] = [];
-  page.on('request', (request) => requests.push(request.url()));
-  page.on('pageerror', (error) => errors.push(error.message));
-  await page.route('**/articles/images/**', async (route) => {
+  await page.route(pattern, async (route) => {
     await gate;
     await route.continue();
   });
-  try {
-    await page.goto(article, { waitUntil: 'domcontentloaded' });
-    const wrapper = page.locator(firstPhoto).first();
-    const photo = wrapper.locator('img');
-    await photo.scrollIntoViewIfNeeded();
-    await expect(wrapper).toHaveAttribute('data-state', 'loading');
-    await expect(wrapper).toHaveCSS('background-image', /data:image\/webp;base64/);
-    await expect(photo).toHaveCSS('opacity', '0');
-    const before = await photo.boundingBox();
-    await photo.evaluate((image: HTMLImageElement) => {
-      image.addEventListener('animationend', (event) => {
-        image.setAttribute('data-fade-duration', String(event.elapsedTime));
+  return release;
+}
+
+for (const { name, url, pattern, selector, reducedMotion } of [
+  {
+    name: 'article photos',
+    url: article,
+    pattern: '**/articles/images/**',
+    selector: firstPhoto,
+    reducedMotion: false,
+  },
+  {
+    name: 'avatar',
+    url: '/',
+    pattern: '**/nextImageExportOptimizer/me.*',
+    selector: 'header .progressive-image',
+    reducedMotion: false,
+  },
+  {
+    name: 'reduced-motion photos',
+    url: article,
+    pattern: '**/articles/images/**',
+    selector: firstPhoto,
+    reducedMotion: true,
+  },
+]) {
+  test(`${name} show inline previews and load without layout shifts`, async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: reducedMotion ? 'reduce' : 'no-preference' });
+    const release = await holdRequests(page, pattern);
+    const requests: string[] = [];
+    const errors: string[] = [];
+    page.on('request', (request) => requests.push(request.url()));
+    page.on('pageerror', (error) => errors.push(error.message));
+    try {
+      await page.goto(url, { waitUntil: 'domcontentloaded' });
+      const wrapper = page.locator(selector).first();
+      const photo = wrapper.locator('img');
+      await photo.scrollIntoViewIfNeeded();
+      await expect(wrapper).toHaveAttribute('data-state', 'loading');
+      await expect(wrapper).toHaveCSS('background-image', /data:image/);
+      await expect(photo).toHaveCSS('opacity', '0');
+      const before = await photo.boundingBox();
+      await photo.evaluate((image: HTMLImageElement) => {
+        image.addEventListener('animationend', (event) => {
+          image.setAttribute('data-fade-duration', String(event.elapsedTime));
+        });
       });
-    });
-    await page.screenshot({ path: '.context/photo-loading.png', fullPage: false });
-    release();
-    await expect(wrapper).toHaveAttribute('data-state', 'complete');
-    await expect(photo).toHaveCSS('opacity', '1');
-    await expect(photo).toHaveAttribute('data-fade-duration', '0.2');
-    await expect(wrapper).toHaveCSS('background-image', 'none');
-    expect(await photo.boundingBox()).toEqual(before);
-    await page.screenshot({ path: '.context/photo-loaded.png', fullPage: false });
-    expect(requests.filter((url) => /-opt-10\./.test(url))).toEqual([]);
-    expect(errors).toEqual([]);
-  } finally {
-    release();
-  }
-});
-
-test('reduced motion reveals loaded images immediately', async ({ page }) => {
-  await page.emulateMedia({ reducedMotion: 'reduce' });
-  let release!: () => void;
-  const gate = new Promise<void>((resolve) => {
-    release = resolve;
+      release();
+      await expect(wrapper).toHaveAttribute('data-state', 'complete');
+      await expect(photo).toHaveCSS('opacity', '1');
+      expect(await photo.getAttribute('data-fade-duration')).toBe(
+        reducedMotion ? null : '0.2',
+      );
+      await expect(wrapper).toHaveCSS('background-image', 'none');
+      expect(await photo.boundingBox()).toEqual(before);
+      expect(requests.filter((url) => /-opt-10\./.test(url))).toEqual([]);
+      expect(errors).toEqual([]);
+    } finally {
+      release();
+    }
   });
-  await page.route('**/articles/images/**', async (route) => {
-    await gate;
-    await route.continue();
-  });
-  await page.goto(article, { waitUntil: 'domcontentloaded' });
-  const wrapper = page.locator(firstPhoto).first();
-  await wrapper.scrollIntoViewIfNeeded();
-  await expect(wrapper).toHaveAttribute('data-state', 'loading');
-  release();
-  await expect(wrapper).toHaveAttribute('data-state', 'complete');
-  await expect(wrapper.locator('img')).toHaveCSS('animation-duration', '0s');
-  await expect(wrapper).toHaveCSS('background-image', 'none');
-});
-
-test('avatar has an inline preview and the same short fade', async ({ page }) => {
-  let release!: () => void;
-  const gate = new Promise<void>((resolve) => {
-    release = resolve;
-  });
-  await page.route('**/nextImageExportOptimizer/me.*', async (route) => {
-    await gate;
-    await route.continue();
-  });
-  await page.goto('/', { waitUntil: 'domcontentloaded' });
-  const avatar = page.locator('header .progressive-image').first();
-  await expect(avatar).toHaveAttribute('data-state', 'loading');
-  await expect(avatar).toHaveCSS('background-image', /data:image/);
-  const before = await avatar.boundingBox();
-  await avatar.locator('img').evaluate((image: HTMLImageElement) => {
-    image.addEventListener('animationend', (event) => {
-      image.setAttribute('data-fade-duration', String(event.elapsedTime));
-    });
-  });
-  release();
-  await expect(avatar).toHaveAttribute('data-state', 'complete');
-  await expect(avatar.locator('img')).toHaveAttribute('data-fade-duration', '0.2');
-  expect(await avatar.boundingBox()).toEqual(before);
-});
+}
 
 test('build-time previews are tiny single frames and skip non-local images', async () => {
   for (const src of ['/articles/images/tram.jpg', '/articles/images/dog-hair.gif']) {
@@ -157,14 +140,7 @@ test('photos remain visible without JavaScript', async ({ browser, baseURL }) =>
 });
 
 test('images loaded before hydration are never hidden or faded', async ({ page }) => {
-  let release!: () => void;
-  const gate = new Promise<void>((resolve) => {
-    release = resolve;
-  });
-  await page.route('**/_next/static/**/*.js', async (route) => {
-    await gate;
-    await route.continue();
-  });
+  const release = await holdRequests(page, '**/_next/static/**/*.js');
   try {
     await page.goto(article, { waitUntil: 'commit' });
     const wrapper = page.locator(firstPhoto).first();
@@ -217,7 +193,7 @@ test('a failed original exposes alt text rather than a permanent blur', async ({
   await page.goto(article);
   const wrapper = page.locator(firstPhoto).first();
   await wrapper.scrollIntoViewIfNeeded();
-  await expect(wrapper).toHaveAttribute('data-state', 'error');
+  await expect(wrapper).toHaveAttribute('data-state', 'complete');
   await expect(wrapper).toHaveCSS('background-image', 'none');
   await expect(wrapper.locator('img')).toHaveCSS('opacity', '1');
   await expect(wrapper.locator('img')).toHaveAttribute('alt', 'Tram');
