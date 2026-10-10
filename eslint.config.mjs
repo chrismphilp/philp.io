@@ -8,8 +8,6 @@ export default defineConfig([
       "node_modules/**",
       ".next/**",
       "out/**",
-      ".context/**",
-      "test-results/**",
       "public/**",
     ],
   },

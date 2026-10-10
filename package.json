@@ -14,8 +14,7 @@
     "start": "npx serve@latest out",
     "static": "next build && next-image-export-optimizer",
     "build:cloudflare": "next build --webpack && next-image-export-optimizer",
-    "lint": "eslint .",
-    "test:images": "playwright test"
+    "lint": "eslint ."
   },
   "pre-push": [
     "format",
@@ -62,8 +61,7 @@
     "prettier": "3.9.10",
     "tailwindcss": "^4.3.3",
     "vercel": "^63.1.2",
-    "webpack": "^5.111.1",
-    "@playwright/test": "1.58.2"
+    "webpack": "^5.111.1"
   },
   "optionalDependencies": {
     "@img/sharp-linux-x64": "0.35.5",

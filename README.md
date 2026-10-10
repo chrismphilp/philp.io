@@ -36,15 +36,3 @@ avatar reuses its static import's preview. Full images retain responsive sizes
 and lazy loading, and fade in over 200ms when still loading after hydration.
 Already-loaded images appear immediately; reduced motion disables the fade.
 Images also work without JavaScript, and SVG diagrams skip previews.
-
-To check photo loading locally:
-
-```sh
-npm ci
-npx playwright install chromium
-npm run build:cloudflare
-npm run test:images
-```
-
-Tests serve `out/` using `npm start`. Set `IMAGE_TEST_URL` to test an unprotected
-preview instead; Cloudflare Access previews require manual sign-in.
