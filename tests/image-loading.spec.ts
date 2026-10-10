@@ -29,7 +29,7 @@ test('slow photos show an inline preview, then fade without moving the page', as
     await expect(wrapper).toHaveCSS('background-image', /data:image\/webp;base64/);
     await expect(photo).toHaveCSS('opacity', '0');
     const before = await photo.boundingBox();
-    await photo.evaluate((image) => {
+    await photo.evaluate((image: HTMLImageElement) => {
       image.addEventListener('animationend', (event) => {
         image.setAttribute('data-fade-duration', String(event.elapsedTime));
       });
@@ -83,7 +83,7 @@ test('avatar has an inline preview and the same short fade', async ({ page }) =>
   await expect(avatar).toHaveAttribute('data-state', 'loading');
   await expect(avatar).toHaveCSS('background-image', /data:image/);
   const before = await avatar.boundingBox();
-  await avatar.locator('img').evaluate((image) => {
+  await avatar.locator('img').evaluate((image: HTMLImageElement) => {
     image.addEventListener('animationend', (event) => {
       image.setAttribute('data-fade-duration', String(event.elapsedTime));
     });
