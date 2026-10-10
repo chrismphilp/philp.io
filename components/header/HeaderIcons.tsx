@@ -3,7 +3,6 @@ import { RiMoonClearLine, RiSunLine } from 'react-icons/ri';
 import { FiGithub } from 'react-icons/fi';
 import { useTheme } from 'next-themes';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
 
 const HeaderIcon = ({ onClick, children }: { onClick?: () => void; children }) => (
   <div
@@ -15,20 +14,14 @@ const HeaderIcon = ({ onClick, children }: { onClick?: () => void; children }) =
 );
 
 const ThemeToggle = () => {
-  const [mounted, setMounted] = useState(false);
-  const { theme, setTheme } = useTheme();
-
-  useEffect(() => {
-    // react-hooks/set-state-in-effect
-    setMounted(true);
-  }, []);
-
-  if (!mounted) return <></>;
+  const { resolvedTheme, setTheme } = useTheme();
 
   return (
     <div className="theme-toggle flex items-center">
-      <HeaderIcon onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
-        {theme === 'light' ? <RiMoonClearLine size={20} /> : <RiSunLine size={20} />}
+      <HeaderIcon onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}>
+        {/* Keep the same markup before hydration; the document theme selects the icon. */}
+        <RiMoonClearLine size={20} className="dark:hidden" />
+        <RiSunLine size={20} className="hidden dark:block" />
       </HeaderIcon>
     </div>
   );
