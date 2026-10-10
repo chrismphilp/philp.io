@@ -31,8 +31,8 @@ Recheck these constraints when upgrading their parent packages. Validate with a 
 
 ## Photo loading
 
-Local article photos get a tiny inline WebP preview during static export. The
-avatar reuses its static import's preview. Full images retain responsive sizes
-and lazy loading, and fade in over 200ms when still loading after hydration.
-Already-loaded images appear immediately; reduced motion disables the fade.
-Images also work without JavaScript, and SVG diagrams skip previews.
+Local article photos get tiny inline WebP previews during static export. The
+avatar uses its static import's preview. `next-image-export-optimizer` handles
+showing the blurred placeholder until the full image loads, using its built-in
+behavior. Article photos retain responsive sizes, lazy loading, and a fixed
+aspect ratio; SVG diagrams skip previews.

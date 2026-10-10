@@ -8,7 +8,7 @@ import rehypeSlug from 'rehype-slug';
 import rehypeImgSize from 'rehype-img-size';
 import rehypePrettyCode from 'rehype-pretty-code';
 import remarkGfm from 'remark-gfm';
-import ProgressiveImage from '../../../components/images/ProgressiveImage';
+import ExportedImage from 'next-image-export-optimizer';
 import { getImagePlaceholder } from '../../../utils/imagePlaceholder';
 import {
   getPublishedPostBySlug,
@@ -27,13 +27,20 @@ const components = {
   img: async (props: React.ImgHTMLAttributes<HTMLImageElement>) => {
     const blurDataURL = await getImagePlaceholder((props.src as string) || '');
     return (
-      <ProgressiveImage
+      <ExportedImage
         className="mx-auto"
-        {...(props as unknown as React.ComponentProps<typeof ProgressiveImage>)}
+        {...(props as unknown as React.ComponentProps<typeof ExportedImage>)}
         src={(props.src as string) || ''}
         alt={props.alt || ''}
         priority={props.loading === 'eager'}
+        placeholder={blurDataURL ? 'blur' : 'empty'}
         blurDataURL={blurDataURL}
+        style={{
+          // Keep the original ratio when responsive encodings round their height.
+          aspectRatio:
+            props.width && props.height ? `${props.width} / ${props.height}` : undefined,
+          ...props.style,
+        }}
         loading={props.loading ?? 'lazy'}
         role="img"
         sizes="(min-width: 1024px) 80ch, 100vw"
