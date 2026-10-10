@@ -19,14 +19,12 @@ export default defineConfig([
       "next.config.js",
       "tailwind.config.js",
       "postcss.config.js",
-      "components/header/HeaderIcons.tsx",
     ],
     languageOptions: {
       sourceType: "script",
     },
     rules: {
       "@typescript-eslint/no-require-imports": "off",
-      "react-hooks/set-state-in-effect": "off",
     },
   },
 ]);
