@@ -13,6 +13,12 @@ npm run dev
 
 For Cloudflare Pages, use `npm run build:cloudflare` and publish the `out` directory. This runs Next.js with webpack for the PWA plugin, then generates the optimized images needed by the static export. Run `npm run lint` before submitting changes.
 
+## Header navigation
+
+Add page links inside `Navigation` in `components/header/Navigation.tsx`. Add header controls as children of `HeaderActions` in `components/header/Header.tsx`; `HeaderActionLink` and `HeaderActionButton` provide consistent styling, accessible labels, and native link/button behavior. The parent layouts use gaps and wrapping, so adding an item does not require changing neighboring items or calculating widths.
+
+Put state and event handlers for an interactive control in its own client component, then render that component inside `HeaderActions`. Keep a control's initial markup stable across server rendering and hydration. `ThemeToggle` is the client component responsible for theme state; CSS selects its visible icon from the document's theme class, so its markup is present before JavaScript loads.
+
 ## Article images
 
 Store each article's images in `public/articles/images/<article-slug>/`, matching the filename in `articles/` without `.mdx`. Reference them with absolute public URLs, for example `![Tram](/articles/images/top-of-the-film-reel/tram.jpg)`. Keep generated image variants out of Git; the build creates them automatically.

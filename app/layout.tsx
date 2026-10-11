@@ -9,6 +9,8 @@ import { siteConfig } from '../utils/seo';
 const professionalFont = Spectral({
   weight: ['300'],
   subsets: ['latin'],
+  // Keep the first painted font: a late swap also resizes ch-based article columns.
+  display: 'optional',
   variable: '--font-spectral',
 });
 
