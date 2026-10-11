@@ -1,9 +1,6 @@
 import type { ComponentProps, ReactNode } from 'react';
 import Link from 'next/link';
 
-const actionClassName =
-  'inline-flex shrink-0 cursor-pointer items-center justify-center p-1 text-primary transition-colors duration-300 hover:text-accent-highlight focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-highlight';
-
 type ActionLabel = {
   label: string;
   children: ReactNode;
@@ -15,7 +12,12 @@ export const HeaderActionLink = ({
   className = '',
   ...props
 }: Omit<ComponentProps<typeof Link>, 'aria-label'> & ActionLabel) => (
-  <Link {...props} aria-label={label} title={title} className={`${actionClassName} ${className}`} />
+  <Link
+    {...props}
+    aria-label={label}
+    title={title}
+    className={`inline-flex shrink-0 cursor-pointer items-center justify-center p-1 text-primary transition-colors duration-300 hover:text-accent-highlight focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-highlight ${className}`}
+  />
 );
 
 export const HeaderActionButton = ({
@@ -30,7 +32,7 @@ export const HeaderActionButton = ({
     type={type}
     aria-label={label}
     title={title}
-    className={`${actionClassName} ${className}`}
+    className={`inline-flex shrink-0 cursor-pointer items-center justify-center p-1 text-primary transition-colors duration-300 hover:text-accent-highlight focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-highlight ${className}`}
   />
 );
 

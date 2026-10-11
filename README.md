@@ -15,7 +15,7 @@ For Cloudflare Pages, use `npm run build:cloudflare` and publish the `out` direc
 
 ## Header navigation
 
-Add page links to `navigationItems` in `components/header/Navigation.tsx`. Add header controls as children of `HeaderActions` in `components/header/Header.tsx`; `HeaderActionLink` and `HeaderActionButton` provide shared styling, accessible labels, and native link/button behavior. The parent layouts use gaps and wrapping, so adding an item does not require changing neighboring items or calculating widths.
+Add page links inside `Navigation` in `components/header/Navigation.tsx`. Add header controls as children of `HeaderActions` in `components/header/Header.tsx`; `HeaderActionLink` and `HeaderActionButton` provide consistent styling, accessible labels, and native link/button behavior. The parent layouts use gaps and wrapping, so adding an item does not require changing neighboring items or calculating widths.
 
 Put state and event handlers for an interactive control in its own client component, then render that component inside `HeaderActions`. Keep a control's initial markup stable across server rendering and hydration. `ThemeToggle` is the client component responsible for theme state; CSS selects its visible icon from the document's theme class, so its markup is present before JavaScript loads.
 
