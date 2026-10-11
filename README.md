@@ -13,6 +13,10 @@ npm run dev
 
 For Cloudflare Pages, use `npm run build:cloudflare` and publish the `out` directory. This runs Next.js with webpack for the PWA plugin, then generates the optimized images needed by the static export. Run `npm run lint` before submitting changes.
 
+## Article images
+
+Store each article's images in `public/articles/images/<article-slug>/`, matching the filename in `articles/` without `.mdx`. Reference them with absolute public URLs, for example `![Tram](/articles/images/top-of-the-film-reel/tram.jpg)`. Keep generated image variants out of Git; the build creates them automatically.
+
 ## Dependency maintenance
 
 `.npmrc` enables `strict-peer-deps` so incompatible dependency combinations fail installation. Keep `package-lock.json` committed and use `npm ci` for repeatable builds. The unused `react-ga`, `react-markdown`, `rehype-shiki`, `autoprefixer`, and `@types/minimatch` packages have been removed, along with the obsolete `vscode-textmate` resolution.
