@@ -6,8 +6,6 @@ export type ArticleData = {
   category: ArticleType;
   wordCount: number;
   readingTime: string;
-  layout?: 'photo-essay';
-  photoCount?: number;
   draft: boolean;
 };
 

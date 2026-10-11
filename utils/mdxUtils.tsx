@@ -34,7 +34,6 @@ const FrontmatterSchema = z.object({
   date: z.string(),
   category: z.nativeEnum(ArticleType),
   draft: z.boolean().optional().default(false),
-  layout: z.literal('photo-essay').optional(),
 });
 
 const buildPostData = (filePath: string): PostData => {
@@ -50,10 +49,6 @@ const buildPostData = (filePath: string): PostData => {
       lastModified: new Date(validatedData.date).toISOString(),
       wordCount: content.split(/\s+/g).length,
       readingTime: readingTime(content).text,
-      photoCount:
-        validatedData.layout === 'photo-essay'
-          ? [...content.matchAll(/!\[[^\]]*]\([^)]+\)/g)].length
-          : undefined,
     } as ArticleData,
     filePath,
   };

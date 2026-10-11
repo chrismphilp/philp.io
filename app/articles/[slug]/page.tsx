@@ -1,7 +1,6 @@
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { notFound } from 'next/navigation';
 import Article from '../../../components/article/Article';
-import PhotoPair from '../../../components/article/PhotoPair';
 import BrainrotLineChart from '../../../components/charts/BrainrotLineChart';
 import StructuredData from '../../../components/seo/StructuredData';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
@@ -23,7 +22,7 @@ import {
   buildMetadata,
 } from '../../../utils/seo';
 
-const getComponents = (isPhotoEssay: boolean) => ({
+const components = {
   img: (props: React.ImgHTMLAttributes<HTMLImageElement>) => (
     <ExportedImage
       className="mx-auto"
@@ -34,17 +33,11 @@ const getComponents = (isPhotoEssay: boolean) => ({
       placeholder="blur"
       loading={props.loading ?? 'lazy'}
       role="img"
-      sizes={
-        props.sizes ??
-        (isPhotoEssay
-          ? '(min-width: 1056px) 1024px, (min-width: 1024px) calc(100vw - 32px), (min-width: 768px) calc(100vw - 96px), calc(100vw - 48px)'
-          : '(min-width: 1024px) 80ch, 100vw')
-      }
+      sizes="(min-width: 1024px) 80ch, 100vw"
     />
   ),
   BrainrotLineChart: BrainrotLineChart,
-  PhotoPair,
-});
+};
 
 const postSlugFromPath = (filePath: string) => filePath.replace(/\.mdx?$/, '');
 
@@ -123,7 +116,7 @@ export default async function ArticlePage(props: { params: Promise<{ slug: strin
       >
         <MDXRemote
           source={content}
-          components={getComponents(data.layout === 'photo-essay')}
+          components={components}
           options={{
             mdxOptions: {
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
