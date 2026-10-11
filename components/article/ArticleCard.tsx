@@ -4,6 +4,10 @@ import { formatDate } from '../../utils/dateUtils';
 
 const ArticleCard = ({ post }) => {
   const link = `/articles/${post.filePath.replace(/\.mdx?$/, '')}`;
+  const detail =
+    post.data.photoCount != null
+      ? `${post.data.photoCount} photographs`
+      : post.data.readingTime;
 
   return (
     <article className="border-b border-accent-subtle last:border-b-0">
@@ -17,7 +21,7 @@ const ArticleCard = ({ post }) => {
 
         <div className="md:ml-10">
           <div className="text-accent-dark text-xs md:hidden mb-2 tracking-wider">
-            {formatDate(post.data.date)} — {post.data.readingTime}
+            {formatDate(post.data.date)} — {detail}
           </div>
 
           <span className="block text-primary text-xl md:text-2xl mb-2 group-hover:text-accent-highlight transition-colors duration-300 font-light tracking-wide">
@@ -29,7 +33,7 @@ const ArticleCard = ({ post }) => {
           </p>
 
           <div className="hidden md:block text-accent-dark text-xs mt-3 tracking-wider">
-            {post.data.readingTime}
+            {detail}
           </div>
         </div>
 

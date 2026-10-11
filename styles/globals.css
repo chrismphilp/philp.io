@@ -350,3 +350,36 @@
     width: min(100%, calc(100ch + 20rem + 10rem));
   }
 }
+
+.photo-essay .article-shell-inner {
+  display: block;
+  max-width: 64rem;
+}
+
+.photo-gallery,
+.photo-pair {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.5rem;
+}
+
+.photo-gallery p {
+  margin: 0;
+}
+
+.photo-gallery img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0;
+}
+
+@media (min-width: 640px) {
+  .photo-gallery {
+    gap: 2.5rem;
+  }
+
+  .photo-pair {
+    grid-template-columns: var(--photo-columns);
+  }
+}
