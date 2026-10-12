@@ -28,7 +28,7 @@ const NavigationLink = ({
     rel={direction === 'older' ? 'prev' : 'next'}
     className={`group block min-w-0 py-6 text-primary transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-current focus-visible:outline-offset-4 motion-reduce:transition-none ${
       direction === 'newer' ? 'md:col-start-2 md:text-right' : ''
-    } ${hasOlderPost ? 'border-t border-accent-subtle md:border-t-0' : ''}`}
+    } ${hasOlderPost ? 'border-t border-accent-subtle dark:border-secondary md:border-t-0' : ''}`}
   >
     <span className="inline-flex items-center gap-2 text-[0.6875rem] uppercase tracking-widest text-secondary">
       {direction === 'older' && <span aria-hidden="true">←</span>}
@@ -50,7 +50,7 @@ const ArticleNavigation = ({ previousPost, nextPost }: ArticleNavigationProps) =
   return (
     <nav
       aria-label="Article navigation"
-      className="not-prose mt-12 mb-16 border-t border-accent-subtle pt-2 lg:mb-[4.125rem] xl:mb-[5.125rem]"
+      className="not-prose mt-12 mb-16 border-t border-accent-subtle pt-2 dark:border-secondary lg:mb-[4.125rem] xl:mb-[5.125rem]"
     >
       <div className="grid gap-x-12 md:grid-cols-2">
         {previousPost && <NavigationLink direction="older" post={previousPost} />}
