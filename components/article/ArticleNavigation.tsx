@@ -8,70 +8,48 @@ export type ArticleNavItem = {
 };
 
 type ArticleNavigationProps = {
-  previousPost?: ArticleNavItem | null;
-  nextPost?: ArticleNavItem | null;
+  olderPost: ArticleNavItem | null;
+  newerPost: ArticleNavItem | null;
 };
 
-enum ArticleNavigationDirection {
-  OLDER = 'older',
-  NEWER = 'newer',
-}
-
-type NavigationDirectionConfig = {
-  label: string;
-  rel: string;
-  arrow: string;
-};
-
-const navigationDirections: Record<ArticleNavigationDirection, NavigationDirectionConfig> = {
-  [ArticleNavigationDirection.OLDER]: {
-    label: 'Older post',
-    rel: 'prev',
-    arrow: '←',
-  },
-  [ArticleNavigationDirection.NEWER]: {
-    label: 'Newer post',
-    rel: 'next',
-    arrow: '→',
-  },
-};
-
-type NavigationLinkProps = {
-  direction: ArticleNavigationDirection;
-  post?: ArticleNavItem | null;
-};
-
-const NavigationLink = ({ direction, post }: NavigationLinkProps) => {
-  if (!post) {
-    return null;
-  }
-
-  const { label, rel, arrow } = navigationDirections[direction];
-
-  return (
-    <Link
-      prefetch={false}
-      href={`/articles/${post.slug}`}
-      rel={rel}
-      data-direction={direction}
-      className={styles.postLink}
-    >
-      <span className={styles.direction}>
-        <span aria-hidden="true">{arrow}</span>
-        {label}
-      </span>
-      <p className={styles.title}>{post.title}</p>
-      {post.description && <p className={styles.description}>{post.description}</p>}
-    </Link>
-  );
-};
-
-const ArticleNavigation = ({ previousPost, nextPost }: ArticleNavigationProps) => {
+const ArticleNavigation = ({ olderPost, newerPost }: ArticleNavigationProps) => {
   return (
     <nav aria-label="Article navigation" className={`not-prose ${styles.navigation}`}>
       <div className={styles.posts}>
-        <NavigationLink direction={ArticleNavigationDirection.OLDER} post={previousPost} />
-        <NavigationLink direction={ArticleNavigationDirection.NEWER} post={nextPost} />
+        {olderPost && (
+          <Link
+            prefetch={false}
+            href={`/articles/${olderPost.slug}`}
+            rel="prev"
+            className={styles.postLink}
+          >
+            <span className={styles.direction}>
+              <span aria-hidden="true">←</span>
+              Older post
+            </span>
+            <p className={styles.title}>{olderPost.title}</p>
+            {olderPost.description && (
+              <p className={styles.description}>{olderPost.description}</p>
+            )}
+          </Link>
+        )}
+        {newerPost && (
+          <Link
+            prefetch={false}
+            href={`/articles/${newerPost.slug}`}
+            rel="next"
+            className={styles.postLink}
+          >
+            <span className={styles.direction}>
+              Newer post
+              <span aria-hidden="true">→</span>
+            </span>
+            <p className={styles.title}>{newerPost.title}</p>
+            {newerPost.description && (
+              <p className={styles.description}>{newerPost.description}</p>
+            )}
+          </Link>
+        )}
       </div>
       <div className={styles.archive}>
         <Link href="/" prefetch={false} className={styles.archiveLink}>

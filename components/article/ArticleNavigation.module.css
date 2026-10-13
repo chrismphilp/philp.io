@@ -43,10 +43,6 @@
   text-transform: uppercase;
 }
 
-.postLink[data-direction='newer'] .direction {
-  flex-direction: row-reverse;
-}
-
 .title {
   margin-top: 0.75rem;
   color: var(--navigation-primary);
@@ -105,7 +101,7 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .postLink[data-direction='newer'] {
+  .postLink[rel='next'] {
     grid-column-start: 2;
     text-align: right;
   }

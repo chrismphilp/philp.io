@@ -10,10 +10,11 @@ import rehypePrettyCode from 'rehype-pretty-code';
 import remarkGfm from 'remark-gfm';
 import ExportedImage from 'next-image-export-optimizer';
 import {
+  getAdjacentPublishedPosts,
   getPublishedPostBySlug,
   getPublishedPostMetadata,
-  PostMeta,
-  sortPostsByDateDescending,
+  type PostMeta,
+  postSlugFromPath,
 } from '../../../utils/mdxUtils';
 import {
   buildArticleBreadcrumbs,
@@ -39,20 +40,21 @@ const components = {
   BrainrotLineChart: BrainrotLineChart,
 };
 
-const postSlugFromPath = (filePath: string) => filePath.replace(/\.mdx?$/, '');
+const buildNavItem = (post: PostMeta | null) => {
+  if (!post) {
+    return null;
+  }
 
-const buildNavItem = (post: PostMeta | null) =>
-  post
-    ? {
-        title: post.data.title,
-        description: post.data.description,
-        slug: postSlugFromPath(post.filePath),
-      }
-    : null;
+  return {
+    title: post.data.title,
+    description: post.data.description,
+    slug: postSlugFromPath(post.filePath),
+  };
+};
 
 export async function generateStaticParams() {
   return getPublishedPostMetadata().map((post) => ({
-    slug: post.filePath.replace(/\.mdx?$/, ''),
+    slug: postSlugFromPath(post.filePath),
   }));
 }
 
@@ -92,16 +94,7 @@ export default async function ArticlePage(props: { params: Promise<{ slug: strin
   const { content, data } = post;
   const breadcrumbs = buildArticleBreadcrumbs(slug, data.category, data.title);
 
-  const sortedPosts = sortPostsByDateDescending(getPublishedPostMetadata());
-
-  const currentIndex = sortedPosts.findIndex(
-    (post) => postSlugFromPath(post.filePath) === slug,
-  );
-  const nextPost = currentIndex > 0 ? sortedPosts[currentIndex - 1] : null;
-  const previousPost =
-    currentIndex >= 0 && currentIndex < sortedPosts.length - 1
-      ? sortedPosts[currentIndex + 1]
-      : null;
+  const { older, newer } = getAdjacentPublishedPosts(slug);
 
   return (
     <section className="flex flex-col items-stretch py-2">
@@ -111,8 +104,8 @@ export default async function ArticlePage(props: { params: Promise<{ slug: strin
       <Article
         frontMatter={{ ...data, slug }}
         breadcrumbs={breadcrumbs}
-        previousPost={buildNavItem(previousPost)}
-        nextPost={buildNavItem(nextPost)}
+        olderPost={buildNavItem(older)}
+        newerPost={buildNavItem(newer)}
       >
         <MDXRemote
           source={content}

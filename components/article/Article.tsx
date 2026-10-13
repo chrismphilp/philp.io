@@ -8,16 +8,16 @@ type ArticleProps = {
   frontMatter: ArticleData & { slug: string };
   breadcrumbs: BreadcrumbItem[];
   children: React.ReactNode;
-  previousPost: ArticleNavItem | null;
-  nextPost: ArticleNavItem | null;
+  olderPost: ArticleNavItem | null;
+  newerPost: ArticleNavItem | null;
 };
 
 const Article = ({
   frontMatter,
   breadcrumbs,
   children,
-  previousPost,
-  nextPost,
+  olderPost,
+  newerPost,
 }: ArticleProps) => {
   return (
     <div className="article-shell w-full pt-4">
@@ -54,7 +54,7 @@ const Article = ({
           </header>
           <section className="text-justify [&>*:first-child]:mt-0">{children}</section>
 
-          <ArticleNavigation previousPost={previousPost} nextPost={nextPost} />
+          <ArticleNavigation olderPost={olderPost} newerPost={newerPost} />
         </article>
 
         <div className="hidden lg:block lg:w-40 lg:flex-shrink-0" aria-hidden="true" />
