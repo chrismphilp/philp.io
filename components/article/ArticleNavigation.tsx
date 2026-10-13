@@ -9,8 +9,8 @@ export type ArticleNavItem = {
 };
 
 type ArticleNavigationProps = {
-  olderPost: ArticleNavItem | null;
-  newerPost: ArticleNavItem | null;
+  previousPost?: ArticleNavItem | null;
+  nextPost?: ArticleNavItem | null;
 };
 
 type ArticleNavigationLinkProps = {
@@ -27,18 +27,18 @@ const ArticleNavigationLink = ({ post, rel, children }: ArticleNavigationLinkPro
   </Link>
 );
 
-const ArticleNavigation = ({ olderPost, newerPost }: ArticleNavigationProps) => {
+const ArticleNavigation = ({ previousPost, nextPost }: ArticleNavigationProps) => {
   return (
     <nav aria-label="Article navigation" className={`not-prose ${styles.navigation}`}>
       <div className={styles.posts}>
-        {olderPost && (
-          <ArticleNavigationLink post={olderPost} rel="prev">
+        {previousPost && (
+          <ArticleNavigationLink post={previousPost} rel="prev">
             <span aria-hidden="true">←</span>
             Older post
           </ArticleNavigationLink>
         )}
-        {newerPost && (
-          <ArticleNavigationLink post={newerPost} rel="next">
+        {nextPost && (
+          <ArticleNavigationLink post={nextPost} rel="next">
             Newer post
             <span aria-hidden="true">→</span>
           </ArticleNavigationLink>

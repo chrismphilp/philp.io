@@ -104,8 +104,8 @@ export default async function ArticlePage(props: { params: Promise<{ slug: strin
       <Article
         frontMatter={{ ...data, slug }}
         breadcrumbs={breadcrumbs}
-        olderPost={buildNavItem(older)}
-        newerPost={buildNavItem(newer)}
+        previousPost={buildNavItem(older)}
+        nextPost={buildNavItem(newer)}
       >
         <MDXRemote
           source={content}
