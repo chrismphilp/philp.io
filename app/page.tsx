@@ -1,5 +1,5 @@
 import StructuredData from '../components/seo/StructuredData';
-import InfiniteArticleList from '../components/article/InfiniteArticleList';
+import ArticleList from '../components/article/ArticleList';
 import { getPublishedPostMetadata, sortPostsByDateDescending } from '../utils/mdxUtils';
 import { buildHomeSchema, buildMetadata } from '../utils/seo';
 
@@ -29,7 +29,7 @@ export default function Homepage() {
       </header>
 
       <div className="asymmetric-element">
-        <InfiniteArticleList allPosts={posts} initialPostCount={10} />
+        <ArticleList posts={posts} />
       </div>
     </section>
   );
