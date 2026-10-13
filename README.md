@@ -17,8 +17,6 @@ For Cloudflare Pages, use `npm run build:cloudflare` and publish the `out` direc
 
 Home, Tech, and Misc render their complete article lists immediately. The archive is small and its metadata is already available at build time. Revealing ten cards at a time used to truncate the page during Back navigation: the browser clamped the saved position to the shorter list before the remaining cards appeared. Keep the full list height available so native Back, Forward, and reload restoration can work at every viewport size. Article links still disable prefetching, so displaying the archive does not download every article.
 
-Install the browser test engines once with `npx playwright install chromium firefox webkit`, then run `npm run test:e2e`. The suite builds and serves the production export on port 3102 and checks scroll positions across mobile, landscape, tablet, and desktop sizes, including either side of the layout breakpoints. It uses the deployed rendering mode because development streaming and HMR can affect scroll restoration. To test an already served export, run `PLAYWRIGHT_BASE_URL=http://localhost:3101 npm run test:e2e` against that server.
-
 ## Header navigation
 
 Add page links inside `Navigation` in `components/header/Navigation.tsx`. Add header controls as children of `HeaderActions` in `components/header/Header.tsx`; `HeaderActionLink` and `HeaderActionButton` provide consistent styling, accessible labels, and native link/button behavior. The parent layouts use gaps and wrapping, so adding an item does not require changing neighboring items or calculating widths.

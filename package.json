@@ -14,8 +14,7 @@
     "start": "npx serve@latest out",
     "static": "next build && next-image-export-optimizer",
     "build:cloudflare": "next build --webpack && next-image-export-optimizer",
-    "lint": "eslint .",
-    "test:e2e": "playwright test"
+    "lint": "eslint ."
   },
   "pre-push": [
     "format",
@@ -55,7 +54,6 @@
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^16.4.0",
-    "@playwright/test": "^1.64.0",
     "baseline-browser-mapping": "^2.11.28",
     "eslint": "^9.39.5",
     "eslint-config-next": "^16.4.0",
