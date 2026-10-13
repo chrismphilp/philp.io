@@ -3,10 +3,11 @@ import Link from 'next/link';
 import { formatDate } from '../../utils/dateUtils';
 
 const ArticleCard = ({ post }) => {
-  const link = `/articles/${post.filePath.replace(/\.mdx?$/, '')}`;
+  const slug = post.filePath.replace(/\.mdx?$/, '');
+  const link = `/articles/${slug}`;
 
   return (
-    <article className="border-b border-accent-subtle last:border-b-0">
+    <article id={`post-${slug}`} className="border-b border-accent-subtle last:border-b-0">
       <Link className="group block py-6 relative" href={link} prefetch={false}>
         <div className="absolute left-0 top-0 bottom-0 hidden md:flex flex-col items-center">
           <div className="vertical-text text-xs text-accent-dark tracking-wider opacity-70 transform rotate-180">

@@ -54,7 +54,11 @@ const Article = ({
           </header>
           <section className="text-justify [&>*:first-child]:mt-0">{children}</section>
 
-          <ArticleNavigation previousPost={previousPost} nextPost={nextPost} />
+          <ArticleNavigation
+            currentPostSlug={frontMatter.slug}
+            previousPost={previousPost}
+            nextPost={nextPost}
+          />
         </article>
 
         <div className="hidden lg:block lg:w-40 lg:flex-shrink-0" aria-hidden="true" />

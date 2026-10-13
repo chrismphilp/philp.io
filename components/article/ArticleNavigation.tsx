@@ -9,6 +9,7 @@ export type ArticleNavItem = {
 };
 
 type ArticleNavigationProps = {
+  currentPostSlug: string;
   previousPost?: ArticleNavItem | null;
   nextPost?: ArticleNavItem | null;
 };
@@ -27,7 +28,11 @@ const ArticleNavigationLink = ({ post, rel, children }: ArticleNavigationLinkPro
   </Link>
 );
 
-const ArticleNavigation = ({ previousPost, nextPost }: ArticleNavigationProps) => {
+const ArticleNavigation = ({
+  currentPostSlug,
+  previousPost,
+  nextPost,
+}: ArticleNavigationProps) => {
   return (
     <nav aria-label="Article navigation" className={`not-prose ${styles.navigation}`}>
       <div className={styles.posts}>
@@ -45,7 +50,11 @@ const ArticleNavigation = ({ previousPost, nextPost }: ArticleNavigationProps) =
         )}
       </div>
       <div className={styles.archive}>
-        <Link href="/" prefetch={false} className={styles.archiveLink}>
+        <Link
+          href={`/#post-${currentPostSlug}`}
+          prefetch={false}
+          className={styles.archiveLink}
+        >
           All writing
         </Link>
       </div>
