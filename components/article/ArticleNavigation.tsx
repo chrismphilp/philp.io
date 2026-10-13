@@ -1,4 +1,6 @@
+import type { ReactNode } from 'react';
 import Link from 'next/link';
+import styles from './ArticleNavigation.module.css';
 
 export type ArticleNavItem = {
   title: string;
@@ -7,41 +9,55 @@ export type ArticleNavItem = {
 };
 
 type ArticleNavigationProps = {
+  currentPostSlug: string;
   previousPost?: ArticleNavItem | null;
   nextPost?: ArticleNavItem | null;
 };
 
-const getArticlePath = (slug: string) => `/articles/${slug}`;
-
-const NavigationLink = ({
-  label,
-  post,
-}: {
-  label: 'Previous' | 'Next';
+type ArticleNavigationLinkProps = {
   post: ArticleNavItem;
-}) => (
-  <Link
-    prefetch={false}
-    href={getArticlePath(post.slug)}
-    className="group block rounded-md border border-transparent p-4 transition-colors duration-300 hover:border-accent-highlight"
-  >
-    <span className="text-xs uppercase tracking-widest text-secondary">{label}</span>
-    <p className="text-primary text-lg font-light group-hover:text-accent-highlight">
-      {post.title}
-    </p>
-    <p className="text-secondary text-sm mt-1">{post.description}</p>
+  rel: 'prev' | 'next';
+  children: ReactNode;
+};
+
+const ArticleNavigationLink = ({ post, rel, children }: ArticleNavigationLinkProps) => (
+  <Link prefetch={false} href={`/articles/${post.slug}`} rel={rel} className={styles.postLink}>
+    <span className={styles.direction}>{children}</span>
+    <p className={styles.title}>{post.title}</p>
+    {post.description && <p className={styles.description}>{post.description}</p>}
   </Link>
 );
 
-const ArticleNavigation = ({ previousPost, nextPost }: ArticleNavigationProps) => {
-  if (!previousPost && !nextPost) {
-    return null;
-  }
-
+const ArticleNavigation = ({
+  currentPostSlug,
+  previousPost,
+  nextPost,
+}: ArticleNavigationProps) => {
   return (
-    <nav className="not-prose mt-10 mb-16 grid gap-6 border-t border-accent-subtle pt-6 md:grid-cols-2 lg:mb-[4.125rem] xl:mb-[5.125rem]">
-      {previousPost && <NavigationLink label="Previous" post={previousPost} />}
-      {nextPost && <NavigationLink label="Next" post={nextPost} />}
+    <nav aria-label="Article navigation" className={`not-prose ${styles.navigation}`}>
+      <div className={styles.posts}>
+        {previousPost && (
+          <ArticleNavigationLink post={previousPost} rel="prev">
+            <span aria-hidden="true">←</span>
+            Older post
+          </ArticleNavigationLink>
+        )}
+        {nextPost && (
+          <ArticleNavigationLink post={nextPost} rel="next">
+            Newer post
+            <span aria-hidden="true">→</span>
+          </ArticleNavigationLink>
+        )}
+      </div>
+      <div className={styles.archive}>
+        <Link
+          href={`/#post-${currentPostSlug}`}
+          prefetch={false}
+          className={styles.archiveLink}
+        >
+          All writing
+        </Link>
+      </div>
     </nav>
   );
 };

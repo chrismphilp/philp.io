@@ -17,6 +17,8 @@ For Cloudflare Pages, use `npm run build:cloudflare` and publish the `out` direc
 
 Home, Tech, and Misc render their complete article lists immediately. The archive is small and its metadata is already available at build time. Revealing ten cards at a time used to truncate the page during Back navigation: the browser clamped the saved position to the shorter list before the remaining cards appeared. Keep the full list height available so native Back, Forward, and reload restoration can work at every viewport size. Article links still disable prefetching, so displaying the archive does not download every article.
 
+The article footer's “All writing” link points to `/#post-<slug>`, targeting the current article's card in the complete Home archive. This also works for directly opened articles and after following previous/next links; it returns to the article's location in the list rather than a saved pixel position.
+
 ## Header navigation
 
 Add page links inside `Navigation` in `components/header/Navigation.tsx`. Add header controls as children of `HeaderActions` in `components/header/Header.tsx`; `HeaderActionLink` and `HeaderActionButton` provide consistent styling, accessible labels, and native link/button behavior. The parent layouts use gaps and wrapping, so adding an item does not require changing neighboring items or calculating widths.

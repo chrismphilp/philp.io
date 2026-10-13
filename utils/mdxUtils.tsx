@@ -25,6 +25,8 @@ export type PostData = PostMeta & {
   content: string;
 };
 
+export const postSlugFromPath = (filePath: string) => filePath.replace(/\.mdx?$/, '');
+
 const FrontmatterSchema = z.object({
   title: z.string(),
   description: z
@@ -71,7 +73,7 @@ export const getPosts = (): PostData[] =>
   articleFilePaths.map((filePath) => buildPostData(filePath));
 
 const getArticleFilePathBySlug = (slug: string) =>
-  articleFilePaths.find((filePath) => filePath.replace(/\.mdx?$/, '') === slug);
+  articleFilePaths.find((filePath) => postSlugFromPath(filePath) === slug);
 
 export const getPostBySlug = (slug: string): PostData | null => {
   const filePath = getArticleFilePathBySlug(slug);
@@ -95,3 +97,17 @@ export const getPublishedPostBySlug = (slug: string): PostData | null => {
 
 export const sortPostsByDateDescending = <T extends PostMeta>(posts: T[]) =>
   [...posts].sort((post1, post2) => (post1.data.date > post2.data.date ? -1 : 1));
+
+export const getAdjacentPublishedPosts = (slug: string) => {
+  const posts = sortPostsByDateDescending(getPublishedPostMetadata());
+  const index = posts.findIndex((post) => postSlugFromPath(post.filePath) === slug);
+
+  if (index === -1) {
+    return { older: null, newer: null };
+  }
+
+  return {
+    older: posts[index + 1] ?? null,
+    newer: posts[index - 1] ?? null,
+  };
+};
