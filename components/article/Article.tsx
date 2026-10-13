@@ -2,20 +2,14 @@ import type { ArticleData } from '../types';
 import { formatDate } from '../../utils/dateUtils';
 import type { BreadcrumbItem } from '../../utils/seo';
 import BreadcrumbTrail from '../seo/BreadcrumbTrail';
-import ArticleNavigation from './ArticleNavigation';
-
-type ArticleNavItem = {
-  title: string;
-  description: string;
-  slug: string;
-} | null;
+import ArticleNavigation, { type ArticleNavItem } from './ArticleNavigation';
 
 type ArticleProps = {
   frontMatter: ArticleData & { slug: string };
   breadcrumbs: BreadcrumbItem[];
   children: React.ReactNode;
-  previousPost: ArticleNavItem;
-  nextPost: ArticleNavItem;
+  previousPost: ArticleNavItem | null;
+  nextPost: ArticleNavItem | null;
 };
 
 const Article = ({
