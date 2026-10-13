@@ -2,7 +2,7 @@ import { ArticleType } from '../../components/types';
 import BreadcrumbTrail from '../../components/seo/BreadcrumbTrail';
 import StructuredData from '../../components/seo/StructuredData';
 import { getPostMetadata } from '../../utils/mdxUtils';
-import InfiniteArticleList from '../../components/article/InfiniteArticleList';
+import ArticleList from '../../components/article/ArticleList';
 import {
   buildBreadcrumbSchema,
   buildCollectionBreadcrumbs,
@@ -50,7 +50,7 @@ export default function Tech() {
       </header>
 
       <div className="asymmetric-element">
-        <InfiniteArticleList allPosts={posts} initialPostCount={10} />
+        <ArticleList posts={posts} />
       </div>
     </section>
   );

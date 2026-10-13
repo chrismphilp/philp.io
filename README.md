@@ -13,6 +13,10 @@ npm run dev
 
 For Cloudflare Pages, use `npm run build:cloudflare` and publish the `out` directory. This runs Next.js with webpack for the PWA plugin, then generates the optimized images needed by the static export. Run `npm run lint` before submitting changes.
 
+## Scroll restoration
+
+Home, Tech, and Misc render their complete article lists immediately. The archive is small and its metadata is already available at build time. Revealing ten cards at a time used to truncate the page during Back navigation: the browser clamped the saved position to the shorter list before the remaining cards appeared. Keep the full list height available so native Back, Forward, and reload restoration can work at every viewport size. Article links still disable prefetching, so displaying the archive does not download every article.
+
 ## Header navigation
 
 Add page links inside `Navigation` in `components/header/Navigation.tsx`. Add header controls as children of `HeaderActions` in `components/header/Header.tsx`; `HeaderActionLink` and `HeaderActionButton` provide consistent styling, accessible labels, and native link/button behavior. The parent layouts use gaps and wrapping, so adding an item does not require changing neighboring items or calculating widths.
