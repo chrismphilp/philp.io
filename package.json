@@ -14,7 +14,12 @@
     "start": "npx serve@latest out",
     "static": "next build && next-image-export-optimizer",
     "build:cloudflare": "next build --webpack && next-image-export-optimizer",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "images:avif": "node scripts/generate-photo-avif.mjs",
+    "predev": "npm run images:avif",
+    "postbuild": "npm run images:avif -- --export",
+    "poststatic": "npm run images:avif -- --export",
+    "postbuild:cloudflare": "npm run images:avif -- --export"
   },
   "pre-push": [
     "format",

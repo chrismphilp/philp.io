@@ -29,3 +29,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Cached AVIF encodes (regenerated from source photos)
+/.cache/photo-avif/
