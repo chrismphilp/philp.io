@@ -35,15 +35,24 @@ const withPWA = require('@ducanh2912/next-pwa').default({
   // Cache photos when viewed, rather than downloading the library on install.
   publicExcludes: [
     '!noprecache/**/*',
+    '!blog/images/**/*',
     '!articles/images/**/*',
     '!**/nextImageExportOptimizer/**/*',
     '!**/next-image-export-optimizer-hashes.json',
   ],
   workboxOptions: {
-    // Next's static export omits this file; precaching it prevents SW installation.
+    // Keep the offline shell, but cache images, optional font subsets, and
+    // browser-specific polyfills only when requested by a visitor.
     manifestTransforms: [
       async (manifest) => ({
-        manifest: manifest.filter(({ url }) => !url.endsWith('/dynamic-css-manifest.json')),
+        manifest: manifest.filter(
+          ({ url }) =>
+            // Next's static export omits this file; it would break SW installation.
+            !url.endsWith('/dynamic-css-manifest.json') &&
+            !/\.(?:png|jpe?g|gif|webp|avif|ico)$/i.test(url) &&
+            !/\/polyfills-[^/]+\.js$/.test(url) &&
+            (!url.endsWith('.woff2') || url.endsWith('.p.woff2')),
+        ),
         warnings: [],
       }),
     ],
