@@ -1,6 +1,7 @@
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { notFound } from 'next/navigation';
 import Article from '../../../components/article/Article';
+import { codeThemes } from '../../../utils/codeThemes';
 import BrainrotLineChart from '../../../components/charts/BrainrotLineChart';
 import StructuredData from '../../../components/seo/StructuredData';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
@@ -125,10 +126,7 @@ export default async function ArticlePage(props: { params: Promise<{ slug: strin
                 [
                   rehypePrettyCode,
                   {
-                    theme: {
-                      dark: 'monokai',
-                      light: 'github-light',
-                    },
+                    theme: codeThemes,
                     keepBackground: true,
                   },
                 ],

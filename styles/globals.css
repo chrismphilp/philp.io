@@ -329,6 +329,10 @@
   border-radius: 0.2rem;
 }
 
+html.dark .prose :not(pre) > code {
+  background-color: #1E1C16;
+}
+
 @media (min-width: 1024px) {
   .article-shell {
     margin-left: calc(50% - 50vw + 1rem);
