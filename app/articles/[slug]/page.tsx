@@ -6,6 +6,7 @@ import StructuredData from '../../../components/seo/StructuredData';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeSlug from 'rehype-slug';
 import rehypeImgSize from 'rehype-img-size';
+import rehypeLeadingImage from '../../../utils/rehypeLeadingImage.mjs';
 import rehypePrettyCode from 'rehype-pretty-code';
 import remarkGfm from 'remark-gfm';
 import ExportedImage from 'next-image-export-optimizer';
@@ -131,6 +132,7 @@ export default async function ArticlePage(props: { params: Promise<{ slug: strin
                   },
                 ],
                 [rehypeImgSize, { dir: 'public' }],
+                rehypeLeadingImage,
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
               ] as any,
             },
