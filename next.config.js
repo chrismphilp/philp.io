@@ -17,7 +17,7 @@ const nextConfig = {
   images: {
     loader: 'custom',
     imageSizes: [16, 64, 128, 256],
-    deviceSizes: [320, 640, 768, 1080, 1920],
+    deviceSizes: [320, 640, 768, 1080, 1440, 1920],
   },
   env: {
     nextImageExportOptimizer_imageFolderPath: 'public',
