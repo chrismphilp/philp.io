@@ -1,8 +1,8 @@
-'use client';
 import Link from 'next/link';
 import { formatDate } from '../../utils/dateUtils';
+import type { PostMeta } from '../../utils/mdxUtils';
 
-const ArticleCard = ({ post }) => {
+const ArticleCard = ({ post }: { post: PostMeta }) => {
   const slug = post.filePath.replace(/\.mdx?$/, '');
   const link = `/articles/${slug}`;
 
