@@ -31,7 +31,7 @@ Store each article's images in `public/articles/images/<article-slug>/`, matchin
 
 JPEG article photographs also get responsive AVIF variants (quality 75, 4:4:4 chroma) with the existing quality-90 WebP fallback. Browsers choose the format through `<picture>`; image dimensions, responsive sizes, and loading behaviour stay the same. AVIF and WebP quality values are codec-specific and are not directly comparable.
 
-The npm development/build commands run `scripts/generate-photo-avif.mjs` automatically. AVIF generation runs after the WebP optimizer during exports because that optimizer removes variants it does not own. Encodes are cached in `.cache/photo-avif/` using the source contents, encoder versions, and settings. Delete that directory to rebuild the cache. Run `npm run images:avif` after adding photos while the dev server is already running; use `-- --export` to also update `out`. Do not commit generated variants. Run `node --test tests/photo-*.test.mjs` to verify responsive selection, EXIF rotation, exported variants, and cache invalidation.
+The npm development/build commands run `scripts/generate-photo-avif.mjs` automatically. AVIF generation runs after the WebP optimizer during exports because that optimizer removes variants it does not own. Encodes are cached in `.cache/photo-avif/` using the source contents, encoder versions, and settings. Delete that directory to rebuild the cache. Run `npm run images:avif` after adding photos while the dev server is already running; use `-- --export` to also update `out`. Do not commit generated variants.
 
 ## Dependency maintenance
 
