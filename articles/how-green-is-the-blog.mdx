@@ -12,7 +12,7 @@ blog. And if it's not, how could it be improved.
 
 To start with it's worth investigating the current state. 
 
-### Current State
+## Current State
 
 An evaluation on [websitecarbon](https://www.websitecarbon.com/website/philp-io) shows that we're pretty good, only 0.06g of carbon produced
 on a site visit, but we can probably do better.
@@ -22,7 +22,7 @@ on a site visit, but we can probably do better.
 [Going through some of the suggestions](https://www.wholegraindigital.com/blog/website-energy-efficiency/) there was some pretty quick wins in
 terms of increasing efficiency and reducing the footprint.
 
-### Reducing Image Size
+## Reducing Image Size
 
 Currently images are generated in a variety of different sizes to aid slower browsers. However they are slightly over-eager currently.
 
@@ -44,7 +44,7 @@ Cutting this back reduces the eventual generated images by nearly half. Big succ
   },
 ```
 
-### Progressive Web Apps (PWA)
+## Progressive Web Apps (PWA)
 
 PWAs allow web applications to be directly installed onto a users device, offering the ability to work while a users device is offline.
 Alongside this they are also able to update content in the background, and display notifications utilising the OS notification system. 
@@ -85,7 +85,7 @@ module.exports = {
 }
 ```
 
-#### Unbreaking Dev
+### Unbreaking Dev
 
 Due to the way PWAs are constructed, a dev environment isn't really suited to cached requests and service workers, with this warning appearing consistently:
 
@@ -104,7 +104,7 @@ const withPWA = require('next-pwa')({
 });
 ```
 
-### Making Efficient Crawlers
+## Making Efficient Crawlers
 
 Web crawlers can be a bit of a drag on a website, so giving them instructions on the optimal way to crawl a website can help to reduce the number of requests
 being made.
@@ -138,7 +138,7 @@ Setting it up was relatively simple:
 ```
 
 
-### Offline Fallback
+## Offline Fallback
 
 Adding offline support with `next-pwa` is relatively trivial, and aids in reducing the number of requests. All it takes is adding a page under 
 `_fallback.tsx`. Pretty trivial currently but give it a spin if you feel like it.
@@ -153,7 +153,7 @@ export default Fallback;
 
 Although admittedly this does little in terms of reducing requests to a website, it's a pretty snazzy feature.
 
-### Conclusion
+## Conclusion
 
 The carbon footprint of the site has [been slighly reduced](https://ecograder.com) through these steps, although this was already shaving a pretty thin coat.
 

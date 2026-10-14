@@ -6,7 +6,7 @@ category: Technology
 draft: false
 ---
 
-### Template Literal Types
+## Template Literal Types
 
 Template literal types let you build a union of valid strings - ideal for topic names, metric keys, routes,
 feature flags, etc. This gives both autocomplete and compile-time errors.
@@ -20,7 +20,7 @@ const t: Topic = "user.archival"
 // const bad: Topic = "user.create" // error
 ```
 
-### Something Satisfying
+## Something Satisfying
 
 The `satisfies` operator is for when you want TypeScript to check that a value matches a type, without forcing the value
 to become that type. It validates shape and constraints, but keeps the narrower inferred types you actually wrote.
@@ -70,7 +70,7 @@ produce("payments.refunded") // ok, because it matches `${string}.${string}`, ev
 produce("payments")          // error, no dot
 ```
 
-### Exhaustive Switches
+## Exhaustive Switches
 
 TypeScript will happily let you write a non-exhaustive `switch` over an `enum`.
 
