@@ -47,4 +47,4 @@ Recheck these constraints when upgrading their parent packages. Validate with a 
 
 ## Browser baseline
 
-The webpack production build targets Next.js's Chrome/Edge/Firefox 111 and Safari 16.4 baseline, recorded in `.browserslistrc`. These browsers provide the older language APIs in Next's unconditional module polyfill bundle. The client build substitutes `utils/browserPolyfills.js`, retaining the newer `URL.canParse` fallback. The Cloudflare build runs `node --test tests/browser-polyfills.test.mjs`, including a fingerprint check that requires review if the upstream module changes. Recheck Next's polyfill module and supported browsers when upgrading Next.js. Turbopack development uses Next's original polyfills.
+The webpack production build targets Next.js's Chrome/Edge/Firefox 111 and Safari 16.4 baseline, recorded in `.browserslistrc`. These browsers provide the older language APIs in Next's unconditional module polyfill bundle. The client build substitutes `utils/browserPolyfills.js`, retaining the newer `URL.canParse` fallback. Recheck Next's polyfill module and supported browsers when upgrading Next.js. Turbopack development uses Next's original polyfills.
