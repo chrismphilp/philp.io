@@ -17,12 +17,12 @@ const nextConfig = {
   images: {
     loader: 'custom',
     imageSizes: [16, 64, 128, 256],
-    deviceSizes: [320, 640, 768, 1080, 1920],
+    deviceSizes: [320, 640, 768, 1080, 1440, 1920],
   },
   env: {
     nextImageExportOptimizer_imageFolderPath: 'public',
     nextImageExportOptimizer_exportFolderPath: 'out',
-    nextImageExportOptimizer_quality: '90',
+    nextImageExportOptimizer_quality: '80',
     nextImageExportOptimizer_storePicturesInWEBP: 'true',
     nextImageExportOptimizer_exportFolderName: 'nextImageExportOptimizer',
     nextImageExportOptimizer_generateAndUseBlurImages: 'true',
