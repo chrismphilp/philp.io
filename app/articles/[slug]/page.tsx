@@ -31,7 +31,7 @@ const components = {
       src={(props.src as string) || ''}
       alt={props.alt || ''}
       priority={props.loading === 'eager'}
-      placeholder="blur"
+      placeholder="empty"
       loading={props.loading ?? 'lazy'}
       role="img"
       sizes="(min-width: 1024px) 80ch, 100vw"

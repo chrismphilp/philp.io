@@ -11,6 +11,7 @@ const Avatar = ({ image, alt }) => (
         width={48}
         height={48}
         alt={alt}
+        placeholder="empty"
         priority
       />
     </Link>
