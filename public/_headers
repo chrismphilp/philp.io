@@ -1,0 +1,4 @@
+# Next.js fingerprints these filenames, so new deployments get new asset URLs.
+# HTML, the service worker, and unversioned article images keep their defaults.
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable
