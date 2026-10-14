@@ -14,7 +14,8 @@
     "start": "npx serve@latest out",
     "static": "next build && next-image-export-optimizer",
     "build:cloudflare": "next build --webpack && next-image-export-optimizer",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "prebuild:cloudflare": "node --test tests/browser-polyfills.test.mjs"
   },
   "pre-push": [
     "format",

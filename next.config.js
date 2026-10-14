@@ -14,6 +14,14 @@ const nextConfig = {
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
   transpilePackages: ['react-icons', 'next-image-export-optimizer'],
   turbopack: {},
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      // Next's supported browsers already provide the older language polyfills.
+      config.resolve.alias[require.resolve('next/dist/build/polyfills/polyfill-module')] =
+        require.resolve('./utils/browserPolyfills.js');
+    }
+    return config;
+  },
   images: {
     loader: 'custom',
     imageSizes: [16, 64, 128, 256],

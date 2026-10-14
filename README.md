@@ -44,3 +44,7 @@ The dependency upgrade retains these compatibility constraints:
 | `tar` under `@vercel/container` | 7.5.22 | A scoped override supplies security fixes while Vercel 63.1.2's container dependency pins 7.5.11. Remove the override when the upstream dependency includes the fixes. |
 
 Recheck these constraints when upgrading their parent packages. Validate with a clean install, lint, and the full Cloudflare build, then wait for the PR's Cloudflare check to succeed before treating the upgrade as deployment-ready.
+
+## Browser baseline
+
+The webpack production build targets Next.js's Chrome/Edge/Firefox 111 and Safari 16.4 baseline, recorded in `.browserslistrc`. These browsers provide the older language APIs in Next's unconditional module polyfill bundle. The client build substitutes `utils/browserPolyfills.js`, retaining the newer `URL.canParse` fallback. The Cloudflare build runs `node --test tests/browser-polyfills.test.mjs`, including a fingerprint check that requires review if the upstream module changes. Recheck Next's polyfill module and supported browsers when upgrading Next.js. Turbopack development uses Next's original polyfills.
