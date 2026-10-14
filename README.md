@@ -29,6 +29,10 @@ Put state and event handlers for an interactive control in its own client compon
 
 Store each article's images in `public/articles/images/<article-slug>/`, matching the filename in `articles/` without `.mdx`. Reference them with absolute public URLs, for example `![Tram](/articles/images/top-of-the-film-reel/tram.jpg)`. Keep generated image variants out of Git; the build creates them automatically.
 
+Set `gallery: true` in a photo article's frontmatter to defer distant images. The first two images keep their existing native loading behaviour; later images mount within 600px of the viewport. Each frame reserves the photograph's aspect ratio from build-time dimensions, including during Back navigation. Photos remain mounted once revealed. Images without dimensions keep native loading, and articles without the flag are unchanged.
+
+A `<noscript>` fallback keeps every photo available without JavaScript. Browsers without IntersectionObserver reveal all photos, and `beforeprint` mounts every photo. As with native lazy loading, browsers may capture a print preview before pending downloads finish; scroll through the gallery and wait for photos to load before printing. Run `node --test tests/gallery-images.test.mjs` to verify the build-time opt-in and image selection. Check initial requests, scrolling, Back navigation, printing, and JavaScript-disabled viewing when changing the client wrapper.
+
 ## Dependency maintenance
 
 `.npmrc` enables `strict-peer-deps` so incompatible dependency combinations fail installation. Keep `package-lock.json` committed and use `npm ci` for repeatable builds. The unused `react-ga`, `react-markdown`, `rehype-shiki`, `autoprefixer`, and `@types/minimatch` packages have been removed, along with the obsolete `vscode-textmate` resolution.

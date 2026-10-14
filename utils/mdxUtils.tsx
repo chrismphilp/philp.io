@@ -36,6 +36,7 @@ const FrontmatterSchema = z.object({
   date: z.string(),
   category: z.nativeEnum(ArticleType),
   draft: z.boolean().optional().default(false),
+  gallery: z.boolean().optional().default(false),
 });
 
 const buildPostData = (filePath: string): PostData => {

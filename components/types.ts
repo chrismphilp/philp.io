@@ -7,6 +7,7 @@ export type ArticleData = {
   wordCount: number;
   readingTime: string;
   draft: boolean;
+  gallery: boolean;
 };
 
 export enum ArticleType {

@@ -9,6 +9,8 @@ import rehypeImgSize from 'rehype-img-size';
 import rehypePrettyCode from 'rehype-pretty-code';
 import remarkGfm from 'remark-gfm';
 import ExportedImage from 'next-image-export-optimizer';
+import DeferredGalleryImage from '../../../components/article/DeferredGalleryImage';
+import rehypeGalleryImages from '../../../utils/rehypeGalleryImages.mjs';
 import {
   getAdjacentPublishedPosts,
   getPublishedPostBySlug,
@@ -24,6 +26,7 @@ import {
 } from '../../../utils/seo';
 
 const components = {
+  'deferred-gallery-image': DeferredGalleryImage,
   img: (props: React.ImgHTMLAttributes<HTMLImageElement>) => (
     <ExportedImage
       className="mx-auto"
@@ -133,6 +136,7 @@ export default async function ArticlePage(props: { params: Promise<{ slug: strin
                   },
                 ],
                 [rehypeImgSize, { dir: 'public' }],
+                [rehypeGalleryImages, { enabled: data.gallery }],
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
               ] as any,
             },
