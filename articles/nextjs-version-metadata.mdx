@@ -9,7 +9,7 @@ draft: false
 When deploying this blog I wanted a quick way to monitor that specific versions of the blog had rolled to the public.
 The eventual solution is outlined below.
 
-### Versioning package.json
+## Versioning package.json
 
 Using the [pre-commit](https://www.npmjs.com/package/pre-commit) package a hook can be setup that runs prior to any commit.
 This looks like:
@@ -24,7 +24,7 @@ This looks like:
 - `git-tag-version`: Creates a version commit and tag - I wanted the version change to be part of the existing commit
 - `git add package*.json`: Add the updated versioning files to the commit
 
-### Going Meta
+## Going Meta
 
 To then display this version as part of the `<meta>` required some small tweaks.
 

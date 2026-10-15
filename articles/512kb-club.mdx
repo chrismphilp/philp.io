@@ -17,7 +17,7 @@ hallowed institution.
 
 ---
 
-### 1. Scrapping Big Brother (~550KB)
+## 1. Scrapping Big Brother (~550KB)
 
 The first big win was analytics. I had a tiny PostHog client imported in `_app.tsx`, which pulled `posthog-js` into
 every page just to send events to a new analytics platform I was testing. Removing that client dropped a fairly chunky
@@ -25,7 +25,7 @@ analytics SDK from the shared bundle, and now lets me live in blissful ignorance
 
 ---
 
-### 2. Slimmer article data on the Homepage (~400KB)
+## 2. Slimmer article data on the Homepage (~400KB)
 
 Next.js writes JSON for each statically generated route. Code heavy posts like my Rust borrow checker article
 produced ~200KB+ JSON blobs.
@@ -51,7 +51,7 @@ The homepage now downloads just one small `index.json` file with metadata, not m
 
 ---
 
-### 3. Replacing tiny libraries with code (~20KB)
+## 3. Replacing tiny libraries with code (~20KB)
 
 `dayjs` was in the bundle solely to format dates as `YYYY.MM.DD` in a couple of places.
 
@@ -69,7 +69,7 @@ export const formatDate = (value: string | Date) => {
 
 ---
 
-### 4. Swapping JavaScript animation for CSS (~20KB)
+## 4. Swapping JavaScript animation for CSS (~20KB)
 
 The theme toggle used `framer-motion` to spin the sun/moon icon on tap. Fun library, but expensive for a single interaction.
 
@@ -104,7 +104,7 @@ Using Codex, it was rewritten as:
 
 ---
 
-### 5. Miscellaneous tidy‑ups (~50–100KB)
+## 5. Miscellaneous tidy‑ups (~50–100KB)
 
 A few smaller changes also helped:
 
@@ -115,7 +115,7 @@ Individually these were small, but together they knocked another chunk off the J
 
 ---
 
-### Where I ended up
+## Where I ended up
 
 I started at roughly **1.52MB** of bundle and shaved it down to around **424KB**.
 

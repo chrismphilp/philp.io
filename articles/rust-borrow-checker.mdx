@@ -9,7 +9,7 @@ draft: false
 Coming from Java the concept of ownership was alien - so to solidify this knowledge I'm going to attempt a brief summary 
 in ~5 minutes.
 
-### Ownership
+## Ownership
 
 Each variable in Rust has an owner. Once ownership is declared, there is exactly one binding to any given resource[*](#reference-counting).
 
@@ -24,7 +24,7 @@ println!("{}", x[0])
 //: # (error[E0382]: borrow of moved value: `x`)
 ```
 
-### Copies
+## Copies
 
 Ownership rules do not apply to **primitive** types, or anything that implements the `Copy{:rust}` trait (which gives
 a type **copy semantics** instead of **move semantics**).
@@ -38,7 +38,7 @@ println!("{}", a);
 //: Finished [] target(s) in 0.65s
 ```
 
-### Functions
+## Functions
 
 A function can also take ownership of a variable via its parameters.
 
@@ -56,7 +56,7 @@ print!("{}", my_vec[0]);
 
 Whenever you see `f(value){:rust}` you can know that **f** has received ownership of **value**.
 
-### Borrowing
+## Borrowing
 
 Instead of taking ownership, a resource can be **borrowed**. Rather than passing by value, we can pass by reference.
 The reference borrows ownership of the variable, until the period where it is released again, at
@@ -87,7 +87,7 @@ fn new_owner(_x: &Vec<i32>) {
 // error[E0596]: cannot borrow `*_x` as mutable, as it is behind a `&` reference
 ```
 
-### Mutable References
+## Mutable References
 
 A mutable reference allows the mutation of borrowed resources.
 
@@ -102,7 +102,7 @@ new_owner(&mut my_vec);
 // Compiles and prints: 5
 ```
 
-#### Key Points
+### Key Points
 
 - If you have a mutable reference to a value, you can have no other references to that value.
 
@@ -129,7 +129,7 @@ println!("{}, {}, and {}", r1, r2);
 error[E0502]: cannot borrow `s` as mutable because it is also borrowed as immutable
 ```
 
-### Lifetimes
+## Lifetimes
 
 Borrowing references to objects and then passing them around can be dangerous. If a resource that has been borrowed
 is deallocated by its owner we must ensure that other users can no longer access the value. In Rust this is done using 
@@ -149,7 +149,7 @@ fn print(s: &str); // elided (implicit)
 fn print<'a>(s: &'a str); // expanded (explicit)
 ```
 
-#### Structs
+### Structs
 
 `struct{:rust}`s must define explicit lifetimes when containing a reference. This ensures that any reference to internal 
 reference data within an object does not live longer than the owner.
@@ -174,13 +174,13 @@ fn main() {
 }
 ```
 
-### Smart Pointers
+## Smart Pointers
 
 Smart pointer types act similarly to standard pointers, but allow further fine-grained control over behaviour.
 When a developer uses memory that contains dynamically allocated data with smart pointers, they are automatically 
 de-allocated.
 
-#### Reference Cell
+### Reference Cell
 
 A reference cell is a smart pointer type that executes the borrowing rules at runtime rather than at compile time. 
 
@@ -202,7 +202,7 @@ let container = RefCell::new(11);
 }
 ```
 
-#### Reference Counting
+### Reference Counting
 
 Reference counts (`Rc<T>{:rust}`) sum up the number of references made to an object, and where no references exist, the data can be
 de-allocated. A reference-counted pointer to an item allows shared ownership of the data, breaking one of the initial rules outlined

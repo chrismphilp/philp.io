@@ -10,7 +10,7 @@ Git as a version control system has usage across the world, but many developers 
 within mainstay commands. This article will investigate these litany of commands, and hopefully increase your
 understanding and productivity.
 
-### Merge
+## Merge
 
 For example, take a common development team example. A team member has created a branch from **master**, and
 added new functionality to print their name when the application runs. While the developer has been doing this,
@@ -25,7 +25,7 @@ at your code to quickly understand where changes were made.
 
 ![Git Merge Example](/articles/images/git-functionality/git-merge.svg)
 
-### Rebase
+## Rebase
 
 Rebasing is the process of moving or combining a sequence of commits to a new base commit. Similar to merge,
 **rebase** can be used to integrate changes from one branch, into another. However, unlike merge (which is a
@@ -35,7 +35,7 @@ commits from a merge, leaving a linear project history.
 
 ![Git Rebase Example](/articles/images/git-functionality/git-rebase.svg)
 
-#### Pushing
+### Pushing
 
 However, any complex operations that squash commits, or reset/rebase your branch require a force push to the remote
 branch.
@@ -54,7 +54,7 @@ A safer alternative that does not overwrite any work on the remote branch is:
 git push --force-with-lease origin my-feature-branch
 ```
 
-### Squashing Commits
+## Squashing Commits
 
 There are times when you realise after you've committed a new feature, you still need to make some changes.
 Commonly, a developer will make the change, and commit it to the branch, like so:

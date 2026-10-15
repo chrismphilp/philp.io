@@ -308,15 +308,15 @@
 }
 
 .prose h2 {
-  font-size: 2em;
-  line-height: 1.2;
-  letter-spacing: 0.08em;
-}
-
-.prose h3 {
   font-size: 1.5em;
   line-height: 1.2;
   letter-spacing: 0.06em;
+}
+
+.prose h3 {
+  font-size: 1.25em;
+  line-height: 1.2;
+  letter-spacing: 0.04em;
 }
 
 .prose pre {
