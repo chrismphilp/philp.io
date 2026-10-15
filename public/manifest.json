@@ -7,8 +7,8 @@
   "background_color": "#FFFFFF",
   "start_url": "/",
   "icons": [
-  {
-      "src": "/blog/images/me.png",
+    {
+      "src": "/blog/images/app-icon-192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
