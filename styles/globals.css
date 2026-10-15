@@ -1,4 +1,9 @@
-@import "tailwindcss";
+@import "tailwindcss" source(none);
+
+/* Scan rendered UI, excluding historical code examples in article prose. */
+@source "../app/**/*.{ts,tsx}";
+@source "../components/**/*.{ts,tsx}";
+@source "../pages/**/*.{ts,tsx}";
 
 @config "../tailwind.config.js";
 
