@@ -29,11 +29,11 @@ const Article = ({
               {formatDate(frontMatter.date)}
             </time>
             {frontMatter.category && (
-              <span className="mt-2 block text-[10px] font-medium tracking-widest text-secondary/60 uppercase">
+              <span className="mt-2 block text-[10px] font-medium tracking-widest text-secondary uppercase">
                 {frontMatter.category}
               </span>
             )}
-            <span className="mt-4 block text-xs tracking-widest text-secondary/70 uppercase">
+            <span className="mt-4 block text-xs tracking-widest text-secondary uppercase">
               {frontMatter.readingTime}
             </span>
           </div>
