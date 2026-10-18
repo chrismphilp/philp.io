@@ -20,17 +20,15 @@ export default function Quotes() {
   const { content } = matter(source);
 
   return (
-    <section className="flex flex-col items-stretch md:items-center py-5">
-      <header className="w-full max-w-3xl mb-10">
-        <h1 className="text-4xl md:text-5xl font-light tracking-tight text-primary leading-tight">
-          Quotes
-        </h1>
-        <p className="mt-4 text-base md:text-lg text-secondary leading-relaxed">
+    <section className="reading-article quotes-page">
+      <header className="reading-header">
+        <h1 className="collection-title">Quotes</h1>
+        <p className="reading-description">
           A private-ish reference page of lines and passages worth returning to.
         </p>
       </header>
 
-      <article className="prose dark:prose-invert prose-lg text-sm sm:text-base">
+      <article className="prose reading-body">
         <MDXRemote
           source={content}
           options={{

@@ -8,12 +8,6 @@
   padding-top: 0.5rem;
 }
 
-:global(html.dark) .navigation {
-  --navigation-primary: var(--color-background-dark);
-  --navigation-secondary: var(--color-accent);
-  --navigation-divider: var(--color-secondary);
-}
-
 .posts {
   display: grid;
   column-gap: 3rem;
