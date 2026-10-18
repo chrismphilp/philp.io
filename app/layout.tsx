@@ -2,16 +2,15 @@ import type { Metadata } from 'next';
 import { ThemeProvider } from 'next-themes';
 import Header from '../components/header/Header';
 import Footer from '../components/footer/Footer';
-import { Spectral } from 'next/font/google';
+import { Space_Grotesk } from 'next/font/google';
 import '../styles/globals.css';
 import { siteConfig } from '../utils/seo';
 
-const professionalFont = Spectral({
-  weight: ['300'],
+const designFont = Space_Grotesk({
+  weight: ['400', '500', '600', '700'],
   subsets: ['latin'],
-  // Keep the first painted font: a late swap also resizes ch-based article columns.
   display: 'optional',
-  variable: '--font-spectral',
+  variable: '--font-design',
 });
 
 export const metadata: Metadata = {
@@ -77,13 +76,20 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en-GB" suppressHydrationWarning>
-      <body className={`flex flex-col min-h-screen ${professionalFont.variable}`}>
-        <ThemeProvider attribute="class" defaultTheme="light" enableColorScheme>
-          <Header />
-          <main className="grow px-6 md:px-12 lg:px-24 max-w-6xl mx-auto w-full">
-            {children}
-          </main>
-          <Footer />
+      <body className={designFont.variable}>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableColorScheme>
+          <a href="#main-content" className="skip-link">
+            Skip to content
+          </a>
+          <div className="site-frame">
+            <Header />
+            <div className="content-area">
+              <main id="main-content" tabIndex={-1} className="site-main">
+                {children}
+              </main>
+              <Footer />
+            </div>
+          </div>
         </ThemeProvider>
       </body>
     </html>

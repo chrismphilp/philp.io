@@ -35,9 +35,8 @@ const components = {
       placeholder="blur"
       loading={props.loading ?? 'lazy'}
       role="img"
-      // Match gutters and column caps; sizes uses the initial 16px font size,
-      // so the md article cap of 75ch at 18px becomes 84.375ch here.
-      sizes="(min-width: 1280px) min(100ch, calc(100vw - 32rem)), (min-width: 1024px) min(96ch, calc(100vw - 28rem)), (min-width: 768px) min(84.375ch, calc(100vw - 6rem)), (min-width: 640px) min(65ch, calc(100vw - 3rem)), calc(100vw - 3rem)"
+      // Match the 46rem reading column and the mobile page gutters.
+      sizes="(min-width: 1024px) 46rem, (min-width: 768px) calc(100vw - 6rem), calc(100vw - 3rem)"
     />
   ),
   BrainrotLineChart: BrainrotLineChart,

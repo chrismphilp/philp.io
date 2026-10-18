@@ -1,43 +1,31 @@
 import Link from 'next/link';
 import { formatDate } from '../../utils/dateUtils';
-import type { PostMeta } from '../../utils/mdxUtils';
+import { postSlugFromPath, type PostMeta } from '../../utils/mdxUtils';
 
-const ArticleCard = ({ post }: { post: PostMeta }) => {
-  const slug = post.filePath.replace(/\.mdx?$/, '');
-  const link = `/articles/${slug}`;
-
+const ArticleCard = ({ post, index }: { post: PostMeta; index: number }) => {
+  const slug = postSlugFromPath(post.filePath);
   return (
-    <article id={`post-${slug}`} className="border-b border-accent-subtle last:border-b-0">
-      <Link className="group block py-6 relative" href={link} prefetch={false}>
-        <div className="absolute left-0 top-0 bottom-0 hidden md:flex flex-col items-center">
-          <div className="vertical-text text-xs text-accent-dark tracking-wider opacity-70 transform rotate-180">
+    <article id={`post-${slug}`} className="article-card">
+      <Link className="article-link" href={`/articles/${slug}`} prefetch={false}>
+        <span className="article-number" aria-hidden="true">
+          {String(index + 1).padStart(2, '0')}
+        </span>
+        <div className="card-copy">
+          <span className="card-category">{post.data.category}</span>
+          <h2>{post.data.title}</h2>
+          {post.data.description && <p>{post.data.description}</p>}
+        </div>
+        <div className="card-meta">
+          <time dateTime={new Date(post.data.date).toISOString()}>
             {formatDate(post.data.date)}
-          </div>
-          <div className="flex-grow border-l border-accent-subtle mt-4"></div>
+          </time>
+          <span>{post.data.readingTime}</span>
         </div>
-
-        <div className="md:ml-10">
-          <div className="text-accent-dark text-xs md:hidden mb-2 tracking-wider">
-            {formatDate(post.data.date)} — {post.data.readingTime}
-          </div>
-
-          <span className="block text-primary text-xl md:text-2xl mb-2 group-hover:text-accent-highlight transition-colors duration-300 font-light tracking-wide">
-            {post.data.title}
-          </span>
-
-          <p className="text-secondary text-base leading-relaxed pr-0 md:pr-12 font-light">
-            {post.data.description}
-          </p>
-
-          <div className="hidden md:block text-accent-dark text-xs mt-3 tracking-wider">
-            {post.data.readingTime}
-          </div>
-        </div>
-
-        <div className="absolute top-1/2 right-0 w-8 h-8 border-t border-r border-accent-highlight opacity-0 group-hover:opacity-20 transition-opacity duration-500 transform translate-x-4 -translate-y-1/2"></div>
+        <span className="card-arrow" aria-hidden="true">
+          ↗
+        </span>
       </Link>
     </article>
   );
 };
-
 export default ArticleCard;
