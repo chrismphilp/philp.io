@@ -2,13 +2,11 @@ import ArticleCard from './ArticleCard';
 import type { PostMeta } from '../../utils/mdxUtils';
 
 const ArticleList = ({ posts }: { posts: PostMeta[] }) => (
-  // Keep the full archive height available when the browser restores history.
-  // Revealing cards after mount clamps saved scroll positions to a shorter list.
-  <div className="space-y-6">
-    {posts.map((post) => (
-      <ArticleCard key={post.filePath} post={post} />
+  // Render the complete archive so history restores the original scroll position.
+  <div className="article-list">
+    {posts.map((post, index) => (
+      <ArticleCard key={post.filePath} post={post} index={index} />
     ))}
   </div>
 );
-
 export default ArticleList;

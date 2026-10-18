@@ -21,7 +21,7 @@ The article footer's “All writing” link points to `/#post-<slug>`, targeting
 
 ## Header navigation
 
-Add page links inside `Navigation` in `components/header/Navigation.tsx`. Add header controls as children of `HeaderActions` in `components/header/Header.tsx`; `HeaderActionLink` and `HeaderActionButton` provide consistent styling, accessible labels, and native link/button behavior. The parent layouts use gaps and wrapping, so adding an item does not require changing neighboring items or calculating widths.
+Add page links to the `links` array inside `Navigation` in `components/header/Navigation.tsx`. Add header controls as children of `HeaderActions` in `components/header/Header.tsx`; `HeaderActionLink` and `HeaderActionButton` provide consistent styling, accessible labels, and native link/button behavior. The header layouts use gaps and wrapping. Navigation marks the current page, and header controls have 44px touch targets.
 
 Put state and event handlers for an interactive control in its own client component, then render that component inside `HeaderActions`. Keep a control's initial markup stable across server rendering and hydration. `ThemeToggle` is the client component responsible for theme state; CSS selects its visible icon from the document's theme class, so its markup is present before JavaScript loads.
 
@@ -48,3 +48,7 @@ Recheck these constraints when upgrading their parent packages. Validate with a 
 ## Tailwind sources
 
 Tailwind scans the application, components, and offline-page TypeScript files. Article code fences are examples, so their class names must not generate production CSS. If an MDX article adds rendered JSX with utility classes, explicitly register those classes or that source in `styles/globals.css`.
+
+## Design direction: Index
+
+An original typographic archive using Manrope, cobalt accents, generous whitespace, and numbered rows. The design includes light and dark palettes, current-page navigation, a skip link, reduced-motion support, and a 46rem article reading column. The full archive stays rendered for native scroll restoration. No design template, external UI kit, or additional runtime dependency is used.

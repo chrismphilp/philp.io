@@ -12,12 +12,7 @@ export const HeaderActionLink = ({
   className = '',
   ...props
 }: Omit<ComponentProps<typeof Link>, 'aria-label'> & ActionLabel) => (
-  <Link
-    {...props}
-    aria-label={label}
-    title={title}
-    className={`inline-flex shrink-0 cursor-pointer items-center justify-center p-1 text-primary transition-colors duration-300 hover:text-accent-highlight focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-highlight ${className}`}
-  />
+  <Link {...props} aria-label={label} title={title} className={`header-action ${className}`} />
 );
 
 export const HeaderActionButton = ({
@@ -32,14 +27,12 @@ export const HeaderActionButton = ({
     type={type}
     aria-label={label}
     title={title}
-    className={`inline-flex shrink-0 cursor-pointer items-center justify-center p-1 text-primary transition-colors duration-300 hover:text-accent-highlight focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-highlight ${className}`}
+    className={`header-action ${className}`}
   />
 );
 
 const HeaderActions = ({ children }: { children: ReactNode }) => (
-  <div className="flex flex-wrap items-center gap-2 border-l border-accent-subtle pl-6">
-    {children}
-  </div>
+  <div className="header-actions">{children}</div>
 );
 
 export default HeaderActions;

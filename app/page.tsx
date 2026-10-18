@@ -5,7 +5,6 @@ import { buildHomeSchema, buildMetadata } from '../utils/seo';
 
 const homeDescription =
   'Essays and articles by Christopher Philp on software, science, ethics, language, books, and everyday life.';
-
 export const metadata = buildMetadata({
   title: 'Essays on software, science, ethics, and books',
   description: homeDescription,
@@ -14,23 +13,35 @@ export const metadata = buildMetadata({
 
 export default function Homepage() {
   const posts = sortPostsByDateDescending(getPublishedPostMetadata());
-
   return (
-    <section className="pb-16 relative">
+    <div className="home-page">
       <StructuredData data={buildHomeSchema(posts)} />
-
-      <header className="mb-12 pt-6 md:pt-10 max-w-3xl">
-        <p className="text-xs tracking-[0.3em] uppercase text-accent-dark mb-4">
-          Recent Writing
-        </p>
-        <h1 className="text-4xl md:text-5xl font-light tracking-tight text-primary leading-tight">
-          Essays on software, science, ethics, and the rest.
+      <header className="home-intro">
+        <p className="eyebrow">Independent thoughts. Open questions.</p>
+        <h1>
+          Ideas,
+          <br />
+          examined<span className="accent-dot">.</span>
         </h1>
+        <div className="intro-copy">
+          <p>
+            I’m Christopher Philp. I write about software, science, ethics, and the things that
+            make me curious.
+          </p>
+          <a className="text-link" href="#writing">
+            Explore the writing <span aria-hidden="true">↓</span>
+          </a>
+        </div>
       </header>
-
-      <div className="asymmetric-element">
+      <section id="writing" className="writing-section" aria-labelledby="writing-heading">
+        <div className="section-heading">
+          <h2 id="writing-heading">
+            The writing <span>({posts.length})</span>
+          </h2>
+          <span>Newest first</span>
+        </div>
         <ArticleList posts={posts} />
-      </div>
-    </section>
+      </section>
+    </div>
   );
 }
