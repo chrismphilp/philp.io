@@ -40,7 +40,6 @@ const withPWA = require('@ducanh2912/next-pwa').default({
     '!**/nextImageExportOptimizer/**/*',
     '!**/next-image-export-optimizer-hashes.json',
     '!_headers', // Cloudflare deployment metadata is not a fetchable asset.
-    '!_redirects',
   ],
   workboxOptions: {
     // Keep the offline shell, but cache images, optional font subsets, and
