@@ -237,6 +237,7 @@ input {
   color: #f6c27a;
 }
 .room-viewport {
+  position: relative;
   overflow: hidden;
 }
 .room-art {
@@ -1225,7 +1226,12 @@ html.dark .reading-page .text-secondary {
     display: none;
   }
   .room-shelf-link {
-    min-height: 32px;
+    position: static;
+    transform: none;
+    min-height: 44px;
+    border-inline: 0;
+    border-bottom: 0;
+    box-shadow: none;
     font-size: 13px;
     padding: 4px 10px;
     gap: 7px;
@@ -1365,7 +1371,7 @@ html.dark .reading-page .text-secondary {
   }
   .room-shelf-link {
     bottom: 2%;
-    min-height: 30px;
+    min-height: 44px;
   }
   .shelf-heading-row {
     align-items: flex-start;

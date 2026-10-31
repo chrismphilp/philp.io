@@ -158,10 +158,10 @@ export default function ReadingRoom() {
             </span>
             <span className="dog-hint">Say a quiet hello</span>
           </button>
-          <a className="room-shelf-link" href="#bookshelf">
-            <PixelIcon name="book" /> Browse the shelves <span aria-hidden="true">↓</span>
-          </a>
         </div>
+        <a className="room-shelf-link" href="#bookshelf">
+          <PixelIcon name="book" /> Browse the shelves <span aria-hidden="true">↓</span>
+        </a>
       </div>
       <div className="room-caption">
         <span aria-live="polite">{message}</span>
