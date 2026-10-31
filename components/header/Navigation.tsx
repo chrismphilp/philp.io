@@ -1,20 +1,26 @@
+'use client';
+
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
-const Navigation = () => (
-  <nav
-    aria-label="Main navigation"
-    className="text-primary tracking-wider text-sm font-light flex flex-wrap justify-center gap-x-6 gap-y-2"
-  >
-    <Link href="/" className="py-1 hover:text-accent-highlight underline-effect">
-      Home
-    </Link>
-    <Link href="/tech" className="py-1 hover:text-accent-highlight underline-effect">
-      Tech
-    </Link>
-    <Link href="/misc" className="py-1 hover:text-accent-highlight underline-effect">
-      Misc
-    </Link>
-  </nav>
-);
-
-export default Navigation;
+export default function Navigation() {
+  const pathname = usePathname();
+  return (
+    <nav className="library-navigation" aria-label="Main navigation">
+      {[
+        ['/', 'The library'],
+        ['/tech', 'Technology'],
+        ['/misc', 'Life & everything'],
+      ].map(([href, label]) => (
+        <Link
+          key={href}
+          href={href}
+          prefetch={false}
+          aria-current={pathname === href ? 'page' : undefined}
+        >
+          {label}
+        </Link>
+      ))}
+    </nav>
+  );
+}

@@ -1,5 +1,6 @@
 import StructuredData from '../components/seo/StructuredData';
-import ArticleList from '../components/article/ArticleList';
+import Bookshelf from '../components/library/Bookshelf';
+import ReadingRoom from '../components/library/ReadingRoom';
 import { getPublishedPostMetadata, sortPostsByDateDescending } from '../utils/mdxUtils';
 import { buildHomeSchema, buildMetadata } from '../utils/seo';
 
@@ -16,21 +17,25 @@ export default function Homepage() {
   const posts = sortPostsByDateDescending(getPublishedPostMetadata());
 
   return (
-    <section className="pb-16 relative">
+    <div className="library-home">
       <StructuredData data={buildHomeSchema(posts)} />
 
-      <header className="mb-12 pt-6 md:pt-10 max-w-3xl">
-        <p className="text-xs tracking-[0.3em] uppercase text-accent-dark mb-4">
-          Recent Writing
+      <header className="library-welcome">
+        <p className="eyebrow">
+          <span aria-hidden="true">✦</span> A SMALL LIBRARY ON THE INTERNET{' '}
+          <span aria-hidden="true">✦</span>
         </p>
-        <h1 className="text-4xl md:text-5xl font-light tracking-tight text-primary leading-tight">
-          Essays on software, science, ethics, and the rest.
+        <h1>
+          Come in. <em>Stay a while.</em>
         </h1>
+        <p>
+          I’m Christopher. These are my thoughts on software, life, and everything between.
+          <br className="desktop-break" /> The fire’s on, the tea’s warm, and there’s always
+          another book.
+        </p>
       </header>
-
-      <div className="asymmetric-element">
-        <ArticleList posts={posts} />
-      </div>
-    </section>
+      <ReadingRoom />
+      <Bookshelf posts={posts} />
+    </div>
   );
 }

@@ -3,8 +3,8 @@
   "short_name": "philp.io",
   "display": "standalone",
   "orientation": "portrait",
-  "theme_color": "#FFFFFF",
-  "background_color": "#FFFFFF",
+  "theme_color": "#191713",
+  "background_color": "#191713",
   "start_url": "/",
   "icons": [
     {

@@ -2,16 +2,25 @@ import type { Metadata } from 'next';
 import { ThemeProvider } from 'next-themes';
 import Header from '../components/header/Header';
 import Footer from '../components/footer/Footer';
-import { Spectral } from 'next/font/google';
+import localFont from 'next/font/local';
 import '../styles/globals.css';
+import '../styles/library.css';
 import { siteConfig } from '../utils/seo';
 
-const professionalFont = Spectral({
-  weight: ['300'],
-  subsets: ['latin'],
-  // Keep the first painted font: a late swap also resizes ch-based article columns.
+const professionalFont = localFont({
+  src: [
+    { path: './fonts/spectral-latin-300.woff2', weight: '300', style: 'normal' },
+    { path: './fonts/spectral-latin-300-italic.woff2', weight: '300', style: 'italic' },
+  ],
   display: 'optional',
   variable: '--font-spectral',
+});
+
+const pixelFont = localFont({
+  src: './fonts/vt323-latin.woff2',
+  weight: '400',
+  display: 'swap',
+  variable: '--font-pixel',
 });
 
 export const metadata: Metadata = {
@@ -77,10 +86,20 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en-GB" suppressHydrationWarning>
-      <body className={`flex flex-col min-h-screen ${professionalFont.variable}`}>
-        <ThemeProvider attribute="class" defaultTheme="light" enableColorScheme>
+      <body
+        className={`flex flex-col min-h-screen ${professionalFont.variable} ${pixelFont.variable}`}
+      >
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem={false}
+          enableColorScheme
+        >
+          <a href="#main-content" className="skip-link">
+            Skip to content
+          </a>
           <Header />
-          <main className="grow px-6 md:px-12 lg:px-24 max-w-6xl mx-auto w-full">
+          <main id="main-content" className="site-main grow" tabIndex={-1}>
             {children}
           </main>
           <Footer />
