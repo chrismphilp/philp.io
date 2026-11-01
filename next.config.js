@@ -36,6 +36,7 @@ const withPWA = require('@ducanh2912/next-pwa').default({
   publicExcludes: [
     '!noprecache/**/*',
     '!blog/images/**/*',
+    '!library/*.m4a', // Fireplace audio is fetched only after an explicit sound gesture.
     '!articles/images/**/*',
     '!**/nextImageExportOptimizer/**/*',
     '!**/next-image-export-optimizer-hashes.json',

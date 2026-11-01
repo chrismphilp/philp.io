@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
 import { ThemeProvider } from 'next-themes';
-import Header from '../components/header/Header';
-import Footer from '../components/footer/Footer';
+import LibraryShell from '../components/library/LibraryShell';
+import { getPublishedPostMetadata, sortPostsByDateDescending } from '../utils/mdxUtils';
 import localFont from 'next/font/local';
 import '../styles/globals.css';
 import '../styles/library.css';
+import '../styles/room.css';
 import { siteConfig } from '../utils/seo';
 
 const professionalFont = localFont({
@@ -13,6 +14,7 @@ const professionalFont = localFont({
     { path: './fonts/spectral-latin-300-italic.woff2', weight: '300', style: 'italic' },
   ],
   display: 'optional',
+  preload: false,
   variable: '--font-spectral',
 });
 
@@ -93,16 +95,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           attribute="class"
           defaultTheme="dark"
           enableSystem={false}
+          disableTransitionOnChange
           enableColorScheme
         >
           <a href="#main-content" className="skip-link">
             Skip to content
           </a>
-          <Header />
-          <main id="main-content" className="site-main grow" tabIndex={-1}>
+          <LibraryShell posts={sortPostsByDateDescending(getPublishedPostMetadata())}>
             {children}
-          </main>
-          <Footer />
+          </LibraryShell>
         </ThemeProvider>
       </body>
     </html>

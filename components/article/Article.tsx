@@ -25,7 +25,7 @@ export default function Article({
         <header className="reading-page-header not-prose">
           <BreadcrumbTrail items={breadcrumbs} />
           <p className="eyebrow">FROM THE PHILP LIBRARY</p>
-          <h1>{frontMatter.title}</h1>
+          <h1 tabIndex={-1}>{frontMatter.title}</h1>
           {frontMatter.description && <p>{frontMatter.description}</p>}
           <div className="reading-metadata">
             <time dateTime={frontMatter.date}>{formatDate(frontMatter.date)}</time>

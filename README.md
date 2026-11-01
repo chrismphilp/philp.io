@@ -15,7 +15,7 @@ For Cloudflare Pages, use `npm run build:cloudflare` and publish the `out` direc
 
 ## The library
 
-The homepage is an animated pixel-art reading room with an interactive bookshelf. Tech and Misc share the same shelf component; articles open in a parchment reading layout. See [the design notes](docs/library-design.md) for the research, visual system, artwork, motion controls, and performance decisions.
+The website is an explorable pixel-art library: posts are clickable books in the illustrated shelves, and articles open over the room. Phones can pan between the snowy window, shelves and fireside; a searchable card catalogue offers a shortcut. Fireplace sound is a quiet, opt-in field recording. See [the design notes](docs/library-design.md) for the research, visual system, artwork, motion controls, and performance decisions.
 
 Run `npm run build:cloudflare` followed by `npm run start` to preview the production export. `npm run test:e2e` tests it in Chromium and mobile WebKit (install browsers first with `npx playwright install chromium webkit`). GitHub Actions runs lint, type checking, the export build, and the browser/accessibility checks.
 
