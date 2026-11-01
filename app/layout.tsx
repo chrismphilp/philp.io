@@ -15,6 +15,8 @@ const professionalFont = localFont({
   ],
   display: 'optional',
   preload: false,
+  fallback: ['Georgia', 'serif'],
+  adjustFontFallback: false,
   variable: '--font-spectral',
 });
 
