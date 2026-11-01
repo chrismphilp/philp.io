@@ -21,7 +21,7 @@ type Place = 'window' | 'west' | 'hearth' | 'east' | 'tea';
 const places: { key: Place; name: string; x: number; y: number }[] = [
   { key: 'window', name: 'Snowfall', x: 0.1, y: 0.4 },
   { key: 'west', name: 'West shelves', x: 0.313, y: 0.31 },
-  { key: 'hearth', name: 'Fireside', x: 0.45, y: 0.5 },
+  { key: 'hearth', name: 'Fireside', x: 0.45, y: 0.75 },
   { key: 'east', name: 'East shelves', x: 0.761, y: 0.31 },
   { key: 'tea', name: 'Tea corner', x: 0.9, y: 0.6 },
 ];
@@ -58,11 +58,13 @@ export default function ReadingRoom({
     const scene = world.current;
     if (!view || !scene) return;
     const destination = places.find((item) => item.key === key)!;
+    // Fingers need the same generous shelf close-up even on short landscape screens.
+    const shelfWidth = matchMedia('(pointer: coarse)').matches
+      ? 2160
+      : Math.max(1500, Math.min(2160, view.clientHeight * 3.3));
     scene.style.setProperty(
       '--camera-width',
-      key === 'west' || key === 'east'
-        ? `${Math.max(1500, Math.min(2160, view.clientHeight * 3.3))}px`
-        : '0px',
+      key === 'west' || key === 'east' ? `${shelfWidth}px` : '0px',
     );
     view.scrollTo({
       left: scene.clientWidth * destination.x - view.clientWidth / 2,

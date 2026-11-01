@@ -241,6 +241,106 @@ test('all routes and dialogs fit a narrow phone', async ({ page }) => {
   await expect(page.getByRole('link', { name: 'Open this book' })).toBeVisible();
 });
 
+test('touch navigation and reading remain usable on small phones in either orientation', async ({
+  page,
+  isMobile,
+}) => {
+  test.skip(!isMobile, 'Touch flow is covered in the iOS and Android projects.');
+  test.setTimeout(60_000);
+  for (const [width, height] of [
+    [320, 568],
+    [360, 640],
+    [390, 844],
+    [568, 320],
+    [667, 375],
+    [740, 360],
+    [844, 390],
+  ]) {
+    await page.setViewportSize({ width, height });
+    await page.goto('/');
+    for (const name of [
+      'snowfall',
+      'west shelves',
+      'fireside',
+      'east shelves',
+      'tea corner',
+    ]) {
+      const control = page.getByRole('button', { name: `Look at ${name}` });
+      // A visible center alone misses controls clipped by the short landscape dock.
+      await expect(control).toBeInViewport({ ratio: 1 });
+      await control.tap();
+      await expect(control).toHaveAttribute('aria-pressed', 'true');
+    }
+    const catalogue = page.getByRole('button', { name: 'Find a book' });
+    await expect(catalogue).toBeInViewport({ ratio: 1 });
+    expect((await catalogue.boundingBox())!.height).toBeGreaterThanOrEqual(44);
+    await catalogue.tap();
+    await page.getByRole('searchbox').fill('TypeScript');
+    const entry = page.locator('.catalogue-entries li').first();
+    const href = await entry.getByRole('link').getAttribute('href');
+    await entry.getByRole('button').tap();
+    const book = page.locator(`.room-book[href="${href}"]`);
+    await expect(book).toBeInViewport({ ratio: 1 });
+    expect((await book.boundingBox())!.width).toBeGreaterThanOrEqual(40);
+    await book.tap();
+    await page.getByRole('link', { name: 'Open this book' }).tap();
+    await expect(page.locator('.reading-page h1')).toBeVisible();
+    const back = page.getByRole('link', { name: 'Back to the room' });
+    await expect(back).toBeInViewport({ ratio: 1 });
+    await back.tap();
+    await expect(book).toBeInViewport({ ratio: 1 });
+  }
+});
+
+test('native touch swipes pan the room and scroll the article', async ({
+  page,
+  isMobile,
+  browserName,
+}) => {
+  test.skip(!isMobile || browserName !== 'chromium', 'Native gesture injection uses CDP.');
+  const touch = await page.context().newCDPSession(page);
+  async function swipe(from: { x: number; y: number }, to: { x: number; y: number }) {
+    await touch.send('Input.dispatchTouchEvent', {
+      type: 'touchStart',
+      touchPoints: [from],
+    });
+    for (let step = 1; step <= 8; step++) {
+      await touch.send('Input.dispatchTouchEvent', {
+        type: 'touchMove',
+        touchPoints: [
+          {
+            x: from.x + ((to.x - from.x) * step) / 8,
+            y: from.y + ((to.y - from.y) * step) / 8,
+          },
+        ],
+      });
+      await page.waitForTimeout(16);
+    }
+    await touch.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+  }
+  await page.goto('/');
+  await expect(page.getByRole('button', { name: 'Look at fireside' })).toHaveAttribute(
+    'aria-pressed',
+    'true',
+  );
+  const panorama = page.locator('.room-panorama');
+  const before = await panorama.evaluate((node) => node.scrollLeft);
+  await swipe({ x: 330, y: 350 }, { x: 80, y: 350 });
+  await expect
+    .poll(() => panorama.evaluate((node) => node.scrollLeft))
+    .toBeGreaterThan(before + 100);
+  await expect(page.locator('.room-book-dialog')).not.toBeVisible();
+  await page.goto('/articles/useful-typescript-features');
+  await swipe({ x: 180, y: 650 }, { x: 180, y: 250 });
+  await expect
+    .poll(() => page.locator('.reader-surface').evaluate((node) => node.scrollTop))
+    .toBeGreaterThan(100);
+  await expect(page.getByRole('link', { name: 'Back to the room' })).toBeInViewport({
+    ratio: 1,
+  });
+  await touch.detach();
+});
+
 test('all shelf links work without JavaScript', async ({ browser }) => {
   const context = await browser.newContext({
     javaScriptEnabled: false,
