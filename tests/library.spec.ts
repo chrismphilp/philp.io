@@ -241,21 +241,21 @@ test('all routes and dialogs fit a narrow phone', async ({ page }) => {
   await expect(page.getByRole('link', { name: 'Open this book' })).toBeVisible();
 });
 
-test('touch navigation and reading remain usable on small phones in either orientation', async ({
-  page,
-  isMobile,
-}) => {
-  test.skip(!isMobile, 'Touch flow is covered in the iOS and Android projects.');
-  test.setTimeout(60_000);
-  for (const [width, height] of [
-    [320, 568],
-    [360, 640],
-    [390, 844],
-    [568, 320],
-    [667, 375],
-    [740, 360],
-    [844, 390],
-  ]) {
+// Each viewport gets its own browser context and timeout, including on slower CI WebKit.
+for (const [width, height] of [
+  [320, 568],
+  [360, 640],
+  [390, 844],
+  [568, 320],
+  [667, 375],
+  [740, 360],
+  [844, 390],
+]) {
+  test(`touch navigation and reading work at ${width}×${height}`, async ({
+    page,
+    isMobile,
+  }) => {
+    test.skip(!isMobile, 'Touch flow is covered in the iOS and Android projects.');
     await page.setViewportSize({ width, height });
     await page.goto('/');
     for (const name of [
@@ -289,8 +289,8 @@ test('touch navigation and reading remain usable on small phones in either orien
     await expect(back).toBeInViewport({ ratio: 1 });
     await back.tap();
     await expect(book).toBeInViewport({ ratio: 1 });
-  }
-});
+  });
+}
 
 test('native touch swipes pan the room and scroll the article', async ({
   page,
