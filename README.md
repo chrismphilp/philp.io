@@ -21,11 +21,11 @@ Run `npm run build:cloudflare` followed by `npm run start` to preview the produc
 
 ### Scroll restoration
 
-All published books render immediately. Keep the complete archive height available for Back, Forward, and reload restoration. Book links disable prefetching. The article footer's “All writing” link points to `/#post-<slug>` so directly opened articles can also return to their place on the shelf.
+The room displays 24 numbered books per bookcase page, with automatic pagination as published MDX files are added. The catalogue searches the complete collection. Hover/focus or tap a spine to read its full title. Book links disable prefetching. Article return links use `/#post-<slug>` to restore the correct bookcase and focused spine, including after new posts move an older book to another page. Without JavaScript, direct shelf links and category collection links remain available.
 
 ### Header navigation
 
-Add page links inside `components/header/Navigation.tsx`. The active route is indicated in the navigation. `ThemeToggle` owns the color-theme state; its markup is stable across rendering and hydration. The default theme is dark, and visitors can choose the parchment light theme.
+Room navigation is in `components/library/ReadingRoom.tsx`; reading controls are in `LibraryShell.tsx`. `ThemeToggle` owns the reader’s color-theme state; its markup is stable across rendering and hydration. The default theme is dark, and visitors can choose the parchment light theme.
 
 ## Article images
 

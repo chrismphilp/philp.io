@@ -92,10 +92,10 @@ input {
 .hearth-glow {
   pointer-events: none;
   position: absolute;
-  left: 36%;
-  top: 42%;
-  width: 36%;
-  height: 48%;
+  left: 38%;
+  top: 31%;
+  width: 30%;
+  height: 38%;
   background: radial-gradient(ellipse, #ff991d38, #ff7b130e 45%, transparent 70%);
   mix-blend-mode: screen;
   animation: fire-glow 3s steps(5) infinite;
@@ -103,18 +103,58 @@ input {
 .fire {
   pointer-events: none;
   position: absolute;
-  left: 46.7%;
-  top: 47.7%;
-  width: 13.7%;
-  height: 23%;
-  background: url('/library/fire-sprites.webp') 0 0 / 400% 100% no-repeat;
+  left: 45.5%;
+  top: 24.2%;
+  width: 13%;
+  aspect-ratio: 1;
+  background: url('/library/fire-16bit.webp') 0 0 / 200% 200% no-repeat;
   image-rendering: pixelated;
-  animation: fire-flicker 0.8s steps(1) infinite;
+  animation: fire-flicker 1.8s steps(1) infinite;
+}
+.fire-embers {
+  position: absolute;
+  left: 47%;
+  top: 30%;
+  width: 10%;
+  height: 14%;
+  pointer-events: none;
+  overflow: hidden;
+}
+.fire-embers i {
+  position: absolute;
+  left: var(--ember-x);
+  bottom: 0;
+  width: 0.26cqw;
+  height: 0.26cqw;
+  background: #ffd78b;
+  opacity: 0;
+  animation: ember-rise var(--ember-duration) var(--ember-delay) linear infinite;
+}
+.fire-embers i:nth-child(3n) {
+  background: #df8b45;
+}
+@keyframes ember-rise {
+  0%,
+  18% {
+    opacity: 0;
+    transform: translate(0, 0);
+  }
+  28% {
+    opacity: 0.8;
+  }
+  65% {
+    opacity: 0.45;
+  }
+  90%,
+  100% {
+    opacity: 0;
+    transform: translate(var(--ember-drift), -6cqw);
+  }
 }
 .tea-steam {
   position: absolute;
-  left: 94.4%;
-  top: 55.5%;
+  left: 94.8%;
+  top: 55%;
   width: 2.5%;
   height: 8%;
   pointer-events: none;
@@ -139,10 +179,10 @@ input {
 }
 .library-dog {
   position: absolute;
-  left: 29%;
-  top: 60%;
-  width: 24%;
-  aspect-ratio: 971 / 809;
+  left: 51%;
+  top: 55%;
+  width: 12.5%;
+  aspect-ratio: 3 / 2;
   border: 0;
   background: transparent;
   padding: 0;
@@ -150,11 +190,11 @@ input {
 .dog-sprite {
   position: absolute;
   inset: 0;
-  background: url('/library/bernese-sprites.webp') 0 0 / 200% 100% no-repeat;
+  background: url('/library/bernese-16bit.webp') 0 0 / 200% 100% no-repeat;
   image-rendering: pixelated;
   animation:
     dog-breathe 4.6s steps(4) infinite,
-    dog-look 24s steps(1) infinite;
+    dog-look 42s steps(1) infinite;
   transform-origin: 50% 75%;
 }
 .dog-awake .dog-sprite {
@@ -163,14 +203,14 @@ input {
 }
 .dog-sleep {
   position: absolute;
-  top: 45%;
-  right: 6%;
+  top: 2%;
+  left: 3%;
   font:
     clamp(10px, 1.4vw, 20px) var(--font-pixel),
     monospace;
   color: #e0cc9a;
   letter-spacing: 3px;
-  animation: dog-zzz 24s steps(1) infinite;
+  animation: dog-zzz 42s steps(1) infinite;
   pointer-events: none;
 }
 .dog-awake .dog-sleep {
@@ -762,13 +802,13 @@ html.dark .reading-page .text-secondary {
     background-position: 0 0;
   }
   25% {
-    background-position: 33.333% 0;
+    background-position: 100% 0;
   }
   50% {
-    background-position: 66.666% 0;
+    background-position: 100% 100%;
   }
   75% {
-    background-position: 100% 0;
+    background-position: 0 100%;
   }
 }
 @keyframes fire-glow {
@@ -802,7 +842,7 @@ html.dark .reading-page .text-secondary {
     transform: scaleY(1);
   }
   50% {
-    transform: scaleY(1.018);
+    transform: scaleY(1.025);
   }
 }
 @keyframes dog-look {
@@ -941,14 +981,6 @@ html.dark .reading-page .text-secondary {
   }
   .footer-ornament {
     display: none;
-  }
-}
-@media (max-width: 600px) {
-  .dog-sprite {
-    background-image: url('/library/bernese-sprites-mobile.webp');
-  }
-  .fire {
-    background-image: url('/library/fire-sprites-mobile.webp');
   }
 }
 @media (max-width: 480px) {

@@ -3,6 +3,7 @@ import AxeBuilder from '@axe-core/playwright';
 import fs from 'node:fs';
 import path from 'node:path';
 import matter from 'gray-matter';
+import { ROOM_CAPACITY } from '../utils/library';
 
 const published = fs
   .readdirSync('articles')
@@ -23,13 +24,14 @@ test('the entire website is the room, with real article links on its shelves', a
   await page.goto('/');
   await expect(page.getByRole('heading', { level: 1 })).toContainText('The reading room');
   await expect(page.locator('.room-world .room-book')).toHaveCount(
-    Math.min(published.length, 48),
+    Math.min(published.length, ROOM_CAPACITY),
   );
   await expect(
     page.locator('.library-welcome, .site-header, .library-footer, .bookshelf-section'),
   ).toHaveCount(0);
   await expect(page.locator('.room-background')).toHaveAttribute('alt', /snowy/i);
   await expect(page.locator('.window-snow i')).toHaveCount(18);
+  await expect(page.locator('.fire-embers i')).toHaveCount(10);
   expect(await page.evaluate(() => document.documentElement.scrollHeight)).toBeLessThanOrEqual(
     page.viewportSize()!.height,
   );
@@ -120,6 +122,10 @@ test('scene controls pause motion, greet the dog, and play real audio only on de
     'animation-play-state',
     'paused',
   );
+  await expect(page.locator('.fire-embers i').first()).toHaveCSS(
+    'animation-play-state',
+    'paused',
+  );
   await page.getByRole('button', { name: 'Resume scene animation' }).click();
   await page
     .getByRole('button', { name: 'Say a quiet hello to the sleeping Bernese Mountain Dog' })
@@ -175,10 +181,16 @@ test('the scenery can be explored with the place controls and mouse drag', async
   await page.getByRole('button', { name: 'Look at east shelves' }).click();
   await expect(page.locator('.east-shelf').first()).toBeInViewport();
   if (!isMobile) {
+    await page.setViewportSize({ width: 800, height: 600 });
+    await page.getByRole('button', { name: 'Look at east shelves' }).click();
+    await expect(page.locator('.east-shelf').first()).toBeInViewport();
+    await expect
+      .poll(() => page.locator('.room-panorama').evaluate((node) => node.scrollLeft))
+      .toBeGreaterThan(150);
     const before = await page.locator('.room-panorama').evaluate((node) => node.scrollLeft);
-    await page.mouse.move(800, 800);
+    await page.mouse.move(100, 430);
     await page.mouse.down();
-    await page.mouse.move(1100, 800, { steps: 10 });
+    await page.mouse.move(400, 430, { steps: 10 });
     await page.mouse.up();
     const after = await page.locator('.room-panorama').evaluate((node) => node.scrollLeft);
     expect(Math.abs(before - after)).toBeGreaterThan(50);
@@ -196,6 +208,7 @@ test('reduced motion is respected and reader theme persists', async ({ page }) =
   await expect(page.locator('.dog-sprite')).toHaveCSS('animation-name', 'none');
   await expect(page.locator('.fire')).toHaveCSS('animation-name', 'none');
   await expect(page.locator('.window-snow')).not.toBeVisible();
+  await expect(page.locator('.fire-embers')).not.toBeVisible();
   await page.goto('/articles/useful-typescript-features');
   await page.getByRole('button', { name: 'Toggle color theme' }).click();
   await expect(page.locator('html')).toHaveClass(/light/);
@@ -271,6 +284,12 @@ for (const [width, height] of [
       await control.tap();
       await expect(control).toHaveAttribute('aria-pressed', 'true');
     }
+    await expect(page.getByRole('button', { name: 'Next bookcase' })).toBeInViewport({
+      ratio: 1,
+    });
+    await expect(page.getByRole('button', { name: 'Previous bookcase' })).toBeInViewport({
+      ratio: 1,
+    });
     const catalogue = page.getByRole('button', { name: 'Find a book' });
     await expect(catalogue).toBeInViewport({ ratio: 1 });
     expect((await catalogue.boundingBox())!.height).toBeGreaterThanOrEqual(44);
@@ -281,7 +300,7 @@ for (const [width, height] of [
     await entry.getByRole('button').tap();
     const book = page.locator(`.room-book[href="${href}"]`);
     await expect(book).toBeInViewport({ ratio: 1 });
-    expect((await book.boundingBox())!.width).toBeGreaterThanOrEqual(40);
+    expect((await book.boundingBox())!.width).toBeGreaterThanOrEqual(28);
     await book.tap();
     await page.getByRole('link', { name: 'Open this book' }).tap();
     await expect(page.locator('.reading-page h1')).toBeVisible();
@@ -348,11 +367,18 @@ test('all shelf links work without JavaScript', async ({ browser }) => {
   });
   const page = await context.newPage();
   await page.goto('http://localhost:3000');
-  await expect(page.locator('.room-book')).toHaveCount(Math.min(published.length, 48));
+  await expect(page.locator('.room-book')).toHaveCount(
+    Math.min(published.length, ROOM_CAPACITY),
+  );
   await page.locator('.room-book').first().click();
   await expect(page.locator('.reading-page h1')).toBeVisible();
   await page.getByRole('link', { name: 'Back to the room' }).click();
   await expect(page.locator('.room-book').first()).toBeInViewport();
+  await page
+    .getByRole('navigation', { name: 'Browse all writing' })
+    .getByRole('link', { name: 'Technology' })
+    .click();
+  await expect(page.locator('.book-link')).toHaveCount(techCount);
   await context.close();
 });
 
@@ -361,7 +387,7 @@ test('room, catalogue, preview and both reader themes pass accessibility checks'
 }) => {
   async function check() {
     const results = await new AxeBuilder({ page })
-      .withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa'])
+      .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'])
       .analyze();
     expect(results.violations).toEqual([]);
   }
@@ -417,4 +443,67 @@ test('audio failure leaves the room usable and offers a retry', async ({ page })
   ).toHaveAttribute('aria-pressed', 'false');
   await page.getByRole('button', { name: 'Find a book' }).click();
   await expect(page.locator('.catalogue-dialog')).toBeVisible();
+});
+
+test('bookcase paging reaches every post without enlarging the room or its lettering', async ({
+  page,
+  isMobile,
+}) => {
+  await page.goto('/');
+  const worldWidth = await page.locator('.room-world').evaluate((node) => node.clientWidth);
+  const previous = page.getByRole('button', { name: 'Previous bookcase' });
+  const next = page.getByRole('button', { name: 'Next bookcase' });
+  await expect(previous).toBeDisabled();
+  const links: string[] = [];
+  for (let index = 0; index < Math.ceil(published.length / ROOM_CAPACITY); index++) {
+    links.push(
+      ...(await page
+        .locator('.room-book')
+        .evaluateAll((nodes) => nodes.map((node) => node.getAttribute('href')!))),
+    );
+    await expect(page.locator('.room-pagination > span')).toHaveAttribute(
+      'aria-label',
+      new RegExp(`Bookcase ${index + 1} of`),
+    );
+    if (await next.isEnabled()) await next.click();
+  }
+  await expect(next).toBeDisabled();
+  expect(links).toHaveLength(published.length);
+  expect(new Set(links).size).toBe(published.length);
+  if (await previous.isEnabled()) await previous.click();
+  await page.getByRole('button', { name: 'Look at west shelves' }).click();
+  expect(await page.locator('.room-world').evaluate((node) => node.clientWidth)).toBe(
+    worldWidth,
+  );
+  const book = page.locator('.room-book').first();
+  await book.focus();
+  await expect(page.locator('.book-nameplate strong')).toHaveText(
+    (await book.getAttribute('aria-label'))!.split(' — ')[0].replace(/^Book \d+: /, ''),
+  );
+  await expect(page.locator('.book-nameplate')).toHaveCSS('writing-mode', 'horizontal-tb');
+  if (isMobile) await book.tap();
+  else await book.press('Enter');
+  await expect(page.locator('.room-book-dialog h2')).toBeVisible();
+});
+
+test('a direct link to an older book restores the right bookcase after reading', async ({
+  page,
+}) => {
+  await page.goto('/');
+  await page.getByRole('button', { name: 'Find a book' }).click();
+  const last = page.locator('.catalogue-entries a').last();
+  const href = await last.getAttribute('href');
+  const slug = href!.split('/').pop();
+  await page.goto(href!);
+  await page.getByRole('link', { name: 'Back to the room' }).click();
+  const book = page.locator(`#post-${slug}`);
+  await expect(book).toBeFocused();
+  await expect(book).toBeInViewport();
+  await expect(page.locator('.room-pagination > span')).toHaveAttribute(
+    'aria-label',
+    new RegExp(`Bookcase ${Math.ceil(published.length / ROOM_CAPACITY)} of`),
+  );
+  await page.reload();
+  await expect(book).toBeFocused();
+  await expect(book).toBeInViewport();
 });

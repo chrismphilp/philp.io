@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useState, type RefObject } from 'react';
 import type { PostMeta } from '../../utils/mdxUtils';
-import { bookSlug, bindings } from './RoomBooks';
+import { bookSlug, bookAppearance } from '../../utils/library';
 import PixelIcon from './PixelIcon';
 
 export default function RoomCatalogue({
@@ -84,7 +84,7 @@ export default function RoomCatalogue({
             <li key={post.filePath}>
               <span
                 className="catalogue-binding"
-                style={{ background: bindings[posts.indexOf(post) % bindings.length] }}
+                style={{ background: bookAppearance(post).binding }}
                 aria-hidden="true"
               />
               <Link href={`/articles/${bookSlug(post)}`} prefetch={false} onClick={onLeave}>

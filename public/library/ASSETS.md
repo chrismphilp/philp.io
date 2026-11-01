@@ -1,6 +1,26 @@
 # Library assets
 
-The room, Bernese Mountain Dog, and flame sprites are original artwork generated for this project with OpenAI's built-in image generation tool. The room is served locally as AVIF with a WebP fallback; sprite strips use WebP. The snowy room was edited from the original rainy illustration, preserving furniture, lighting, and geometry while clearing twelve bays for functional HTML book spines.
+Original artwork made for this site with OpenAI's **built-in image generation tool** (generation and style-transfer edit modes), 1 November 2026. No game artwork was copied. All production files are local; the website makes no image-generation requests.
+
+| File | Logical pixels | Encoding | Size |
+| --- | --- | --- | --- |
+| `room-16bit.webp` | 384 × 216 | WebP quality 90 | 28,918 bytes |
+| `bernese-16bit.webp` | 96 × 32, two 48 × 32 poses | Lossless WebP with alpha | 3,216 bytes |
+| `fire-16bit.webp` | 64 × 64, four 32 × 32 frames in a 2 × 2 grid | Lossless WebP with alpha | 2,004 bytes |
+
+The source images were resized to their logical grids using nearest-neighbour resampling. CSS `image-rendering: pixelated` enlarges them; the scene uses the same files on phones and desktop. The background deliberately leaves six bays empty for real HTML links. The old detailed backgrounds and sprite strips have been removed. Total scenery payload: **34,138 bytes (33.3 KiB)**.
+
+## Final room edit prompt
+
+> Use case: style-transfer. Edit target: the supplied mansion room background. Completely repaint its rendering into charming COARSE 16-bit pixel art like a Stardew Valley farmhouse interior or Pokemon GBA room. This is a pixel tileset GAME SCREEN, not an oil painting or a realistic interior. Keep the exact 16:9 composition and all object positions, but radically simplify shapes into large clean flat pixel clusters, bold dark brown pixel outlines and 3-shade ramps per material. Actual logical grid 384x216; enlarged nearest neighbour, no subpixel details, no grain, NO fine texture, no dither, no gradients, no photorealistic light, no blur. Restrict to 32 harmonious flat colours: warm honey oak, chestnut outlines, muted rust red rug/chair, cream stone hearth, pale golden lamps, cool blue snowy window. Floor planks should be flat colour with just 2 or 3 simple dark marks. Rug should have a simple chunky diamond border and empty red centre. Bookcases should be very clear cartoon game furniture, with the exact SIX empty dark shelf bays (three on left at x23.6–37.5%, three on right at x69.4–85.9%, bay floor y16.8%,26.2%,35.3%) maintained for HTML book sprites. Preserve the fireplace opening x45–59% y30–46%, low logs at y44%, no flames. Preserve snowy window x0–18% y0–30%, painting above fireplace, tea at far right, big rug lower centre. Preserve armchair at lower right hiding the reader's head and torso: ONLY his forearm and legs visible, with both shoes naturally supported on the pouffe to the left of the chair. Simplify everything into adorable readable game props with strong pixel silhouettes. NO dog, NO flames, NO words or UI. The whole room must look hand-pixelled by a game artist, with deliberate square pixels and lots of flat colour areas.
+
+## Dog generation brief
+
+Transparent two-frame sprite strip, two equal 48 × 32 logical-pixel cells. A small sleeping Bernese Mountain Dog, viewed from above and behind, curled on its belly with its head at upper left toward the fireplace and its back/rump facing the viewer. Black coat, rust legs, white collar and tail marking; no eye contact or front-facing portrait. Left pose sleeping, right pose a tiny sleepy ear/head adjustment still facing away. Keep size, baseline, padding and silhouette consistent. Flat 16-bit pixel clusters, a restrained palette, no fur texture, antialiasing, background, furniture, text or baked-in sleep symbols.
+
+## Fire generation brief
+
+Transparent four-frame 2 × 2 sheet, each cell 32 × 32 logical pixels. A low, wide, cosy hearth flame with three softly rounded, stepped tongues in amber, gold and pale yellow. Identical baseline and padding, gently varied flame shapes, six flat colours, crisp 16-bit pixels. No logs, smoke, background, borders, text or detached sparks. Embers are separate lightweight CSS particles so they can rise slowly at different intervals.
 
 ## Fireplace audio
 
@@ -12,17 +32,3 @@ The room, Bernese Mountain Dog, and flame sprites are original artwork generated
 - Licence verified: 1 November 2026.
 - Changes: excerpt, 70 Hz high-pass and 4.5 kHz low-pass filtering, gentle compression of sharp snaps, loudness balancing to approximately −25 LUFS with restrained peaks, a two-second equal-power overlap at the loop boundary, stereo 32 kHz / 96 kbps AAC encoding. Original field sound; no synthesized noise, music, or rain.
 - Playback starts only after the visitor enables sound. It is excluded from service-worker precaching, fades in at 35% volume, and pauses when the document is hidden. The source credit is also linked in the in-room About panel.
-
-## Snowy room edit prompt
-
-Built-in imagegen edit of the existing room: preserve the exact composition, pixel art style, warm amber lighting, furniture, ornaments, fireplace, resting man, pouffe, tea, painting, rug, and camera. Replace rain with a blue snowy winter night, snow-covered evergreen trees and distant manor lights; retain the leaded window. Empty the six shelf bays immediately left of the fireplace (26.5–36% of the image) and the six bays immediately right (71.2–81%), keeping the shelf boards, outer shelves, books, plants and globe. No dog, flames, UI or text baked into the background. Keep the 1672:941 composition.
-
-Production room files: `reading-room.avif`, `reading-room-mobile.avif`, `reading-room.webp`, and `reading-room-mobile.webp`, all in this directory. The WebP files provide a fallback when AVIF is unsupported.
-
-## Armchair pose edit prompt
-
-Edited with the built-in imagegen tool on 1 November 2026. The reader's head and torso are concealed by the chair, with only arms and legs visible and the feet supported by the pouffe. The resulting artwork is exported to the same four production room files above (1344×756 desktop, 1008×567 mobile).
-
-Exact prompt:
-
-> Use case: precise-object-edit. Edit target: the supplied pixel-art mansion library background. Change ONLY the seated man and his relationship to the existing red leather armchair and round matching pouffe at the far right. The seated reader is reclined deep inside the chair, viewed from behind: the chair completely conceals his head, neck, shoulders and torso. Absolutely no head or face should be visible above or beside the chair. Only his relaxed dark-sleeved forearms/hands resting naturally along the armrests, and his two dark-trousered legs with shoes, should be visible around the chair. Arrange both legs in a natural relaxed perspective from the chair seat diagonally left towards the existing pouffe. BOTH heels/shoes must rest directly on the TOP cushion of that round pouffe, visibly supported and aligned with it, no hovering feet and no legs dangling beside the pouffe. Keep the pouffe's position and size unchanged and preserve the armchair's outer silhouette as closely as possible. Restore the bookshelf behind the removed head. Preserve ALL other pixels/composition as closely as possible: exact room layout, camera, 1672:941 aspect ratio, walnut shelves including all twelve EMPTY shelf bays used by interactive HTML books, snowy window, fireplace, glowing embers, mantelpiece and painting, rug, lamps, cup of tea and side table. Match existing detailed pixel-art style, warm amber palette and firelight. No dog, new objects, UI, text, watermarks or full flames added. This is an exact-layout web background; no zoom, crop, reframing or repositioning of architecture.

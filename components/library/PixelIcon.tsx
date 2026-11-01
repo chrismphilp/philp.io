@@ -1,6 +1,10 @@
 import type { CSSProperties } from 'react';
 
 const paths = {
+  sleep:
+    'M1 15h6v2H5v2H3v2h4v2H1v-4h2v-2H1v-2zM9 9h6v2h-2v2h-2v2h4v2H9v-4h2v-2H9V9zM17 2h6v2h-2v2h-2v2h4v2h-6V6h2V4h-2V2z',
+  snow: 'M10 1h4v5h3V3h3v3h-3v3h6v4h-6v3h3v3h-3v-3h-3v7h-4v-7H7v3H4v-3h3v-3H1V9h6V6H4V3h3v3h3V1z',
+  fire: 'M10 1h4v5h3v4h3v8h-3v3H7v-3H4v-8h3v4h3V1zm0 13v5h4v-5h-4z',
   book: 'M3 3h7v2h4V3h7v16h-7v2h-4v-2H3V3zm2 2v12h5V5H5zm9 0v12h5V5h-5z',
   sound:
     'M2 9h4V7h2V5h3v14H8v-2H6v-2H2V9zm12-2h2v2h2v6h-2v2h-2v-3h2v-4h-2V7zm5-4h2v4h2v10h-2v4h-2v-5h2V8h-2V3z',

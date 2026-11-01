@@ -13,17 +13,18 @@ import {
 import type { PostMeta } from '../../utils/mdxUtils';
 import { formatDate } from '../../utils/dateUtils';
 import PixelIcon from './PixelIcon';
-import RoomBooks, { bindings, bookSlug, ROOM_CAPACITY } from './RoomBooks';
+import RoomBooks from './RoomBooks';
+import { bookAppearance, bookSlug, findBookPage, getLibraryPage } from '../../utils/library';
 import RoomCatalogue from './RoomCatalogue';
 import { FireplaceControls } from './FireplaceSound';
 
 type Place = 'window' | 'west' | 'hearth' | 'east' | 'tea';
 const places: { key: Place; name: string; x: number; y: number }[] = [
-  { key: 'window', name: 'Snowfall', x: 0.1, y: 0.4 },
-  { key: 'west', name: 'West shelves', x: 0.313, y: 0.31 },
-  { key: 'hearth', name: 'Fireside', x: 0.45, y: 0.75 },
-  { key: 'east', name: 'East shelves', x: 0.761, y: 0.31 },
-  { key: 'tea', name: 'Tea corner', x: 0.9, y: 0.6 },
+  { key: 'window', name: 'Snowfall', x: 0.1, y: 0.22 },
+  { key: 'west', name: 'West shelves', x: 0.305, y: 0.22 },
+  { key: 'hearth', name: 'Fireside', x: 0.52, y: 0.56 },
+  { key: 'east', name: 'East shelves', x: 0.775, y: 0.22 },
+  { key: 'tea', name: 'Tea corner', x: 0.9, y: 0.69 },
 ];
 
 export default function ReadingRoom({
@@ -50,22 +51,14 @@ export default function ReadingRoom({
   const [place, setPlace] = useState<Place>('hearth');
   const [selected, setSelected] = useState<PostMeta | null>(null);
   const [bookPage, setBookPage] = useState(0);
-  const pageCount = Math.ceil(posts.length / ROOM_CAPACITY);
-  const visiblePosts = posts.slice(bookPage * ROOM_CAPACITY, (bookPage + 1) * ROOM_CAPACITY);
+  const [inspected, setInspected] = useState<PostMeta | null>(null);
+  const shelf = getLibraryPage(posts, bookPage);
 
   const moveTo = useCallback((key: Place, smooth = true) => {
     const view = panorama.current;
     const scene = world.current;
     if (!view || !scene) return;
     const destination = places.find((item) => item.key === key)!;
-    // Fingers need the same generous shelf close-up even on short landscape screens.
-    const shelfWidth = matchMedia('(pointer: coarse)').matches
-      ? 2160
-      : Math.max(1500, Math.min(2160, view.clientHeight * 3.3));
-    scene.style.setProperty(
-      '--camera-width',
-      key === 'west' || key === 'east' ? `${shelfWidth}px` : '0px',
-    );
     view.scrollTo({
       left: scene.clientWidth * destination.x - view.clientWidth / 2,
       top: scene.clientHeight * destination.y - view.clientHeight / 2,
@@ -85,9 +78,8 @@ export default function ReadingRoom({
 
   const locateBook = useCallback(
     (slug: string) => {
-      const index = posts.findIndex((post) => bookSlug(post) === slug);
-      if (index < 0) return;
-      const page = Math.floor(index / ROOM_CAPACITY);
+      const page = findBookPage(posts, slug);
+      if (page === null) return;
       if (page !== bookPage) {
         pendingBook.current = slug;
         setBookPage(page);
@@ -179,6 +171,7 @@ export default function ReadingRoom({
     if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0)
       return;
     event.preventDefault();
+    setInspected(null);
     setSelected(post);
   }
 
@@ -288,32 +281,35 @@ export default function ReadingRoom({
         }}
       >
         <div ref={world} className="room-world">
-          <picture>
-            <source
-              media="(max-width: 600px)"
-              type="image/avif"
-              srcSet="/library/reading-room-mobile.avif"
-            />
-            <source
-              media="(min-width: 601px)"
-              type="image/avif"
-              srcSet="/library/reading-room.avif"
-            />
-            <source media="(max-width: 600px)" srcSet="/library/reading-room-mobile.webp" />
-            {/* One compressed background, no canvas, video, or animation runtime. */}
-            <img
-              className="room-background"
-              src="/library/reading-room.webp"
-              width="1672"
-              height="941"
-              alt="A snowy evening in a pixel-art British mansion library, with walnut shelves and a stone fireplace. A reader reclines behind an armchair, only his arms and legs visible, with his feet resting on a pouffe and tea beside him."
-              fetchPriority="high"
-              decoding="async"
-              draggable={false}
-            />
-          </picture>
+          {/* Native-resolution pixel art must bypass resampling by image optimizers. */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            className="room-background"
+            src="/library/room-16bit.webp"
+            width="384"
+            height="216"
+            alt="A snowy evening in a 16-bit British mansion library, with walnut shelves, a golden hearth and a patterned rug. A reader sits behind a red armchair, only his arms and legs visible, feet resting on a pouffe, with tea beside him."
+            fetchPriority="high"
+            decoding="async"
+            draggable={false}
+          />
           <div className="hearth-glow" aria-hidden="true" />
           <div className="fire" aria-hidden="true" />
+          <div className="fire-embers" aria-hidden="true">
+            {Array.from({ length: 10 }, (_, i) => (
+              <i
+                key={i}
+                style={
+                  {
+                    '--ember-x': `${14 + ((i * 29) % 72)}%`,
+                    '--ember-drift': `${((i * 13) % 29) - 14}px`,
+                    '--ember-duration': `${5.7 + ((i * 17) % 31) / 10}s`,
+                    '--ember-delay': `${-i * 2.73}s`,
+                  } as CSSProperties
+                }
+              />
+            ))}
+          </div>
           <div className="tea-steam" aria-hidden="true">
             <i />
             <i />
@@ -328,15 +324,16 @@ export default function ReadingRoom({
                     '--flake-x': `${(i * 17) % 100}%`,
                     '--flake-delay': `${-i * 1.7}s`,
                     '--flake-speed': `${9 + (i % 6)}s`,
-                    '--flake-size': `${i % 3 === 0 ? 3 : 2}px`,
+                    '--flake-size': `${i % 3 === 0 ? 0.52 : 0.26}cqw`,
                   } as CSSProperties
                 }
               />
             ))}
           </div>
           <RoomBooks
-            posts={visiblePosts}
-            allPosts={posts}
+            posts={shelf.items}
+            offset={shelf.first - 1}
+            onInspect={setInspected}
             onPull={pullBook}
             onFocus={focusBook}
           />
@@ -348,7 +345,7 @@ export default function ReadingRoom({
           >
             <span className="dog-sprite" />
             <span className="dog-sleep" aria-hidden="true">
-              z z Z
+              <PixelIcon name="sleep" />
             </span>
             <span className="dog-hint">Say a quiet hello</span>
           </button>
@@ -380,19 +377,59 @@ export default function ReadingRoom({
           </button>
         </div>
       </div>
+      {inspected && !selected && (
+        <div className="book-nameplate" aria-hidden="true">
+          <span>
+            {inspected.data.category} · {inspected.data.readingTime}
+          </span>
+          <strong>{inspected.data.title}</strong>
+          <small>Pull this book from the shelf ↗</small>
+        </div>
+      )}
+      <noscript>
+        <nav className="room-noscript" aria-label="Browse all writing">
+          <Link href="/tech">Technology</Link>
+          <Link href="/misc">Life &amp; everything</Link>
+        </nav>
+      </noscript>
       <div className={`room-toast${message ? ' has-message' : ''}`} role="status">
         {message}
       </div>
       <footer className="room-dock">
-        <div className="room-guide">
-          <span className="guide-star" aria-hidden="true">
-            ✦
+        <nav className="room-pagination" aria-label="Bookcases">
+          <button
+            type="button"
+            aria-label="Previous bookcase"
+            disabled={shelf.page === 0}
+            onClick={() => {
+              setInspected(null);
+              setBookPage(shelf.page - 1);
+            }}
+          >
+            <PixelIcon name="arrow" style={{ transform: 'rotate(180deg)' }} />
+          </button>
+          <span
+            aria-live="polite"
+            aria-atomic="true"
+            aria-label={`Bookcase ${shelf.page + 1} of ${shelf.pageCount}, volumes ${shelf.first} to ${shelf.last} of ${posts.length}`}
+          >
+            <small>BOOKCASE</small>
+            <strong>
+              {shelf.page + 1} / {shelf.pageCount}
+            </strong>
           </span>
-          <p>
-            Every book is a story.<span> Pull one from the shelf.</span>
-            <small>SWIPE OR DRAG TO EXPLORE</small>
-          </p>
-        </div>
+          <button
+            type="button"
+            aria-label="Next bookcase"
+            disabled={shelf.page === shelf.pageCount - 1}
+            onClick={() => {
+              setInspected(null);
+              setBookPage(shelf.page + 1);
+            }}
+          >
+            <PixelIcon name="arrow" />
+          </button>
+        </nav>
         <nav className="room-places" aria-label="Explore the room">
           {places.map((item) => (
             <button
@@ -401,16 +438,20 @@ export default function ReadingRoom({
               onClick={() => moveTo(item.key)}
               aria-pressed={place === item.key}
               aria-label={`Look at ${item.name.toLowerCase()}`}
+              title={item.name}
             >
-              <span aria-hidden="true">
-                {item.key === 'window'
-                  ? '❄'
-                  : item.key === 'west' || item.key === 'east'
-                    ? '▥'
-                    : item.key === 'hearth'
-                      ? '♨'
-                      : '♧'}
-              </span>
+              <PixelIcon
+                name={
+                  item.key === 'window'
+                    ? 'snow'
+                    : item.key === 'west' || item.key === 'east'
+                      ? 'shelf'
+                      : item.key === 'hearth'
+                        ? 'fire'
+                        : 'tea'
+                }
+                size={22}
+              />
               <small>{item.name}</small>
             </button>
           ))}
@@ -425,15 +466,6 @@ export default function ReadingRoom({
             Find a book<small>{posts.length} VOLUMES</small>
           </span>
         </button>
-        {pageCount > 1 && (
-          <button
-            className="more-volumes"
-            type="button"
-            onClick={() => setBookPage((bookPage + 1) % pageCount)}
-          >
-            Shelves {bookPage + 1}/{pageCount} →
-          </button>
-        )}
       </footer>
       <RoomCatalogue
         posts={posts}
@@ -473,7 +505,7 @@ export default function ReadingRoom({
               className="book-cover"
               style={
                 {
-                  '--binding': bindings[posts.indexOf(selected) % bindings.length],
+                  '--binding': bookAppearance(selected).binding,
                 } as CSSProperties
               }
               aria-hidden="true"
@@ -529,8 +561,9 @@ export default function ReadingRoom({
             Every book on the shelves is something I’ve written.
           </p>
           <p>
-            Pick a spine to take a closer look. Drag the room, or use the places below to
-            wander. The dog is happy to keep you company.
+            Pick a numbered spine to see its title. Use the bookcase arrows for more volumes,
+            or Find a book to search the whole collection. Swipe or drag the room to wander.
+            The dog is happy to keep you company.
           </p>
           <div className="about-links">
             <Link href="/tech" prefetch={false} onClick={() => about.current?.close()}>
