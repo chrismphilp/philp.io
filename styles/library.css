@@ -103,52 +103,76 @@ input {
 .fire {
   pointer-events: none;
   position: absolute;
-  left: 48.1%;
-  top: 50.2%;
-  width: 11.2%;
-  height: 18.7%;
-  background: url('/library/fire-sprites.webp') 0 0 / 400% 100% no-repeat;
+  left: 46.3%;
+  top: 47.2%;
+  width: 14.5%;
+  height: 25.2%;
+  background-position: 0 0;
   image-rendering: pixelated;
-  animation: fire-flicker 1.8s steps(1) infinite;
+  animation: fire-flicker 1.05s steps(1) infinite;
+}
+/* The wood stays grounded while the six flame silhouettes flicker above it. */
+.fire::before,
+.fire::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('/library/fire-sprites.webp') 0 0 / 600% 100% no-repeat;
+}
+.fire::before {
+  background-position: inherit;
+  clip-path: inset(0 0 48%);
+}
+.fire::after {
+  clip-path: inset(52% 0 0);
 }
 .fire-embers {
   position: absolute;
-  left: 49%;
-  top: 48%;
-  width: 9%;
-  height: 19%;
+  left: 47%;
+  top: 45%;
+  width: 13%;
+  height: 25%;
   pointer-events: none;
   overflow: hidden;
 }
 .fire-embers i {
   position: absolute;
   left: var(--ember-x);
-  bottom: 0;
-  width: 0.26cqw;
-  height: 0.26cqw;
-  background: #ffd78b;
+  bottom: 12%;
+  width: 0.18cqw;
+  height: 0.18cqw;
+  background: #ffcf79;
+  box-shadow: 0 0 3px #fa8d47aa;
   opacity: 0;
   animation: ember-rise var(--ember-duration) var(--ember-delay) linear infinite;
 }
 .fire-embers i:nth-child(3n) {
-  background: #df8b45;
+  background: #e98b40;
+  width: 0.12cqw;
+  height: 0.24cqw;
 }
 @keyframes ember-rise {
   0%,
-  18% {
+  52% {
     opacity: 0;
     transform: translate(0, 0);
   }
-  28% {
-    opacity: 0.8;
+  53% {
+    opacity: 1;
+    transform: translate(0, -0.3cqw);
   }
-  65% {
-    opacity: 0.45;
+  57% {
+    opacity: 0.85;
+    transform: translate(calc(var(--ember-drift) * 0.3), -1.9cqw);
   }
-  90%,
+  76% {
+    opacity: 0.55;
+    transform: translate(calc(var(--ember-drift) * 0.65), -5.4cqw);
+  }
+  96%,
   100% {
     opacity: 0;
-    transform: translate(var(--ember-drift), -6cqw);
+    transform: translate(var(--ember-drift), -10cqw);
   }
 }
 .tea-steam {
@@ -343,30 +367,23 @@ input {
   color: var(--room-muted);
 }
 .bookcase {
-  --shelf-row: 302px;
   display: grid;
-  grid-template-columns: repeat(10, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 16px;
   padding: 0 19px;
   border-left: 9px solid #493222;
   border-right: 9px solid #493222;
   border-bottom: 9px solid #37271b;
-  background:
-    repeating-linear-gradient(
-      to bottom,
-      transparent 0 calc(var(--shelf-row) - 13px),
-      #987245 calc(var(--shelf-row) - 13px) calc(var(--shelf-row) - 11px),
-      #6c4b2f calc(var(--shelf-row) - 11px) calc(var(--shelf-row) - 3px),
-      #2e2016 calc(var(--shelf-row) - 3px) var(--shelf-row)
-    ),
-    #241b14;
+  background: #241b14;
   box-shadow:
     inset 0 0 50px #0006,
     0 12px 25px #0002;
   margin-top: 12px;
 }
 .book-slot {
-  height: 302px;
-  padding: 26px 5px 13px;
+  min-height: 280px;
+  padding: 20px 0;
+  border-bottom: 6px solid #6c4b2f;
   display: flex;
   justify-content: center;
   align-items: flex-end;
@@ -383,8 +400,9 @@ input {
   flex-direction: column;
   align-items: center;
   width: 100%;
-  max-width: 79px;
-  height: var(--book-height);
+  max-width: 210px;
+  min-height: var(--book-height);
+  padding: 40px 15px 56px;
   flex-shrink: 0;
   color: #f0d9ad !important;
   background:
@@ -435,8 +453,8 @@ input {
   z-index: 2;
 }
 .book-spine-top {
-  height: 30px;
-  padding-top: 7px;
+  position: absolute;
+  top: 8px;
   font:
     12px var(--font-pixel),
     monospace;
@@ -445,16 +463,15 @@ input {
 }
 .book-title {
   display: block;
-  writing-mode: vertical-rl;
-  text-orientation: mixed;
-  height: calc(100% - 78px);
-  padding: 10px 0 5px;
+  margin: auto 0;
   max-width: 100%;
-  font-size: 15px;
-  line-height: 1.5;
-  font-weight: 300;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  font:
+    19px/1.35 var(--font-spectral),
+    Georgia,
+    serif;
+  text-align: center;
+  overflow-wrap: anywhere;
+  text-wrap: pretty;
 }
 .book-spine-bottom {
   position: absolute;
@@ -483,6 +500,7 @@ input {
 .bookcase-list .book-slot {
   display: block;
   height: auto;
+  min-height: 0;
   padding: 0;
   box-shadow: none;
   border-bottom: 1px solid var(--room-line);
@@ -492,6 +510,7 @@ input {
   width: 100%;
   max-width: none;
   height: auto;
+  min-height: 0;
   padding: 26px 45px 26px 20px;
   color: var(--room-ink) !important;
   background: none;
@@ -516,6 +535,7 @@ input {
   height: auto;
   padding: 0;
   font-size: 24px;
+  text-align: left;
 }
 .bookcase-list .book-list-detail {
   display: flex;
@@ -801,13 +821,19 @@ html.dark .reading-page .text-secondary {
   100% {
     background-position: 0 0;
   }
-  25% {
-    background-position: 33.333% 0;
+  16% {
+    background-position: 20% 0;
   }
-  50% {
-    background-position: 66.666% 0;
+  34% {
+    background-position: 40% 0;
   }
-  75% {
+  49% {
+    background-position: 60% 0;
+  }
+  68% {
+    background-position: 80% 0;
+  }
+  84% {
     background-position: 100% 0;
   }
 }
@@ -934,7 +960,7 @@ html.dark .reading-page .text-secondary {
     padding-top: 17px;
   }
   .bookcase {
-    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
     padding: 0 9px;
     border-left-width: 6px;
     border-right-width: 6px;
@@ -997,17 +1023,18 @@ html.dark .reading-page .text-secondary {
     font-size: 11px;
   }
   .bookcase {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    --shelf-row: 283px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
   }
   .book-slot {
-    height: 283px;
+    min-height: 250px;
   }
   .book-link {
-    height: calc(var(--book-height) - 15px);
+    min-height: calc(var(--book-height) - 15px);
+    padding-inline: 10px;
   }
   .book-title {
-    font-size: 14px;
+    font-size: 17px;
   }
   .catalogue-meta > span:last-child {
     display: none;

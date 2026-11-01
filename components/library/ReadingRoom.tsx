@@ -18,14 +18,11 @@ import { bookAppearance, bookSlug, findBookPage, getLibraryPage } from '../../ut
 import RoomCatalogue from './RoomCatalogue';
 import { FireplaceControls } from './FireplaceSound';
 
-type Place = 'window' | 'west' | 'hearth' | 'east' | 'tea';
-const places: { key: Place; name: string; x: number; y: number }[] = [
-  { key: 'window', name: 'Snowfall', x: 0.1, y: 0.4 },
-  { key: 'west', name: 'West shelves', x: 0.313, y: 0.31 },
-  { key: 'hearth', name: 'Fireside', x: 0.48, y: 0.73 },
-  { key: 'east', name: 'East shelves', x: 0.761, y: 0.31 },
-  { key: 'tea', name: 'Tea corner', x: 0.9, y: 0.6 },
-];
+const destinations = {
+  west: { x: 0.313, y: 0.31 },
+  hearth: { x: 0.48, y: 0.73 },
+  east: { x: 0.761, y: 0.31 },
+};
 
 export default function ReadingRoom({
   posts,
@@ -48,26 +45,21 @@ export default function ReadingRoom({
   const [paused, setPaused] = useState(false);
   const [awake, setAwake] = useState(false);
   const [message, setMessage] = useState('');
-  const [place, setPlace] = useState<Place>('hearth');
   const [selected, setSelected] = useState<PostMeta | null>(null);
   const [bookPage, setBookPage] = useState(0);
   const [inspected, setInspected] = useState<PostMeta | null>(null);
   const shelf = getLibraryPage(posts, bookPage);
 
-  const moveTo = useCallback((key: Place, smooth = true) => {
+  const moveTo = useCallback((key: keyof typeof destinations) => {
     const view = panorama.current;
     const scene = world.current;
     if (!view || !scene) return;
-    const destination = places.find((item) => item.key === key)!;
+    const destination = destinations[key];
     view.scrollTo({
       left: scene.clientWidth * destination.x - view.clientWidth / 2,
       top: scene.clientHeight * destination.y - view.clientHeight / 2,
-      behavior:
-        smooth && !matchMedia('(prefers-reduced-motion: reduce)').matches
-          ? 'smooth'
-          : 'instant',
+      behavior: 'instant',
     });
-    setPlace(key);
   }, []);
 
   function say(text: string) {
@@ -87,10 +79,9 @@ export default function ReadingRoom({
       }
       const book = document.getElementById(`post-${slug}`);
       if (book) {
-        moveTo(book.closest('.west-shelf') ? 'west' : 'east', false);
+        moveTo(book.closest('.west-shelf') ? 'west' : 'east');
         book.scrollIntoView({ block: 'center', inline: 'center', behavior: 'instant' });
         book.focus({ preventScroll: true });
-        setPlace(book.closest('.west-shelf') ? 'west' : 'east');
       }
     },
     [bookPage, posts, moveTo],
@@ -105,7 +96,7 @@ export default function ReadingRoom({
   }, [bookPage, locateBook]);
 
   useEffect(() => {
-    moveTo('hearth', false);
+    moveTo('hearth');
     const view = panorama.current;
     if (!view) return;
     // Keep the room's subject in view when rotating a phone or resizing a window.
@@ -113,7 +104,7 @@ export default function ReadingRoom({
     const observer = new ResizeObserver(() => {
       if (Math.abs(width - view.clientWidth) > 50) {
         width = view.clientWidth;
-        moveTo('hearth', false);
+        moveTo('hearth');
       }
     });
     observer.observe(view);
@@ -216,10 +207,7 @@ export default function ReadingRoom({
             title="About this library"
           >
             <span className="status-light" aria-hidden="true" />
-            <span>
-              <span className="room-title">The reading room</span>{' '}
-              <small>CHRISTOPHER PHILP’S LIBRARY</small>
-            </span>
+            <span className="room-title">The reading room</span>
           </button>
         </h1>
         <span className="winter-weather">
@@ -293,8 +281,8 @@ export default function ReadingRoom({
             <img
               className="room-background"
               src="/library/reading-room.webp"
-              width="1344"
-              height="756"
+              width="896"
+              height="504"
               alt="A snowy evening in a richly detailed pixel-art British mansion library, with walnut shelves, a golden hearth and a patterned rug. A reader sits behind a red armchair, only his arms and legs visible, feet resting on a pouffe, with tea beside him."
               fetchPriority="high"
               decoding="async"
@@ -309,9 +297,9 @@ export default function ReadingRoom({
                 key={i}
                 style={
                   {
-                    '--ember-x': `${14 + ((i * 29) % 72)}%`,
-                    '--ember-drift': `${((i * 13) % 29) - 14}px`,
-                    '--ember-duration': `${5.7 + ((i * 17) % 31) / 10}s`,
+                    '--ember-x': `${12 + ((i * 29) % 74)}%`,
+                    '--ember-drift': `${(((i * 13) % 29) - 14) / 7}cqw`,
+                    '--ember-duration': `${9.7 + ((i * 17) % 47) / 10}s`,
                     '--ember-delay': `${-i * 2.73}s`,
                   } as CSSProperties
                 }
@@ -379,7 +367,7 @@ export default function ReadingRoom({
             className="room-secret fire-hotspot"
             type="button"
             aria-label="Warm your hands by the fire"
-            onClick={() => say('The logs settle into the grate. Just one more chapter.')}
+            onClick={() => say('The logs settle softly. Just one more chapter.')}
           >
             <span>Warm your hands</span>
           </button>
@@ -438,32 +426,7 @@ export default function ReadingRoom({
             <PixelIcon name="arrow" />
           </button>
         </nav>
-        <nav className="room-places" aria-label="Explore the room">
-          {places.map((item) => (
-            <button
-              type="button"
-              key={item.key}
-              onClick={() => moveTo(item.key)}
-              aria-pressed={place === item.key}
-              aria-label={`Look at ${item.name.toLowerCase()}`}
-              title={item.name}
-            >
-              <PixelIcon
-                name={
-                  item.key === 'window'
-                    ? 'snow'
-                    : item.key === 'west' || item.key === 'east'
-                      ? 'shelf'
-                      : item.key === 'hearth'
-                        ? 'fire'
-                        : 'tea'
-                }
-                size={22}
-              />
-              <small>{item.name}</small>
-            </button>
-          ))}
-        </nav>
+        <span className="room-explore-hint">DRAG TO EXPLORE · PULL A BOOK TO READ</span>
         <button
           className="catalogue-button"
           type="button"

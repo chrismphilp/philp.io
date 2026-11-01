@@ -1,17 +1,36 @@
 # Library assets
 
-Original artwork created for this project with OpenAI's **built-in image generation tool**. The detailed mansion background is restored from commit `d28d938`, preserving the snowy window, walnut shelves, warm light and corrected armchair pose. Its twelve empty shelf bays now hold two functional book links each, with the current pagination and readable title cards.
+Original artwork created for this project with OpenAI's **built-in image generation tool**. The room preserves its detailed mansion composition with a slightly stronger pixel grid; its empty hearth receives a separate animated log fire. Twelve shelf bays hold the actual blog links, using antique leather textures and readable full-title cards.
 
 | File | Dimensions | Size |
 | --- | --- | --- |
-| `reading-room.avif` | 1344 × 756 | 95,939 bytes |
-| `reading-room.webp` | 1344 × 756 | 202,388 bytes |
-| `reading-room-mobile.avif` | 1008 × 567 | 68,072 bytes |
-| `reading-room-mobile.webp` | 1008 × 567 | 138,398 bytes |
+| `reading-room.avif` | 896 × 504 | 62,741 bytes |
+| `reading-room.webp` | 896 × 504 | 150,028 bytes |
+| `reading-room-mobile.avif` | 672 × 378 | 40,950 bytes |
+| `reading-room-mobile.webp` | 672 × 378 | 95,130 bytes |
 | `bernese-fireside.webp` | 320 × 112, two 160 × 112 poses | 12,334 bytes |
-| `fire-sprites.webp` | 480 × 160, four 120 × 160 frames | 18,082 bytes |
+| `fire-sprites.webp` | 576 × 128, six 96 × 128 frames | 28,936 bytes |
+| `book-bindings.webp` | 192 × 96, six 32 × 96 textures | 12,444 bytes |
 
-The browser selects one AVIF background, with WebP as a fallback. Total scenery is **96.2 KiB on mobile / 123.4 KiB on desktop** for AVIF-capable browsers (164.9 / 227.3 KiB with the WebP fallback). The dog is resized with nearest-neighbour sampling and encoded as WebP quality 92 with full-quality alpha. The restored flame strip plays slowly, with separate CSS embers drifting upward. No scene assets are fetched from third-party hosts.
+The browser selects one AVIF background, with WebP as a fallback. Total scenery is **92.4 KiB on mobile / 113.7 KiB on desktop** for AVIF-capable browsers (145.4 / 199.0 KiB with WebP). Backgrounds use nearest-neighbour resampling, AVIF quality 52 / 4:4:4 and WebP quality 88. Fire frames are extracted from the generated six-column strip, resized with nearest-neighbour sampling and encoded as WebP quality 78 / alpha quality 80. The lower log layer stays still while flame silhouettes animate above it. Separate CSS embers occasionally pop and drift upward. Binding cells are cropped from the six generated spines and encoded at WebP quality 86. No scene assets are fetched from third-party hosts.
+
+## Refined room prompt
+
+Edit of the existing detailed room, built-in tool. Output is resized into the four `reading-room*` files above.
+
+> Use case: style-transfer and precise-object-edit. Edit target: supplied old British mansion library background. Preserve the exact 16:9 composition, object positions, lighting, colours, architecture, six empty shelf bays on each side of the fireplace, snowy window and outside landscape, old painting, rug, side table with tea, red leather armchair and matching pouffe. Reader's head and torso stay completely hidden behind the chair: only existing arm and legs visible, feet stay on pouffe. NO DOG and NO TEXT. Make this SAME image just slightly more pixelated, consistent with the lovely small crisp pixels of its snowy exterior: disciplined 2-3 pixel clusters, warm detailed 1990s adventure-game pixel artwork, restrained dithering, no smoothing, no major redesign, no chunky cartoon outlines. Keep all shelf edges and camera alignment identical. The only object edit: remove the little glowing logs/coals and brass grate in the fireplace opening, leaving clean dark soot-brown brick and a dark level hearth floor inside the same unchanged carved stone fireplace. An animated roaring log fire will be layered there later. Preserve the warm reflected glow on the fireplace surround and floor. Do NOT change any furniture arrangement or add books to the empty shelf bays. Output wide 16:9 image.
+
+## Roaring log fire prompt
+
+Generated with the built-in tool, saved as `public/library/fire-sprites.webp` after frame packing and compression.
+
+> Use case: stylized-concept. Asset: animation sprite sheet for a cosy old British mansion pixel-art library fireplace. Create EXACTLY SIX consecutive animation frames in one perfectly aligned horizontal strip of equal 256x256 cells, canvas1536x256, transparent background with real alpha. Each frame shows the SAME very beautiful full roaring wood fire, front view with slight view down onto three overlapping substantial split oak logs, clear dark charred bark, visible circular ochre end-grain, ember-red fissures and a small glowing coal bed. Several beautiful layered tongues of amber, tangerine and pale butter-yellow flame dance upwards BETWEEN and BEHIND the clearly visible logs; varied slender tapering tongues, lacy negative space, natural roaring wood fire, absolutely not one single teardrop/gas flame. No smoke. Warm golden luminous light. Each fire occupies x28..228 and y30..230 within its own256square cell; all logs grounded at y222 on the same stable base. In ALL SIX frames the logs must be identical in shape, scale, placement and illumination: ONLY the flame tongues change silhouette in a natural fluid loop (right, centre, left and curl), not a bouncing whole fire. Detailed hand-placed pixel-art aesthetic using crisp 2px pixel clusters, limited warm 16-colour palette, like tasteful 1990s adventure game fireplace art; avoid photorealism, smooth vector curves, glossy cartoon shapes. No fireplace, no fire surround, no grate, no andirons, no floor, no border, no text, no numbers. Real transparent space around every frame. This asset will fit inside an existing dark brick hearth. Flame is broad and lush but leaves the substantial logs clearly visible.
+
+## Vintage bindings prompt
+
+Generated with the built-in tool, saved as `public/library/book-bindings.webp` after extracting six texture cells. Volume numbers are accessible HTML, never baked into the image.
+
+> Asset type: pixel-art game texture atlas, exactly SIX old leather BOOK SPINES side by side, front elevation, on transparent background. Canvas1536x1024: six equal256x1024 cells. Each spine is tall and narrow, completely fills its cell width and height with NO margin (edge to edge leather). Style: rich but crisp warm detailed adventure-game pixel art for walnut bookshelves in an old British mansion. Each spine has rubbed aged leather grain, slightly rounded illuminated left edge, dark crease at right, clear antique raised horizontal binding cords near the top and bottom, delicate double-line gold leaf tooling in faded brass. Colours left to right: oxblood burgundy, dark forest green, tobacco brown, midnight navy, deep aubergine, warm chestnut. The centre of EACH spine has a small plain dark leather rectangular label bordered in old brass, absolutely blank, no text anywhere; a tiny elegant gold botanical fleur-de-lis above the label. Varied subtle old-world tooling on each volume. Restrained antique elegance; look like real old embossed leather book spines depicted with discrete pixel clusters, not bright modern buttons or rectangles. Everything crisp, no glossy plastic, no gradients that look vector, no cartoon outline. No visible front covers, no perspective, no pages, no bookshelves, no scenery, no cast shadow beyond the spines. All six have identical height, consistent warm light from above right. No letters, no titles, no words, no numbers anywhere.
 
 ## Sleeping dog prompt
 
@@ -30,13 +49,13 @@ Generated with the built-in tool using the detailed room as a style reference an
 - Changes: excerpt, 70 Hz high-pass and 4.5 kHz low-pass filtering, gentle compression of sharp snaps, loudness balancing to approximately −25 LUFS with restrained peaks, a two-second equal-power overlap at the loop boundary, stereo 32 kHz / 96 kbps AAC encoding. Original field sound; no synthesized noise, music, or rain.
 - Playback starts only after the visitor enables sound. It is excluded from service-worker precaching, fades in at 35% volume, and pauses when the document is hidden. The source credit is also linked in the in-room About panel.
 
-## Snowy room edit prompt
+## Original snowy room edit prompt
 
 Built-in imagegen edit of the existing room: preserve the exact composition, pixel art style, warm amber lighting, furniture, ornaments, fireplace, resting man, pouffe, tea, painting, rug, and camera. Replace rain with a blue snowy winter night, snow-covered evergreen trees and distant manor lights; retain the leaded window. Empty the six shelf bays immediately left of the fireplace (26.5–36% of the image) and the six bays immediately right (71.2–81%), keeping the shelf boards, outer shelves, books, plants and globe. No dog, flames, UI or text baked into the background. Keep the 1672:941 composition.
 
 Production room files: `reading-room.avif`, `reading-room-mobile.avif`, `reading-room.webp`, and `reading-room-mobile.webp`, all in this directory. The WebP files provide a fallback when AVIF is unsupported.
 
-## Armchair pose edit prompt
+## Original armchair pose edit prompt
 
 Edited with the built-in imagegen tool on 1 November 2026. The reader's head and torso are concealed by the chair, with only arms and legs visible and the feet supported by the pouffe. The resulting artwork is exported to the same four production room files above (1344×756 desktop, 1008×567 mobile).
 

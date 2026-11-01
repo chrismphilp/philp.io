@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test';
+import { expect, test, type Page } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -11,6 +11,12 @@ const published = fs
   .map((file) => ({ file, data: matter(fs.readFileSync(path.join('articles', file))).data }))
   .filter(({ data }) => !data.draft);
 const techCount = published.filter(({ data }) => data.category === 'Technology').length;
+
+// Exercise the catalogue's real locate action when a test needs an off-screen book.
+async function locateVolume(page: Page, index = 0) {
+  await page.getByRole('button', { name: 'Find a book' }).click();
+  await page.locator('.catalogue-entries li').nth(index).getByRole('button').click();
+}
 
 test('the entire website is the room, with real article links on its shelves', async ({
   page,
@@ -43,7 +49,7 @@ test('a shelf book pulls out, restores focus, and opens a reader inside the room
   page,
 }) => {
   await page.goto('/');
-  await page.getByRole('button', { name: 'Look at west shelves' }).click();
+  await locateVolume(page);
   const book = page.locator('.room-book').first();
   const href = await book.getAttribute('href');
   await book.click();
@@ -167,39 +173,33 @@ test('scene controls pause motion, greet the dog, and play real audio only on de
   await expect.poll(playing).toBe(false);
 });
 
-test('the scenery can be explored with the place controls and mouse drag', async ({
+test('the room uses compact controls and can be explored with keyboard and mouse drag', async ({
   page,
   isMobile,
 }) => {
   await page.goto('/');
-  await page.getByRole('button', { name: 'Look at west shelves' }).click();
-  await expect(page.getByRole('button', { name: 'Look at west shelves' })).toHaveAttribute(
-    'aria-pressed',
-    'true',
-  );
-  await expect(page.locator('.west-shelf').first()).toBeInViewport();
-  await page.getByRole('button', { name: 'Look at east shelves' }).click();
-  await expect(page.locator('.east-shelf').first()).toBeInViewport();
+  await expect(page.locator('.room-places')).toHaveCount(0);
+  expect((await page.locator('.room-hud').boundingBox())!.height).toBe(48);
+  expect((await page.locator('.room-dock').boundingBox())!.height).toBe(52);
+  await locateVolume(page);
+  await expect(page.locator('.room-book').first()).toBeInViewport();
+  // Tab into scenery hotspots also pans to them, without location buttons.
+  await page.getByRole('button', { name: 'Enjoy a cup of tea' }).focus();
+  await page.keyboard.press('Enter');
+  await expect(page.getByRole('status')).toContainText('Earl Grey. Still warm.');
   if (!isMobile) {
     await page.setViewportSize({ width: 800, height: 600 });
-    await page.getByRole('button', { name: 'Look at east shelves' }).click();
-    await expect(page.locator('.east-shelf').first()).toBeInViewport();
-    await expect
-      .poll(() => page.locator('.room-panorama').evaluate((node) => node.scrollLeft))
-      .toBeGreaterThan(150);
-    const before = await page.locator('.room-panorama').evaluate((node) => node.scrollLeft);
-    await page.mouse.move(100, 430);
+    await locateVolume(page, ROOM_CAPACITY - 1);
+    const panorama = page.locator('.room-panorama');
+    await expect.poll(() => panorama.evaluate((node) => node.scrollLeft)).toBeGreaterThan(150);
+    const before = await panorama.evaluate((node) => node.scrollLeft);
+    await page.mouse.move(100, 450);
     await page.mouse.down();
-    await page.mouse.move(400, 430, { steps: 10 });
+    await page.mouse.move(500, 450, { steps: 10 });
     await page.mouse.up();
-    const after = await page.locator('.room-panorama').evaluate((node) => node.scrollLeft);
-    expect(Math.abs(before - after)).toBeGreaterThan(50);
+    expect(before - (await panorama.evaluate((node) => node.scrollLeft))).toBeGreaterThan(100);
+    await expect(page.locator('.window-snow')).toBeInViewport();
   }
-  await page.getByRole('button', { name: 'Look at tea corner' }).click();
-  await page.getByRole('button', { name: 'Enjoy a cup of tea' }).click();
-  await expect(page.getByRole('status')).toContainText('Earl Grey. Still warm.');
-  await page.getByRole('button', { name: 'Look at snowfall' }).click();
-  await expect(page.locator('.window-snow')).toBeInViewport();
 });
 
 test('reduced motion is respected and reader theme persists', async ({ page }) => {
@@ -249,7 +249,7 @@ test('all routes and dialogs fit a narrow phone', async ({ page }) => {
   expect(await dialog.evaluate((node) => node.scrollWidth > node.clientWidth)).toBe(false);
   await page.getByRole('button', { name: 'Close catalogue' }).click();
   await page.setViewportSize({ width: 844, height: 390 });
-  await page.getByRole('button', { name: 'Look at west shelves' }).click();
+  await locateVolume(page);
   await page.locator('.room-book').first().click();
   await expect(page.getByRole('link', { name: 'Open this book' })).toBeVisible();
 });
@@ -271,19 +271,9 @@ for (const [width, height] of [
     test.skip(!isMobile, 'Touch flow is covered in the iOS and Android projects.');
     await page.setViewportSize({ width, height });
     await page.goto('/');
-    for (const name of [
-      'snowfall',
-      'west shelves',
-      'fireside',
-      'east shelves',
-      'tea corner',
-    ]) {
-      const control = page.getByRole('button', { name: `Look at ${name}` });
-      // A visible center alone misses controls clipped by the short landscape dock.
-      await expect(control).toBeInViewport({ ratio: 1 });
-      await control.tap();
-      await expect(control).toHaveAttribute('aria-pressed', 'true');
-    }
+    expect((await page.locator('.room-hud').boundingBox())!.height).toBe(48);
+    expect((await page.locator('.room-dock').boundingBox())!.height).toBe(52);
+    await expect(page.locator('.room-places')).toHaveCount(0);
     await expect(page.getByRole('button', { name: 'Next bookcase' })).toBeInViewport({
       ratio: 1,
     });
@@ -338,10 +328,7 @@ test('native touch swipes pan the room and scroll the article', async ({
     await touch.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
   }
   await page.goto('/');
-  await expect(page.getByRole('button', { name: 'Look at fireside' })).toHaveAttribute(
-    'aria-pressed',
-    'true',
-  );
+  await expect(page.locator('.fire')).toBeInViewport();
   const panorama = page.locator('.room-panorama');
   const before = await panorama.evaluate((node) => node.scrollLeft);
   await swipe({ x: 330, y: 350 }, { x: 80, y: 350 });
@@ -393,7 +380,7 @@ test('room, catalogue, preview and both reader themes pass accessibility checks'
   }
   await page.goto('/');
   await check();
-  await page.getByRole('button', { name: 'Look at west shelves' }).click();
+  await locateVolume(page);
   await page.locator('.room-book').first().click();
   await expect(page.locator('.room-book-dialog')).toHaveCSS('opacity', '1');
   await check();
@@ -410,7 +397,7 @@ test('room, catalogue, preview and both reader themes pass accessibility checks'
 
 test('back navigation restores the same part of the room', async ({ page }) => {
   await page.goto('/');
-  await page.getByRole('button', { name: 'Look at east shelves' }).click();
+  await locateVolume(page, ROOM_CAPACITY - 1);
   const last = page.locator('.room-book').last();
   await last.click();
   await page.getByRole('link', { name: 'Open this book' }).click();
@@ -471,7 +458,7 @@ test('bookcase paging reaches every post without enlarging the room or its lette
   expect(links).toHaveLength(published.length);
   expect(new Set(links).size).toBe(published.length);
   if (await previous.isEnabled()) await previous.click();
-  await page.getByRole('button', { name: 'Look at west shelves' }).click();
+  await locateVolume(page);
   expect(await page.locator('.room-world').evaluate((node) => node.clientWidth)).toBe(
     worldWidth,
   );
@@ -506,4 +493,58 @@ test('a direct link to an older book restores the right bookcase after reading',
   await page.reload();
   await expect(book).toBeFocused();
   await expect(book).toBeInViewport();
+});
+
+test('long titles stay complete in the catalogue, shelf label, preview and collections', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 320, height: 568 });
+  const longest = [...published].sort((a, b) => b.data.title.length - a.data.title.length)[0];
+  await page.goto('/');
+  await page.getByRole('button', { name: 'Find a book' }).click();
+  await page.getByRole('searchbox').fill(longest.data.title);
+  const entry = page.locator('.catalogue-entries li').first();
+  await expect(entry.getByRole('link')).toContainText(longest.data.title);
+  await entry.getByRole('button').click();
+  const label = page.locator('.book-nameplate strong');
+  await expect(label).toHaveText(longest.data.title);
+  await expect(label).toBeInViewport({ ratio: 1 });
+  await page.locator('.room-book:focus').press('Enter');
+  const title = page.locator('.room-book-dialog h2');
+  await expect(title).toHaveText(longest.data.title);
+  await expect(title).toBeInViewport({ ratio: 1 });
+  expect(
+    await page
+      .locator('.room-book-dialog')
+      .evaluate((node) => node.scrollWidth > node.clientWidth),
+  ).toBe(false);
+  await page.getByRole('link', { name: 'Open this book' }).click();
+  await expect(page.locator('.reading-page h1')).toHaveText(longest.data.title);
+  for (const route of ['/tech', '/misc']) {
+    await page.goto(route);
+    const clipped = await page.locator('.book-title').evaluateAll((titles) =>
+      titles
+        .filter((title) => {
+          const range = document.createRange();
+          range.selectNodeContents(title);
+          const text = range.getBoundingClientRect();
+          const book = title.closest('a')!.getBoundingClientRect();
+          return (
+            text.left < book.left ||
+            text.right > book.right ||
+            text.top < book.top ||
+            text.bottom > book.bottom
+          );
+        })
+        .map((title) => title.textContent),
+    );
+    expect(clipped).toEqual([]);
+    await page.getByRole('button', { name: 'Show reading list' }).click();
+    await expect(page.locator('.bookcase-list')).toBeVisible();
+    expect(
+      await page
+        .locator('.reader-surface')
+        .evaluate((node) => node.scrollWidth > node.clientWidth),
+    ).toBe(false);
+  }
 });

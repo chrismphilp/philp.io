@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import PixelIcon from './PixelIcon';
 import type { CSSProperties, FocusEvent, MouseEvent } from 'react';
 import type { PostMeta } from '../../utils/mdxUtils';
 import { bookAppearance, bookSlug } from '../../utils/library';
@@ -54,15 +53,13 @@ export default function RoomBooks({
                 style={
                   {
                     '--binding': appearance.binding,
+                    '--binding-position': appearance.texturePosition,
                     '--spine-height': `${appearance.height}%`,
                   } as CSSProperties
                 }
               >
                 <span className="spine-number" aria-hidden="true">
                   {number}
-                </span>
-                <span className="spine-stamp" aria-hidden="true">
-                  <PixelIcon name="star" />
                 </span>
               </Link>
             );

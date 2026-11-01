@@ -1,7 +1,7 @@
 import type { PostMeta } from './mdxUtils';
 
 export const ROOM_CAPACITY = 24;
-export const bindings = ['#72403f', '#3f6655', '#87652f', '#3f596d', '#665074', '#885432'];
+export const bindings = ['#58312c', '#344b3a', '#694c29', '#304451', '#503344', '#66402a'];
 export const bookSlug = (post: Pick<PostMeta, 'filePath'>) =>
   post.filePath.replace(/\.mdx?$/, '');
 
@@ -32,5 +32,10 @@ export function bookAppearance(post: Pick<PostMeta, 'filePath'>) {
   let hash = 2166136261;
   for (const character of bookSlug(post))
     hash = Math.imul(hash ^ character.charCodeAt(0), 16777619) >>> 0;
-  return { binding: bindings[hash % bindings.length], height: 78 + (hash % 19) };
+  const bindingIndex = hash % bindings.length;
+  return {
+    binding: bindings[bindingIndex],
+    texturePosition: `${bindingIndex * 20}%`,
+    height: 78 + (hash % 19),
+  };
 }
