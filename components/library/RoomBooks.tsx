@@ -5,8 +5,34 @@ import type { CSSProperties, FocusEvent, MouseEvent } from 'react';
 import type { PostMeta } from '../../utils/mdxUtils';
 import { bookAppearance, bookSlug } from '../../utils/library';
 
-// Twelve bays in the restored room, with two readable, tappable spines per bay.
-const shelfBottoms = [13.1, 21.8, 30.5, 39.2, 47.9, 56.5];
+// Shelf front edges in the 4:3 diorama. Books inherit each wall's perspective.
+// Nine bays hold 24 volumes; further posts get another bookcase, never smaller targets.
+const bays = [
+  ...[19.3, 28.5, 37.7].map((y, row) => ({
+    x: 32.7,
+    y,
+    width: 6.1,
+    angle: -24,
+    start: row * 2,
+    count: 2,
+  })),
+  ...[16.5, 25.8, 35].map((y, row) => ({
+    x: 39.8,
+    y,
+    width: 7.7,
+    angle: 24,
+    start: 6 + row * 2,
+    count: 2,
+  })),
+  ...[31.5, 41.7, 51.9].map((y, row) => ({
+    x: 76,
+    y,
+    width: 14.5,
+    angle: 24,
+    start: 12 + row * 4,
+    count: 4,
+  })),
+];
 
 export default function RoomBooks({
   posts,
@@ -23,15 +49,22 @@ export default function RoomBooks({
 }) {
   return (
     <nav className="room-books" aria-label="Books on the library shelves">
-      {Array.from({ length: 12 }, (_, shelf) => (
+      {bays.map((bay, shelf) => (
         <div
           key={shelf}
           className={`in-room-shelf ${shelf < 6 ? 'west-shelf' : 'east-shelf'}`}
-          style={{ '--shelf-bottom': `${100 - shelfBottoms[shelf % 6]}%` } as CSSProperties}
+          style={
+            {
+              '--shelf-x': `${bay.x}%`,
+              '--shelf-y': `${bay.y}%`,
+              '--shelf-width': `${bay.width}%`,
+              '--shelf-angle': `${bay.angle}deg`,
+            } as CSSProperties
+          }
         >
-          {posts.slice(shelf * 2, (shelf + 1) * 2).map((post, slot) => {
+          {posts.slice(bay.start, bay.start + bay.count).map((post, slot) => {
             const appearance = bookAppearance(post);
-            const number = String(offset + shelf * 2 + slot + 1).padStart(2, '0');
+            const number = String(offset + bay.start + slot + 1).padStart(2, '0');
             return (
               <Link
                 key={post.filePath}

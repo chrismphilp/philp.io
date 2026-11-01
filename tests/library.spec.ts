@@ -20,6 +20,7 @@ async function locateVolume(page: Page, index = 0) {
 
 test('the entire website is the room, with real article links on its shelves', async ({
   page,
+  isMobile,
 }) => {
   const errors: string[] = [];
   const media: string[] = [];
@@ -38,6 +39,14 @@ test('the entire website is the room, with real article links on its shelves', a
   await expect(page.locator('.room-background')).toHaveAttribute('alt', /snowy/i);
   await expect(page.locator('.window-snow i')).toHaveCount(18);
   await expect(page.locator('.fire-embers i')).toHaveCount(10);
+  // The floating floor and both walls fit on desktop; phones retain tappable books.
+  if (!isMobile) await expect(page.locator('.room-world')).toBeInViewport({ ratio: 1 });
+  const smallestBook = await page
+    .locator('.room-book')
+    .evaluateAll((books) =>
+      Math.min(...books.map((book) => book.getBoundingClientRect().width)),
+    );
+  expect(smallestBook).toBeGreaterThanOrEqual(28);
   expect(await page.evaluate(() => document.documentElement.scrollHeight)).toBeLessThanOrEqual(
     page.viewportSize()!.height,
   );

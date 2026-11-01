@@ -92,10 +92,10 @@ input {
 .hearth-glow {
   pointer-events: none;
   position: absolute;
-  left: 36%;
-  top: 42%;
-  width: 36%;
-  height: 48%;
+  left: 44%;
+  top: 43%;
+  width: 32%;
+  height: 30%;
   background: radial-gradient(ellipse, #ff991d38, #ff7b130e 45%, transparent 70%);
   mix-blend-mode: screen;
   animation: fire-glow 3s steps(5) infinite;
@@ -103,21 +103,21 @@ input {
 .fire {
   pointer-events: none;
   position: absolute;
-  left: 46.3%;
-  top: 47.2%;
-  width: 14.5%;
-  height: 25.2%;
+  left: 54.9%;
+  top: 43.5%;
+  width: 11.3%;
+  height: 15.1%;
   background-position: 0 0;
   image-rendering: pixelated;
-  animation: fire-flicker 1.05s steps(1) infinite;
+  animation: fire-flicker 0.88s steps(1) infinite;
 }
-/* The wood stays grounded while the six flame silhouettes flicker above it. */
+/* The wood stays grounded while the four flame silhouettes flicker above it. */
 .fire::before,
 .fire::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: url('/library/fire-sprites.webp') 0 0 / 600% 100% no-repeat;
+  background: url('/library/fire-sprites.webp') 0 0 / 400% 100% no-repeat;
 }
 .fire::before {
   background-position: inherit;
@@ -128,10 +128,10 @@ input {
 }
 .fire-embers {
   position: absolute;
-  left: 47%;
-  top: 45%;
-  width: 13%;
-  height: 25%;
+  left: 55.5%;
+  top: 39%;
+  width: 10%;
+  height: 18%;
   pointer-events: none;
   overflow: hidden;
 }
@@ -177,10 +177,10 @@ input {
 }
 .tea-steam {
   position: absolute;
-  left: 94.4%;
-  top: 55.5%;
+  left: 65.8%;
+  top: 66.4%;
   width: 2.5%;
-  height: 8%;
+  height: 7%;
   pointer-events: none;
 }
 .tea-steam i {
@@ -203,10 +203,10 @@ input {
 }
 .library-dog {
   position: absolute;
-  left: 35%;
-  top: 68%;
+  left: 33.5%;
+  top: 55%;
   width: 18%;
-  aspect-ratio: 160 / 112;
+  aspect-ratio: 100 / 68;
   border: 0;
   background: transparent;
   padding: 0;
@@ -821,19 +821,13 @@ html.dark .reading-page .text-secondary {
   100% {
     background-position: 0 0;
   }
-  16% {
-    background-position: 20% 0;
+  25% {
+    background-position: 33.333333% 0;
   }
-  34% {
-    background-position: 40% 0;
+  50% {
+    background-position: 66.666667% 0;
   }
-  49% {
-    background-position: 60% 0;
-  }
-  68% {
-    background-position: 80% 0;
-  }
-  84% {
+  75% {
     background-position: 100% 0;
   }
 }

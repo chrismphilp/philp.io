@@ -19,9 +19,9 @@ import RoomCatalogue from './RoomCatalogue';
 import { FireplaceControls } from './FireplaceSound';
 
 const destinations = {
-  west: { x: 0.313, y: 0.31 },
-  hearth: { x: 0.48, y: 0.73 },
-  east: { x: 0.761, y: 0.31 },
+  west: { x: 0.39, y: 0.27 },
+  hearth: { x: 0.52, y: 0.6 },
+  east: { x: 0.83, y: 0.44 },
 };
 
 export default function ReadingRoom({
@@ -281,9 +281,9 @@ export default function ReadingRoom({
             <img
               className="room-background"
               src="/library/reading-room.webp"
-              width="896"
-              height="504"
-              alt="A snowy evening in a richly detailed pixel-art British mansion library, with walnut shelves, a golden hearth and a patterned rug. A reader sits behind a red armchair, only his arms and legs visible, feet resting on a pouffe, with tea beside him."
+              width="480"
+              height="360"
+              alt="An isometric pixel diorama of a British mansion library on a snowy evening: walnut shelves, a golden hearth and a patterned rug on a floating wooden floor. A reader rests in a red armchair, only his arms and legs visible, feet on a pouffe, with tea beside him."
               fetchPriority="high"
               decoding="async"
               draggable={false}

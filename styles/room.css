@@ -119,7 +119,7 @@ body:has(.library-app) {
   scrollbar-width: none;
   overscroll-behavior: contain;
   cursor: grab;
-  background: #18110b;
+  background: radial-gradient(ellipse at 50% 65%, #352218, #19130f 72%);
 }
 .room-panorama::-webkit-scrollbar {
   display: none;
@@ -130,8 +130,12 @@ body:has(.library-app) {
 }
 .room-world {
   position: relative;
-  width: max(100vw, calc((100svh - var(--hud-height) - var(--dock-height)) * 16 / 9), 960px);
-  aspect-ratio: 16 / 9;
+  width: max(
+    1000px,
+    min(100vw, calc((100svh - var(--hud-height) - var(--dock-height)) * 4 / 3))
+  );
+  aspect-ratio: 4 / 3;
+  margin-inline: auto;
   isolation: isolate;
   container-type: inline-size;
 }
@@ -158,13 +162,13 @@ body:has(.library-app) {
 }
 .window-snow {
   position: absolute;
-  top: 16%;
-  left: 1.4%;
-  width: 15%;
-  height: 37.5%;
+  top: 19.5%;
+  left: 12.2%;
+  width: 9.4%;
+  height: 31%;
   overflow: hidden;
   pointer-events: none;
-  clip-path: polygon(1% 0, 100% 7%, 100% 100%, 0 100%);
+  clip-path: polygon(0 17%, 100% 0, 100% 83%, 0 100%);
 }
 .window-snow i {
   position: absolute;
@@ -191,20 +195,16 @@ body:has(.library-app) {
 }
 .in-room-shelf {
   position: absolute;
-  bottom: var(--shelf-bottom);
-  height: 7.9%;
+  top: var(--shelf-y);
+  left: var(--shelf-x);
+  width: var(--shelf-width);
+  height: 8%;
+  transform: translateY(-100%) skewY(var(--shelf-angle));
+  transform-origin: bottom left;
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  gap: 0.26cqw;
-}
-.west-shelf {
-  left: 26.7%;
-  width: 9.1%;
-}
-.east-shelf {
-  left: 71.3%;
-  width: 9.6%;
+  gap: 0.2cqw;
 }
 .in-room-shelf:has(.room-book:hover),
 .in-room-shelf:focus-within {
@@ -213,7 +213,7 @@ body:has(.library-app) {
 .room-book {
   position: relative;
   display: block;
-  width: 2.1cqw;
+  width: 2.8cqw;
   min-width: 28px;
   height: var(--spine-height);
   flex-shrink: 0;
@@ -239,12 +239,11 @@ body:has(.library-app) {
 }
 .spine-number {
   position: absolute;
-  inset: 29% 9% auto;
+  inset: 33% 14% auto;
   min-height: 21%;
   display: grid;
   place-items: center;
-  background: #20170bd9;
-  border-block: 1px solid #b68d5444;
+  background: #20170b99;
   font:
     clamp(11px, 0.82cqw, 15px)/1 var(--font-pixel),
     monospace;
@@ -319,22 +318,22 @@ body:has(.library-app) {
   visibility: visible;
 }
 .tea-hotspot {
-  top: 59%;
-  left: 91%;
-  width: 8%;
-  height: 12%;
+  top: 71%;
+  left: 63%;
+  width: 10%;
+  height: 13%;
 }
 .painting-hotspot {
-  top: 3%;
-  left: 44%;
-  width: 20%;
-  height: 24%;
+  top: 14%;
+  left: 56%;
+  width: 14%;
+  height: 19%;
 }
 .fire-hotspot {
-  top: 49%;
-  left: 47%;
-  width: 14%;
-  height: 22%;
+  top: 42%;
+  left: 54%;
+  width: 13%;
+  height: 19%;
 }
 .room-dock {
   position: absolute;
