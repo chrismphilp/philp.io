@@ -306,7 +306,7 @@ export default function ReadingRoom({
               src="/library/reading-room.webp"
               width="1672"
               height="941"
-              alt="A snowy evening in a pixel-art British mansion library, with walnut shelves, a stone fireplace, and a man resting in an armchair with his feet on a pouffe and tea beside him."
+              alt="A snowy evening in a pixel-art British mansion library, with walnut shelves and a stone fireplace. A reader reclines behind an armchair, only his arms and legs visible, with his feet resting on a pouffe and tea beside him."
               fetchPriority="high"
               decoding="async"
               draggable={false}

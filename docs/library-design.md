@@ -24,7 +24,7 @@ Opening an article renders the server-generated MDX page in a reading surface ov
 
 The room, dog and flames were generated for this project using OpenAI’s built-in image generation tool. The room edit preserves the original scene while replacing rain with a snowy winter landscape and clearing the twelve functional shelf bays. The production assets and the exact edit prompt are documented in [public/library/ASSETS.md](../public/library/ASSETS.md).
 
-The desktop background is a 1344px-wide AVIF with a WebP fallback; phones receive a 1008px-wide version because they pan across the same large scene. Dog and fire sprite strips are shared across sizes. Total scene imagery is approximately **152 KiB desktop / 108 KiB mobile** in AVIF-capable browsers (279 / 185 KiB with the WebP fallback). Pixel edges are preserved with nearest-neighbour rendering. Spectral and VT323 are hosted locally with their SIL Open Font Licenses in `app/fonts/`.
+The desktop background is a 1344px-wide AVIF with a WebP fallback; phones receive a 1008px-wide version because they pan across the same large scene. Dog and fire sprite strips are shared across sizes. Total scene imagery is approximately **137 KiB desktop / 109 KiB mobile** in AVIF-capable browsers (241 / 178 KiB with the WebP fallback). Pixel edges are preserved with nearest-neighbour rendering. Spectral and VT323 are hosted locally with their SIL Open Font Licenses in `app/fonts/`.
 
 Warm walnut, parchment, amber and brass form the palette. Article readers can choose a dark or light paper theme. Book previews use the same cloth-binding colours as the selected spine.
 
