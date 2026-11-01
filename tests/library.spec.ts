@@ -395,7 +395,18 @@ test('back navigation restores the same part of the room', async ({ page }) => {
 });
 
 test('audio failure leaves the room usable and offers a retry', async ({ page }) => {
-  await page.context().route('**/library/fireplace.m4a', (route) => route.abort());
+  // Linux WebKit's media backend can retry outside Playwright's request routing.
+  // Use a real missing resource so every backend exercises an actual load failure.
+  await page.addInitScript(() => {
+    const OriginalAudio = window.Audio;
+    window.Audio = class extends OriginalAudio {
+      constructor(src?: string) {
+        super(
+          src === '/library/fireplace.m4a' ? '/library/unavailable-fireplace-test.m4a' : src,
+        );
+      }
+    };
+  });
   await page.goto('/');
   await page.getByRole('button', { name: 'Sound off: play fireplace sounds' }).click();
   await expect(page.locator('.fireplace-error')).toContainText(
