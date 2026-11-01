@@ -6,8 +6,8 @@ import type { CSSProperties, FocusEvent, MouseEvent } from 'react';
 import type { PostMeta } from '../../utils/mdxUtils';
 import { bookAppearance, bookSlug } from '../../utils/library';
 
-// Two bookcases, each with three bays and four book slots.
-const shelfBottoms = [16.8, 26.2, 35.3];
+// Twelve bays in the restored room, with two readable, tappable spines per bay.
+const shelfBottoms = [13.1, 21.8, 30.5, 39.2, 47.9, 56.5];
 
 export default function RoomBooks({
   posts,
@@ -24,15 +24,15 @@ export default function RoomBooks({
 }) {
   return (
     <nav className="room-books" aria-label="Books on the library shelves">
-      {Array.from({ length: 6 }, (_, shelf) => (
+      {Array.from({ length: 12 }, (_, shelf) => (
         <div
           key={shelf}
-          className={`in-room-shelf ${shelf < 3 ? 'west-shelf' : 'east-shelf'}`}
-          style={{ '--shelf-bottom': `${100 - shelfBottoms[shelf % 3]}%` } as CSSProperties}
+          className={`in-room-shelf ${shelf < 6 ? 'west-shelf' : 'east-shelf'}`}
+          style={{ '--shelf-bottom': `${100 - shelfBottoms[shelf % 6]}%` } as CSSProperties}
         >
-          {posts.slice(shelf * 4, (shelf + 1) * 4).map((post, slot) => {
+          {posts.slice(shelf * 2, (shelf + 1) * 2).map((post, slot) => {
             const appearance = bookAppearance(post);
-            const number = String(offset + shelf * 4 + slot + 1).padStart(2, '0');
+            const number = String(offset + shelf * 2 + slot + 1).padStart(2, '0');
             return (
               <Link
                 key={post.filePath}

@@ -20,11 +20,11 @@ import { FireplaceControls } from './FireplaceSound';
 
 type Place = 'window' | 'west' | 'hearth' | 'east' | 'tea';
 const places: { key: Place; name: string; x: number; y: number }[] = [
-  { key: 'window', name: 'Snowfall', x: 0.1, y: 0.22 },
-  { key: 'west', name: 'West shelves', x: 0.305, y: 0.22 },
-  { key: 'hearth', name: 'Fireside', x: 0.52, y: 0.56 },
-  { key: 'east', name: 'East shelves', x: 0.775, y: 0.22 },
-  { key: 'tea', name: 'Tea corner', x: 0.9, y: 0.69 },
+  { key: 'window', name: 'Snowfall', x: 0.1, y: 0.4 },
+  { key: 'west', name: 'West shelves', x: 0.313, y: 0.31 },
+  { key: 'hearth', name: 'Fireside', x: 0.48, y: 0.73 },
+  { key: 'east', name: 'East shelves', x: 0.761, y: 0.31 },
+  { key: 'tea', name: 'Tea corner', x: 0.9, y: 0.6 },
 ];
 
 export default function ReadingRoom({
@@ -281,18 +281,26 @@ export default function ReadingRoom({
         }}
       >
         <div ref={world} className="room-world">
-          {/* Native-resolution pixel art must bypass resampling by image optimizers. */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            className="room-background"
-            src="/library/room-16bit.webp"
-            width="384"
-            height="216"
-            alt="A snowy evening in a 16-bit British mansion library, with walnut shelves, a golden hearth and a patterned rug. A reader sits behind a red armchair, only his arms and legs visible, feet resting on a pouffe, with tea beside him."
-            fetchPriority="high"
-            decoding="async"
-            draggable={false}
-          />
+          <picture>
+            <source
+              media="(max-width: 600px)"
+              type="image/avif"
+              srcSet="/library/reading-room-mobile.avif"
+            />
+            <source type="image/avif" srcSet="/library/reading-room.avif" />
+            <source media="(max-width: 600px)" srcSet="/library/reading-room-mobile.webp" />
+            {/* Precompressed artwork has an AVIF source and WebP fallback. */}
+            <img
+              className="room-background"
+              src="/library/reading-room.webp"
+              width="1344"
+              height="756"
+              alt="A snowy evening in a richly detailed pixel-art British mansion library, with walnut shelves, a golden hearth and a patterned rug. A reader sits behind a red armchair, only his arms and legs visible, feet resting on a pouffe, with tea beside him."
+              fetchPriority="high"
+              decoding="async"
+              draggable={false}
+            />
+          </picture>
           <div className="hearth-glow" aria-hidden="true" />
           <div className="fire" aria-hidden="true" />
           <div className="fire-embers" aria-hidden="true">

@@ -29,9 +29,9 @@ body:has(.library-app) {
   justify-content: space-between;
   gap: 24px;
   padding: 0 28px;
-  border-bottom: 4px solid #ae7947;
-  background: #2c211b;
-  box-shadow: inset 0 -3px #513527;
+  border-bottom: 1px solid #795a3466;
+  background: linear-gradient(#292016, #1d1710);
+  box-shadow: 0 3px 14px #0005;
 }
 .room-wordmark {
   display: flex;
@@ -164,10 +164,10 @@ body:has(.library-app) {
 }
 .window-snow {
   position: absolute;
-  top: 2.5%;
-  left: 0.5%;
-  width: 17.5%;
-  height: 27%;
+  top: 16%;
+  left: 1.4%;
+  width: 15%;
+  height: 37.5%;
   overflow: hidden;
   pointer-events: none;
   clip-path: polygon(1% 0, 100% 7%, 100% 100%, 0 100%);
@@ -198,19 +198,19 @@ body:has(.library-app) {
 .in-room-shelf {
   position: absolute;
   bottom: var(--shelf-bottom);
-  height: 8.3%;
+  height: 7.9%;
   display: flex;
   align-items: flex-end;
   justify-content: center;
   gap: 0.26cqw;
 }
 .west-shelf {
-  left: 23.6%;
-  width: 13.9%;
+  left: 26.7%;
+  width: 9.1%;
 }
 .east-shelf {
-  left: 69.4%;
-  width: 16.5%;
+  left: 71.3%;
+  width: 9.6%;
 }
 .in-room-shelf:has(.room-book:hover),
 .in-room-shelf:focus-within {
@@ -222,17 +222,20 @@ body:has(.library-app) {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  width: 3cqw;
+  width: 2.2cqw;
   min-width: 28px;
   height: var(--spine-height);
   flex-shrink: 0;
   pointer-events: auto;
-  background: var(--binding);
-  border: 0.26cqw solid #332520;
-  border-top-color: #bfa178;
+  background:
+    linear-gradient(90deg, #0007, transparent 18%, #ffffff13 24%, transparent 36%, #0004 95%),
+    var(--binding);
+  border: 1px solid #ba8a4977;
+  border-top: 2px solid #c3985988;
   box-shadow:
-    inset 0.26cqw 0 #fff2,
-    inset -0.26cqw 0 #0004;
+    inset 2px 0 #eac18c20,
+    inset -2px 0 #0004,
+    2px 1px 3px #0008;
   padding: 0.52cqw 0;
   color: #f9d894 !important;
   text-shadow: 1px 1px #332520;
@@ -245,7 +248,7 @@ body:has(.library-app) {
   content: '';
   position: absolute;
   inset: 12% 0;
-  border-block: 0.26cqw solid #d5a562;
+  border-block: 1px solid #d5a562aa;
   pointer-events: none;
 }
 .room-book:hover,
@@ -271,12 +274,10 @@ body:has(.library-app) {
   bottom: 116px;
   width: min(440px, calc(100% - 32px));
   transform: translateX(-50%);
-  background: #f4dfb6;
-  border: 4px solid #573728;
-  box-shadow:
-    inset 0 0 0 2px #c39862,
-    4px 4px #201611;
-  color: #3d2a20;
+  background: #24190ff5;
+  border: 1px solid #ab8050;
+  box-shadow: 4px 4px #100b09a8;
+  color: #f3e3c7;
   padding: 14px 20px;
   text-align: center;
   pointer-events: none;
@@ -284,8 +285,9 @@ body:has(.library-app) {
 .book-nameplate strong {
   display: block;
   font:
-    24px/1.1 var(--font-pixel),
-    monospace;
+    21px/1.3 var(--font-spectral),
+    Georgia,
+    serif;
   margin: 6px 0;
 }
 .book-nameplate span,
@@ -294,7 +296,7 @@ body:has(.library-app) {
   font:
     16px/1.2 var(--font-pixel),
     monospace;
-  color: #6e4930;
+  color: #dfbe8a;
 }
 .room-noscript {
   position: absolute;
@@ -339,16 +341,16 @@ body:has(.library-app) {
   height: 12%;
 }
 .painting-hotspot {
-  top: 1%;
-  left: 45%;
-  width: 16%;
-  height: 17%;
+  top: 3%;
+  left: 44%;
+  width: 20%;
+  height: 24%;
 }
 .fire-hotspot {
-  top: 30%;
-  left: 45%;
+  top: 49%;
+  left: 47%;
   width: 14%;
-  height: 17%;
+  height: 22%;
 }
 .room-dock {
   position: absolute;
@@ -362,9 +364,9 @@ body:has(.library-app) {
   align-items: center;
   justify-content: space-between;
   gap: 22px;
-  border-top: 4px solid #ae7947;
-  background: #2c211b;
-  box-shadow: inset 0 3px #513527;
+  border-top: 1px solid #98714666;
+  background: linear-gradient(#241b12, #1a140e);
+  box-shadow: 0 -3px 16px #0004;
 }
 .room-pagination {
   display: flex;
@@ -380,8 +382,8 @@ body:has(.library-app) {
   place-items: center;
   width: 44px;
   height: 44px;
-  border: 2px solid #a17a50;
-  background: #483022;
+  border: 1px solid #a17a50;
+  background: #392817;
   color: #f4d49c;
   box-shadow: inset -2px -2px #251a13;
 }
@@ -450,8 +452,8 @@ body:has(.library-app) {
   justify-content: center;
   gap: 13px;
   padding: 12px 19px;
-  border: 2px solid #bc925c;
-  background: #483022;
+  border: 1px solid #ac824b;
+  background: #392817;
   color: #f0d3a3;
   box-shadow: 3px 3px #0e0a07;
   text-align: left;
@@ -508,7 +510,7 @@ body:has(.library-app) {
   padding: 0;
   background: #eee1c5;
   color: #382b1e;
-  border: 4px solid #735137;
+  border: 1px solid #a58654;
   box-shadow:
     0 18px 90px #0009,
     5px 5px #26190e;
@@ -533,8 +535,9 @@ body:has(.library-app) {
 .catalogue-paper h2 {
   color: #39291c;
   font:
-    38px/1.05 var(--font-pixel),
-    monospace;
+    300 34px/1.15 var(--font-spectral),
+    Georgia,
+    serif;
   letter-spacing: -0.8px;
   margin-bottom: 10px;
 }
@@ -1072,15 +1075,16 @@ body:has(.library-app) {
 }
 
 .room-book-dialog {
-  background: #f4dfb6;
+  background: #eee1c5;
   color: #3d2a20;
-  border: 4px solid #735137;
+  border: 1px solid #a58654;
   box-shadow: 6px 6px #201611;
 }
 .room-book-dialog .book-preview-copy h2 {
   font:
-    32px/1.1 var(--font-pixel),
-    monospace;
+    30px/1.25 var(--font-spectral),
+    Georgia,
+    serif;
 }
 .room-book-dialog .book-preview-copy p,
 .room-book-dialog .keep-browsing {
@@ -1103,8 +1107,9 @@ body:has(.library-app) {
 }
 .room-book-dialog .cover-title {
   font:
-    26px/1.1 var(--font-pixel),
-    monospace;
+    26px/1.25 var(--font-spectral),
+    Georgia,
+    serif;
 }
 @media (max-width: 480px) {
   .room-book-dialog .book-cover {

@@ -92,10 +92,10 @@ input {
 .hearth-glow {
   pointer-events: none;
   position: absolute;
-  left: 38%;
-  top: 31%;
-  width: 30%;
-  height: 38%;
+  left: 36%;
+  top: 42%;
+  width: 36%;
+  height: 48%;
   background: radial-gradient(ellipse, #ff991d38, #ff7b130e 45%, transparent 70%);
   mix-blend-mode: screen;
   animation: fire-glow 3s steps(5) infinite;
@@ -103,20 +103,20 @@ input {
 .fire {
   pointer-events: none;
   position: absolute;
-  left: 45.5%;
-  top: 24.2%;
-  width: 13%;
-  aspect-ratio: 1;
-  background: url('/library/fire-16bit.webp') 0 0 / 200% 200% no-repeat;
+  left: 48.1%;
+  top: 50.2%;
+  width: 11.2%;
+  height: 18.7%;
+  background: url('/library/fire-sprites.webp') 0 0 / 400% 100% no-repeat;
   image-rendering: pixelated;
   animation: fire-flicker 1.8s steps(1) infinite;
 }
 .fire-embers {
   position: absolute;
-  left: 47%;
-  top: 30%;
-  width: 10%;
-  height: 14%;
+  left: 49%;
+  top: 48%;
+  width: 9%;
+  height: 19%;
   pointer-events: none;
   overflow: hidden;
 }
@@ -153,8 +153,8 @@ input {
 }
 .tea-steam {
   position: absolute;
-  left: 94.8%;
-  top: 55%;
+  left: 94.4%;
+  top: 55.5%;
   width: 2.5%;
   height: 8%;
   pointer-events: none;
@@ -179,10 +179,10 @@ input {
 }
 .library-dog {
   position: absolute;
-  left: 51%;
-  top: 55%;
-  width: 12.5%;
-  aspect-ratio: 3 / 2;
+  left: 35%;
+  top: 68%;
+  width: 18%;
+  aspect-ratio: 160 / 112;
   border: 0;
   background: transparent;
   padding: 0;
@@ -190,7 +190,7 @@ input {
 .dog-sprite {
   position: absolute;
   inset: 0;
-  background: url('/library/bernese-16bit.webp') 0 0 / 200% 100% no-repeat;
+  background: url('/library/bernese-fireside.webp') 0 0 / 200% 100% no-repeat;
   image-rendering: pixelated;
   animation:
     dog-breathe 4.6s steps(4) infinite,
@@ -203,8 +203,8 @@ input {
 }
 .dog-sleep {
   position: absolute;
-  top: 2%;
-  left: 3%;
+  top: 16%;
+  left: 73%;
   font:
     clamp(10px, 1.4vw, 20px) var(--font-pixel),
     monospace;
@@ -802,13 +802,13 @@ html.dark .reading-page .text-secondary {
     background-position: 0 0;
   }
   25% {
-    background-position: 100% 0;
+    background-position: 33.333% 0;
   }
   50% {
-    background-position: 100% 100%;
+    background-position: 66.666% 0;
   }
   75% {
-    background-position: 0 100%;
+    background-position: 100% 0;
   }
 }
 @keyframes fire-glow {
