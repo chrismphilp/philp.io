@@ -47,6 +47,21 @@ test('the entire website is the room, with real article links on its shelves', a
       Math.min(...books.map((book) => book.getBoundingClientRect().width)),
     );
   expect(smallestBook).toBeGreaterThanOrEqual(28);
+  if (!isMobile) {
+    for (const [width, height] of [
+      [1366, 768],
+      [1280, 720],
+    ]) {
+      await page.setViewportSize({ width, height });
+      await expect(page.locator('.room-world')).toBeInViewport({ ratio: 1 });
+      const minimumTarget = await page
+        .locator('.room-book')
+        .evaluateAll((books) =>
+          Math.min(...books.map((book) => book.getBoundingClientRect().width)),
+        );
+      expect(minimumTarget).toBeGreaterThanOrEqual(24);
+    }
+  }
   expect(await page.evaluate(() => document.documentElement.scrollHeight)).toBeLessThanOrEqual(
     page.viewportSize()!.height,
   );

@@ -237,6 +237,18 @@ body:has(.library-app) {
   outline: 1px solid #efd399;
   outline-offset: 2px;
 }
+/* Fit the complete diorama on shorter laptops without shrinking touch targets. */
+@media (min-width: 1000px) and (hover: hover) and (pointer: fine) {
+  .room-world {
+    width: max(
+      800px,
+      min(100vw, calc((100svh - var(--hud-height) - var(--dock-height)) * 4 / 3))
+    );
+  }
+  .room-book {
+    min-width: 24px;
+  }
+}
 .spine-number {
   position: absolute;
   inset: 33% 14% auto;
