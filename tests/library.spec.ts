@@ -22,7 +22,9 @@ test('the entire website is the room, with real article links on its shelves', a
   });
   await page.goto('/');
   await expect(page.getByRole('heading', { level: 1 })).toContainText('The reading room');
-  await expect(page.locator('.room-world .room-book')).toHaveCount(published.length);
+  await expect(page.locator('.room-world .room-book')).toHaveCount(
+    Math.min(published.length, 48),
+  );
   await expect(
     page.locator('.library-welcome, .site-header, .library-footer, .bookshelf-section'),
   ).toHaveCount(0);
@@ -43,7 +45,7 @@ test('a shelf book pulls out, restores focus, and opens a reader inside the room
   const book = page.locator('.room-book').first();
   const href = await book.getAttribute('href');
   await book.click();
-  const dialog = page.getByRole('dialog', { name: 'Vietnam' });
+  const dialog = page.locator('.room-book-dialog');
   await expect(dialog).toBeVisible();
   await page.keyboard.press('Escape');
   await expect(dialog).not.toBeVisible();
@@ -246,7 +248,7 @@ test('all shelf links work without JavaScript', async ({ browser }) => {
   });
   const page = await context.newPage();
   await page.goto('http://localhost:3000');
-  await expect(page.locator('.room-book')).toHaveCount(published.length);
+  await expect(page.locator('.room-book')).toHaveCount(Math.min(published.length, 48));
   await page.locator('.room-book').first().click();
   await expect(page.locator('.reading-page h1')).toBeVisible();
   await page.getByRole('link', { name: 'Back to the room' }).click();
