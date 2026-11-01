@@ -13,17 +13,19 @@ npm run dev
 
 For Cloudflare Pages, use `npm run build:cloudflare` and publish the `out` directory. This runs Next.js with webpack for the PWA plugin, then generates the optimized images needed by the static export. Run `npm run lint` before submitting changes.
 
-## Scroll restoration
+## The library
 
-Home, Tech, and Misc render their complete article lists immediately. The archive is small and its metadata is already available at build time. Revealing ten cards at a time used to truncate the page during Back navigation: the browser clamped the saved position to the shorter list before the remaining cards appeared. Keep the full list height available so native Back, Forward, and reload restoration can work at every viewport size. Article links still disable prefetching, so displaying the archive does not download every article.
+The website is an explorable pixel-art library: posts are clickable books in the illustrated shelves, and articles open over the room. Phones can pan between the snowy window, shelves and fireside; a searchable card catalogue offers a shortcut. Fireplace sound is a quiet, opt-in field recording. See [the design notes](docs/library-design.md) for the research, visual system, artwork, motion controls, and performance decisions.
 
-The article footer's “All writing” link points to `/#post-<slug>`, targeting the current article's card in the complete Home archive. This also works for directly opened articles and after following previous/next links; it returns to the article's location in the list rather than a saved pixel position.
+Run `npm run build:cloudflare` followed by `npm run start` to preview the production export. `npm run test:e2e` tests it in Chromium and mobile WebKit (install browsers first with `npx playwright install chromium webkit`). GitHub Actions runs lint, type checking, the export build, and the browser/accessibility checks.
 
-## Header navigation
+### Scroll restoration
 
-Add page links inside `Navigation` in `components/header/Navigation.tsx`. Add header controls as children of `HeaderActions` in `components/header/Header.tsx`; `HeaderActionLink` and `HeaderActionButton` provide consistent styling, accessible labels, and native link/button behavior. The parent layouts use gaps and wrapping, so adding an item does not require changing neighboring items or calculating widths.
+The room displays 24 numbered books per bookcase page, with automatic pagination as published MDX files are added. The catalogue searches the complete collection. Hover/focus or tap a spine to read its full title. Book links disable prefetching. Article return links use `/#post-<slug>` to restore the correct bookcase and focused spine, including after new posts move an older book to another page. Without JavaScript, direct shelf links and category collection links remain available.
 
-Put state and event handlers for an interactive control in its own client component, then render that component inside `HeaderActions`. Keep a control's initial markup stable across server rendering and hydration. `ThemeToggle` is the client component responsible for theme state; CSS selects its visible icon from the document's theme class, so its markup is present before JavaScript loads.
+### Header navigation
+
+Room navigation is in `components/library/ReadingRoom.tsx`; reading controls are in `LibraryShell.tsx`. `ThemeToggle` owns the reader’s color-theme state; its markup is stable across rendering and hydration. The default theme is dark, and visitors can choose the parchment light theme.
 
 ## Article images
 

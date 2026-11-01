@@ -1,5 +1,4 @@
 import StructuredData from '../components/seo/StructuredData';
-import ArticleList from '../components/article/ArticleList';
 import { getPublishedPostMetadata, sortPostsByDateDescending } from '../utils/mdxUtils';
 import { buildHomeSchema, buildMetadata } from '../utils/seo';
 
@@ -15,22 +14,5 @@ export const metadata = buildMetadata({
 export default function Homepage() {
   const posts = sortPostsByDateDescending(getPublishedPostMetadata());
 
-  return (
-    <section className="pb-16 relative">
-      <StructuredData data={buildHomeSchema(posts)} />
-
-      <header className="mb-12 pt-6 md:pt-10 max-w-3xl">
-        <p className="text-xs tracking-[0.3em] uppercase text-accent-dark mb-4">
-          Recent Writing
-        </p>
-        <h1 className="text-4xl md:text-5xl font-light tracking-tight text-primary leading-tight">
-          Essays on software, science, ethics, and the rest.
-        </h1>
-      </header>
-
-      <div className="asymmetric-element">
-        <ArticleList posts={posts} />
-      </div>
-    </section>
-  );
+  return <StructuredData data={buildHomeSchema(posts)} />;
 }

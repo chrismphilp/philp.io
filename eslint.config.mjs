@@ -9,6 +9,9 @@ export default defineConfig([
       ".next/**",
       "out/**",
       "public/**",
+      "playwright-report/**",
+      "test-results/**",
+      ".context/**",
     ],
   },
   {

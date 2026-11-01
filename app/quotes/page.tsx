@@ -20,7 +20,7 @@ export default function Quotes() {
   const { content } = matter(source);
 
   return (
-    <section className="flex flex-col items-stretch md:items-center py-5">
+    <section className="reading-page">
       <header className="w-full max-w-3xl mb-10">
         <h1 className="text-4xl md:text-5xl font-light tracking-tight text-primary leading-tight">
           Quotes

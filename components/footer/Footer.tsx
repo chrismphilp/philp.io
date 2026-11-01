@@ -1,32 +1,23 @@
-const Footer = () => {
-  const currentYear = new Date().getFullYear();
+import PixelIcon from '../library/PixelIcon';
+import Link from 'next/link';
 
+export default function Footer() {
   return (
-    <footer className="relative border-t border-accent-subtle py-12">
-      <div className="mx-auto w-full max-w-[75ch] px-6 md:max-w-4xl md:px-10 lg:max-w-[52rem] lg:px-8 xl:max-w-[56rem] xl:px-10">
-        <div className="flex flex-col gap-6 md:grid md:grid-cols-2 md:gap-0 md:items-center">
-          <div className="flex items-center text-sm tracking-wider text-primary font-light dark:text-background-dark md:border-r md:border-accent-subtle/30 md:pr-10 lg:pr-12">
-            © {currentYear}
-            <span className="text-accent-highlight mx-2">⦁</span>
-            Philp
-          </div>
-
-          <div className="flex md:justify-end md:pl-10 lg:pl-12">
-            <a
-              href="https://github.com/chrismphilp"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm tracking-wider text-primary font-light underline-effect hover:text-accent-highlight dark:text-background-dark"
-            >
-              GitHub
-            </a>
-          </div>
+    <footer className="library-footer">
+      <div>
+        <Link className="footer-signature" href="/" prefetch={false}>
+          Christopher Philp<span>A curious mind. A quiet corner of the web.</span>
+        </Link>
+        <span className="footer-ornament" aria-hidden="true">
+          <PixelIcon name="book" size={22} />
+        </span>
+        <div className="footer-links">
+          <a href="https://github.com/chrismphilp/philp.io">
+            Made with care <span aria-hidden="true">↗</span>
+          </a>
+          <span>© {new Date().getFullYear()} · No rush. No noise.</span>
         </div>
       </div>
-
-      <div className="absolute bottom-0 right-0 w-1/4 h-px bg-accent opacity-40"></div>
     </footer>
   );
-};
-
-export default Footer;
+}
